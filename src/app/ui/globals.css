@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light dark;
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+body {
+  font-family: var(--instagram-sans), sans-serif;
+}
+
+@layer components {
+  .btn-secondary {
+    @apply flex h-8 flex-row flex-nowrap items-center justify-center gap-1 rounded-lg bg-[#efefef] px-4 py-[7px] font-system text-sm font-semibold hover:bg-[#dbdbdb] dark:bg-[#363636] dark:hover:bg-[#262626];
+  }
+}

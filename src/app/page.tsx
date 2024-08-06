@@ -1,112 +1,138 @@
+'use client';
+
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import DownArrowIcon from "./icons/DownArrowIcon";
+import ThreeDotsIcon from "./icons/ThreeDotsIcon";
+import UserPlusIcon from "./icons/UserPlusIcon";
+import { tabs } from "./lib/constants";
+import ProjectsTab from "./ui/content-tabs/ProjectsTab";
+import ExperienceTab from "./ui/content-tabs/ExperienceTab";
+import OthersTab from "./ui/content-tabs/OthersTab";
 
-export default function Home() {
+export default function Page() {
+  const yearsOld = new Date().getFullYear() - 2002;
+  const tabsContainerRef = useRef(null);
+  const [selectedTab, setSelectedTab] = useState("projects");
+
+  useEffect(() => {
+    const tabsContainer = tabsContainerRef.current;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            updateSelectedTab(entry.target.id);
+          }
+        });
+      },
+      { root: tabsContainer, threshold: 0.5 },
+    );
+
+    const tabElements = [document.getElementById("projects"), document.getElementById("experience"), document.getElementById("others")];
+
+    tabElements.forEach((tab) => {
+      if (tab) observer.observe(tab);
+    });
+
+    // Clean up on unmount
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  function updateSelectedTab(tabId: string) {
+    setSelectedTab(tabId);
+    let hash = `#${tabId}`;
+    if (tabId === "projects") {
+      hash = "";
+    }
+
+    if (hash === window.location.hash) {
+      return;
+    }
+
+    let location = window.location.toString().split("#")[0];
+    history.replaceState(null, null, location + hash);
+  }
+
+  function handleAnchorClick(tabId: string, event: React.MouseEvent<HTMLAnchorElement>) {
+    event.preventDefault();
+    const target = document.getElementById(tabId);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+    updateSelectedTab(tabId);
+  }
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main className="mx-auto sm:mt-[30px] md:max-w-3xl lg:max-w-4xl">
+      <section className="flex flex-col items-start justify-center">
+        <header className="flex h-11 w-full flex-row items-center justify-center border-b-[1px] border-[#dbdbdb] sm:hidden">
+          <h1 className="font-system font-semibold">Jaime Resano</h1>
+        </header>
+        <div className="mt-4 grid grid-flow-col sm:mb-4 sm:mt-0">
+          <div className="col-start-1 row-span-2 row-start-1 mx-4 h-fit w-fit rounded-full bg-gradient-to-tr from-yellow-200 via-[#FD1D1D] to-[#FF00AA] p-[3.5px] sm:row-span-3 sm:ml-0 sm:mr-7">
+            <div className="rounded-full bg-white p-1">
+              <Image src="/images/jaimePicture.png" alt="Jaime Resano face" className="size-20 min-h-20 min-w-20 rounded-full sm:size-44 sm:min-h-44 sm:min-w-44" width="80" height="80" />
+            </div>
+          </div>
+
+          <div className="col-start-2 row-start-1 flex flex-row flex-wrap items-center justify-start gap-2 sm:mb-5">
+            <h1 className="text-nowrap text-xl">Jaime Resano</h1>
+            <div className="flex flex-row items-start justify-center gap-2">
+              <div className="btn-secondary">
+                <p>Following</p>
+                <DownArrowIcon extraClasses="size-3 stroke-black dark:stroke-white" />
+              </div>
+              <div className="btn-secondary text-nowrap">Send message</div>
+              <div className="btn-secondary">
+                <UserPlusIcon extraClasses="size-4 stroke-black dark:stroke-white" />
+              </div>
+              <ThreeDotsIcon extraClasses="size-8 stroke-black dark:stroke-white" />
+            </div>
+          </div>
+          <div className="col-span-2 row-start-4 border-t-[1px] border-[#dbdbdb] py-3 sm:col-start-2 sm:row-start-2 sm:border-t-0 sm:p-0">
+            <div className="flex flex-1 flex-row flex-nowrap justify-around sm:justify-start sm:gap-10">
+              <div className="flex flex-col items-center gap-0 font-system text-sm sm:flex-row sm:gap-1 sm:font-normal">
+                <span className="font-lg font-semibold">12</span> projects
+              </div>
+              <div className="flex flex-col items-center gap-0 font-system text-sm sm:flex-row sm:gap-1 sm:font-normal">
+                <span className="font-lg font-semibold">{yearsOld}</span> years old
+              </div>
+              <div className="flex flex-col items-center gap-0 font-system text-sm sm:flex-row sm:gap-1 sm:font-normal">
+                <span className="font-lg font-semibold">69</span> followers
+              </div>
+            </div>
+          </div>
+          <div className="col-span-2 col-start-1 p-4 font-system text-sm sm:col-span-1 sm:col-start-2 sm:row-start-3 sm:p-0">
+            <h2 className="font-lg font-bold">Welcome to my personal website</h2>
+            <p>
+              I am a software engineer with a strong passion for programming and anything related to computers.
+              <br />
+              In this website you can find my portfolio with the format of an Instagram profile.
+            </p>
+          </div>
         </div>
+      </section>
+      <div id="anchorsTabsContainer" className="flex w-full flex-row justify-around border-t-[1px] border-[#dbdbdb] sm:justify-center sm:gap-[60px]">
+        {tabs.map((tab) => (
+          <a
+            key={tab.id}
+            className={`flex flex-1 flex-row items-center justify-center gap-2 border-black py-2 aria-selected:border-t-[1px] ${selectedTab === tab.id ? "border-t-[1px]" : ""}`}
+            href={`#${tab.id}`}
+            aria-label={tab.name}
+            id={`anchor${tab.name}`}
+            onClick={(event) => handleAnchorClick(tab.id, event)}
+          >
+            <tab.icon extraClasses="size-8" />
+            <span className="hidden text-sm uppercase tracking-widest sm:inline">{tab.name}</span>
+          </a>
+        ))}
       </div>
-
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+      <div ref={tabsContainerRef} id="tabsContainer" className="flex snap-x flex-row gap-2 overflow-x-hidden scroll-smooth data-[dragging]:snap-none">
+        <ProjectsTab id="projects" />
+        <ExperienceTab id="experience" />
+        <OthersTab id="others" />
       </div>
     </main>
   );
