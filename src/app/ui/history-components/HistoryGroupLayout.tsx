@@ -26,17 +26,27 @@ export default function HistoryGroupLayout({ children, title, thumbnail, previou
     setActiveIndex(index);
   }
 
-  const goToPreviousHistory = () => {
+  function goToPreviousHistory() {
     if (activeIndex > 0) {
       scrollToIndex(activeIndex - 1);
     }
-  };
+  }
 
-  const goToNextHistory = () => {
+  function goToNextHistory() {
     if (activeIndex < historiesRefs.current.length - 1) {
       scrollToIndex(activeIndex + 1);
     }
-  };
+  }
+
+  function navigateIfSmallScreen(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    if (window.innerWidth < 640) {
+      if (event.pageX - event.currentTarget.offsetLeft > event.currentTarget.offsetWidth / 2) {
+        goToNextHistory();
+      } else {
+        goToPreviousHistory();
+      }
+    }
+  }
 
   return (
     <div className="flex h-screen w-full flex-col bg-black sm:w-full sm:flex-row sm:gap-10 sm:bg-[#1a1a1a]">
@@ -45,9 +55,9 @@ export default function HistoryGroupLayout({ children, title, thumbnail, previou
           <p>Anterior: {previousHistoryGroupTitle}</p>
         </div>
       )}
-      <div className="flex-1 max-h-full sm:my-14">
+      <div className="max-h-full flex-1 sm:my-14">
         <div className="mx-auto flex h-full w-fit flex-row items-center gap-4">
-          <PreviousArrow extraClasses={`text-[#8e8e8e] hover:text-white hover:cursor-pointer transition-all ${activeIndex === 0 ? "invisible" : "sm:visible"}`} onClick={goToPreviousHistory} />
+          <PreviousArrow extraClasses={`text-[#8e8e8e] hover:text-white hover:cursor-pointer transition-all invisible ${activeIndex !== 0 ? "sm:visible" : ""}`} onClick={goToPreviousHistory} /> 
           <div className="flex aspect-[9/16] h-full flex-col rounded-md bg-black text-center">
             <div className="flex w-full flex-row items-center gap-1 p-2">
               <Image src={thumbnail} alt="History group thumbnail" width="32" height="32" className="rounded-full" />
@@ -56,7 +66,7 @@ export default function HistoryGroupLayout({ children, title, thumbnail, previou
                 <CloseIcon extraClasses="text-white" />
               </a>
             </div>
-            <div className="flex flex-1 flex-row overflow-x-hidden rounded-md">
+            <div className="flex flex-1 flex-row overflow-x-hidden rounded-md" onClick={navigateIfSmallScreen}>
               {children.map((child, index) => {
                 return React.cloneElement(child as React.ReactElement<any>, {
                   ref: (el: HTMLDivElement) => {
@@ -69,7 +79,7 @@ export default function HistoryGroupLayout({ children, title, thumbnail, previou
             <BottomBar />
           </div>
           <NextArrow
-            extraClasses={`text-[#8e8e8e] hover:text-white hover:cursor-pointer transition-all ${activeIndex === historiesRefs.current.length - 1 ? "invisible" : "sm:visible"}`}
+            extraClasses={`text-[#8e8e8e] hover:text-white hover:cursor-pointer transition-all invisible ${activeIndex !== historiesRefs.current.length - 1 ? "sm:visible" : ""}`}
             onClick={goToNextHistory}
           />
         </div>
