@@ -52,7 +52,7 @@ export default function Page() {
     }
 
     let location = window.location.toString().split("#")[0];
-    history.replaceState(null, null, location + hash);
+    history.replaceState(null, "", location + hash);
   }
 
   function handleAnchorClick(tabId: string, event: React.MouseEvent<HTMLAnchorElement>) {
