@@ -1,5 +1,5 @@
-import HeartIcon from '@/app/icons/HeartIcon';
-import ShareIcon from '@/app/icons/ShareIcon';
+import HeartIcon from '@/icons/HeartIcon';
+import ShareIcon from '@/icons/ShareIcon';
 
 export default function BottomBar() {
   return (

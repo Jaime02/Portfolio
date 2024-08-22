@@ -1,6 +1,6 @@
 import { Metadata } from "next";
-import { InstagramSans } from "./ui/fonts";
-import "@/app/ui/globals.css";
+import { InstagramSans } from "@/app/fonts";
+import "@/app/globals.css";
 
 export const metadata: Metadata = {
   title: "Jaime Resano | Personal website",
