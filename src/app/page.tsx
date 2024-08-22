@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
 import React, { useEffect, useRef, useState } from "react";
 
-import { tabs } from "@/app/lib/Constants";
+import { tabs } from "@/app/misc/Constants";
 import ProjectsTab from "@/components/content-tabs/ProjectsTab";
 import ExperienceTab from "@/components/content-tabs/ExperienceTab";
 import OthersTab from "@/components/content-tabs/OthersTab";
@@ -10,16 +10,27 @@ import ProfileContent from "@/components/misc/ProfileContent";
 
 export default function Page() {
   const tabsContainerRef = useRef(null);
-  const tabAnchors = useRef<(HTMLAnchorElement | null)[]>([]);
-  const tabElements = useRef<(HTMLElement | null)[]>([]);
-  const [selectedTab, setSelectedTab] = useState("projects");
-  
+  const tabElements = useRef<HTMLElement[]>([]);
+
+  let defaultTab = window.location.hash.replace("#", "") ? window.location.hash.replace("#", "") : tabs[0].id;
+
+  let defaultBorderIndex = defaultTab ? tabs.findIndex((tab) => tab.id === defaultTab) : 0;
+  const [borderTab, setBorderTab] = useState(defaultBorderIndex);
+
+  // Scroll to the initially selected tab by the hash in the URL
+  useEffect(() => {
+    tabElements.current[borderTab].scrollIntoView({ behavior: "instant" });
+  }, []);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            updateSelectedTab(entry.target.id);
+            let index = (entry.target as HTMLElement).dataset.index;
+            if (index !== undefined) {
+              setBorderTab(Number(index));
+            }
           }
         });
       },
@@ -27,7 +38,7 @@ export default function Page() {
     );
 
     tabElements.current.forEach((tab) => {
-      if (tab) observer.observe(tab);
+      observer.observe(tab);
     });
 
     // Clean up on unmount
@@ -37,7 +48,6 @@ export default function Page() {
   }, []);
 
   function updateSelectedTab(tabId: string) {
-    setSelectedTab(tabId);
     let hash = `#${tabId}`;
     if (tabId === "projects") {
       hash = "";
@@ -49,17 +59,16 @@ export default function Page() {
 
     let location = window.location.toString().split("#")[0];
     history.replaceState(null, "", location + hash);
+
+    let tabIndex = tabs.findIndex((tab) => tab.id === tabId);
+    tabElements.current[tabIndex].scrollIntoView({ behavior: "smooth" });
   }
 
   function handleAnchorClick(tabId: string, event: React.MouseEvent<HTMLAnchorElement>) {
-    // Prevent default behavior. By default, it always sets the hash in the URL 
+    // Prevent default behavior. By default, it always sets the hash in the URL
     event.preventDefault();
     updateSelectedTab(tabId);
   }
-
-  useEffect(() => {
-    
-  }, [selectedTab]);
 
   return (
     <main className="mx-auto sm:mt-[30px] md:max-w-3xl lg:max-w-4xl">
@@ -68,8 +77,8 @@ export default function Page() {
         {tabs.map((tab, index) => (
           <a
             key={tab.id}
-            className={`flex flex-1 flex-row items-center justify-center gap-2 border-black py-2 aria-selected:border-t-[1px] ${selectedTab === tab.id ? "border-t-[1px]" : ""}`}
-            href={`#${tab.id}`}
+            className={`flex flex-1 flex-row items-center justify-center gap-2 border-black py-2 aria-selected:border-t-[1px] ${borderTab === index ? "border-t-[1px]" : ""}`}
+            href={tab.id === "projects" ? "" : `#${tab.id}`}
             aria-label={tab.name}
             onClick={(event) => handleAnchorClick(tab.id, event)}
           >
@@ -79,9 +88,24 @@ export default function Page() {
         ))}
       </div>
       <div ref={tabsContainerRef} className="flex snap-x flex-row gap-2 overflow-x-hidden scroll-smooth data-[dragging]:snap-none">
-        <ProjectsTab ref={tabElements.current[0]} />
-        <ExperienceTab ref={tabElements.current[1]} />
-        <OthersTab ref={tabElements.current[2]} />
+        <ProjectsTab
+          ref={(el) => {
+            if (el) tabElements.current[0] = el;
+          }}
+          index={0}
+        />
+        <ExperienceTab
+          ref={(el) => {
+            if (el) tabElements.current[1] = el;
+          }}
+          index={1}
+        />
+        <OthersTab
+          ref={(el) => {
+            if (el) tabElements.current[2] = el;
+          }}
+          index={2}
+        />
       </div>
     </main>
   );

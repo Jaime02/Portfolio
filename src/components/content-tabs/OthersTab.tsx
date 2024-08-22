@@ -1,10 +1,12 @@
 import { forwardRef } from "react";
 
-interface Props {}
+interface Props {
+  index: number;
+}
 
-const OthersTab = forwardRef<HTMLDivElement, Props>((props: Props, ref) => {
+const OthersTab = forwardRef<HTMLDivElement, Props>(({index}: Props, ref) => {
   return (
-    <div className="min-w-full snap-center">
+    <div ref={ref} data-index={index} className="min-w-full snap-center">
       <p>Others</p>
     </div>
   );

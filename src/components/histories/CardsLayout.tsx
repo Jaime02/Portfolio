@@ -4,7 +4,7 @@ import NextArrow from "@/icons/NextArrow";
 import PreviousArrow from "@/icons/PreviousArrow";
 import BottomBar from "@/components/histories/BottomBar";
 import Header from "@/components/histories/Header";
-import * as Constants from "@/app/lib/Constants";
+import * as Constants from "@/app/misc/Constants";
 
 interface Props {
   children?: React.ReactNode[];

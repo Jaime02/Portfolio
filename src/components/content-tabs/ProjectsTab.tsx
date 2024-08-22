@@ -2,9 +2,11 @@ import Image from "next/image";
 import ThreeColumnsGrid from "@/components/misc/ThreeColumnsGrid";
 import { forwardRef } from "react";
 
-interface Props {}
+interface Props {
+  index: number;
+}
 
-const ProjectsTab = forwardRef<HTMLDivElement, Props>((props: Props, ref) => {
+const ProjectsTab = forwardRef<HTMLDivElement, Props>(({index}: Props, ref) => {
   const items = [
     {
       link: "/projects#this-website",
@@ -19,7 +21,7 @@ const ProjectsTab = forwardRef<HTMLDivElement, Props>((props: Props, ref) => {
   ];
 
   return (
-    <div ref={ref} className="min-w-full snap-center">
+    <div ref={ref} data-index={index} className="min-w-full snap-center">
       <ThreeColumnsGrid>
         {items.map((item) => (
           <a href={item.link} key={item.title}>

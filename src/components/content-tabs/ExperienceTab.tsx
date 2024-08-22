@@ -2,11 +2,13 @@ import ThreeColumnsGrid from "@/components/misc/ThreeColumnsGrid";
 import Image from 'next/image';
 import { forwardRef } from "react";
 
-interface Props {}
+interface Props {
+  index: number;
+}
 
-const ExperienceTab = forwardRef<HTMLDivElement, Props>((props: Props, ref) => {
+const ExperienceTab = forwardRef<HTMLDivElement, Props>(({index}: Props, ref) => {
   return (
-    <div className="min-w-full snap-center"> 
+    <div ref={ref} data-index={index} className="min-w-full snap-center"> 
       <ThreeColumnsGrid>
         <Image src="/images/2.svg" alt="Project 2" className="select-none" draggable="false" width="300" height="300"/>
         <Image src="/images/3.svg" alt="Project 3" className="select-none" draggable="false" width="300" height="300"/>
