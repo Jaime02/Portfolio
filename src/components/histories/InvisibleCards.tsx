@@ -1,9 +1,9 @@
-import CardsLayout from "./CardsLayout";
+import InvisibleCardsLayout from "@/components/histories/InvisibleCardsLayout";
 
-export default function InvisibleCards({ amount, keys }: { amount: number; keys: number[] }) {
-  return Array(amount)
+export default function InvisibleCards({ keys }: { keys: number[] }) {
+  return Array(keys.length)
     .fill(0)
     .map((_, i) => {
-      return <CardsLayout invisible={true} key={keys[i]} />;
+      return <InvisibleCardsLayout key={keys[i]} />;
     });
 }

@@ -1,4 +1,4 @@
-export default function HeartIcon({ extraClasses }: { extraClasses: string }) {
+export default function HeartIcon({ extraClasses }: { extraClasses?: string }) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" aria-label="Like" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24" className={`${extraClasses}`}>
       <title>Like</title>

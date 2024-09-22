@@ -1,10 +1,11 @@
 import Card from "@/components/histories/Card";
-import CardsLayout from "@/components/histories/CardsLayout";
+import CardsLayout, { CardsLayoutProps } from "@/components/histories/CardsLayout";
 import Image from "next/image";
+import { forwardRef } from "react";
 
-export default function TechnicalDrawingApp() {
+const TechnicalDrawingApp = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
   return (
-    <CardsLayout title="Technical Drawing App" thumbnail="/images/technicalDrawingAppThumbnail.png">
+    <CardsLayout title="Technical Drawing App" thumbnail="/images/technicalDrawingAppThumbnail.png" {...props} ref={ref}>
       <Card>
         <h1>Technical Drawing app</h1>
         <Image src="/images/TechnicalDrawingAppScreenshot.png" width="500" height="500" alt="Technical Drawing App Screenshot" className="select-none h-auto w-auto" draggable="false" />  
@@ -15,4 +16,6 @@ export default function TechnicalDrawingApp() {
       </Card>
     </CardsLayout>
   );
-}
+});
+
+export default TechnicalDrawingApp;

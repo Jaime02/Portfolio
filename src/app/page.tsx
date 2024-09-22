@@ -12,14 +12,14 @@ export default function Page() {
   const tabsContainerRef = useRef(null);
   const tabElements = useRef<HTMLElement[]>([]);
 
-  let defaultTab = window.location.hash.replace("#", "") ? window.location.hash.replace("#", "") : tabs[0].id;
-
-  let defaultBorderIndex = defaultTab ? tabs.findIndex((tab) => tab.id === defaultTab) : 0;
-  const [borderTab, setBorderTab] = useState(defaultBorderIndex);
+  const [borderTab, setBorderTab] = useState(0);
 
   // Scroll to the initially selected tab by the hash in the URL
   useEffect(() => {
-    tabElements.current[borderTab].scrollIntoView({ behavior: "instant" });
+    let defaultTab = window.location.hash.replace("#", "") ? window.location.hash.replace("#", "") : tabs[0].id;
+    let defaultBorderIndex = defaultTab ? tabs.findIndex((tab) => tab.id === defaultTab) : 0;
+    setBorderTab(defaultBorderIndex);
+    tabElements.current[defaultBorderIndex].scrollIntoView({ behavior: "auto" });
   }, []);
 
   useEffect(() => {
@@ -37,14 +37,9 @@ export default function Page() {
       { root: tabsContainerRef.current, threshold: 0.5 },
     );
 
-    tabElements.current.forEach((tab) => {
-      observer.observe(tab);
-    });
+    tabElements.current.forEach(tab => observer.observe(tab));
 
-    // Clean up on unmount
-    return () => {
-      observer.disconnect();
-    };
+    return () => observer.disconnect();
   }, []);
 
   function updateSelectedTab(tabId: string) {
@@ -87,7 +82,7 @@ export default function Page() {
           </a>
         ))}
       </div>
-      <div ref={tabsContainerRef} className="flex snap-x flex-row gap-2 overflow-x-hidden scroll-smooth data-[dragging]:snap-none">
+      <div ref={tabsContainerRef} className="flex snap-x flex-row gap-2 overflow-x-hidden data-[dragging]:snap-none">
         <ProjectsTab
           ref={(el) => {
             if (el) tabElements.current[0] = el;

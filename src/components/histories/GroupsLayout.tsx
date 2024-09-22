@@ -1,45 +1,78 @@
 "use client";
-import React, { act, useEffect, useRef, useState } from "react";
-import CardsLayout from "@/components/histories/CardsLayout";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import InvisibleCards from "@/components/histories/InvisibleCards";
+import { HistoryGroup } from "@/app/misc/Constants";
+import { useEffectAfterMount } from "@/components/misc/useEffectAfterMount";
 
 interface Props {
-  historyCardsLayouts: React.ReactNode[];
+  historyCardsLayouts: HistoryGroup[];
 }
 
 export default function GroupsLayout({ historyCardsLayouts }: Props) {
   const historyGroupsRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const [activeHistoryGroupIndex, setActiveHistoryGroupIndex] = useState(0);
+
+  let selectedCardLayout = window.location.hash.replace("#", "");
+  const initialIndex = selectedCardLayout
+    ? historyCardsLayouts.findIndex((historyCardLayout) => historyCardLayout.hash === selectedCardLayout)
+    : 0;
+
+  const [activeHistoryGroupIndex, setActiveHistoryGroupIndex] = useState(initialIndex);
 
   useEffect(() => {
-    historyGroupsRefs.current[activeHistoryGroupIndex]?.scrollIntoView({
-      behavior: "instant",
+    // Scroll to the initial element based on the hash
+    console.log("Auto scrolling " + initialIndex);
+    historyGroupsRefs.current[initialIndex]?.scrollIntoView({
+      behavior: "auto",
       inline: "center",
     });
+  }, []);
+
+  useEffectAfterMount(() => {
+    // Scroll to the active element whenever the index changes
+    console.log("Smooth scrolling " + activeHistoryGroupIndex);
+    historyGroupsRefs.current[activeHistoryGroupIndex]?.scrollIntoView({
+      behavior: "smooth",
+      inline: "center",
+      block: "nearest",
+    });
+
+    // Update URL depending on active group and story
+    window.history.replaceState(null, "", historyCardsLayouts[activeHistoryGroupIndex].url);
+  }, [activeHistoryGroupIndex]);
+    
+  const goToNextHistoryGroup = useCallback(() => {
+    if (activeHistoryGroupIndex === historyGroupsRefs.current.length - 1) {
+      window.location.href = "/";
+      return;
+    }
+    setActiveHistoryGroupIndex((activeHistoryGroupIndex) => activeHistoryGroupIndex + 1);
+  }, [activeHistoryGroupIndex]);
+
+  const goToPreviousHistoryGroup = useCallback(() => {
+    if (activeHistoryGroupIndex === 0) {
+      return;
+    }
+    setActiveHistoryGroupIndex((activeHistoryGroupIndex) => activeHistoryGroupIndex - 1);
   }, [activeHistoryGroupIndex]);
 
   return (
     <div className="flex h-screen max-h-screen w-full snap-x flex-row overflow-hidden bg-black sm:w-full sm:gap-10 sm:bg-[#1a1a1a] sm:py-14">
-      <InvisibleCards amount={2} keys={[0, 1]} />
-      {historyCardsLayouts.map((historyCardsLayout, index) => {
-        let active = index === activeHistoryGroupIndex;
-        let onClickFunction = () => {};
-        if (!active) {
-          onClickFunction = () => {
-            setActiveHistoryGroupIndex(index);
-          };
-        }
-
-        return React.cloneElement(historyCardsLayout as React.ReactElement<any>, {
-          ref: (el: HTMLDivElement) => {
-            historyGroupsRefs.current[index] = el;
-          },
+      <InvisibleCards keys={[-1, -2]} />
+      {historyCardsLayouts.map((historyCardsLayout, index) =>
+        React.cloneElement(historyCardsLayout.component, {
+          ref: (el: HTMLDivElement | null) => (historyGroupsRefs.current[index] = el),
           key: index,
-          active: active,
-          onClick: onClickFunction,
-        });
-      })}
-      <InvisibleCards amount={2} keys={[2, 3]} />
+          active: index === activeHistoryGroupIndex,
+          isFirstGroup: index === 0,
+          isLastGroup: index === historyGroupsRefs.current.length - 1,
+          selectMyself: () => {
+            setActiveHistoryGroupIndex(index);
+          },
+          goToPreviousHistoryGroup: goToPreviousHistoryGroup,
+          goToNextHistoryGroup: goToNextHistoryGroup,
+        }),
+      )}
+      <InvisibleCards keys={[-3, -4]} />
     </div>
   );
 }

@@ -1,12 +1,10 @@
+"use client";
+
 import GroupsLayout from "@/components/histories/GroupsLayout";
-import ThisWebsite from "@/app/(histories)/projects/ThisWebsite";
-import TechnicalDrawingApp from "@/app/(histories)/projects/TechnicalDrawingApp";
+import {ProjectsHistoryGroups} from "@/app/misc/Constants";
 
 export default function Page() {
   return (
-    <GroupsLayout historyCardsLayouts={[
-      <ThisWebsite />,
-      <TechnicalDrawingApp />
-    ]} />
+    <GroupsLayout historyCardsLayouts={ProjectsHistoryGroups} />
   );
 }

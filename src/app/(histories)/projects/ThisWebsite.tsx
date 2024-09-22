@@ -1,10 +1,11 @@
 import Card from "@/components/histories/Card";
-import CardsLayout from "@/components/histories/CardsLayout";
+import CardsLayout, { CardsLayoutProps } from "@/components/histories/CardsLayout";
 import Image from "next/image";
+import { forwardRef } from "react";
 
-export default function ThisWebsite() {
+const ThisWebsite = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
   return (
-    <CardsLayout title="This website" thumbnail="/images/thisWebsiteThumbnail.svg">
+    <CardsLayout title="This website" thumbnail="/images/thisWebsiteThumbnail.svg" {...props} ref={ref}>
       <Card>
         <h1>This Website</h1>
         <Image src="/images/thisWebsiteThumbnail.svg" width="200" height="200" alt="Project 1" className="select-none" draggable="false" priority={true}/>  
@@ -19,4 +20,6 @@ export default function ThisWebsite() {
       </Card>
     </CardsLayout>
   );
-}
+});
+
+export default ThisWebsite;
