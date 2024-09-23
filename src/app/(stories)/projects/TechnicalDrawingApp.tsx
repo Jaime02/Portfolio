@@ -18,4 +18,5 @@ const TechnicalDrawingApp = forwardRef<HTMLDivElement, CardsLayoutProps>((props,
   );
 });
 
+TechnicalDrawingApp.displayName = "Technical Drawing App";
 export default TechnicalDrawingApp;

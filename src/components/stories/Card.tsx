@@ -4,4 +4,5 @@ const Card  = forwardRef<HTMLDivElement, { children: React.ReactNode }>(({ child
   return <div ref={ref} className="flex min-w-full flex-col bg-white dark:bg-[#343434] snap-center">{children}</div>; 
 });
 
+Card.displayName = "Card";
 export default Card;

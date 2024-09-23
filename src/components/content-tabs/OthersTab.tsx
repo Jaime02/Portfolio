@@ -12,4 +12,5 @@ const OthersTab = forwardRef<HTMLDivElement, Props>(({index}: Props, ref) => {
   );
 });
 
+OthersTab.displayName = "Others Tab";
 export default OthersTab;

@@ -18,4 +18,5 @@ const ExperienceTab = forwardRef<HTMLDivElement, Props>(({index}: Props, ref) =>
   );
 });
 
+ExperienceTab.displayName = "Experience Tab";
 export default ExperienceTab;

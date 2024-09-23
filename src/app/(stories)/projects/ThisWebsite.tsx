@@ -22,4 +22,5 @@ const ThisWebsite = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) =>
   );
 });
 
+ThisWebsite.displayName = "This Website";
 export default ThisWebsite;

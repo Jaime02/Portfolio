@@ -33,4 +33,5 @@ const ProjectsTab = forwardRef<HTMLDivElement, Props>(({index}: Props, ref) => {
   );
 });
 
+ProjectsTab.displayName = "Projects Tab";
 export default ProjectsTab;

@@ -132,4 +132,5 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(
   },
 );
 
+CardsLayout.displayName = "CardsLayout";
 export default CardsLayout;
