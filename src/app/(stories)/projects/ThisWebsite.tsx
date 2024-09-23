@@ -1,5 +1,5 @@
-import Card from "@/components/histories/Card";
-import CardsLayout, { CardsLayoutProps } from "@/components/histories/CardsLayout";
+import Card from "@/components/stories/Card";
+import CardsLayout, { CardsLayoutProps } from "@/components/stories/CardsLayout";
 import Image from "next/image";
 import { forwardRef } from "react";
 

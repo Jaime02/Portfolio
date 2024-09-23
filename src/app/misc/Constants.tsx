@@ -1,5 +1,5 @@
-import TechnicalDrawingApp from "@/app/(histories)/projects/TechnicalDrawingApp";
-import ThisWebsite from "@/app/(histories)/projects/ThisWebsite";
+import TechnicalDrawingApp from "@/app/(stories)/projects/TechnicalDrawingApp";
+import ThisWebsite from "@/app/(stories)/projects/ThisWebsite";
 import ExperienceIcon from "@/icons/ExperienceIcon";
 import ProjectsIcon from "@/icons/ProjectsIcon";
 import ThreeDotsIcon from "@/icons/ThreeDotsIcon";

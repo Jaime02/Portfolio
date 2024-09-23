@@ -1,6 +1,6 @@
 "use client";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import InvisibleCards from "@/components/histories/InvisibleCards";
+import InvisibleCards from "@/components/stories/InvisibleCards";
 import { HistoryGroup } from "@/app/misc/Constants";
 import { useEffectAfterMount } from "@/components/misc/useEffectAfterMount";
 
@@ -56,7 +56,7 @@ export default function GroupsLayout({ historyCardsLayouts }: Props) {
   }, [activeHistoryGroupIndex]);
 
   return (
-    <div className="flex h-screen max-h-screen w-full snap-x flex-row overflow-hidden bg-black sm:w-full sm:gap-10 sm:bg-[#1a1a1a] sm:py-14">
+    <div className="flex h-screen max-h-screen w-full flex-row overflow-hidden bg-black sm:w-full sm:gap-10 sm:bg-[#1a1a1a] sm:py-14">
       <InvisibleCards keys={[-1, -2]} />
       {historyCardsLayouts.map((historyCardsLayout, index) =>
         React.cloneElement(historyCardsLayout.component, {

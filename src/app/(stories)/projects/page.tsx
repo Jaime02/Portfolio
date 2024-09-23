@@ -1,6 +1,6 @@
 "use client";
 
-import GroupsLayout from "@/components/histories/GroupsLayout";
+import GroupsLayout from "@/components/stories/GroupsLayout";
 import {ProjectsHistoryGroups} from "@/app/misc/Constants";
 
 export default function Page() {

@@ -1,4 +1,4 @@
-import InvisibleCardsLayout from "@/components/histories/InvisibleCardsLayout";
+import InvisibleCardsLayout from "@/components/stories/InvisibleCardsLayout";
 
 export default function InvisibleCards({ keys }: { keys: number[] }) {
   return Array(keys.length)
