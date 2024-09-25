@@ -25,7 +25,7 @@ export default function GroupsLayout({ historyCardsLayouts }: Props) {
       behavior: "auto",
       inline: "center",
     });
-  }, []);
+  }, [initialIndex]);
 
   useEffectAfterMount(() => {
     // Scroll to the active element whenever the index changes

@@ -37,7 +37,7 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(
           behavior: "smooth",
         });
       }
-    }, [activeHistoryCardIndex]);
+    }, [activeHistoryCardIndex, active]);
 
     const goToPreviousHistory = useCallback(() => {
       setHistoryTimer(0);
@@ -64,7 +64,7 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(
       }
 
       setActiveHistoryCardIndex(activeHistoryCardIndex + 1);
-    }, [activeHistoryCardIndex, goToNextHistoryGroup]);
+    }, [activeHistoryCardIndex, goToNextHistoryGroup, isLastGroup]);
 
     useEffect(() => {
       if (!active) {
@@ -80,7 +80,7 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(
       }, timerResolution);
 
       return () => clearInterval(timer);
-    }, [historyTimer, goToNextHistory]);
+    }, [historyTimer, goToNextHistory, active]);
 
     function navigateIfSmallScreen(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
       if (window.innerWidth > Constants.SMALL_BREAKPOINT_WIDTH) {
