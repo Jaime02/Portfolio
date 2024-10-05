@@ -34,30 +34,30 @@ export const tabs = [
   }),
 ];
 
-export abstract class HistoryGroup {
-  hash: string;
+export abstract class StoryGroup {
+  groupName: string;
   component: React.ReactElement;
   url: string = "";
-  constructor({hash, component}: {hash: string, component: React.ReactElement}) {
-    this.hash = hash;
+  constructor({groupName, component}: {groupName: string, component: React.ReactElement}) {
+    this.groupName = groupName;
     this.component = component;
   }
 }
 
-class ProjectsHistoryGroup extends HistoryGroup {
-  constructor({hash, component}: {hash: string, component: React.ReactElement}) {
-    super({hash, component});
-    this.url = `/projects#${hash}`;
+class ProjectsStoryGroup extends StoryGroup {
+  constructor({groupName, component}: {groupName: string, component: React.ReactElement}) {
+    super({groupName, component});
+    this.url = `/projects/${groupName}`;
   }
 }
 
-export const ProjectsHistoryGroups: HistoryGroup[] = [
-  new ProjectsHistoryGroup({
-    hash: "this-website",
+export const ProjectsStoryGroups: StoryGroup[] = [
+  new ProjectsStoryGroup({
+    groupName: "this-website",
     component: <ThisWebsite />,
   }),
-  new ProjectsHistoryGroup({
-    hash: "technical-drawing-app",
+  new ProjectsStoryGroup({
+    groupName: "technical-drawing-app",
     component: <TechnicalDrawingApp />,
   }),
 ];

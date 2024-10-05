@@ -1,78 +1,92 @@
 "use client";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import InvisibleCards from "@/components/stories/InvisibleCards";
-import { HistoryGroup } from "@/app/misc/Constants";
-import { useEffectAfterMount } from "@/components/misc/useEffectAfterMount";
+import { StoryGroup } from "@/app/misc/Constants";
+import { motion } from "framer-motion";
 
 interface Props {
-  historyCardsLayouts: HistoryGroup[];
+  initialStoryGroup?: string;
+  storyCardsLayouts: StoryGroup[];
 }
 
-export default function GroupsLayout({ historyCardsLayouts }: Props) {
-  const historyGroupsRefs = useRef<(HTMLDivElement | null)[]>([]);
+export default function GroupsLayout({ initialStoryGroup, storyCardsLayouts }: Props) {
+  const storyGroupsRefs = useRef<HTMLDivElement[]>([]);
+  const groupsLayoutRef = useRef<HTMLDivElement | null>(null);
+  const [offset, setOffset] = useState<number>(0);
 
-  let selectedCardLayout = window.location.hash.replace("#", "");
-  const initialIndex = selectedCardLayout
-    ? historyCardsLayouts.findIndex((historyCardLayout) => historyCardLayout.hash === selectedCardLayout)
-    : 0;
+  const initialGroupIndex: number = initialStoryGroup ? storyCardsLayouts.findIndex((storyCardLayout) => storyCardLayout.groupName === initialStoryGroup) : 0;
+  const [activeStoryGroupIndex, setActiveStoryGroupIndex] = useState(initialGroupIndex);
 
-  const [activeHistoryGroupIndex, setActiveHistoryGroupIndex] = useState(initialIndex);
+  const calculateOffset = useCallback(() => {
+    if (!groupsLayoutRef.current || !storyGroupsRefs.current[activeStoryGroupIndex]) return 0;
+
+    const containerWidth = groupsLayoutRef.current.offsetWidth;
+    const storyWidth = storyGroupsRefs.current[0].offsetWidth;
+
+    // TODO
+    const gap = 8;
+    const offset = containerWidth / 2 - storyWidth / 2 - activeStoryGroupIndex * (storyWidth + gap);
+    return offset;
+  }, [activeStoryGroupIndex]);
 
   useEffect(() => {
-    // Scroll to the initial element based on the hash
-    console.log("Auto scrolling " + initialIndex);
-    historyGroupsRefs.current[initialIndex]?.scrollIntoView({
-      behavior: "auto",
-      inline: "center",
-    });
-  }, [initialIndex]);
-
-  useEffectAfterMount(() => {
     // Scroll to the active element whenever the index changes
-    console.log("Smooth scrolling " + activeHistoryGroupIndex);
-    historyGroupsRefs.current[activeHistoryGroupIndex]?.scrollIntoView({
-      behavior: "smooth",
-      inline: "center",
-      block: "nearest",
-    });
+    function handleResize() {
+      setOffset(calculateOffset());
+    }
+    window.addEventListener("resize", handleResize);
 
-    // Update URL depending on active group and story
-    window.history.replaceState(null, "", historyCardsLayouts[activeHistoryGroupIndex].url);
-  }, [activeHistoryGroupIndex]);
-    
-  const goToNextHistoryGroup = useCallback(() => {
-    if (activeHistoryGroupIndex === historyGroupsRefs.current.length - 1) {
+    return () => window.removeEventListener("resize", handleResize);
+  }, [calculateOffset]);
+
+  useEffect(() => {
+    // Update URL depending on active story group
+    window.history.replaceState(null, "", storyCardsLayouts[activeStoryGroupIndex].url);
+
+    setOffset(calculateOffset());
+  }, [activeStoryGroupIndex, storyCardsLayouts, calculateOffset]);
+
+  const goToNextStoryGroup = useCallback(() => {
+    if (activeStoryGroupIndex === storyGroupsRefs.current.length - 1) {
       window.location.href = "/";
       return;
     }
-    setActiveHistoryGroupIndex((activeHistoryGroupIndex) => activeHistoryGroupIndex + 1);
-  }, [activeHistoryGroupIndex]);
+    setActiveStoryGroupIndex((activeStoryGroupIndex) => activeStoryGroupIndex + 1);
+  }, [activeStoryGroupIndex]);
 
-  const goToPreviousHistoryGroup = useCallback(() => {
-    if (activeHistoryGroupIndex === 0) {
+  const goToPreviousStoryGroup = useCallback(() => {
+    if (activeStoryGroupIndex === 0) {
       return;
     }
-    setActiveHistoryGroupIndex((activeHistoryGroupIndex) => activeHistoryGroupIndex - 1);
-  }, [activeHistoryGroupIndex]);
+    setActiveStoryGroupIndex((activeStoryGroupIndex) => activeStoryGroupIndex - 1);
+  }, [activeStoryGroupIndex]);
 
   return (
-    <div className="flex h-screen max-h-screen w-full flex-row overflow-hidden bg-black sm:w-full sm:gap-10 sm:bg-[#1a1a1a] sm:py-14">
-      <InvisibleCards keys={[-1, -2]} />
-      {historyCardsLayouts.map((historyCardsLayout, index) =>
-        React.cloneElement(historyCardsLayout.component, {
-          ref: (el: HTMLDivElement | null) => (historyGroupsRefs.current[index] = el),
-          key: index,
-          active: index === activeHistoryGroupIndex,
-          isFirstGroup: index === 0,
-          isLastGroup: index === historyGroupsRefs.current.length - 1,
-          selectMyself: () => {
-            setActiveHistoryGroupIndex(index);
-          },
-          goToPreviousHistoryGroup: goToPreviousHistoryGroup,
-          goToNextHistoryGroup: goToNextHistoryGroup,
-        }),
-      )}
-      <InvisibleCards keys={[-3, -4]} />
+    <div ref={groupsLayoutRef} className="flex h-screen max-h-screen w-full flex-row overflow-hidden bg-black sm:w-full sm:bg-[#1a1a1a] sm:py-14">
+      {storyCardsLayouts.map((storyCardsLayout, index) => {
+        return (
+          <motion.div
+            key={index}
+            animate={{
+              x: offset,
+              scale: activeStoryGroupIndex === index ? 1 : 0.5, // scale the selected item to 1, others to 0.5
+            }}
+            initial={false}
+            transition={{ type: "tween", ease: "easeInOut" }}
+          >
+            {React.cloneElement(storyCardsLayout.component, {
+              ref: (el: HTMLDivElement) => (storyGroupsRefs.current[index] = el),
+              active: index === activeStoryGroupIndex,
+              isFirstGroup: index === 0,
+              isLastGroup: index === storyGroupsRefs.current.length - 1,
+              selectMyself: () => {
+                setActiveStoryGroupIndex(index);
+              },
+              goToPreviousStoryGroup: goToPreviousStoryGroup,
+              goToNextStoryGroup: goToNextStoryGroup,
+            })}
+          </motion.div>
+        );
+      })}
     </div>
   );
 }

@@ -7,10 +7,10 @@ interface Props {
   thumbnail: string;
 }
 
-export default function HistoryHeader({ active, title, thumbnail }: Props) {
+export default function StoryHeader({ active, title, thumbnail }: Props) {
   return (
     <div className="flex w-full flex-row items-center gap-1 p-2">
-      <Image src={thumbnail} alt="History group thumbnail" width="32" height="32" className="rounded-full" />
+      <Image src={thumbnail} alt="story group thumbnail" width="32" height="32" className="rounded-full" />
       <h1 className="h-fit flex-1 text-left leading-none text-white">{title}</h1>
       {active && 
         <a href="/">

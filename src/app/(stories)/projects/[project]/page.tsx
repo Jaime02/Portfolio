@@ -5,8 +5,12 @@ const GroupsLayout = dynamic(() => import('@/components/stories/GroupsLayout'), 
   ssr: false,
 });
 
-export default function Page() {
+interface Props {
+  params: { project: string };
+}
+
+export default function Page({ params }: Props ) {
   return (
-    <GroupsLayout storyCardsLayouts={ProjectsStoryGroups} />
+    <GroupsLayout initialStoryGroup={params.project} storyCardsLayouts={ProjectsStoryGroups}/>
   );
 }

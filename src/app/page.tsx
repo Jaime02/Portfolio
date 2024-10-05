@@ -14,7 +14,7 @@ export default function Page() {
 
   const [borderTab, setBorderTab] = useState(0);
 
-  // Scroll to the initially selected tab by the hash in the URL
+  // Scroll to the initially selected tab by the groupName in the URL
   useEffect(() => {
     let defaultTab = window.location.hash.replace("#", "") ? window.location.hash.replace("#", "") : tabs[0].id;
     let defaultBorderIndex = defaultTab ? tabs.findIndex((tab) => tab.id === defaultTab) : 0;

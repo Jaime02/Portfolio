@@ -5,7 +5,7 @@ import PreviousArrow from "@/icons/PreviousArrow";
 import BottomBar from "@/components/stories/BottomBar";
 import Header from "@/components/stories/Header";
 import * as Constants from "@/app/misc/Constants";
-import HistoriesProgressBar from "@/components/stories/StoriesProgressBar";
+import ProgressBar from "@/components/stories/ProgressBar";
 
 export interface CardsLayoutProps {
   children?: React.ReactNode[];
@@ -15,122 +15,135 @@ export interface CardsLayoutProps {
   isFirstGroup?: boolean;
   isLastGroup?: boolean;
   selectMyself?: () => void;
-  goToPreviousHistoryGroup?: () => void;
-  goToNextHistoryGroup?: () => void;
+  goToPreviousStoryGroup?: () => void;
+  goToNextStoryGroup?: () => void;
 }
 
-const STORY_DURATION = 100000;
+const STORY_DURATION = 5000;
 let timerResolution = 50;
 
-const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(
-  ({ children, title, thumbnail, active, isFirstGroup, isLastGroup, selectMyself, goToPreviousHistoryGroup, goToNextHistoryGroup }, ref) => {
-    const [activeHistoryCardIndex, setActiveHistoryCardIndex] = useState(0);
-    const historiesContainerRef = useRef<HTMLDivElement>(null);
-    const historiesRefs = useRef<(HTMLDivElement | null)[]>([]);
-    const [historyTimer, setHistoryTimer] = useState(0);
+const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, title, thumbnail, active, isFirstGroup, isLastGroup, selectMyself, goToPreviousStoryGroup, goToNextStoryGroup }, ref) => {
+  const storiesContainerRef = useRef<HTMLDivElement>(null);
+  const storiesRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-    useEffect(() => {
-      if (active && historiesRefs.current[activeHistoryCardIndex]) {
-        historiesContainerRef.current?.scrollTo({
-          top: 0,
-          left: historiesRefs.current[activeHistoryCardIndex]?.offsetWidth * activeHistoryCardIndex,
-          behavior: "smooth",
-        });
+  const initialStoryCardIndex = Number(window.location.hash.substring(1));
+  const [activeStoryCardIndex, setActiveStoryCardIndex] = useState(initialStoryCardIndex);
+
+  const [storyTimer, setStoryTimer] = useState(0);
+  const firstTimeRendering = useRef(true);
+
+  useEffect(() => {
+    if (activeStoryCardIndex !== 0) {
+      window.history.replaceState(null, "", `#${activeStoryCardIndex}`);
+    } else {
+      window.history.replaceState(null, "", window.location.pathname);
+    }
+
+    if (active && storiesRefs.current[activeStoryCardIndex]) {
+      storiesContainerRef.current?.scrollTo({
+        top: 0,
+        left: storiesRefs.current[activeStoryCardIndex]?.offsetWidth * activeStoryCardIndex,
+        behavior: firstTimeRendering.current ? "instant" : "smooth", 
+      });
+
+      if (firstTimeRendering.current) {
+        firstTimeRendering.current = false;
       }
-    }, [activeHistoryCardIndex, active]);
+    }
+  }, [activeStoryCardIndex, active]);
 
-    const goToPreviousHistory = useCallback(() => {
-      setHistoryTimer(0);
+  const goToPreviousStory = useCallback(() => {
+    setStoryTimer(0);
 
-      if (activeHistoryCardIndex === 0) {
-        goToPreviousHistoryGroup!();
-        return;
-      }
-      setActiveHistoryCardIndex(activeHistoryCardIndex - 1);
-    }, [activeHistoryCardIndex, goToPreviousHistoryGroup]);
+    if (activeStoryCardIndex === 0) {
+      goToPreviousStoryGroup!();
+      return;
+    }
+    setActiveStoryCardIndex(activeStoryCardIndex - 1);
+  }, [activeStoryCardIndex, goToPreviousStoryGroup]);
 
-    const goToNextHistory = useCallback(() => {
-      if (activeHistoryCardIndex === historiesRefs.current.length - 1 && isLastGroup) {
-        window.location.href = "/";
-        return;
-      }
+  const goToNextStory = useCallback(() => {
+    if (activeStoryCardIndex === storiesRefs.current.length - 1 && isLastGroup) {
+      window.location.href = "/";
+      return;
+    }
 
-      setHistoryTimer(0);
+    setStoryTimer(0);
 
-      if (activeHistoryCardIndex === historiesRefs.current.length - 1) {
-        setActiveHistoryCardIndex(0);
-        goToNextHistoryGroup!();
-        return;
-      }
+    if (activeStoryCardIndex === storiesRefs.current.length - 1) {
+      setActiveStoryCardIndex(0);
+      goToNextStoryGroup!();
+      return;
+    }
 
-      setActiveHistoryCardIndex(activeHistoryCardIndex + 1);
-    }, [activeHistoryCardIndex, goToNextHistoryGroup, isLastGroup]);
+    setActiveStoryCardIndex(activeStoryCardIndex + 1);
+  }, [activeStoryCardIndex, goToNextStoryGroup, isLastGroup]);
 
-    useEffect(() => {
-      if (!active) {
-        return;
-      }
+  useEffect(() => {
+    if (!active) {
+      return;
+    }
 
-      const timer = setInterval(() => {
-        if (historyTimer < 100) {
-          setHistoryTimer((historyTimer) => historyTimer + 100 / (STORY_DURATION / timerResolution));
-        } else {
-          goToNextHistory();
-        }
-      }, timerResolution);
-
-      return () => clearInterval(timer);
-    }, [historyTimer, goToNextHistory, active]);
-
-    function navigateIfSmallScreen(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-      if (window.innerWidth > Constants.SMALL_BREAKPOINT_WIDTH) {
-        return;
-      }
-
-      let elementRect = event.currentTarget.getBoundingClientRect();
-      let centerX = elementRect.left + elementRect.width / 2;
-      let clickX = event.clientX;
-
-      if (clickX > centerX) {
-        goToNextHistory();
+    const timer = setInterval(() => {
+      if (storyTimer < 100) {
+        setStoryTimer((storyTimer) => storyTimer + 100 / (STORY_DURATION / timerResolution));
       } else {
-        goToPreviousHistory();
+        goToNextStory();
+        clearInterval(timer);
       }
+    }, timerResolution);
+
+    return () => clearInterval(timer);
+  }, [storyTimer, goToNextStory, active]);
+
+  function navigateIfSmallScreen(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    if (window.innerWidth > Constants.SMALL_BREAKPOINT_WIDTH) {
+      return;
     }
 
-    function onClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-      if (active) {
-        return;
-      }
+    let elementRect = event.currentTarget.getBoundingClientRect();
+    let centerX = elementRect.left + elementRect.width / 2;
+    let clickX = event.clientX;
 
-      setActiveHistoryCardIndex(0);
-      setHistoryTimer(0);
-      selectMyself!();
+    if (clickX > centerX) {
+      goToNextStory();
+    } else {
+      goToPreviousStory();
+    }
+  }
+
+  function onClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    if (active) {
+      return;
     }
 
-    return (
-      <div className={`mx-auto flex h-full w-fit flex-row items-center gap-4 transition duration-300 ease-in-out ${active ? "" : "scale-50 opacity-50"}`} onClick={onClick} ref={ref}>
-        {active && <PreviousArrow extraClasses={`invisible ${activeHistoryCardIndex !== 0 || !isFirstGroup ? "sm:visible" : ""}`} onClick={goToPreviousHistory} />}
-        <div className="flex aspect-[9/16] h-full flex-col rounded-md bg-black text-center">
-          {active && <HistoriesProgressBar historyCount={children ? children.length : 0} activeHistoryIndex={activeHistoryCardIndex} progress={historyTimer}></HistoriesProgressBar>}
-          {thumbnail && title && <Header active={active!} thumbnail={thumbnail} title={title} />}
-          <div ref={historiesContainerRef} className="flex flex-1 snap-x flex-row overflow-x-hidden rounded-md" onClick={navigateIfSmallScreen}>
-            {children?.map((child, index) => {
-              return React.cloneElement(child as React.ReactElement<any>, {
-                ref: (el: HTMLDivElement) => {
-                  historiesRefs.current[index] = el;
-                },
-                key: index,
-              });
-            })}
-          </div>
-          {active && <BottomBar />}
+    setActiveStoryCardIndex(0);
+    setStoryTimer(0);
+    selectMyself!();
+  }
+
+  return (
+    <div className={`mx-auto flex h-full w-fit flex-row items-center gap-4 ${!active ? "opacity-50" : ""}`} onClick={onClick} ref={ref}>
+      {active && <PreviousArrow extraClasses={`invisible ${activeStoryCardIndex !== 0 || !isFirstGroup ? "sm:visible" : ""}`} onClick={goToPreviousStory} />}
+      <div className="flex aspect-[9/16] h-full flex-col rounded-md bg-black text-center">
+        {active && <ProgressBar storyCount={children ? children.length : 0} activeStoryIndex={activeStoryCardIndex} progress={storyTimer}/>}
+        {thumbnail && title && <Header active={active!} thumbnail={thumbnail} title={title} />}
+        <div ref={storiesContainerRef} className="flex flex-1 snap-x flex-row overflow-x-hidden rounded-md" onClick={navigateIfSmallScreen}>
+          {children?.map((child, index) => {
+            return React.cloneElement(child as React.ReactElement<any>, {
+              ref: (el: HTMLDivElement) => {
+                storiesRefs.current[index] = el;
+              },
+              key: index,
+            });
+          })}
         </div>
-        {active && <NextArrow extraClasses={"invisible sm:visible"} onClick={goToNextHistory} />}
+        {active && <BottomBar />}
       </div>
-    );
-  },
-);
+      {active && <NextArrow extraClasses={"invisible sm:visible"} onClick={goToNextStory} />}
+    </div>
+  );
+});
 
 CardsLayout.displayName = "CardsLayout";
 export default CardsLayout;

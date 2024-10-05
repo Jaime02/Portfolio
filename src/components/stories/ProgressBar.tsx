@@ -1,13 +1,13 @@
 interface Props {
-  historyCount: number;
-  activeHistoryIndex: number;
+  storyCount: number;
+  activeStoryIndex: number;
   progress: number;
 }
 
-export default function HistoriesProgressBar({ historyCount, activeHistoryIndex, progress }: Props) {
+export default function ProgressBar({ storyCount, activeStoryIndex, progress }: Props) {
   return (
     <div className="flex h-[2px] w-full flex-row gap-2 rounded-md">
-      {Array(historyCount)
+      {Array(storyCount)
         .fill(0)
         .map((_, index) => {
           return (
@@ -15,7 +15,7 @@ export default function HistoriesProgressBar({ historyCount, activeHistoryIndex,
               <div
                 className="h-full bg-white"
                 style={{
-                  width: activeHistoryIndex > index ? '100%' : index === activeHistoryIndex ? `${progress}%` : '0%',
+                  width: activeStoryIndex > index ? '100%' : index === activeStoryIndex ? `${progress}%` : '0%',
                 }}
               />
             </div>

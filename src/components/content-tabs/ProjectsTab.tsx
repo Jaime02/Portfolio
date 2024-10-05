@@ -9,12 +9,12 @@ interface Props {
 const ProjectsTab = forwardRef<HTMLDivElement, Props>(({index}: Props, ref) => {
   const items = [
     {
-      link: "/projects#this-website",
+      link: "/projects/this-website",
       thumbnail: "/images/thisWebsiteThumbnail.svg",
       title: "This website",
     },
     {
-      link: "/projects#technical-drawing-app",
+      link: "/projects/technical-drawing-app",
       thumbnail: "/images/technicalDrawingAppThumbnail.png",
       title: "Technical drawing app",
     },
