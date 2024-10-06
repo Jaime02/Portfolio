@@ -21,13 +21,8 @@ export default function GroupsLayout({ initialStoryGroup, storyCardsLayouts }: P
   const calculateOffset = useCallback(() => {
     if (!groupsLayoutRef.current || !storyGroupsRefs.current[activeStoryGroupIndex]) return 0;
 
-    const containerWidth = groupsLayoutRef.current.offsetWidth;
     const storyWidth = storyGroupsRefs.current[0].offsetWidth;
-
-    // TODO
-    const gap = 8;
-    const offset = containerWidth / 2 - storyWidth / 2 - activeStoryGroupIndex * (storyWidth + gap);
-    return offset;
+    return -activeStoryGroupIndex * storyWidth;
   }, [activeStoryGroupIndex]);
 
   const [offset, setOffset] = useState<number>(calculateOffset());
@@ -68,7 +63,7 @@ export default function GroupsLayout({ initialStoryGroup, storyCardsLayouts }: P
   }, [activeStoryGroupIndex]);
 
   return (
-    <div ref={groupsLayoutRef} className="flex h-dvh max-h-dvh w-full flex-row overflow-hidden bg-black sm:w-full sm:bg-[#1a1a1a] sm:py-14">
+    <div ref={groupsLayoutRef} className="flex h-dvh max-h-dvh w-full max-w-full flex-row overflow-hidden bg-black sm:w-full sm:bg-[#1a1a1a] sm:py-14 pt-2 px-2">
       {storyCardsLayouts.map((storyCardsLayout, index) => {
         return (
           <motion.div
@@ -77,6 +72,7 @@ export default function GroupsLayout({ initialStoryGroup, storyCardsLayouts }: P
               x: offset,
               scale: activeStoryGroupIndex === index ? 1 : 0.5,
             }}
+            className="max-w-full"
             initial={false}
             transition={{ type: "tween", ease: "easeInOut" }}
           >

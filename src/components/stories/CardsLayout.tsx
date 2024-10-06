@@ -21,7 +21,7 @@ export interface CardsLayoutProps {
   goToNextStoryGroup?: () => void;
 }
 
-const STORY_DURATION = 5000;
+const STORY_DURATION = 60000;
 const MOUSE_PRESS_DURATION_THRESHOLD = 200;
 let TIMER_RESOLUTION = 50;
 
@@ -154,9 +154,9 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, ti
   }
   
   return (
-    <div className={`mx-auto flex h-full w-fit flex-row items-center gap-4 ${!active ? "opacity-50" : ""}`} ref={ref}>
+    <div className={`mx-auto flex h-full max-w-full w-fit flex-row items-center sm:gap-4 ${!active ? "opacity-50" : ""}`} ref={ref}>
       {active && <PreviousArrow extraClasses={`invisible ${activeStoryCardIndex !== 0 || !isFirstGroup ? "sm:visible" : ""}`} onClick={goToPreviousStory} />}
-      <div className="flex aspect-[9/16] h-full flex-col rounded-md bg-black text-center">
+      <div className="flex aspect-[9/16] max-w-full h-full flex-col rounded-md bg-black text-center">
         {active && <ProgressBar storyCount={children ? children.length : 0} activeStoryIndex={activeStoryCardIndex!} progress={storyTimer}/>}
         {thumbnail && title && <Header active={active!} thumbnail={thumbnail} title={title} timerRunning={timerRunning} setTimerRunning={setTimerRunning} />}
         <div ref={storiesContainerRef} className="flex flex-1 snap-x flex-row overflow-x-hidden rounded-md" onMouseDown={mouseDown} onMouseUp={mouseUp}>
