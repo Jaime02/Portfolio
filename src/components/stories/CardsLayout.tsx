@@ -14,39 +14,38 @@ export interface CardsLayoutProps {
   active?: boolean;
   isFirstGroup?: boolean;
   isLastGroup?: boolean;
+  activeStoryCardIndex?: number;
+  setActiveStoryCardIndex?: React.Dispatch<React.SetStateAction<number>>;
   selectMyself?: () => void;
   goToPreviousStoryGroup?: () => void;
   goToNextStoryGroup?: () => void;
 }
 
 const STORY_DURATION = 5000;
-let timerResolution = 50;
+const MOUSE_PRESS_DURATION_THRESHOLD = 200;
+let TIMER_RESOLUTION = 50;
 
-const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, title, thumbnail, active, isFirstGroup, isLastGroup, selectMyself, goToPreviousStoryGroup, goToNextStoryGroup }, ref) => {
+const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, title, thumbnail, active, isFirstGroup, isLastGroup, activeStoryCardIndex, setActiveStoryCardIndex, selectMyself, goToPreviousStoryGroup, goToNextStoryGroup }, ref) => {
   const storiesContainerRef = useRef<HTMLDivElement>(null);
   const storiesRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const initialStoryCardIndex = Number(window.location.hash.substring(1));
-  const [activeStoryCardIndex, setActiveStoryCardIndex] = useState(initialStoryCardIndex);
-
   const [storyTimer, setStoryTimer] = useState(0);
   const [timerRunning, setTimerRunning] = useState(false);
+  const [mouseDownTime, setMouseDownTime] = useState<number>(0);
 
   const firstTimeRendering = useRef(true);
 
   useEffect(() => {
     if (activeStoryCardIndex !== 0) {
-      console.log("Cards layout sets url to" + `#${activeStoryCardIndex}`);
       window.history.replaceState(null, "", `#${activeStoryCardIndex}`);
     } else {
-      console.log("Cards layout sets url to" + window.location.pathname);
       window.history.replaceState(null, "", window.location.pathname);
     }
 
-    if (active && storiesRefs.current[activeStoryCardIndex]) {
+    if (active && storiesRefs.current[activeStoryCardIndex!]) {
       storiesContainerRef.current?.scrollTo({
         top: 0,
-        left: storiesRefs.current[activeStoryCardIndex]?.offsetWidth * activeStoryCardIndex,
+        left: storiesRefs.current[activeStoryCardIndex!]!.offsetWidth * activeStoryCardIndex!,
         behavior: firstTimeRendering.current ? "instant" : "smooth", 
       });
 
@@ -58,14 +57,14 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, ti
   }, [activeStoryCardIndex, active]);
 
   const goToPreviousStory = useCallback(() => {
-    setStoryTimer(0);
-
     if (activeStoryCardIndex === 0) {
       goToPreviousStoryGroup!();
       return;
-    }
-    setActiveStoryCardIndex(activeStoryCardIndex - 1);
-  }, [activeStoryCardIndex, goToPreviousStoryGroup]);
+    } 
+    
+    setStoryTimer(0);
+    setActiveStoryCardIndex!(activeStoryCardIndex! - 1);
+  }, [activeStoryCardIndex, setActiveStoryCardIndex, goToPreviousStoryGroup]);
 
   const goToNextStory = useCallback(() => {
     if (activeStoryCardIndex === storiesRefs.current.length - 1 && isLastGroup) {
@@ -76,13 +75,13 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, ti
     setStoryTimer(0);
 
     if (activeStoryCardIndex === storiesRefs.current.length - 1) {
-      setActiveStoryCardIndex(0);
+      setActiveStoryCardIndex!(0);
       goToNextStoryGroup!();
       return;
     }
 
-    setActiveStoryCardIndex(activeStoryCardIndex + 1);
-  }, [activeStoryCardIndex, goToNextStoryGroup, isLastGroup]);
+    setActiveStoryCardIndex!(activeStoryCardIndex! + 1);
+  }, [activeStoryCardIndex, setActiveStoryCardIndex, goToNextStoryGroup, isLastGroup]);
 
   useEffect(() => {
     if (!active) {
@@ -95,12 +94,12 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, ti
       }
 
       if (storyTimer < 100) {
-        setStoryTimer((storyTimer) => storyTimer + 100 / (STORY_DURATION / timerResolution));
+        setStoryTimer((storyTimer) => storyTimer + 100 / (STORY_DURATION / TIMER_RESOLUTION));
       } else {
         goToNextStory();
         clearInterval(timer);
       }
-    }, timerResolution);
+    }, TIMER_RESOLUTION);
 
     return () => clearInterval(timer);
   }, [storyTimer, goToNextStory, active, timerRunning]);
@@ -129,39 +128,38 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, ti
     }
   }
 
-  function onClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-    if (active) {
-      return;
-    }
-
-    setActiveStoryCardIndex(0);
-    setStoryTimer(0);
-    selectMyself!();
-  }
-
   function mouseDown(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     if (!active) {
       return;
     }
-
+    setMouseDownTime(Date.now());
     setTimerRunning(false);
   }
 
   function mouseUp(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     if (!active) {
+      setActiveStoryCardIndex!(0);
+      setStoryTimer(0);
+      selectMyself!();
       return;
     }
+  
+    const mousePressDuration = Date.now() - mouseDownTime;
+    if (mousePressDuration < MOUSE_PRESS_DURATION_THRESHOLD) {
+      navigateIfSmallScreen(event);
+    }
 
+    setMouseDownTime(0);
     setTimerRunning(true);
   }
-
+  
   return (
-    <div className={`mx-auto flex h-full w-fit flex-row items-center gap-4 ${!active ? "opacity-50" : ""}`} onClick={onClick} ref={ref}>
+    <div className={`mx-auto flex h-full w-fit flex-row items-center gap-4 ${!active ? "opacity-50" : ""}`} ref={ref}>
       {active && <PreviousArrow extraClasses={`invisible ${activeStoryCardIndex !== 0 || !isFirstGroup ? "sm:visible" : ""}`} onClick={goToPreviousStory} />}
       <div className="flex aspect-[9/16] h-full flex-col rounded-md bg-black text-center">
-        {active && <ProgressBar storyCount={children ? children.length : 0} activeStoryIndex={activeStoryCardIndex} progress={storyTimer}/>}
+        {active && <ProgressBar storyCount={children ? children.length : 0} activeStoryIndex={activeStoryCardIndex!} progress={storyTimer}/>}
         {thumbnail && title && <Header active={active!} thumbnail={thumbnail} title={title} timerRunning={timerRunning} setTimerRunning={setTimerRunning} />}
-        <div ref={storiesContainerRef} className="flex flex-1 snap-x flex-row overflow-x-hidden rounded-md" onClick={navigateIfSmallScreen} onMouseDown={mouseDown} onMouseUp={mouseUp}>
+        <div ref={storiesContainerRef} className="flex flex-1 snap-x flex-row overflow-x-hidden rounded-md" onMouseDown={mouseDown} onMouseUp={mouseUp}>
           {children?.map((child, index) => {
             return React.cloneElement(child as React.ReactElement<any>, {
               ref: (el: HTMLDivElement) => {

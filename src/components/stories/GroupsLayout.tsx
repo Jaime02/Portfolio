@@ -11,10 +11,12 @@ interface Props {
 export default function GroupsLayout({ initialStoryGroup, storyCardsLayouts }: Props) {
   const storyGroupsRefs = useRef<HTMLDivElement[]>([]);
   const groupsLayoutRef = useRef<HTMLDivElement | null>(null);
-  const [offset, setOffset] = useState<number>(0);
 
   const initialGroupIndex: number = initialStoryGroup ? storyCardsLayouts.findIndex((storyCardLayout) => storyCardLayout.groupName === initialStoryGroup) : 0;
   const [activeStoryGroupIndex, setActiveStoryGroupIndex] = useState(initialGroupIndex);
+  
+  const initialStoryCardIndex = Number(window.location.hash.substring(1));
+  const [activeStoryCardIndex, setActiveStoryCardIndex] = useState(initialStoryCardIndex);
 
   const calculateOffset = useCallback(() => {
     if (!groupsLayoutRef.current || !storyGroupsRefs.current[activeStoryGroupIndex]) return 0;
@@ -27,6 +29,8 @@ export default function GroupsLayout({ initialStoryGroup, storyCardsLayouts }: P
     const offset = containerWidth / 2 - storyWidth / 2 - activeStoryGroupIndex * (storyWidth + gap);
     return offset;
   }, [activeStoryGroupIndex]);
+
+  const [offset, setOffset] = useState<number>(calculateOffset());
 
   useEffect(() => {
     // Scroll to the active element whenever the index changes
@@ -50,14 +54,17 @@ export default function GroupsLayout({ initialStoryGroup, storyCardsLayouts }: P
       window.location.href = "/";
       return;
     }
-    setActiveStoryGroupIndex((activeStoryGroupIndex) => activeStoryGroupIndex + 1);
+    
+    setActiveStoryGroupIndex(activeStoryGroupIndex + 1); 
   }, [activeStoryGroupIndex]);
 
   const goToPreviousStoryGroup = useCallback(() => {
     if (activeStoryGroupIndex === 0) {
+      window.location.href = "/";
       return;
     }
-    setActiveStoryGroupIndex((activeStoryGroupIndex) => activeStoryGroupIndex - 1);
+
+    setActiveStoryGroupIndex(activeStoryGroupIndex - 1);
   }, [activeStoryGroupIndex]);
 
   return (
@@ -78,6 +85,8 @@ export default function GroupsLayout({ initialStoryGroup, storyCardsLayouts }: P
               active: index === activeStoryGroupIndex,
               isFirstGroup: index === 0,
               isLastGroup: index === storyGroupsRefs.current.length - 1,
+              activeStoryCardIndex: activeStoryCardIndex,
+              setActiveStoryCardIndex: setActiveStoryCardIndex,
               selectMyself: () => {
                 setActiveStoryGroupIndex(index);
               },

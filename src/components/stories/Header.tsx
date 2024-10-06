@@ -19,7 +19,7 @@ export default function StoryHeader({ active, title, thumbnail, timerRunning, se
       {active && (
         <>
           {timerRunning ? (
-            <button onClick={() => setTimerRunning(false)}>
+            <button onClick={() => setTimerRunning(false)} className="hidden sm:block">
              <PauseIcon />
             </button>
           ) : (
