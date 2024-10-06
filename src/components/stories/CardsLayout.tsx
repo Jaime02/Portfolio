@@ -30,12 +30,16 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, ti
   const [activeStoryCardIndex, setActiveStoryCardIndex] = useState(initialStoryCardIndex);
 
   const [storyTimer, setStoryTimer] = useState(0);
+  const [timerRunning, setTimerRunning] = useState(false);
+
   const firstTimeRendering = useRef(true);
 
   useEffect(() => {
     if (activeStoryCardIndex !== 0) {
+      console.log("Cards layout sets url to" + `#${activeStoryCardIndex}`);
       window.history.replaceState(null, "", `#${activeStoryCardIndex}`);
     } else {
+      console.log("Cards layout sets url to" + window.location.pathname);
       window.history.replaceState(null, "", window.location.pathname);
     }
 
@@ -49,6 +53,7 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, ti
       if (firstTimeRendering.current) {
         firstTimeRendering.current = false;
       }
+      
     }
   }, [activeStoryCardIndex, active]);
 
@@ -85,6 +90,10 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, ti
     }
 
     const timer = setInterval(() => {
+      if (!timerRunning) {
+        return;
+      }
+
       if (storyTimer < 100) {
         setStoryTimer((storyTimer) => storyTimer + 100 / (STORY_DURATION / timerResolution));
       } else {
@@ -94,7 +103,15 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, ti
     }, timerResolution);
 
     return () => clearInterval(timer);
-  }, [storyTimer, goToNextStory, active]);
+  }, [storyTimer, goToNextStory, active, timerRunning]);
+  
+  useEffect(() => {
+    if (!active) {
+      return;
+    } 
+
+    setTimerRunning(true);
+  }, [active]);
 
   function navigateIfSmallScreen(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     if (window.innerWidth > Constants.SMALL_BREAKPOINT_WIDTH) {
@@ -122,13 +139,29 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, ti
     selectMyself!();
   }
 
+  function mouseDown(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    if (!active) {
+      return;
+    }
+
+    setTimerRunning(false);
+  }
+
+  function mouseUp(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    if (!active) {
+      return;
+    }
+
+    setTimerRunning(true);
+  }
+
   return (
     <div className={`mx-auto flex h-full w-fit flex-row items-center gap-4 ${!active ? "opacity-50" : ""}`} onClick={onClick} ref={ref}>
       {active && <PreviousArrow extraClasses={`invisible ${activeStoryCardIndex !== 0 || !isFirstGroup ? "sm:visible" : ""}`} onClick={goToPreviousStory} />}
       <div className="flex aspect-[9/16] h-full flex-col rounded-md bg-black text-center">
         {active && <ProgressBar storyCount={children ? children.length : 0} activeStoryIndex={activeStoryCardIndex} progress={storyTimer}/>}
-        {thumbnail && title && <Header active={active!} thumbnail={thumbnail} title={title} />}
-        <div ref={storiesContainerRef} className="flex flex-1 snap-x flex-row overflow-x-hidden rounded-md" onClick={navigateIfSmallScreen}>
+        {thumbnail && title && <Header active={active!} thumbnail={thumbnail} title={title} timerRunning={timerRunning} setTimerRunning={setTimerRunning} />}
+        <div ref={storiesContainerRef} className="flex flex-1 snap-x flex-row overflow-x-hidden rounded-md" onClick={navigateIfSmallScreen} onMouseDown={mouseDown} onMouseUp={mouseUp}>
           {children?.map((child, index) => {
             return React.cloneElement(child as React.ReactElement<any>, {
               ref: (el: HTMLDivElement) => {

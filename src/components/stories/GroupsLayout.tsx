@@ -40,7 +40,7 @@ export default function GroupsLayout({ initialStoryGroup, storyCardsLayouts }: P
 
   useEffect(() => {
     // Update URL depending on active story group
-    window.history.replaceState(null, "", storyCardsLayouts[activeStoryGroupIndex].url);
+    window.history.replaceState(null, "", storyCardsLayouts[activeStoryGroupIndex].url + window.location.hash);
 
     setOffset(calculateOffset());
   }, [activeStoryGroupIndex, storyCardsLayouts, calculateOffset]);
