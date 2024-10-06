@@ -18,13 +18,13 @@ export default function ProfileContent() {
 
       <div className="col-start-2 row-start-1 flex flex-row flex-wrap items-center justify-start gap-2 sm:mb-5">
         <h1 className="text-nowrap text-xl">Jaime Resano</h1>
-        <div className="flex flex-row items-start justify-center gap-2">
-          <div className="btn-secondary">
+        <div className="flex flex-row flex-wrap items-start justify-start gap-2">
+          <div className="btn-secondary select-none">
             <p>Following</p>
             <DownArrowIcon extraClasses="size-3 stroke-black dark:stroke-white" />
           </div>
           <div className="btn-secondary text-nowrap">Send message</div>
-          <div className="btn-secondary">
+          <div className="btn-secondary select-none">
             <UserPlusIcon extraClasses="size-4 stroke-black dark:stroke-white" />
           </div>
           <ThreeDotsIcon extraClasses="size-8 stroke-black dark:stroke-white" />

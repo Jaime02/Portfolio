@@ -68,14 +68,14 @@ export default function GroupsLayout({ initialStoryGroup, storyCardsLayouts }: P
   }, [activeStoryGroupIndex]);
 
   return (
-    <div ref={groupsLayoutRef} className="flex h-screen max-h-screen w-full flex-row overflow-hidden bg-black sm:w-full sm:bg-[#1a1a1a] sm:py-14">
+    <div ref={groupsLayoutRef} className="flex h-dvh max-h-dvh w-full flex-row overflow-hidden bg-black sm:w-full sm:bg-[#1a1a1a] sm:py-14">
       {storyCardsLayouts.map((storyCardsLayout, index) => {
         return (
           <motion.div
             key={index}
             animate={{
               x: offset,
-              scale: activeStoryGroupIndex === index ? 1 : 0.5, // scale the selected item to 1, others to 0.5
+              scale: activeStoryGroupIndex === index ? 1 : 0.5,
             }}
             initial={false}
             transition={{ type: "tween", ease: "easeInOut" }}
