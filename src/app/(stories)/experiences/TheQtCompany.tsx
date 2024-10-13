@@ -6,7 +6,7 @@ import { forwardRef } from "react";
 
 const TheQtCompany = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
   return (
-    <CardsLayout title="The Qt Company" thumbnail={<HeaderThumbnail src="/images/QtLogo.svg"/>} {...props} ref={ref}>
+    <CardsLayout {...props} ref={ref}>
       <Card>
         <h1>The Qt Company</h1>
         <Image src="/images/QtLogo.svg" width="500" height="500" alt="Qt logo" className="h-auto w-auto select-none" draggable="false" />

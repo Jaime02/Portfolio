@@ -12,7 +12,7 @@ const Freelancing = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) =>
         <h1>Upwork</h1>
       </Card>
       <Card>
-        <h1>Fiverr</h1>
+        <h1>Me prostituyo por cuatro pelas, pa entendernos</h1>
       </Card>
     </CardsLayout>
   );

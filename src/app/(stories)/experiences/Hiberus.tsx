@@ -8,9 +8,6 @@ const Hiberus = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
       <Card>
         <h1>Hiberus</h1>
       </Card>
-      <Card>
-        <p>Me gustan los trenes</p>
-      </Card>
     </CardsLayout>
   );
 });
