@@ -27,7 +27,7 @@ export default function ProfileContent() {
           <div className="btn-secondary select-none">
             <UserPlusIcon extraClasses="size-4 stroke-black dark:stroke-white" />
           </div>
-          <ThreeDotsIcon extraClasses="size-8 stroke-black dark:stroke-white" />
+          <ThreeDotsIcon/>
         </div>
       </div>
       <div className="col-span-2 row-start-4 border-t-[1px] border-[#dbdbdb] py-3 sm:col-start-2 sm:row-start-2 sm:border-t-0 sm:p-0">
