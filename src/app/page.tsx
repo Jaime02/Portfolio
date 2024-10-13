@@ -2,10 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 
-import { tabs } from "@/app/misc/Constants";
-import ProjectsTab from "@/components/content-tabs/ProjectsTab";
-import ExperienceTab from "@/components/content-tabs/ExperienceTab";
-import OthersTab from "@/components/content-tabs/OthersTab";
+import { storyCategories } from "@/misc/Constants";
 import ProfileContent from "@/components/misc/ProfileContent";
 
 export default function Page() {
@@ -14,10 +11,10 @@ export default function Page() {
 
   const [borderTab, setBorderTab] = useState(0);
 
-  // Scroll to the initially selected tab by the groupName in the URL
+  // Scroll to the initially selected tab by the title in the URL
   useEffect(() => {
-    let defaultTab = window.location.hash.replace("#", "") ? window.location.hash.replace("#", "") : tabs[0].id;
-    let defaultBorderIndex = defaultTab ? tabs.findIndex((tab) => tab.id === defaultTab) : 0;
+    let defaultTab = window.location.hash.replace("#", "") ? window.location.hash.replace("#", "") : storyCategories[0].getId();
+    let defaultBorderIndex = defaultTab ? storyCategories.findIndex((tab) => tab.getId() === defaultTab) : 0;
     setBorderTab(defaultBorderIndex);
     tabElements.current[defaultBorderIndex].scrollIntoView({ behavior: "auto" });
   }, []);
@@ -37,7 +34,7 @@ export default function Page() {
       { root: tabsContainerRef.current, threshold: 0.5 },
     );
 
-    tabElements.current.forEach(tab => observer.observe(tab));
+    tabElements.current.forEach((tab) => observer.observe(tab));
 
     return () => observer.disconnect();
   }, []);
@@ -55,7 +52,7 @@ export default function Page() {
     let location = window.location.toString().split("#")[0];
     history.replaceState(null, "", location + hash);
 
-    let tabIndex = tabs.findIndex((tab) => tab.id === tabId);
+    let tabIndex = storyCategories.findIndex((tab) => tab.getId() === tabId);
     tabElements.current[tabIndex].scrollIntoView({ behavior: "smooth" });
   }
 
@@ -69,38 +66,29 @@ export default function Page() {
     <main className="mx-auto sm:mt-[30px] md:max-w-3xl lg:max-w-4xl">
       <ProfileContent />
       <div className="flex w-full flex-row justify-around border-t-[1px] border-[#dbdbdb] sm:justify-center sm:gap-[60px]">
-        {tabs.map((tab, index) => (
-          <a
-            key={tab.id}
-            className={`flex flex-1 flex-row items-center justify-center gap-2 border-black py-2 aria-selected:border-t-[1px] ${borderTab === index ? "border-t-[1px]" : ""}`}
-            href={tab.id === "projects" ? "" : `#${tab.id}`}
-            aria-label={tab.name}
-            onClick={(event) => handleAnchorClick(tab.id, event)}
-          >
-            {tab.Icon}
-            <span className="hidden text-sm uppercase tracking-widest sm:inline">{tab.name}</span>
-          </a>
-        ))}
+        {storyCategories.map((tab, index) => {
+          let tabId = tab.getId();
+          return (
+            <a
+              key={tabId}
+              className={`flex flex-1 flex-row items-center justify-center gap-2 border-black py-2 aria-selected:border-t-[1px] ${borderTab === index ? "border-t-[1px]" : ""}`}
+              href={tabId === "projects" ? "" : `#${tabId}`}
+              aria-label={tab.name}
+              onClick={(event) => handleAnchorClick(tabId, event)}
+            >
+              {tab.icon}
+              <span className="hidden text-sm uppercase tracking-widest sm:inline">{tab.name}</span>
+            </a>
+          );
+        })}
       </div>
       <div ref={tabsContainerRef} className="flex snap-x flex-row gap-2 overflow-x-hidden data-[dragging]:snap-none">
-        <ProjectsTab
-          ref={(el) => {
-            if (el) tabElements.current[0] = el;
-          }}
-          index={0}
-        />
-        <ExperienceTab
-          ref={(el) => {
-            if (el) tabElements.current[1] = el;
-          }}
-          index={1}
-        />
-        <OthersTab
-          ref={(el) => {
-            if (el) tabElements.current[2] = el;
-          }}
-          index={2}
-        />
+        {storyCategories.map((tab, index) =>
+          React.cloneElement(tab.storyTabThumbnails, {
+            ref: (el: HTMLDivElement) => (tabElements.current[index] = el),
+            key: index,
+          }),
+        )}
       </div>
     </main>
   );

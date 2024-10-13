@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { InstagramSans } from "@/app/misc/fonts";
+import { InstagramSans } from "@/misc/fonts";
 import "@/app/globals.css";
 
 export const metadata: Metadata = {

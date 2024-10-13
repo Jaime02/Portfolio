@@ -12,7 +12,7 @@ export default function ProfileContent() {
     <div className="mt-4 grid grid-flow-col sm:mb-4 sm:mt-0">
       <div className="col-start-1 row-span-2 row-start-1 mx-4 h-fit w-fit rounded-full bg-gradient-to-tr from-yellow-200 via-[#FD1D1D] to-[#FF00AA] p-[3.5px] sm:row-span-3 sm:ml-0 sm:mr-7">
         <div className="rounded-full bg-white p-1">
-          <Image src="/images/jaimePicture.png" alt="Jaime Resano face" className="size-20 min-h-20 min-w-20 rounded-full sm:size-44 sm:min-h-44 sm:min-w-44" width="300" height="300" />
+          <Image src="/images/Me.webp" alt="Jaime Resano face" className="size-20 min-h-20 min-w-20 rounded-full sm:size-44 sm:min-h-44 sm:min-w-44" width="300" height="300" />
         </div>
       </div>
 
