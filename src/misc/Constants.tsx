@@ -4,7 +4,7 @@ import OPmobility from "@/app/(stories)/experiences/OPmobility";
 import TheQtCompany from "@/app/(stories)/experiences/TheQtCompany";
 import Upna from "@/app/(stories)/experiences/Upna";
 import CoolPictures from "@/app/(stories)/others/CoolPictures";
-import MyLinks from "@/app/(stories)/others/DownloadCV";
+import MyLinks from "@/app/(stories)/others/MyLinks";
 import DownloadCV from "@/app/(stories)/others/DownloadCV";
 import PaintFilterManager from "@/app/(stories)/projects/PaintFilterManager";
 import QtProjects from "@/app/(stories)/projects/QtProjects";
