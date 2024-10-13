@@ -9,7 +9,7 @@ const OPmobility = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => 
         <h1>OPmobility, formerly known as Plastic Omnium</h1>
       </Card>
       <Card>
-        <p>Me gustan los trenes</p>
+        <p>OPI MOBILI TY</p>
       </Card>
     </CardsLayout>
   );

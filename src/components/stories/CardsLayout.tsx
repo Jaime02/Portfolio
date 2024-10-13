@@ -21,7 +21,7 @@ export interface CardsLayoutProps {
   goToNextStoryGroup?: () => void;
 }
 
-const STORY_DURATION = 600000;
+const STORY_DURATION = 5000;
 const MOUSE_PRESS_DURATION_THRESHOLD = 200;
 let TIMER_RESOLUTION = 50;
 

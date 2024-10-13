@@ -31,7 +31,6 @@ export default function GroupsLayout({ initialStoryGroupUrl, storyCategory }: Pr
 
     const storyWidth = storyGroupsRefs.current[activeStoryGroupIndex].offsetWidth;
     const containerWidth = groupsLayoutContainerRef.current.offsetWidth;
-    console.log(storyWidth, containerWidth);
     let offset = containerWidth / 2 - storyWidth / 2 - activeStoryGroupIndex * storyWidth;
     return offset;
   }, [activeStoryGroupIndex]);

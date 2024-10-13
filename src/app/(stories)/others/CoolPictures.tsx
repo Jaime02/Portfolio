@@ -8,11 +8,9 @@ const CoolPictures = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) =
     <CardsLayout {...props} ref={ref}>
       <Card>
         <h1>Hey, are you still here? I have nothing else to show you... well... here you have, some cool pictures &#128513;</h1>
-        <h2>Click on the download button in order to download it as a PDF</h2>
-        <a className="btn-secondary" href="/CVJaimeResano.pdf"><Image src="/images/download.svg" width="20" height="20" alt="Download PDF" className="select-none" draggable="false" priority={true}/> Download CV</a>
       </Card>
       <Card>
-        <p>Me gustan los trenes</p>
+        <p>GOLFFFFFFFFFFFFFFFFFFFFFFFFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p>
       </Card>
     </CardsLayout>
   );

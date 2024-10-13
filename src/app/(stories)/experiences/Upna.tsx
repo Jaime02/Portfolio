@@ -6,7 +6,7 @@ const Upna = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
   return (
     <CardsLayout {...props} ref={ref}>
       <Card>
-        <h1>Upna, tremendo mierdon</h1>
+        <h1>La puta Upna, tremendo mierdon</h1>
       </Card>
       <Card>
         <p>Me gustan los trenes</p>
