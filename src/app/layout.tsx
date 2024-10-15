@@ -6,10 +6,10 @@ export const metadata: Metadata = {
   title: "Jaime Resano | Personal website",
   description: "Jaime Resano Aisa personal website",
 };
-
+// scroll-smooth motion-reduce:scroll-auto
 export default function BaseLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="scroll-smooth motion-reduce:scroll-auto">
+    <html lang="en" className="">
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />

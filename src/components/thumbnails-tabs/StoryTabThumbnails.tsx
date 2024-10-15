@@ -9,7 +9,7 @@ interface Props {
 
 const StoryTabThumbnails = forwardRef<HTMLDivElement, Props>(({index, thumbnails}: Props, ref) => {
   return (
-    <div ref={ref} data-index={index} className="min-w-full snap-center"> 
+    <div ref={ref} data-index={index} className="min-w-full"> 
       <ThreeColumnsGrid>
         {
           thumbnails.map((thumbnail, index) => React.cloneElement(thumbnail, {key: index, alt: thumbnail.props.alt}))
