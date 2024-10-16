@@ -54,7 +54,7 @@ export default function GroupsLayout({ initialStoryGroupUrl, storyCategory }: Pr
   const goToNextStoryGroup = useCallback(() => {
     // Animate the scroll only after the first click. Avoid animating the scroll on page render
     groupsLayoutRef.current!.setAttribute("data-animate", "");
-    
+
     if (activeStoryGroupIndex === storyGroupsRefs.current.length - 1) {
       window.location.href = "/";
       return;
@@ -78,35 +78,24 @@ export default function GroupsLayout({ initialStoryGroupUrl, storyCategory }: Pr
   return (
     <div ref={groupsLayoutContainerRef} className="flex h-dvh max-h-dvh w-full flex-col justify-center overflow-clip bg-black pt-2 sm:bg-[#1a1a1a] sm:py-8">
       <div ref={groupsLayoutRef} className="flex h-full max-h-full w-max max-w-none flex-row data-[animate]:transition-transform data-[animate]:duration-500">
-        {storyCategory.storyGroups.map((storyGroup, index) => {
-          return (
-            <motion.div
-              key={index}
-              animate={{
-                scale: activeStoryGroupIndex === index ? 1 : 0.5,
-              }}
-              className=""
-              initial={false}
-              transition={{ type: "tween", ease: "easeInOut" }}
-            >
-              {React.cloneElement(storyGroup.component, {
-                ref: (el: HTMLDivElement) => (storyGroupsRefs.current[index] = el),
-                storyGroup: storyGroup,
-                active: index === activeStoryGroupIndex,
-                isFirstGroup: index === 0,
-                isLastGroup: index === storyGroupsRefs.current.length - 1,
-                activeStoryCardIndex: activeStoryCardIndex,
-                setActiveStoryCardIndex: setActiveStoryCardIndex,
-                selectMyself: () => {
-                  groupsLayoutRef.current!.setAttribute("data-animate", "");
-                  setActiveStoryGroupIndex(index);
-                },
-                goToPreviousStoryGroup: goToPreviousStoryGroup,
-                goToNextStoryGroup: goToNextStoryGroup,
-              })}
-            </motion.div>
-          );
-        })}
+        {storyCategory.storyGroups.map((storyGroup, index) =>
+          React.cloneElement(storyGroup.component, {
+            ref: (el: HTMLDivElement) => (storyGroupsRefs.current[index] = el),
+            key: index,
+            storyGroup: storyGroup,
+            active: index === activeStoryGroupIndex,
+            isFirstGroup: index === 0,
+            isLastGroup: index === storyGroupsRefs.current.length - 1,
+            activeStoryCardIndex: activeStoryCardIndex,
+            setActiveStoryCardIndex: setActiveStoryCardIndex,
+            selectMyself: () => {
+              groupsLayoutRef.current!.setAttribute("data-animate", "");
+              setActiveStoryGroupIndex(index);
+            },
+            goToPreviousStoryGroup: goToPreviousStoryGroup,
+            goToNextStoryGroup: goToNextStoryGroup,
+          }),
+        )}
       </div>
     </div>
   );

@@ -21,10 +21,6 @@ export interface CardsLayoutProps {
   goToNextStoryGroup?: () => void;
 }
 
-const STORY_DURATION = 5000;
-const MOUSE_PRESS_DURATION_THRESHOLD = 200;
-let TIMER_RESOLUTION = 50;
-
 const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(
   ({ children, storyGroup, active, isFirstGroup, isLastGroup, activeStoryCardIndex, setActiveStoryCardIndex, selectMyself, goToPreviousStoryGroup, goToNextStoryGroup }, ref) => {
     let cards = React.Children.toArray(children);
@@ -95,12 +91,12 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(
         }
 
         if (storyTimer < 100) {
-          setStoryTimer((storyTimer) => storyTimer + 100 / (STORY_DURATION / TIMER_RESOLUTION));
+          setStoryTimer((storyTimer) => storyTimer + 100 / (Constants.STORY_DURATION / Constants.TIMER_RESOLUTION));
         } else {
           goToNextStory();
           clearInterval(timer);
         }
-      }, TIMER_RESOLUTION);
+      }, Constants.TIMER_RESOLUTION);
 
       return () => clearInterval(timer);
     }, [storyTimer, goToNextStory, active, timerRunning]);
@@ -144,23 +140,27 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(
         selectMyself!();
         return;
       }
+      // Ignore other mouse keys except left click
+      if (event.button !== 0) {
+        return;
+      }
 
       const mousePressDuration = Date.now() - mouseDownTime;
-      if (mousePressDuration < MOUSE_PRESS_DURATION_THRESHOLD) {
+      if (mousePressDuration < Constants.MOUSE_PRESS_DURATION_THRESHOLD) {
         navigateIfSmallScreen(event);
       }
 
       setMouseDownTime(0);
       setTimerRunning(true);
     }
-    
+
     return (
-      <div className={`flex w-fit max-w-[100vw] h-full flex-row items-center sm:gap-4 ${!active ? "opacity-50" : ""}`} ref={ref}>
+      <div className={`flex h-full max-w-[100vw] flex-row items-center sm:gap-4 ${!active ? "scale-50 opacity-50" : ""} transition-transform duration-300 ease-in-out`} ref={ref}>
         {<PreviousArrow extraClasses={`sm:shrink-0 invisible ${active && (activeStoryCardIndex !== 0 || !isFirstGroup) ? "sm:visible" : ""}`} onClick={goToPreviousStory} />}
-        <div className="flex aspect-[9/16] max-h-full h-full max-w-full flex-col rounded-md bg-black text-stretch">
+        <div className="flex aspect-[9/16] h-full max-h-full max-w-full flex-col rounded-md bg-black">
           {active && <ProgressBar storyCount={cards.length} activeStoryIndex={activeStoryCardIndex!} progress={storyTimer} />}
           <Header active={active!} storyGroup={storyGroup!} timerRunning={timerRunning} setTimerRunning={setTimerRunning} />
-          <div ref={storiesContainerRef} className="flex flex-1 snap-x flex-row overflow-x-hidden gap-2" onMouseDown={mouseDown} onMouseUp={mouseUp}>
+          <div ref={storiesContainerRef} className="flex flex-1 snap-x flex-row gap-2 overflow-x-hidden" onMouseDown={mouseDown} onMouseUp={mouseUp}>
             {cards.map((child, index) => {
               return React.cloneElement(child as React.ReactElement<any>, {
                 ref: (el: HTMLDivElement) => {

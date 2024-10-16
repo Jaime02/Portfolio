@@ -1,7 +1,10 @@
 "use client";
 
 import ProfileContent from "@/components/misc/ProfileContent";
-import ContentTabs from "@/components/thumbnails-tabs/ContentTabs";
+import dynamic from "next/dynamic";
+const ContentTabs = dynamic(() => import('@/components/thumbnails-tabs/ContentTabs'), {
+  ssr: false,
+});
 
 export default function Page() {
   return (

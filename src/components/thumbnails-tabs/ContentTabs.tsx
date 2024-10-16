@@ -1,3 +1,5 @@
+"use client";
+
 import { storyCategories } from "@/misc/Constants";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import useOnWindowResize from "@/misc/useOnWindowResize";

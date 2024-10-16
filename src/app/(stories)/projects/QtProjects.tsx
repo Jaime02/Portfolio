@@ -13,7 +13,7 @@ I love the Python bindings of the C++ API, which are called <q>PySide</q>. The c
       </Card>
       <Card>
         <h1>During my second year of university, I coded a QuickSort algorithm simulation using PySide6. That way I learned how QuickSort works and I helped my classmates to achieve the same goal. The result shows a gorgeous animation</h1> 
-        <Image src="/images/QtQuickSort.gif" width="200" height="200" alt="Quick sort algorithm animation" className="select-none" draggable="false" priority={true}/>
+        <Image src="/images/QtQuickSort.gif" unoptimized width="200" height="200" alt="Quick sort algorithm animation" className="select-none" draggable="false" priority={true}/>
       </Card>
     </CardsLayout>
   );

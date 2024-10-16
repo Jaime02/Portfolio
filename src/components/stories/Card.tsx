@@ -1,7 +1,11 @@
 import { forwardRef } from "react";
 
-const Card  = forwardRef<HTMLDivElement, { children: React.ReactNode }>(({ children }, ref) => {  
-  return <div ref={ref} className="flex min-w-full flex-col rounded-md bg-white dark:bg-[#343434] snap-center p-2">{children}</div>; 
+const Card = forwardRef<HTMLDivElement, { children: React.ReactNode }>(({ children }, ref) => {
+  return (
+    <div ref={ref} className="flex min-w-full max-w-full snap-center flex-col gap-2 overflow-auto text-pretty rounded-md bg-white p-2 dark:bg-[#343434]">
+      {children}
+    </div>
+  );
 });
 
 Card.displayName = "Card";

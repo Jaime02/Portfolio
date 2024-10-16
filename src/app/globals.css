@@ -16,6 +16,10 @@ body {
 
 @layer components {
   .btn-secondary {
-    @apply flex h-8 flex-row flex-nowrap items-center justify-center gap-1 rounded-lg bg-[#efefef] px-4 py-[7px] font-system text-sm font-semibold hover:bg-[#dbdbdb] dark:bg-[#363636] dark:hover:bg-[#262626];
+    @apply flex w-fit h-8 flex-row flex-nowrap items-center justify-center gap-1 rounded-lg bg-[#efefef] px-4 py-[7px] font-system text-sm font-semibold hover:bg-[#dbdbdb] dark:bg-[#363636] dark:hover:bg-[#262626];
   }
+}
+
+.styled-a {
+  @apply underline text-blue-600 hover:text-blue-800 visited:text-purple-600
 }

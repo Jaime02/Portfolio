@@ -1,7 +1,6 @@
 import Card from "@/components/stories/Card";
 import CardsLayout, { CardsLayoutProps } from "@/components/stories/CardsLayout";
 import { forwardRef } from "react";
-import Image from "next/image";
 
 const CoolPictures = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
   return (
@@ -10,7 +9,7 @@ const CoolPictures = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) =
         <h1>Hey, are you still here? I have nothing else to show you... well... here you have, some cool pictures &#128513;</h1>
       </Card>
       <Card>
-        <p>GOLFFFFFFFFFFFFFFFFFFFFFFFFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p>
+        <h1>Technological stack</h1>
       </Card>
     </CardsLayout>
   );

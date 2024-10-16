@@ -95,13 +95,13 @@ export const ProjectsStoryGroups: StoryGroup[] = [
   new ProjectsStoryGroup({
     title: "This website",
     component: <ThisWebsite storyGroup={this} />,
-    tabThumbnail: <TabThumbnail alt="This website thumbnail" src="/images/InstagramLogo.svg" href="/projects/this-website" />,
+    tabThumbnail: <TabThumbnail alt="This website thumbnail" src="/images/InstagramLogo.svg" href="/projects/this-website" padding={true} />,
     headerThumbnail: <HeaderThumbnail src="/images/InstagramLogo.svg" />,
   }),
   new ProjectsStoryGroup({
     title: "Qt projects",
     component: <QtProjects storyGroup={this} />,
-    tabThumbnail: <TabThumbnail alt="Qt projects tumbnail" src="/images/QtLogo.svg" href="/projects/qt-projects" />,
+    tabThumbnail: <TabThumbnail alt="Qt projects tumbnail" src="/images/QtLogo.svg" href="/projects/qt-projects" padding={true} />,
     headerThumbnail: <HeaderThumbnail src="/images/QtSquareLogo.svg" />,
   }),
   new ProjectsStoryGroup({
@@ -140,8 +140,8 @@ export const ExperiencesStoryGroups: StoryGroup[] = [
   new ExperiencesStoryGroup({
     title: "Upna",
     component: <Upna />,
-    tabThumbnail: <TabThumbnail alt="Upna thumbnail" src="/images/UpnaLogo.webp" href="/experiences/upna" />, 
-    headerThumbnail: <HeaderThumbnail src="/images/AcademicLogo.svg" />,
+    tabThumbnail: <TabThumbnail alt="Upna thumbnail" src="/images/UpnaLogo.webp" href="/experiences/upna" padding={true} />, 
+    headerThumbnail: <HeaderThumbnail src="/images/AcademicIcon.svg" />,
   }),
 ];
 
@@ -149,7 +149,7 @@ export const OthersStoryGroups: StoryGroup[] = [
   new OthersStoryGroup({
     title: "Download CV",
     component: <DownloadCV />,
-    tabThumbnail: <TabThumbnail alt="Download CV thumbnail" src="/images/CVIcon.svg" href="/others/download-cv" />,
+    tabThumbnail: <TabThumbnail alt="Download CV thumbnail" src="/images/CVIcon.svg" href="/others/download-cv" padding={true} />,
     headerThumbnail: <HeaderThumbnail src="/images/CVIcon.svg" />,
   }),
   new OthersStoryGroup({
@@ -161,7 +161,7 @@ export const OthersStoryGroups: StoryGroup[] = [
   new OthersStoryGroup({
     title: "Cool pictures",
     component: <CoolPictures />,
-    tabThumbnail: <TabThumbnail alt="Cool pictures thumbnail" src="/images/WIP.svg" href="/others/cool-pictures" />,
+    tabThumbnail: <TabThumbnail alt="Cool pictures thumbnail" src="/images/WIP.svg" href="/others/cool-pictures" padding={true} />,
     headerThumbnail: <HeaderThumbnail src="/images/WIP.svg" />,
   }),
 ];
@@ -190,3 +190,6 @@ export const othersStoryCategory = new StoryCategory({
 export const storyCategories: StoryCategory[] = [projectsStoryCategory, experiencesStoryCategory, othersStoryCategory];
 
 export const SMALL_BREAKPOINT_WIDTH = 640;
+export const MOUSE_PRESS_DURATION_THRESHOLD = 100;
+export const STORY_DURATION = 50000;
+export const TIMER_RESOLUTION = 50;
