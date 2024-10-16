@@ -1,7 +1,6 @@
 "use client";
 import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { StoryCategory } from "@/misc/Constants";
-import { motion } from "framer-motion";
 import useOnWindowResize from "@/misc/useOnWindowResize";
 
 interface Props {
