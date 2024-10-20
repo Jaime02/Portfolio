@@ -18,12 +18,12 @@ const ThisWebsite = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) =>
           title="Do you like it?"
           options={["Does not look professional 😪👎🏻", "I don't know 🫤", "I love it! 😍"]}
           correctAnswerIndex={2}
-          messagesOnAnswerChosen={['Oh, sorry! I don\'t give a fuck. Or if you prefer something more formal: "Do not give dogs what is sacred". Mathew 7:6.', "Keep trying...😉", "You nailed it! 👏🏻"]}
+          messagesOnAnswerChosen={['\"Do not give dogs what is sacred\". Mathew 7:6', "Keep trying...😉", "You nailed it! 👏🏻"]}
         />
       </Card>
       <Card>
-        <div className="rounded-lg bg-gray-300 p-2">
-          <h1 className="bg-gradient-to-r from-blue-600 to-green-500 bg-clip-text text-center text-2xl font-black text-transparent">Technological stack</h1>
+        <div className="rounded-lg bg-gray-300 dark:bg-slate-900 p-2">
+          <h1 className="bg-gradient-to-r from-blue-700 dark:from-blue-500 to-green-400 dark:to-green-500 bg-clip-text text-center text-2xl font-black text-transparent">Technological stack</h1> 
         </div>
         <p>
           The website is a set of HTML, CSS and TypeScript files handled by the meta-framework{" "}
@@ -37,7 +37,7 @@ const ThisWebsite = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) =>
           <a className="styled-a" href="https://github.com/Jaime02/Portfolio" target="_blank">
             Github
           </a>
-          .
+          . It has taken me a lot of effort, sweat and tears, but I think that it is worth it. I wanted to follow the best practices available and keep the number of dependencies as low as possible.
         </p>
       </Card>
     </CardsLayout>

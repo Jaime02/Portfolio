@@ -1,21 +1,28 @@
 import { Metadata } from "next";
 import { InstagramSans } from "@/misc/fonts";
 import "@/app/globals.css";
+import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
   title: "Jaime Resano | Personal website",
   description: "Jaime Resano Aisa personal website",
 };
-// scroll-smooth motion-reduce:scroll-auto
+
 export default function BaseLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="">
+    <html lang="en" className="" suppressHydrationWarning>
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png"/>
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png"/>
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png"/>
+        <link rel="manifest" href="/site.webmanifest"/>
       </head>
-      <body className={`${InstagramSans.className} flex min-h-screen flex-col bg-white text-black dark:bg-black dark:text-white`}>{children}</body>
+      <body className={`${InstagramSans.className} flex min-h-screen flex-col transition-colors duration-300 ease-linear`}>
+        <ThemeProvider attribute="class">{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

@@ -36,6 +36,7 @@ export default function ContentTabs() {
     updateLayoutOffset();
   }, [updateLayoutOffset]);
 
+  // Observer which updates the border of the active tab
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries: IntersectionObserverEntry[]) => {
@@ -48,7 +49,7 @@ export default function ContentTabs() {
           }
         });
       },
-      { root: tabsContainerLayoutRef.current, threshold: 0.5 },
+      { root: tabsContainerLayoutRef.current, threshold: 0.8 },
     );
 
     tabElements.current.forEach((tab) => observer.observe(tab));
@@ -68,6 +69,7 @@ export default function ContentTabs() {
     updateLayoutOffset();
   }
 
+  // This will load the offset properly on page loading before displaying anything
   useLayoutEffect(() => {
     updateLayoutOffset();
   }, [updateLayoutOffset]);
@@ -84,25 +86,26 @@ export default function ContentTabs() {
 
   return (
     <>
-      <div className="flex w-full flex-row justify-around border-t-[1px] border-[#dbdbdb] sm:justify-center sm:gap-[60px]">
+      <div className="flex w-full flex-row justify-around border-t-[1px] sm:justify-center sm:gap-[60px]">
         {storyCategories.map((tab, index) => {
           let tabId = tab.getId();
+          let isActive = activeBorderIndex === index;
           return (
             <a
               key={tabId}
-              className={`flex flex-1 flex-row items-center justify-center gap-2 border-black py-2 aria-selected:border-t-[1px] ${activeBorderIndex === index ? "border-t-[1px]" : ""}`}
+              className={`flex flex-1 flex-row items-center justify-center gap-2 ${isActive ? "border-black dark:border-white" : "text-gray-800 dark:text-ig-gray"} py-2 border-t-[1px]`}
               href={tabId === "projects" ? "" : `#${tabId}`}
               aria-label={tab.name}
               onClick={(event) => handleAnchorClick(tabId, event)}
             >
               {tab.icon}
-              <span className="hidden text-sm uppercase tracking-widest sm:inline">{tab.name}</span>
+              <span className={`hidden text-sm uppercase tracking-widest sm:inline ${isActive ? "font-extrabold" : ""}`}>{tab.name}</span>
             </a>
           );
         })}
       </div>
       <div ref={tabsContainerLayoutRef} className="w-full overflow-x-clip">
-        <div ref={tabsContainerRef} className="flex flex-row data-[animate]:transition-transform data-[animate]:duration-500"> 
+        <div ref={tabsContainerRef} className="flex flex-row data-[animate]:transition-transform data-[animate]:duration-1000"> 
           {storyCategories.map((tab, index) =>
             React.cloneElement(tab.storyTabThumbnails, {
               ref: (el: HTMLDivElement) => (tabElements.current[index] = el),

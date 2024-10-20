@@ -9,7 +9,7 @@ const CoolPictures = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) =
         <h1>Hey, are you still here? I have nothing else to show you... well... here you have, some cool pictures &#128513;</h1>
       </Card>
       <Card>
-        <h1>Technological stack</h1>
+        <h1>TO DO</h1>
       </Card>
     </CardsLayout>
   );

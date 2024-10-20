@@ -18,15 +18,15 @@ export default function Header({ active, storyGroup, timerRunning, setTimerRunni
       {active && (
         <>
           {timerRunning ? (
-            <button onClick={() => setTimerRunning(false)} className="hidden sm:block">
+            <button aria-label="Pause" onClick={() => setTimerRunning(false)} className="hidden sm:block">
              <PauseIcon />
             </button>
           ) : (
-            <button onClick={() => setTimerRunning(true)} className="hidden sm:block">
+            <button aria-label="Resume" onClick={() => setTimerRunning(true)} className="hidden sm:block">
               <PlayIcon />
             </button>
           )}
-          <a href="/">
+          <a href="/" aria-label="Close">
             <CloseIcon/>
           </a>
         </>

@@ -191,5 +191,5 @@ export const storyCategories: StoryCategory[] = [projectsStoryCategory, experien
 
 export const SMALL_BREAKPOINT_WIDTH = 640;
 export const MOUSE_PRESS_DURATION_THRESHOLD = 100;
-export const STORY_DURATION = 50000;
+export const STORY_DURATION = 5000;
 export const TIMER_RESOLUTION = 50;
