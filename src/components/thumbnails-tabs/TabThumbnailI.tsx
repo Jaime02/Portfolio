@@ -5,7 +5,7 @@ interface TabThumbnailProps {
   href: string;
   alt: string;
   src: string;
-  padding: boolean;
+  padding?: boolean;
 }
 
 export default function TabThumbnail({href, alt, src, padding = false}: TabThumbnailProps) {

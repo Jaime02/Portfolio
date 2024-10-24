@@ -114,7 +114,7 @@ export const ProjectsStoryGroups: StoryGroup[] = [
   new ProjectsStoryGroup({
     title: "LiveGL",
     component: <LiveGL storyGroup={this} />,
-    tabThumbnail: <TabThumbnail alt="LiveGL thumbnail" src="/images/LiveGLThumbnail.webp" href="/projects/livegl" padding={true} transparentBackground={true} />,
+    tabThumbnail: <TabThumbnail alt="LiveGL thumbnail" src="/images/LiveGLThumbnail.webp" href="/projects/livegl" padding={true} />,
     headerThumbnail: <HeaderThumbnail src="/images/LiveGLThumbnail.webp" />,
   }),
 ];

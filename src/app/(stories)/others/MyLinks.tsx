@@ -1,7 +1,7 @@
 import Card from "@/components/stories/Card";
 import CardsLayout, { CardsLayoutProps } from "@/components/stories/CardsLayout";
 import GithubIcon from "@/icons/GithubIcon";
-import LinkedinIcon from "@/icons/LinkedInIcon";
+import LinkedinIcon from "@/icons/LinkedinIcon";
 import YoutubeIcon from "@/icons/YoutubeIcon";
 import React from "react";
 import { forwardRef } from "react";

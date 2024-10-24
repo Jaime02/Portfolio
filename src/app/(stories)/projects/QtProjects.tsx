@@ -36,7 +36,7 @@ const QtProjects = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => 
           . The combination of the capabilities of Qt and the development speed of Python is amazing.
         </p>
         <p>
-          One of Qt's most notable strengths is its cross-platform compatibility. The Python, C++ or{" "}
+          One of Qt&apos;s most notable strengths is its cross-platform compatibility. The Python, C++ or{" "}
           <a className="styled-a" href="https://doc.qt.io/qt-6/qtqml-index.html" target="_blank">
             QML
           </a>{" "}
