@@ -18,6 +18,7 @@ import ExperienceIcon from "@/icons/ExperienceIcon";
 import ProjectsIcon from "@/icons/ProjectsIcon";
 import ThreeDotsIcon from "@/icons/ThreeDotsIcon";
 import React from "react";
+import LiveGL from "@/app/(stories)/projects/LiveGL";
 
 export class StoryCategory {
   name: string;
@@ -110,6 +111,12 @@ export const ProjectsStoryGroups: StoryGroup[] = [
     tabThumbnail: <TabThumbnail alt="Paint filter manager thumbnail" src="/images/PaintFilterManagerLogo.webp" href="/projects/paint-filter-manager" />,
     headerThumbnail: <HeaderThumbnail src="/images/PaintFilterManagerLogo.webp" />,
   }),
+  new ProjectsStoryGroup({
+    title: "LiveGL",
+    component: <LiveGL storyGroup={this} />,
+    tabThumbnail: <TabThumbnail alt="LiveGL thumbnail" src="/images/LiveGLThumbnail.webp" href="/projects/livegl" padding={true} transparentBackground={true} />,
+    headerThumbnail: <HeaderThumbnail src="/images/LiveGLThumbnail.webp" />,
+  }),
 ];
 
 export const ExperiencesStoryGroups: StoryGroup[] = [
@@ -191,5 +198,5 @@ export const storyCategories: StoryCategory[] = [projectsStoryCategory, experien
 
 export const SMALL_BREAKPOINT_WIDTH = 640;
 export const MOUSE_PRESS_DURATION_THRESHOLD = 100;
-export const STORY_DURATION = 5000;
+export const STORY_DURATION = 12000;
 export const TIMER_RESOLUTION = 50;

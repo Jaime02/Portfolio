@@ -17,6 +17,7 @@ const config: Config = {
     		},
     		colors: {
 					"ig-gray": "var(--ig-gray)",
+					"qt-green": "rgb(65, 205, 82)",
     			background: "hsl(var(--background))",
     			foreground: "hsl(var(--foreground))",
     			card: {
@@ -57,11 +58,24 @@ const config: Config = {
     				"4": "hsl(var(--chart-4))",
     				"5": "hsl(var(--chart-5))"
     			}
-    		}
+    		},
+				keyframes: {
+					animatedBackground: {
+						'0%': { backgroundPosition: '0% 50%' },
+						'50%': { backgroundPosition: '100% 50%' },
+						'100%': { backgroundPosition: '0% 50%' },
+					},
+				},
+				backgroundSize: {
+					'300%': '300%',
+				},
+				animation: {
+					"moving-background": "animatedBackground 4s ease infinite alternate",
+				},
     	},
     	fontFamily: {
-    		system: ["-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica", "Arial", "sans-serif"]
-    	}
+    		system: ["-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica", "Arial", "sans-serif"],
+			}
     },
 	plugins: [require("tailwindcss-animate")],
 };

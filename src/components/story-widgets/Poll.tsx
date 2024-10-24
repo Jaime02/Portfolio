@@ -31,7 +31,7 @@ export default function Poll({ title, options, correctAnswerIndex, messagesOnAns
         {options.map((option, index) => (
           <button
             key={index}
-            className={`clickable h-8 w-full rounded-lg px-4 text-black ${index === answerChosen ? (index === correctAnswerIndex ? "bg-green-500" : "bg-red-500") : "bg-gray-200"}`}
+            className={`clickable h-8 w-full rounded-lg px-4 text-black ${index === answerChosen ? (index === correctAnswerIndex ? "bg-green-400" : "bg-red-500") : "bg-gray-200"}`}
             onMouseUp={(event) => {
               handleAnswerChosen(event, index);
             }}

@@ -1,7 +1,7 @@
 import { Metadata } from "next";
-import { InstagramSans } from "@/misc/fonts";
 import "@/app/globals.css";
 import { ThemeProvider } from "next-themes";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 export const metadata: Metadata = {
   title: "Jaime Resano | Personal website",
@@ -20,8 +20,9 @@ export default function BaseLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png"/>
         <link rel="manifest" href="/site.webmanifest"/>
       </head>
-      <body className={`${InstagramSans.className} flex min-h-screen flex-col transition-colors duration-300 ease-linear`}>
-        <ThemeProvider attribute="class">{children}</ThemeProvider>
+      <body className={`flex min-h-screen flex-col transition-colors duration-300 ease-linear`}>
+        <ThemeProvider attribute="class">
+        <TooltipProvider delayDuration={100}>{children}</TooltipProvider></ThemeProvider>
       </body>
     </html>
   );

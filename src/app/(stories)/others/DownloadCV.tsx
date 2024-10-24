@@ -7,12 +7,11 @@ const DownloadCV = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => 
   return (
     <CardsLayout {...props} ref={ref}>
       <Card>
-        <h1>Here you can see a preview of my CV</h1>
-        <h2>Click on the download button in order to download it as a PDF</h2>
-        <a className="btn-secondary" href="/CVJaimeResano.pdf"><Image src="/images/DownloadIcon.svg" width="20" height="20" alt="Download icon" className="select-none" draggable="false" priority={true}/> Download CV</a>
-      </Card>
-      <Card>
-        <p>Me gustan los trenes</p>
+        <p>Here you can see a preview of my CV. Click on the download button in order to download it as a PDF. Use it wisely!</p>
+        <Image src={"/images/CVPreview.webp"} width="800" height="800" alt="CV preview" className="w-full select-none max-h-[70%] object-contain" draggable="false" priority={true} />
+        <a className="btn-primary mx-auto text-lg" target="_blank" href="/CVJaimeResano.pdf">
+          <Image src="/images/DownloadIcon.svg" width="28" height="28" alt="Download icon" className="select-none" draggable="false" priority={true} /> Download CV
+        </a>
       </Card>
     </CardsLayout>
   );

@@ -93,19 +93,19 @@ export default function ContentTabs() {
           return (
             <a
               key={tabId}
-              className={`flex flex-1 flex-row items-center justify-center gap-2 ${isActive ? "border-black dark:border-white" : "text-gray-800 dark:text-ig-gray"} py-2 border-t-[1px]`}
+              className={`flex flex-1 flex-row items-center justify-center gap-2 ${isActive ? "border-black dark:border-white border-t-[1px]" : "text-gray-800 dark:text-ig-gray"} py-2`}
               href={tabId === "projects" ? "" : `#${tabId}`}
               aria-label={tab.name}
               onClick={(event) => handleAnchorClick(tabId, event)}
             >
               {tab.icon}
-              <span className={`hidden text-sm uppercase tracking-widest sm:inline ${isActive ? "font-extrabold" : ""}`}>{tab.name}</span>
+              <span className={`hidden text-sm uppercase tracking-widest sm:inline ${isActive ? "font-bold" : ""}`}>{tab.name}</span>
             </a>
           );
         })}
       </div>
-      <div ref={tabsContainerLayoutRef} className="w-full overflow-x-clip">
-        <div ref={tabsContainerRef} className="flex flex-row data-[animate]:transition-transform data-[animate]:duration-1000"> 
+      <div ref={tabsContainerLayoutRef} className="w-full overflow-x-hidden">
+        <div ref={tabsContainerRef} className="flex flex-row data-[animate]:transition-transform data-[animate]:duration-700"> 
           {storyCategories.map((tab, index) =>
             React.cloneElement(tab.storyTabThumbnails, {
               ref: (el: HTMLDivElement) => (tabElements.current[index] = el),

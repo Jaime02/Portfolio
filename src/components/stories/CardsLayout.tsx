@@ -15,6 +15,7 @@ export interface CardsLayoutProps {
   isFirstGroup?: boolean;
   isLastGroup?: boolean;
   activeStoryCardIndex?: number;
+  font?: string;
   setActiveStoryCardIndex?: React.Dispatch<React.SetStateAction<number>>;
   selectMyself?: () => void;
   goToPreviousStoryGroup?: () => void;
@@ -22,7 +23,7 @@ export interface CardsLayoutProps {
 }
 
 const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(
-  ({ children, storyGroup, active, isFirstGroup, isLastGroup, activeStoryCardIndex, setActiveStoryCardIndex, selectMyself, goToPreviousStoryGroup, goToNextStoryGroup }, ref) => {
+  ({ children, storyGroup, active, isFirstGroup, isLastGroup, activeStoryCardIndex, font, setActiveStoryCardIndex, selectMyself, goToPreviousStoryGroup, goToNextStoryGroup }, ref) => {
     let cards = React.Children.toArray(children);
     const storiesContainerRef = useRef<HTMLDivElement>(null);
     const storiesRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -155,12 +156,12 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(
     }
 
     return (
-      <div className={`flex h-full max-w-[100vw] flex-row items-center sm:gap-4 ${!active ? "scale-50 opacity-50" : ""} transition-transform duration-300 ease-in-out`} ref={ref}>
+      <div className={`flex h-full max-w-min flex-row items-center sm:gap-4 ${!active ? "scale-50 opacity-50" : ""} transition-transform duration-300 ease-in-out ${font ? `font-${font}` : ""}`} ref={ref}>
         {<PreviousArrow extraClasses={`sm:shrink-0 invisible ${active && (activeStoryCardIndex !== 0 || !isFirstGroup) ? "sm:visible" : ""}`} onClick={goToPreviousStory} />}
-        <div className="flex aspect-[9/16] h-full max-h-full max-w-full flex-col rounded-md bg-black">
+        <div className="flex aspect-[9/16] overflow-hidden h-full max-h-full max-w-full flex-col rounded-md bg-black">
           {active && <ProgressBar storyCount={cards.length} activeStoryIndex={activeStoryCardIndex!} progress={storyTimer} />}
           <Header active={active!} storyGroup={storyGroup!} timerRunning={timerRunning} setTimerRunning={setTimerRunning} />
-          <div ref={storiesContainerRef} className="flex flex-1 snap-x flex-row gap-2 overflow-x-hidden" onMouseDown={mouseDown} onMouseUp={mouseUp}>
+          <div ref={storiesContainerRef} className="flex flex-1 min-w-full max-w-full snap-x flex-row gap-2 overflow-x-hidden" onMouseDown={mouseDown} onMouseUp={mouseUp}>
             {cards.map((child, index) => {
               return React.cloneElement(child as React.ReactElement<any>, {
                 ref: (el: HTMLDivElement) => {
