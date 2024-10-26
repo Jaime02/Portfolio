@@ -19,6 +19,14 @@ import ProjectsIcon from "@/icons/ProjectsIcon";
 import ThreeDotsIcon from "@/icons/ThreeDotsIcon";
 import React from "react";
 import LiveGL from "@/app/(stories)/projects/LiveGL";
+import QtThumbnail from "@/components/thumbnails-tabs/QtThumbnail";
+import Crispin from "@/app/(stories)/others/Crispin";
+import CoolPicturesThumbnail from "@/components/thumbnails-tabs/CoolPicturesThumbnail";
+
+export const SMALL_BREAKPOINT_WIDTH = 640;
+export const MOUSE_PRESS_DURATION_THRESHOLD = 100;
+export const STORY_DURATION = 12000;
+export const TIMER_RESOLUTION = 50;
 
 export class StoryCategory {
   name: string;
@@ -102,7 +110,7 @@ export const ProjectsStoryGroups: StoryGroup[] = [
   new ProjectsStoryGroup({
     title: "Qt projects",
     component: <QtProjects storyGroup={this} />,
-    tabThumbnail: <TabThumbnail alt="Qt projects tumbnail" src="/images/QtLogo.svg" href="/projects/qt-projects" padding={true} />,
+    tabThumbnail: <QtThumbnail />,
     headerThumbnail: <HeaderThumbnail src="/images/QtSquareLogo.svg" />,
   }),
   new ProjectsStoryGroup({
@@ -136,7 +144,7 @@ export const ExperiencesStoryGroups: StoryGroup[] = [
     title: "Hiberus",
     component: <Hiberus />,
     tabThumbnail: <TabThumbnail alt="Hiberus thumbnail" src="/images/HiberusLogo.webp" href="/experiences/hiberus" />,
-    headerThumbnail: <HeaderThumbnail src="/images/HiberusLogo.webp" />,
+    headerThumbnail: <HeaderThumbnail src="/images/HiberusThumbnail.jpeg" />,
   }),
   new ExperiencesStoryGroup({
     title: "Freelancing",
@@ -165,11 +173,17 @@ export const OthersStoryGroups: StoryGroup[] = [
     tabThumbnail: <TabThumbnail alt="My links thumbnail" src="/images/LinkIcon.svg" href="/others/my-links" />,
     headerThumbnail: <HeaderThumbnail src="/images/LinkIcon.svg" />,
   }),
+  new OthersStoryGroup({ 
+    title: "Crispin",
+    component: <Crispin />,
+    tabThumbnail: <TabThumbnail alt="Crispin thumbnail" src="/images/CrispinThumbnail.jpg" href="/others/crispin" />,
+    headerThumbnail: <HeaderThumbnail src="/images/CrispinSquareThumbnail.jpg" />,
+  }),
   new OthersStoryGroup({
     title: "Cool pictures",
     component: <CoolPictures />,
-    tabThumbnail: <TabThumbnail alt="Cool pictures thumbnail" src="/images/WIP.svg" href="/others/cool-pictures" padding={true} />,
-    headerThumbnail: <HeaderThumbnail src="/images/WIP.svg" />,
+    tabThumbnail: <CoolPicturesThumbnail />,
+    headerThumbnail: <HeaderThumbnail src="/images/icons/CameraIcon.svg" />,
   }),
 ];
 
@@ -196,7 +210,9 @@ export const othersStoryCategory = new StoryCategory({
 
 export const storyCategories: StoryCategory[] = [projectsStoryCategory, experiencesStoryCategory, othersStoryCategory];
 
-export const SMALL_BREAKPOINT_WIDTH = 640;
-export const MOUSE_PRESS_DURATION_THRESHOLD = 100;
-export const STORY_DURATION = 12000;
-export const TIMER_RESOLUTION = 50;
+export class StoryVideo {
+  constructor(
+    public url: string,
+    public extraComponents?: React.JSX.Element,
+  ) {}
+}

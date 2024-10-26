@@ -11,7 +11,7 @@ export default function Poll({ title, options, correctAnswerIndex, messagesOnAns
   const [answerChosen, setAnswerChosen] = useState(-1);
 
   function handleAnswerChosen(event: React.MouseEvent<HTMLButtonElement, MouseEvent>, index: number) {
-    // Accept only left clicks
+    // Accept left clicks only
     if (event.button !== 0) {
       return;
     }

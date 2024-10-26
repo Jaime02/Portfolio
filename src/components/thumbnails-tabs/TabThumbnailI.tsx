@@ -11,7 +11,7 @@ interface TabThumbnailProps {
 export default function TabThumbnail({href, alt, src, padding = false}: TabThumbnailProps) {
   return (
     <TabThumbnailLayout href={href} padding={padding}>
-      <Image src={src} alt={alt} className="select-none" draggable="false" width="300" height="300" />
+      <Image src={src} alt={alt} className="select-none" draggable="false" width="300" height="300" priority={true}/>
     </TabThumbnailLayout>
   );
 }

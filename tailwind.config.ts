@@ -18,6 +18,7 @@ const config: Config = {
     		colors: {
 					"ig-gray": "var(--ig-gray)",
 					"qt-green": "rgb(65, 205, 82)",
+					"op-mobility-blue": "#0e3571",
     			background: "hsl(var(--background))",
     			foreground: "hsl(var(--foreground))",
     			card: {
@@ -75,6 +76,9 @@ const config: Config = {
     	},
     	fontFamily: {
     		system: ["-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica", "Arial", "sans-serif"],
+				instagram: ["var(--font-instagram)"],
+				opmobility: ["var(--opmobility-font)"],
+				qt: ["var(--font-qt)"],
 			}
     },
 	plugins: [require("tailwindcss-animate")],

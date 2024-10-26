@@ -110,7 +110,7 @@ const QtProjects = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => 
         <p>
           The user can paint numbers in a black and white canvas using his mouse. Afterwards, the program will use the algorithm to identify the number drawn.
         </p>
-        <Image src="/images/KNN.webp" width="800" height="800" alt="QKNNPainter" className="w-full select-none" draggable="false" priority={true} />
+        <Image src="/images/KNN.webp" width="800" height="800" alt="QKNNPainter" className="w-[60%] mx-auto select-none" draggable="false" priority={true} />
         <GithubRepoLink href="https://github.com/Jaime02/QKNNPainter" />
       </Card>
     </CardsLayout>

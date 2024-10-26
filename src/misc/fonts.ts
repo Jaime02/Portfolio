@@ -1,7 +1,7 @@
 import localFont from "next/font/local";
 
-export const InstagramSans = localFont({
-  variable: "--instagram-sans",
+export const InstagramFont = localFont({
+  variable: "--font-instagram",
   src: [
     {
       path: "../font-files/instagram/Instagram Sans Light.woff",
@@ -27,7 +27,7 @@ export const InstagramSans = localFont({
 });
 
 export const QtFont = localFont({
-  variable: "--titillium-web",
+  variable: "--font-qt",
   src: [
     {
       path: "../font-files/qt/TitilliumWeb-ExtraLight.ttf",
@@ -56,3 +56,19 @@ export const QtFont = localFont({
     },
   ],
 });
+
+export const OpMobilityFont = localFont({
+  variable: "--opmobility-font",
+  src: [
+    {
+      path: "../font-files/opmobility/centurygothic.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../font-files/opmobility/centurygothic_bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+}); 

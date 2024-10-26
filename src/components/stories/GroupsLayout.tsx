@@ -75,7 +75,7 @@ export default function GroupsLayout({ initialStoryGroupUrl, storyCategory }: Pr
   }, [activeStoryGroupIndex]);
 
   return (
-    <div ref={groupsLayoutContainerRef} className="flex h-dvh max-h-dvh w-full flex-col justify-center overflow-hidden bg-black pt-2 sm:bg-[#1a1a1a] sm:py-8">
+    <div ref={groupsLayoutContainerRef} className="flex h-dvh max-h-dvh w-full max-w-full flex-col justify-center overflow-hidden bg-black px-2 py-3 sm:bg-[#1a1a1a]">
       <div ref={groupsLayoutRef} className="flex h-full max-h-full flex-row data-[animate]:transition-transform data-[animate]:duration-500">
         {storyCategory.storyGroups.map((storyGroup, index) =>
           React.cloneElement(storyGroup.component, {

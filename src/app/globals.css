@@ -4,7 +4,7 @@
 
 @layer components {
   .clickable {
-    @apply active:ring-2 active:opacity-75 select-none cursor-pointer;
+    @apply hover:ring-2 active:opacity-75 select-none cursor-pointer;
   }
 
   .btn-base {

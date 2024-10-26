@@ -7,19 +7,20 @@ interface Props {
   active: boolean;
   storyGroup: StoryGroup;
   timerRunning: boolean;
+  floatingHeader: boolean;
   setTimerRunning: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function Header({ active, storyGroup, timerRunning, setTimerRunning }: Props) {
+export default function Header({ active, storyGroup, timerRunning, floatingHeader, setTimerRunning }: Props) {
   return (
-    <div className="flex w-full flex-row items-center gap-2 p-2">
+    <div className={`flex w-full flex-row items-center gap-2 p-2 ${!floatingHeader ? "bg-ig-gray dark:bg-black" : ""}`}>
       {storyGroup.headerThumbnail}
       <h1 className="h-fit flex-1 text-left leading-none text-white">{storyGroup.title}</h1>
       {active && (
         <>
           {timerRunning ? (
             <button aria-label="Pause" onClick={() => setTimerRunning(false)} className="hidden sm:block">
-             <PauseIcon />
+              <PauseIcon />
             </button>
           ) : (
             <button aria-label="Resume" onClick={() => setTimerRunning(true)} className="hidden sm:block">
@@ -27,7 +28,7 @@ export default function Header({ active, storyGroup, timerRunning, setTimerRunni
             </button>
           )}
           <a href="/" aria-label="Close">
-            <CloseIcon/>
+            <CloseIcon />
           </a>
         </>
       )}
