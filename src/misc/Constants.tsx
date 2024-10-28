@@ -25,7 +25,7 @@ import CoolPicturesThumbnail from "@/components/thumbnails-tabs/CoolPicturesThum
 
 export const SMALL_BREAKPOINT_WIDTH = 640;
 export const MOUSE_PRESS_DURATION_THRESHOLD = 100;
-export const STORY_DURATION = 12000;
+export const STORY_DURATION = 120000;
 export const TIMER_RESOLUTION = 50;
 
 export class StoryCategory {

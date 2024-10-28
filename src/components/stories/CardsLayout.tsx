@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, forwardRef, useEffect, useCallback, useImperativeHandle } from "react";
+import React, { useState, useRef, forwardRef, useEffect, useCallback, useImperativeHandle, useLayoutEffect } from "react";
 import NextArrow from "@/icons/NextArrow";
 import PreviousArrow from "@/icons/PreviousArrow";
 import BottomBar from "@/components/stories/BottomBar";
@@ -7,6 +7,7 @@ import Header from "@/components/stories/Header";
 import * as Constants from "@/misc/Constants";
 import ProgressBar from "@/components/stories/ProgressBar";
 import { StoryGroup } from "@/misc/Constants";
+import useOnWindowResize from "@/misc/useOnWindowResize";
 
 export interface CardsLayoutProps {
   children?: React.ReactNode[] | React.ReactNode;
@@ -17,7 +18,6 @@ export interface CardsLayoutProps {
   activeStoryCardIndex?: number;
   font?: string;
   floatingHeader?: boolean;
-  videoRefs?: React.MutableRefObject<(HTMLVideoElement)[]>;
   setActiveStoryCardIndex?: React.Dispatch<React.SetStateAction<number>>;
   selectMyself?: () => void;
   goToPreviousStoryGroup?: () => void;
@@ -25,73 +25,93 @@ export interface CardsLayoutProps {
 }
 
 const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(
-  ({ children, storyGroup, active, isFirstGroup, isLastGroup, activeStoryCardIndex, font, floatingHeader = false, videoRefs, setActiveStoryCardIndex, selectMyself, goToPreviousStoryGroup, goToNextStoryGroup }, forwardedRef) => {
-    
+  (
+    { children, storyGroup, active, isFirstGroup, isLastGroup, activeStoryCardIndex, font, floatingHeader = false, setActiveStoryCardIndex, selectMyself, goToPreviousStoryGroup, goToNextStoryGroup },
+    forwardedRef,
+  ) => {
     const ref = useRef<HTMLInputElement>(null);
     useImperativeHandle(forwardedRef, () => ref.current as HTMLInputElement);
 
     let cards = React.Children.toArray(children);
+    const storyGroupContainer = useRef<HTMLDivElement>(null);
     const storiesContainerRef = useRef<HTMLDivElement>(null);
-    const storiesRefs = useRef<(HTMLDivElement | null)[]>([]);
+    const storiesRefs = useRef<HTMLDivElement[]>([]);
 
     const [storyTimer, setStoryTimer] = useState(0);
     const [timerRunning, setTimerRunning] = useState(false);
     const [mouseDownTime, setMouseDownTime] = useState<number>(0);
-  
-    const [currentVideoRef, setCurrentVideoRef] = useState<HTMLVideoElement | null>(null);
-  
-    const firstTimeRendering = useRef(true);
+
+    const currentVideoRef = useRef<HTMLVideoElement | null>(null);
+
+    const updateLayoutOffset = useCallback(() => {
+      if (!storiesContainerRef.current || !storiesRefs.current[activeStoryCardIndex!]) {
+        return 0;
+      }
+
+      const storyWidth = storiesRefs.current[activeStoryCardIndex!].offsetWidth;
+      const containerWidth = storiesContainerRef.current.offsetWidth;
+      let offset = containerWidth / 2 - storyWidth / 2 - activeStoryCardIndex! * storyWidth - activeStoryCardIndex! * 8;
+      storiesContainerRef.current.style.transform = ` translateX(${offset}px)`;
+    }, [activeStoryCardIndex]);
+
+    useOnWindowResize(() => {
+      updateLayoutOffset();
+    }, [updateLayoutOffset]);
 
     useEffect(() => {
-      if (activeStoryCardIndex !== 0) {
-        window.history.replaceState(null, "", `#${activeStoryCardIndex}`);
-      } else {
-        window.history.replaceState(null, "", window.location.pathname);
-      }
+      updateLayoutOffset();
+    }, [activeStoryCardIndex, updateLayoutOffset]);
 
-      if (active && storiesRefs.current[activeStoryCardIndex!]) {
-        storiesContainerRef.current?.scrollTo({
-          top: 0,
-          left: storiesRefs.current[activeStoryCardIndex!]!.offsetWidth * activeStoryCardIndex!,
-          behavior: firstTimeRendering.current ? "instant" : "smooth",
-        });
-
-        if (firstTimeRendering.current) {
-          firstTimeRendering.current = false;
-        }
-      }
-    }, [activeStoryCardIndex, active]);
-
+    useLayoutEffect(() => {
+      updateLayoutOffset();
+    }, [updateLayoutOffset]);
 
     // Play current video observer
     useEffect(() => {
-      if (!active || !(videoRefs?.current)) {
+      if (!active || !storiesRefs?.current) {
         return;
       }
 
       const observer = new IntersectionObserver(
         (entries: IntersectionObserverEntry[]) => {
           entries.forEach((entry: IntersectionObserverEntry) => {
-            if (entry.isIntersecting) {
-              let video = entry.target as HTMLVideoElement;
-              setCurrentVideoRef(video);
-              video.currentTime = 0;
-              video.play();
+            let story = entry.target as HTMLDivElement;
+            let video = story.querySelector("video");
+            if (!video) {
+              return;
             }
+            video.currentTime = 0;
+            if (!entry.isIntersecting) {
+              video.pause();
+              return;
+            }
+
+            // Try to unmute the video
+            video.muted = false;
+            video
+              .play()
+              .catch((error) => {
+                video.muted = true;
+                video.play();
+              });
+
+            currentVideoRef.current = video;
           });
         },
-        { root: ref.current, threshold: 0.8 },
+        { root: storyGroupContainer.current, threshold: 0.5 },
       );
-  
-      videoRefs.current.forEach((video) => observer.observe(video));
-  
+
+      storiesRefs.current.forEach((story) => {
+        observer.observe(story);
+      });
+
       return () => observer.disconnect();
-    }, [active, videoRefs]);
-  
+    }, [active, storiesRefs]);
+
     // Pause the video when the tab is not active
     useEffect(() => {
-      if (!active && currentVideoRef) {
-        currentVideoRef.pause();
+      if (!active && currentVideoRef.current) {
+        currentVideoRef.current.pause();
       }
     }, [active, currentVideoRef]);
 
@@ -151,6 +171,11 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(
       setTimerRunning(true);
     }, [active]);
 
+    useEffect(() => {
+      // Animate the scroll only after the component has been mounted. Avoid animating the scroll on page render
+      storiesContainerRef.current!.setAttribute("data-animate", "");
+    }, []);
+
     function navigateIfSmallScreen(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
       if (window.innerWidth > Constants.SMALL_BREAKPOINT_WIDTH) {
         return;
@@ -206,26 +231,27 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(
         ref={ref}
       >
         {<PreviousArrow extraClasses={`sm:shrink-0 invisible ${active && (activeStoryCardIndex !== 0 || !isFirstGroup) ? "sm:visible" : ""}`} onClick={goToPreviousStory} />}
-        <div className={`${floatingHeader ? "relative" : ""} overflow-hidden flex flex-col aspect-[9/16] h-full max-h-full max-w-full rounded-md bg-black ${!active ? "pointer-events-none" : ""}`}>
+        <div
+          ref={storyGroupContainer}
+          className={`${floatingHeader ? "relative" : ""} flex aspect-[9/16] h-full max-h-full max-w-full flex-col overflow-hidden rounded-md bg-black ${!active ? "pointer-events-none" : ""}`}
+        >
           <div className={`${floatingHeader ? "absolute z-20 w-full p-2" : ""}`}>
             {active && <ProgressBar storyCount={cards.length} activeStoryIndex={activeStoryCardIndex!} progress={storyTimer} floatingHeader={floatingHeader!} />}
             <Header active={active!} storyGroup={storyGroup!} timerRunning={timerRunning} setTimerRunning={setTimerRunning} floatingHeader={floatingHeader!} />
           </div>
           <div
             ref={storiesContainerRef}
-            className={`${floatingHeader ? "absolute h-full w-full" : ""} flex min-w-full max-w-full flex-1 snap-x flex-row gap-2 overflow-x-hidden`}
+            className={`${floatingHeader ? "h-full w-full" : ""} flex min-w-full max-w-full flex-1 snap-x flex-row gap-2 data-[animate]:transition-transform data-[animate]:duration-500`}
             onMouseDown={navigationMouseDown}
             onMouseUp={navigationMouseUp}
           >
-            {cards.map((child, index) => {
-              return React.cloneElement(child as React.ReactElement<any>, {
-                ref: (el: HTMLDivElement) => {
-                  storiesRefs.current[index] = el;
-                },
+            {cards.map((child, index) =>
+              React.cloneElement(child as React.ReactElement<any>, {
+                ref: (el: HTMLDivElement) => (storiesRefs.current[index] = el),
                 key: index,
                 padding: !floatingHeader,
-              });
-            })}
+              }),
+            )}
           </div>
           {active && <BottomBar floatingHeader={floatingHeader!} />}
         </div>

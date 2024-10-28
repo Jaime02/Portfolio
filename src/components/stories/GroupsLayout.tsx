@@ -45,15 +45,25 @@ export default function GroupsLayout({ initialStoryGroupUrl, storyCategory }: Pr
     window.history.replaceState(null, "", storyCategory.storyGroups[activeStoryGroupIndex].getFullUrl() + window.location.hash);
     updateLayoutOffset();
   }, [activeStoryGroupIndex, storyCategory.storyGroups, updateLayoutOffset]);
+  
+  useEffect(() => {
+    if (activeStoryCardIndex !== 0) {
+      window.history.replaceState(null, "", `#${activeStoryCardIndex}`);
+    } else {
+      window.history.replaceState(null, "", window.location.pathname);
+    }
+  }, [activeStoryCardIndex]);
+
+  useEffect(() => {
+    // Animate the scroll only after the component has been mounted. Avoid animating the scroll on page render
+    groupsLayoutRef.current!.setAttribute("data-animate", "");
+  }, []);
 
   useLayoutEffect(() => {
     updateLayoutOffset();
   }, [updateLayoutOffset]);
 
   const goToNextStoryGroup = useCallback(() => {
-    // Animate the scroll only after the first click. Avoid animating the scroll on page render
-    groupsLayoutRef.current!.setAttribute("data-animate", "");
-
     if (activeStoryGroupIndex === storyGroupsRefs.current.length - 1) {
       window.location.href = "/";
       return;
@@ -63,9 +73,6 @@ export default function GroupsLayout({ initialStoryGroupUrl, storyCategory }: Pr
   }, [activeStoryGroupIndex]);
 
   const goToPreviousStoryGroup = useCallback(() => {
-    // Animate the scroll only after the first click. Avoid animating the scroll on page render
-    groupsLayoutRef.current!.setAttribute("data-animate", "");
-
     if (activeStoryGroupIndex === 0) {
       window.location.href = "/";
       return;
@@ -85,10 +92,9 @@ export default function GroupsLayout({ initialStoryGroupUrl, storyCategory }: Pr
             active: index === activeStoryGroupIndex,
             isFirstGroup: index === 0,
             isLastGroup: index === storyGroupsRefs.current.length - 1,
-            activeStoryCardIndex: activeStoryCardIndex,
+            activeStoryCardIndex: index === activeStoryGroupIndex ? activeStoryCardIndex : 0,
             setActiveStoryCardIndex: setActiveStoryCardIndex,
             selectMyself: () => {
-              groupsLayoutRef.current!.setAttribute("data-animate", "");
               setActiveStoryGroupIndex(index);
             },
             goToPreviousStoryGroup: goToPreviousStoryGroup,

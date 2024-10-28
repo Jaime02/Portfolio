@@ -5,16 +5,14 @@ import { StoryVideo } from "@/misc/Constants";
 import StoryLocation from "@/components/story-widgets/StoryLocation";
 
 const CoolPictures = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
-  const videoRefs = useRef<HTMLVideoElement[]>([]);
-
   let videos = [
-    new StoryVideo("/videos/Castle.mp4"),
+    new StoryVideo("/videos/Castle.mp4", <StoryLocation extraContainerClasses="left-[50%] top-[80%]" locationUrl="https://maps.app.goo.gl/4VmokxJJHsCYEdJK9" text="Neuschwanstein castle"/>),
     new StoryVideo("/videos/OPmobilityGolf.mp4"),
-    new StoryVideo("/videos/WUG.mp4", <StoryLocation extraContainerClasses="left-[50%] top-[50%]" locationUrl="https://maps.app.goo.gl/H9x2NKCJj9mBMxLh8" text="Weißenburg in Bayern" />),
+    new StoryVideo("/videos/WUG.mp4", <StoryLocation extraContainerClasses="left-[50%] top-[40%]" locationUrl="https://maps.app.goo.gl/H9x2NKCJj9mBMxLh8" text="Weißenburg in Bayern" />),
   ];
 
   return (
-    <CardsLayout {...props} ref={ref} floatingHeader={true} videoRefs={videoRefs}>
+    <CardsLayout {...props} ref={ref} floatingHeader={true}>
       <Card>
         <div className="flex h-full w-full flex-col items-center justify-center gap-4 p-4">
           <h1>Hey, are you still here? I have nothing else to show you... well... here you have, some cool pictures &#128513;</h1>
@@ -29,9 +27,6 @@ const CoolPictures = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) =
             className="max-h-full w-full"
             muted
             loop
-            ref={(el: HTMLVideoElement) => {
-              videoRefs.current[index] = el;
-            }}
           >
             <source src={video.url} type="video/mp4" />
             Sorry, your browser does not support the video tag

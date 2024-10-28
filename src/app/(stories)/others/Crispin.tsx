@@ -5,9 +5,6 @@ import SpanishFlagIcon from "@/icons/SpanishFlagIcon";
 import { StoryVideo } from "@/misc/Constants";
 
 const Crispin = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
-  
-  const videoRefs = useRef<(HTMLVideoElement)[]>([]);
-  
   let presentationSign = (
     <div className="absolute left-[50%] top-[18%] z-10 flex h-[24%] w-[90%] translate-x-[-50%] translate-y-[-50%] flex-col justify-center rounded-md p-2 backdrop-blur-lg">
       <p className="text-pretty font-bold text-black sm:text-xl">
@@ -27,7 +24,7 @@ const Crispin = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
   ];
 
   return (
-    <CardsLayout {...props} ref={ref} floatingHeader={true} videoRefs={videoRefs}>
+    <CardsLayout {...props} ref={ref} floatingHeader={true}>
       {videos.map((video, index) => (
         <Card key={index}>
           <video
@@ -36,9 +33,6 @@ const Crispin = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
             className="max-h-full w-full"
             muted
             loop
-            ref={(el: HTMLVideoElement) => {
-              videoRefs.current[index] = el;
-            }}
           >
             <source src={video.url} type="video/mp4" />
             Sorry, your browser does not support the video tag

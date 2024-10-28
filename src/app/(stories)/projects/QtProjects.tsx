@@ -63,7 +63,7 @@ const QtProjects = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => 
           </a>{" "}
           is used.
         </p>
-        <Image src="/images/TechnicalDrawingAppScreenshot.png" width="800" height="800" alt="Technical drawing app" className="w-full select-none" draggable="false" priority={true} />
+        <Image src="/images/TechnicalDrawingAppScreenshot.webp" width="700" height="700" alt="Technical drawing app" className="w-full select-none" draggable="false" priority={true} />
         <GithubRepoLink href="https://github.com/Jaime02/Proyecto-de-investigacion-2020-Dibujo-tecnico" />
       </Card>
       <Card>
