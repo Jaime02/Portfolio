@@ -2,29 +2,31 @@ import CloseIcon from "@/icons/CloseIcon";
 import PlayIcon from "@/icons/PlayIcon";
 import PauseIcon from "@/icons/PauseIcon";
 import { StoryGroup } from "@/misc/Constants";
+import { useContext } from "react";
+import { StoryGroupsContext } from "@/components/stories/StoryGroupsContext";
+import { StoryGroupContext } from "@/components/stories/StoryGroupContext";
 
 interface Props {
-  active: boolean;
-  storyGroup: StoryGroup;
-  timerRunning: boolean;
   floatingHeader: boolean;
-  setTimerRunning: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function Header({ active, storyGroup, timerRunning, floatingHeader, setTimerRunning }: Props) {
+export default function Header({ floatingHeader }: Props) {
+  const { paused, setPaused, active } = useContext(StoryGroupsContext);
+  const { title, headerThumbnail } = useContext(StoryGroupContext);
+  
   return (
     <div className={`flex w-full flex-row items-center gap-2 p-2 ${!floatingHeader ? "bg-ig-gray dark:bg-black" : ""}`}>
-      {storyGroup.headerThumbnail}
-      <h1 className="h-fit flex-1 text-left leading-none text-white">{storyGroup.title}</h1>
+      {headerThumbnail}
+      <h1 className="h-fit flex-1 text-left leading-none text-white">{title}</h1>
       {active && (
         <>
-          {timerRunning ? (
-            <button aria-label="Pause" onClick={() => setTimerRunning(false)} className="hidden sm:block">
-              <PauseIcon />
+          {paused ? (
+            <button aria-label="Resume" onClick={() => setPaused(false)} className="hidden sm:block">
+              <PlayIcon />
             </button>
           ) : (
-            <button aria-label="Resume" onClick={() => setTimerRunning(true)} className="hidden sm:block">
-              <PlayIcon />
+            <button aria-label="Pause" onClick={() => setPaused(true)} className="hidden sm:block">
+              <PauseIcon />
             </button>
           )}
           <a href="/" aria-label="Close">

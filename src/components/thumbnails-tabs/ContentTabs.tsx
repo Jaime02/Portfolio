@@ -29,7 +29,7 @@ export default function ContentTabs() {
     const tabWidth = tabElements.current[activeTabIndex].offsetWidth;
     const containerWidth = tabsContainerLayoutRef.current.offsetWidth;
     let offset = containerWidth / 2 - tabWidth / 2 - activeTabIndex * tabWidth;
-    tabsContainerRef.current!.style.transform = ` translateX(${offset}px)`;
+    tabsContainerRef.current!.style.transform = `translateX(${offset}px)`;
   }, [activeTabIndex]);
 
   useOnWindowResize(() => {

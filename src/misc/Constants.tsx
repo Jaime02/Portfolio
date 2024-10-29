@@ -25,7 +25,7 @@ import CoolPicturesThumbnail from "@/components/thumbnails-tabs/CoolPicturesThum
 
 export const SMALL_BREAKPOINT_WIDTH = 640;
 export const MOUSE_PRESS_DURATION_THRESHOLD = 100;
-export const STORY_DURATION = 120000;
+export const STORY_DURATION = 50000;
 export const TIMER_RESOLUTION = 50;
 
 export class StoryCategory {
@@ -67,7 +67,7 @@ export abstract class StoryGroup {
   urlCategoryPrefix?: string = "";
   constructor({ title, component, tabThumbnail, headerThumbnail, urlCategoryPrefix }: StoryGroupProps) {
     this.title = title;
-    this.component = component;
+    this.component = React.cloneElement(component, { storyGroup: this });
     this.tabThumbnail = tabThumbnail;
     this.headerThumbnail = headerThumbnail;
     this.urlCategoryPrefix = urlCategoryPrefix;
@@ -103,25 +103,25 @@ class OthersStoryGroup extends StoryGroup {
 export const ProjectsStoryGroups: StoryGroup[] = [
   new ProjectsStoryGroup({
     title: "This website",
-    component: <ThisWebsite storyGroup={this} />,
+    component: <ThisWebsite />,
     tabThumbnail: <TabThumbnail alt="This website thumbnail" src="/images/InstagramLogo.svg" href="/projects/this-website" padding={true} />,
     headerThumbnail: <HeaderThumbnail src="/images/InstagramLogo.svg" />,
   }),
   new ProjectsStoryGroup({
     title: "Qt projects",
-    component: <QtProjects storyGroup={this} />,
+    component: <QtProjects />,
     tabThumbnail: <QtThumbnail />,
     headerThumbnail: <HeaderThumbnail src="/images/QtSquareLogo.svg" />,
   }),
   new ProjectsStoryGroup({
     title: "Paint filter manager",
-    component: <PaintFilterManager storyGroup={this} />,
+    component: <PaintFilterManager />,
     tabThumbnail: <TabThumbnail alt="Paint filter manager thumbnail" src="/images/PaintFilterManagerLogo.webp" href="/projects/paint-filter-manager" />,
     headerThumbnail: <HeaderThumbnail src="/images/PaintFilterManagerLogo.webp" />,
   }),
   new ProjectsStoryGroup({
     title: "LiveGL",
-    component: <LiveGL storyGroup={this} />,
+    component: <LiveGL />,
     tabThumbnail: <TabThumbnail alt="LiveGL thumbnail" src="/images/LiveGLThumbnail.webp" href="/projects/livegl" padding={true} />,
     headerThumbnail: <HeaderThumbnail src="/images/LiveGLThumbnail.webp" />,
   }),
@@ -130,7 +130,7 @@ export const ProjectsStoryGroups: StoryGroup[] = [
 export const ExperiencesStoryGroups: StoryGroup[] = [
   new ExperiencesStoryGroup({
     title: "The Qt Company",
-    component: <TheQtCompany storyGroup={this} />,
+    component: <TheQtCompany />,
     tabThumbnail: <QtGroupThumbnail />,
     headerThumbnail: <HeaderThumbnail src="/images/QtSquareLogo.svg" />,
   }),
@@ -149,13 +149,13 @@ export const ExperiencesStoryGroups: StoryGroup[] = [
   new ExperiencesStoryGroup({
     title: "Freelancing",
     component: <Freelancing />,
-    tabThumbnail: <FreelancingLogo href="/experiences/freelancing"/>,
+    tabThumbnail: <FreelancingLogo href="/experiences/freelancing" />,
     headerThumbnail: <HeaderThumbnail src="/images/Laptop.svg" />,
   }),
   new ExperiencesStoryGroup({
     title: "Upna",
     component: <Upna />,
-    tabThumbnail: <TabThumbnail alt="Upna thumbnail" src="/images/UpnaLogo.webp" href="/experiences/upna" padding={true} />, 
+    tabThumbnail: <TabThumbnail alt="Upna thumbnail" src="/images/UpnaLogo.webp" href="/experiences/upna" padding={true} />,
     headerThumbnail: <HeaderThumbnail src="/images/AcademicIcon.svg" />,
   }),
 ];
@@ -173,7 +173,7 @@ export const OthersStoryGroups: StoryGroup[] = [
     tabThumbnail: <TabThumbnail alt="My links thumbnail" src="/images/LinkIcon.svg" href="/others/my-links" />,
     headerThumbnail: <HeaderThumbnail src="/images/LinkIcon.svg" />,
   }),
-  new OthersStoryGroup({ 
+  new OthersStoryGroup({
     title: "Crispin",
     component: <Crispin />,
     tabThumbnail: <TabThumbnail alt="Crispin thumbnail" src="/images/CrispinThumbnail.jpg" href="/others/crispin" />,

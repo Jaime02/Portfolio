@@ -6,7 +6,7 @@ import { StoryVideo } from "@/misc/Constants";
 
 const Crispin = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
   let presentationSign = (
-    <div className="absolute left-[50%] top-[18%] z-10 flex h-[24%] w-[90%] translate-x-[-50%] translate-y-[-50%] flex-col justify-center rounded-md p-2 backdrop-blur-lg">
+    <div className="absolute left-[50%] top-[18%] z-10 flex h-[24%] w-[90%] translate-x-[-50%] translate-y-[-50%] flex-col justify-center rounded-md p-2 backdrop-blur-[2px]">
       <p className="text-pretty font-bold text-black sm:text-xl">
         This is my dog, <span className="font-extrabold">Crispin</span>. He is a handsome and loyal dog. It is a mix between an American Standford and an Alano Español{" "}
         <SpanishFlagIcon extraClasses="size-4 inline" />
@@ -15,7 +15,7 @@ const Crispin = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
   );
 
   let videos = [
-    new StoryVideo("/videos/CrispinMerryChristmas.mp4", presentationSign),
+    new StoryVideo("/videos/CrispinHandsome.mp4", presentationSign),
     new StoryVideo("/videos/CrispinSofa.mp4"),
     new StoryVideo("/videos/CrispinStaring.mp4"),
     new StoryVideo("/videos/CrispinSad.mp4"),

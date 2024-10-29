@@ -1,4 +1,5 @@
 "use client";
+import { StoryGroupsContextProvider } from "@/components/stories/StoryGroupsContext";
 import { experiencesStoryCategory } from "@/misc/Constants";
 import dynamic from "next/dynamic";
 const GroupsLayout = dynamic(() => import('@/components/stories/GroupsLayout'), {
@@ -11,6 +12,8 @@ interface Props {
 
 export default function Page({ params }: Props ) {
   return (
-    <GroupsLayout initialStoryGroupUrl={params.experience ? params.experience[0] : ""} storyCategory={experiencesStoryCategory}/>
+    <StoryGroupsContextProvider storyCategory={experiencesStoryCategory} initialStoryGroupUrl={params.experience ? params.experience[0] : ""}>
+      <GroupsLayout/>
+    </StoryGroupsContextProvider>
   );
 }

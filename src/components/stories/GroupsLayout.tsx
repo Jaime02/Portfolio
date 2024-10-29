@@ -1,39 +1,26 @@
 "use client";
-import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { StoryCategory } from "@/misc/Constants";
+import React, { useCallback, useContext, useEffect, useLayoutEffect, useRef } from "react";
 import useOnWindowResize from "@/misc/useOnWindowResize";
+import { StoryGroupsContext } from "@/components/stories/StoryGroupsContext";
+import { StoryGroup } from "@/misc/Constants";
+import { StoryGroupContextProvider } from "@/components/stories/StoryGroupContext";
 
-interface Props {
-  initialStoryGroupUrl?: string;
-  storyCategory: StoryCategory;
-}
+export default function GroupsLayout() {
+  const { activeStoryGroup, storyCategory, activeStoryGroupIndex } = useContext(StoryGroupsContext);
 
-export default function GroupsLayout({ initialStoryGroupUrl, storyCategory }: Props) {
   const storyGroupsRefs = useRef<HTMLDivElement[]>([]);
   const groupsLayoutContainerRef = useRef<HTMLDivElement | null>(null);
   const groupsLayoutRef = useRef<HTMLDivElement | null>(null);
-
-  let initialGroupIndex: number = 0;
-  if (initialStoryGroupUrl) {
-    initialGroupIndex = Math.max(
-      storyCategory.storyGroups.findIndex((storyGroup) => storyGroup.getGroupUrl() === initialStoryGroupUrl),
-      0,
-    );
-  }
-
-  const [activeStoryGroupIndex, setActiveStoryGroupIndex] = useState(initialGroupIndex);
-
-  const initialStoryCardIndex = Number(window.location.hash.substring(1));
-  const [activeStoryCardIndex, setActiveStoryCardIndex] = useState(initialStoryCardIndex);
 
   const updateLayoutOffset = useCallback(() => {
     if (!groupsLayoutContainerRef.current || !storyGroupsRefs.current[activeStoryGroupIndex]) {
       return 0;
     }
+
     const storyWidth = storyGroupsRefs.current[activeStoryGroupIndex].offsetWidth;
     const containerWidth = groupsLayoutContainerRef.current.offsetWidth;
     let offset = containerWidth / 2 - storyWidth / 2 - activeStoryGroupIndex * storyWidth;
-    groupsLayoutRef.current!.style.transform = ` translateX(${offset}px)`;
+    groupsLayoutRef.current!.style.transform = `translateX(${offset}px)`;
   }, [activeStoryGroupIndex]);
 
   useOnWindowResize(() => {
@@ -42,17 +29,9 @@ export default function GroupsLayout({ initialStoryGroupUrl, storyCategory }: Pr
 
   useEffect(() => {
     // Update URL depending on active story group
-    window.history.replaceState(null, "", storyCategory.storyGroups[activeStoryGroupIndex].getFullUrl() + window.location.hash);
+    window.history.replaceState(null, "", activeStoryGroup.getFullUrl() + window.location.hash);
     updateLayoutOffset();
-  }, [activeStoryGroupIndex, storyCategory.storyGroups, updateLayoutOffset]);
-  
-  useEffect(() => {
-    if (activeStoryCardIndex !== 0) {
-      window.history.replaceState(null, "", `#${activeStoryCardIndex}`);
-    } else {
-      window.history.replaceState(null, "", window.location.pathname);
-    }
-  }, [activeStoryCardIndex]);
+  }, [activeStoryGroup, updateLayoutOffset]);
 
   useEffect(() => {
     // Animate the scroll only after the component has been mounted. Avoid animating the scroll on page render
@@ -63,44 +42,17 @@ export default function GroupsLayout({ initialStoryGroupUrl, storyCategory }: Pr
     updateLayoutOffset();
   }, [updateLayoutOffset]);
 
-  const goToNextStoryGroup = useCallback(() => {
-    if (activeStoryGroupIndex === storyGroupsRefs.current.length - 1) {
-      window.location.href = "/";
-      return;
-    }
-
-    setActiveStoryGroupIndex(activeStoryGroupIndex + 1);
-  }, [activeStoryGroupIndex]);
-
-  const goToPreviousStoryGroup = useCallback(() => {
-    if (activeStoryGroupIndex === 0) {
-      window.location.href = "/";
-      return;
-    }
-
-    setActiveStoryGroupIndex(activeStoryGroupIndex - 1);
-  }, [activeStoryGroupIndex]);
-
   return (
-    <div ref={groupsLayoutContainerRef} className="flex h-dvh max-h-dvh w-full max-w-full flex-col justify-center overflow-hidden bg-black px-2 py-3 sm:bg-[#1a1a1a]">
+    <div ref={groupsLayoutContainerRef} className="flex h-dvh max-h-dvh w-full max-w-full flex-col justify-center overflow-hidden bg-black px-2 py-1 sm:bg-[#1a1a1a] sm:py-3">
       <div ref={groupsLayoutRef} className="flex h-full max-h-full flex-row data-[animate]:transition-transform data-[animate]:duration-500">
-        {storyCategory.storyGroups.map((storyGroup, index) =>
-          React.cloneElement(storyGroup.component, {
-            ref: (el: HTMLDivElement) => (storyGroupsRefs.current[index] = el),
-            key: index,
-            storyGroup: storyGroup,
-            active: index === activeStoryGroupIndex,
-            isFirstGroup: index === 0,
-            isLastGroup: index === storyGroupsRefs.current.length - 1,
-            activeStoryCardIndex: index === activeStoryGroupIndex ? activeStoryCardIndex : 0,
-            setActiveStoryCardIndex: setActiveStoryCardIndex,
-            selectMyself: () => {
-              setActiveStoryGroupIndex(index);
-            },
-            goToPreviousStoryGroup: goToPreviousStoryGroup,
-            goToNextStoryGroup: goToNextStoryGroup,
-          }),
-        )}
+        {storyCategory.storyGroups.map((storyGroup: StoryGroup, storyGroupIndex: number) => (
+          <StoryGroupContextProvider storyGroupIndex={storyGroupIndex!} storyGroup={storyGroup!} key={storyGroupIndex}>
+            {React.cloneElement(storyGroup.component, {
+              ref: (el: HTMLDivElement) => (storyGroupsRefs.current[storyGroupIndex] = el),
+              storyGroupIndex: storyGroupIndex,
+            })}
+          </StoryGroupContextProvider>
+        ))}
       </div>
     </div>
   );
