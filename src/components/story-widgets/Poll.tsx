@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 
 interface PollProps {
   title: string;
@@ -8,7 +8,8 @@ interface PollProps {
 }
 
 export default function Poll({ title, options, correctAnswerIndex, messagesOnAnswerChosen }: PollProps) {
-  const [answerChosen, setAnswerChosen] = useState(-1);
+  const [answerChosenIndex, setAnswerChosen] = useState(-1);
+  const message = useMemo(() => messagesOnAnswerChosen[answerChosenIndex], [answerChosenIndex, messagesOnAnswerChosen]);
 
   function handleAnswerChosen(event: React.MouseEvent<HTMLButtonElement, MouseEvent>, index: number) {
     // Accept left clicks only
@@ -31,7 +32,7 @@ export default function Poll({ title, options, correctAnswerIndex, messagesOnAns
         {options.map((option, index) => (
           <button
             key={index}
-            className={`clickable h-8 w-full rounded-lg px-4 text-black ${index === answerChosen ? (index === correctAnswerIndex ? "bg-green-400" : "bg-red-500") : "bg-gray-200"}`}
+            className={`clickable h-8 w-full rounded-lg px-4 text-black ${index === answerChosenIndex ? (index === correctAnswerIndex ? "bg-green-400" : "bg-red-500") : "bg-gray-200"}`}
             onMouseUp={(event) => {
               handleAnswerChosen(event, index);
             }}
@@ -39,7 +40,7 @@ export default function Poll({ title, options, correctAnswerIndex, messagesOnAns
             {option}
           </button>
         ))}
-        <p className="font-bold text-black">{messagesOnAnswerChosen[answerChosen]}</p>
+        <p className={`font-bold overflow-y-clip text-black transition-all duration-1000 ${message ? "h-max" : "h-0"}`}>{message}</p>
       </div>
     </div>
   );

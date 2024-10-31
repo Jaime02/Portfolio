@@ -28,8 +28,7 @@ export default function GroupsLayout() {
   }, [updateLayoutOffset]);
 
   useEffect(() => {
-    // Update URL depending on active story group
-    window.history.replaceState(null, "", activeStoryGroup.getFullUrl() + window.location.hash);
+    window.history.replaceState(null, "", activeStoryGroup.getFullUrl());
     updateLayoutOffset();
   }, [activeStoryGroup, updateLayoutOffset]);
 

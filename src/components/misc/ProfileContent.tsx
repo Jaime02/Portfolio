@@ -6,12 +6,12 @@ import { useEffect, useState } from "react";
 import UserCheckIcon from "@/icons/UserCheckIcon";
 import ThemeSwitch from "@/components/misc/ThemeSwitch";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import Settings from "@/components/misc/Settings";
 
 export default function ProfileContent() {
   const [followingPopoverOpen, setFollowingPopoverOpen] = useState(false);
   const [sendMessagePopoverOpen, setSendMessagePopoverOpen] = useState(false);
   const [isFollowingMe, setIsFollowingMe] = useState(false);
-  const [settingsHidden, setSettingsHidden] = useState(true);
 
   useEffect(() => {
     let timer = setTimeout(() => {
@@ -53,7 +53,7 @@ export default function ProfileContent() {
                 <ThreeDotsIcon />
               </PopoverTrigger>
               <PopoverContent>
-                <ThemeSwitch />
+                <Settings/> 
               </PopoverContent>
             </Popover>
           </div>

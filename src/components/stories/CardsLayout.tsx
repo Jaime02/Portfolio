@@ -35,6 +35,7 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, st
 
   const [storyTimer, setStoryTimer] = useState(0);
   const [mouseDownTime, setMouseDownTime] = useState<number>(0);
+  const [storyDuration, setStoryDuration] = useState(5000);
 
   const updateLayoutOffset = useCallback(() => {
     if (!storiesContainerRef.current || !storiesRefs.current[activeStoryCardIndex]) {
@@ -65,7 +66,6 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, st
     setStoryTimer(0);
 
     if (activeStoryCardIndex === storiesCount - 1) {
-      console.log("last story");
       setActiveStoryCardIndex(0);
       goToNextStoryGroup();
       return;
@@ -82,9 +82,11 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, st
     updateLayoutOffset();
   }, [updateLayoutOffset]);
 
+  // Story changed effect
   useEffect(() => {
     updateLayoutOffset();
-    if (!storiesRefs.current[activeStoryCardIndex]) {
+
+    if (!storiesRefs.current[activeStoryCardIndex] || !active) {
       return;
     }
 
@@ -93,48 +95,11 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, st
     currentVideoRef.current = video;
     if (video) {
       video.currentTime = 0;
-
-      if (!paused) {
-        // Try to unmute the video
-        video.muted = false;
-
-        video.play().catch((error: any) => {
-          video.muted = true;
-          video.play();
-        });
+      video.onloadedmetadata = () => {
+        setStoryDuration(video.duration * 1000);
       }
     }
-  }, [activeStoryCardIndex, updateLayoutOffset, paused]);
-
-  // Play current video observer
-  useEffect(() => {
-    if (!active || !storiesRefs?.current || paused) {
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries: IntersectionObserverEntry[]) => {
-        entries.forEach((entry: IntersectionObserverEntry) => {
-          let story = entry.target as HTMLDivElement;
-          let video = story.querySelector("video");
-          if (!video) {
-            return;
-          }
-          if (!entry.isIntersecting) {
-            video.pause();
-            return;
-          }
-        });
-      },
-      { root: storyGroupContainer.current, threshold: 0.5 },
-    );
-
-    storiesRefs.current.forEach((story) => {
-      observer.observe(story);
-    });
-
-    return () => observer.disconnect();
-  }, [active, storiesRefs, paused]);
+  }, [active, activeStoryCardIndex, updateLayoutOffset]);
 
   // Pause the video when the tab is not active
   useEffect(() => {
@@ -142,9 +107,7 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, st
       currentVideoRef.current.pause();
       setPaused(true);
     }
-    // TO DO
-    // setPaused(false);
-  }, [active]);
+  }, [active, setPaused]);
 
   useEffect(() => {
     if (!active) {
@@ -170,7 +133,7 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, st
       }
 
       if (storyTimer < 100) {
-        setStoryTimer((storyTimer) => storyTimer + 100 / (Constants.STORY_DURATION / Constants.TIMER_RESOLUTION));
+        setStoryTimer((storyTimer) => storyTimer + 100 / (storyDuration / Constants.TIMER_RESOLUTION));
       } else {
         goToNextStory();
         clearInterval(timer);
@@ -178,7 +141,7 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, st
     }, Constants.TIMER_RESOLUTION);
 
     return () => clearInterval(timer);
-  }, [storyTimer, goToNextStory, active, paused]);
+  }, [storyDuration, storyTimer, goToNextStory, active, paused]);
 
   // Animate the scroll only after the component has been mounted. Avoid animating the scroll on page render
   useEffect(() => {
@@ -205,6 +168,7 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, st
     if (!active) {
       return;
     }
+
     setMouseDownTime(Date.now());
     setPaused(true);
   }
@@ -215,8 +179,8 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, st
     }
     // Pause the previous video if existing
     currentVideoRef.current?.pause();
-    setActiveStoryCardIndex!(0);
     setStoryTimer(0);
+    setActiveStoryCardIndex(0);
     setActiveStoryGroupIndex(storyGroupIndex);
   }
 
@@ -244,23 +208,23 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, st
       {<PreviousArrow extraClasses={`sm:shrink-0 invisible ${active && (activeStoryCardIndex !== 0 || !inFirstGroup) ? "sm:visible" : ""}`} onClick={goToPreviousStory} />}
       <div
         ref={storyGroupContainer}
-        className={`${floatingHeader ? "relative" : ""} flex aspect-[9/16] h-full max-h-full max-w-full flex-col overflow-hidden rounded-md bg-black ${!active ? "pointer-events-none" : ""}`}
+        className={`${floatingHeader ? "relative" : ""} flex overflow-x-hidden aspect-[9/16] h-full max-h-full max-w-full flex-col rounded-md bg-black ${!active ? "pointer-events-none" : ""}`}
       >
-        <div className={`${floatingHeader ? "absolute z-20 w-full" : ""} p-2`}>
+        <div className={`${floatingHeader ? "absolute z-20 w-full" : ""} p-2 flex flex-col gap-2`}>
           {active && <ProgressBar storyCount={storiesCount} activeStoryIndex={activeStoryCardIndex} progress={storyTimer} />}
           <Header floatingHeader={floatingHeader!} />
         </div>
         <div
           ref={storiesContainerRef}
-          className={`${floatingHeader ? "h-full w-full" : ""} flex min-w-full max-w-full flex-1 snap-x flex-row items-center gap-2 data-[animate]:transition-transform data-[animate]:duration-500`}
-          onMouseDown={navigationMouseDown}
-          onMouseUp={navigationMouseUp}
+          className={`${floatingHeader ? "h-full w-full" : ""} flex min-w-full flex-1 snap-x flex-row items-center gap-2 data-[animate]:transition-transform data-[animate]:duration-500 overflow-y-auto`}
         >
           {cards.map((child, index) =>
             React.cloneElement(child as React.ReactElement<any>, {
               ref: (el: HTMLDivElement) => (storiesRefs.current[index] = el),
               key: index,
               padding: !floatingHeader,
+              onMouseDown: navigationMouseDown,
+              onMouseUp: navigationMouseUp
             }),
           )}
         </div>
