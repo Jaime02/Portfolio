@@ -4,10 +4,10 @@ import { storyCategories } from "@/misc/Constants";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import useOnWindowResize from "@/misc/useOnWindowResize";
 import React from "react";
+import { ThumbnailContextProvider } from "@/components/thumbnails-tabs/ThumbnailContext";
 
 export default function ContentTabs() {
   const tabsContainerLayoutRef = useRef<HTMLDivElement>(null);
-  const tabsContainerRef = useRef<HTMLDivElement>(null);
   const tabElements = useRef<HTMLElement[]>([]);
 
   let initialTabIndex: number = 0;
@@ -26,13 +26,16 @@ export default function ContentTabs() {
     if (!tabsContainerLayoutRef.current || !tabElements.current[activeTabIndex]) {
       return 0;
     }
-    const tabWidth = tabElements.current[activeTabIndex].offsetWidth;
+    const tabWidth = tabElements.current[activeTabIndex].clientWidth;
     const containerWidth = tabsContainerLayoutRef.current.offsetWidth;
-    let offset = containerWidth / 2 - tabWidth / 2 - activeTabIndex * tabWidth;
-    tabsContainerRef.current!.style.transform = `translateX(${offset}px)`;
+    for (let i = 0; i < tabElements.current.length; i++) {
+      let offset = containerWidth / 2 - tabWidth / 2 + i * tabWidth - activeTabIndex * tabWidth + 20 * i - activeTabIndex * 20;
+      tabElements.current![i].style.left = `${offset}px`;
+    }
   }, [activeTabIndex]);
 
   useOnWindowResize(() => {
+    updateTabsContainerHeight();
     updateLayoutOffset();
   }, [updateLayoutOffset]);
 
@@ -59,7 +62,7 @@ export default function ContentTabs() {
 
   function updateSelectedTab(tabId: string) {
     if (tabId === "projects") {
-      // Remove the URL hash on the first tab 
+      // Remove the URL hash on the first tab
       history.replaceState(null, "", window.location.pathname);
     } else {
       history.replaceState(null, "", `#${tabId}`);
@@ -71,17 +74,30 @@ export default function ContentTabs() {
 
   // This will load the offset properly on page loading before displaying anything
   useLayoutEffect(() => {
+    updateTabsContainerHeight();
     updateLayoutOffset();
   }, [updateLayoutOffset]);
+
+  const updateTabsContainerHeight = useCallback(() => {
+    let parentHeight = Math.max(...tabElements.current.map((tab) => tab.offsetHeight));
+    tabsContainerLayoutRef.current!.style.height = `${parentHeight}px`;
+  }, [tabElements]);
 
   function handleAnchorClick(tabId: string, event: React.MouseEvent<HTMLAnchorElement>) {
     // Prevent default behavior. By default, it always sets the hash in the URL
     event.preventDefault();
 
     // Animate the scroll only after the first click. Avoid animating the scroll on page render
-    tabsContainerRef.current!.setAttribute("data-animate", "");
+    for (let i = 0; i < tabElements.current.length; i++) {
+      tabElements.current[i]!.setAttribute("data-animate", "");
+    }
 
     updateSelectedTab(tabId);
+  }
+  function thumbnailOnFocus(event: React.FocusEvent<HTMLDivElement>, tabId: string) {
+    updateSelectedTab(tabId);
+    // Avoid the scroll jumping to the top when focusing the thumbnail
+    tabsContainerLayoutRef.current!.scrollLeft = 0;
   }
 
   return (
@@ -93,7 +109,7 @@ export default function ContentTabs() {
           return (
             <a
               key={tabId}
-              className={`flex flex-1 flex-row items-center justify-center gap-2 ${isActive ? "border-black dark:border-white border-t-[1px]" : "text-gray-800 dark:text-ig-gray"} py-2`}
+              className={`flex flex-1 flex-row items-center justify-center gap-2 ${isActive ? "border-t-[1px] border-black dark:border-white" : "text-gray-800 dark:text-ig-gray"} py-2`}
               href={tabId === "projects" ? "" : `#${tabId}`}
               aria-label={tab.name}
               onClick={(event) => handleAnchorClick(tabId, event)}
@@ -104,15 +120,15 @@ export default function ContentTabs() {
           );
         })}
       </div>
-      <div ref={tabsContainerLayoutRef} className="w-full overflow-x-hidden">
-        <div ref={tabsContainerRef} className="flex flex-row data-[animate]:transition-transform data-[animate]:duration-700"> 
-          {storyCategories.map((tab, index) =>
-            React.cloneElement(tab.storyTabThumbnails, {
+      <div ref={tabsContainerLayoutRef} className="w-full overflow-hidden relative">
+        {storyCategories.map((tab, index) => (
+          <ThumbnailContextProvider key={index} onFocus={(event: React.FocusEvent<HTMLDivElement>) => thumbnailOnFocus(event, tab.getId())}>
+            {React.cloneElement(tab.storyTabThumbnails, {
               ref: (el: HTMLDivElement) => (tabElements.current[index] = el),
               key: index,
-            }),
-          )}
-        </div>
+            })}
+          </ThumbnailContextProvider>
+        ))}
       </div>
     </>
   );

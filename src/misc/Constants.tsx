@@ -22,13 +22,14 @@ import LiveGL from "@/app/(stories)/projects/LiveGL";
 import QtThumbnail from "@/components/thumbnails-tabs/QtThumbnail";
 import Crispin from "@/app/(stories)/others/Crispin";
 import CoolPicturesThumbnail from "@/components/thumbnails-tabs/CoolPicturesThumbnail";
+import MyLinksThumbnail from "@/components/thumbnails-tabs/MyLinksThumbnail";
 
 export const SMALL_BREAKPOINT_WIDTH = 640;
 export const MOUSE_PRESS_DURATION_THRESHOLD = 100;
-export const STORY_DURATION = 50000;
+export const DEFAULT_STORY_DURATION = 10000;
 export const TIMER_RESOLUTION = 50;
 
-export class StoryCategory {
+export class StoryGroupCategory {
   name: string;
   index: number;
   storyGroups: StoryGroup[];
@@ -104,7 +105,7 @@ export const ProjectsStoryGroups: StoryGroup[] = [
   new ProjectsStoryGroup({
     title: "This website",
     component: <ThisWebsite />,
-    tabThumbnail: <TabThumbnail alt="This website thumbnail" src="/images/InstagramLogo.svg" href="/projects/this-website" padding={true} />,
+    tabThumbnail: <TabThumbnail title="This website" src="/images/InstagramLogo.svg" href="/projects/this-website" padding={true} />,
     headerThumbnail: <HeaderThumbnail src="/images/InstagramLogo.svg" />,
   }),
   new ProjectsStoryGroup({
@@ -116,13 +117,13 @@ export const ProjectsStoryGroups: StoryGroup[] = [
   new ProjectsStoryGroup({
     title: "Paint filter manager",
     component: <PaintFilterManager />,
-    tabThumbnail: <TabThumbnail alt="Paint filter manager thumbnail" src="/images/PaintFilterManagerLogo.webp" href="/projects/paint-filter-manager" />,
+    tabThumbnail: <TabThumbnail title="Paint filter manager" src="/images/PaintFilterManagerLogo.webp" href="/projects/paint-filter-manager" />,
     headerThumbnail: <HeaderThumbnail src="/images/PaintFilterManagerLogo.webp" />,
   }),
   new ProjectsStoryGroup({
     title: "LiveGL",
     component: <LiveGL />,
-    tabThumbnail: <TabThumbnail alt="LiveGL thumbnail" src="/images/LiveGLThumbnail.webp" href="/projects/livegl" padding={true} />,
+    tabThumbnail: <TabThumbnail title="LiveGL" src="/images/LiveGLThumbnail.webp" href="/projects/livegl" padding={true} />,
     headerThumbnail: <HeaderThumbnail src="/images/LiveGLThumbnail.webp" />,
   }),
 ];
@@ -137,13 +138,13 @@ export const ExperiencesStoryGroups: StoryGroup[] = [
   new ExperiencesStoryGroup({
     title: "OPmobility",
     component: <OPmobility />,
-    tabThumbnail: <TabThumbnail alt="OPmobility thumbnail" src="/images/OPmobilityLogo.webp" href="/experiences/opmobility" />,
+    tabThumbnail: <TabThumbnail title="OPmobility" src="/images/OPmobilityLogo.webp" href="/experiences/opmobility" />,
     headerThumbnail: <HeaderThumbnail src="/images/PlasticOmniumLogo.svg" />,
   }),
   new ExperiencesStoryGroup({
     title: "Hiberus",
     component: <Hiberus />,
-    tabThumbnail: <TabThumbnail alt="Hiberus thumbnail" src="/images/HiberusLogo.webp" href="/experiences/hiberus" />,
+    tabThumbnail: <TabThumbnail title="Hiberus" src="/images/HiberusLogo.webp" href="/experiences/hiberus" />,
     headerThumbnail: <HeaderThumbnail src="/images/HiberusThumbnail.jpeg" />,
   }),
   new ExperiencesStoryGroup({
@@ -155,7 +156,7 @@ export const ExperiencesStoryGroups: StoryGroup[] = [
   new ExperiencesStoryGroup({
     title: "Upna",
     component: <Upna />,
-    tabThumbnail: <TabThumbnail alt="Upna thumbnail" src="/images/UpnaLogo.webp" href="/experiences/upna" padding={true} />,
+    tabThumbnail: <TabThumbnail title="Universidad Publica de Navarra" src="/images/UpnaLogo.webp" href="/experiences/upna" padding={true} />,
     headerThumbnail: <HeaderThumbnail src="/images/AcademicIcon.svg" />,
   }),
 ];
@@ -164,19 +165,19 @@ export const OthersStoryGroups: StoryGroup[] = [
   new OthersStoryGroup({
     title: "Download CV",
     component: <DownloadCV />,
-    tabThumbnail: <TabThumbnail alt="Download CV thumbnail" src="/images/CVIcon.svg" href="/others/download-cv" padding={true} />,
+    tabThumbnail: <TabThumbnail title="Download CV" src="/images/CVIcon.svg" href="/others/download-cv" padding={true} />,
     headerThumbnail: <HeaderThumbnail src="/images/CVIcon.svg" />,
   }),
   new OthersStoryGroup({
     title: "My links",
     component: <MyLinks />,
-    tabThumbnail: <TabThumbnail alt="My links thumbnail" src="/images/LinkIcon.svg" href="/others/my-links" />,
+    tabThumbnail: <MyLinksThumbnail href="/others/my-links" />,
     headerThumbnail: <HeaderThumbnail src="/images/LinkIcon.svg" />,
   }),
   new OthersStoryGroup({
     title: "Crispin",
     component: <Crispin />,
-    tabThumbnail: <TabThumbnail alt="Crispin thumbnail" src="/images/CrispinThumbnail.jpg" href="/others/crispin" />,
+    tabThumbnail: <TabThumbnail title="Crispin" src="/images/CrispinThumbnail.jpg" href="/others/crispin" />,
     headerThumbnail: <HeaderThumbnail src="/images/CrispinSquareThumbnail.jpg" />,
   }),
   new OthersStoryGroup({
@@ -187,32 +188,53 @@ export const OthersStoryGroups: StoryGroup[] = [
   }),
 ];
 
-export const projectsStoryCategory = new StoryCategory({
+export const projectsStoryCategory = new StoryGroupCategory({
   name: "Projects",
   index: 0,
   storyGroups: ProjectsStoryGroups,
   icon: <ProjectsIcon />,
 });
 
-export const experiencesStoryCategory = new StoryCategory({
+export const experiencesStoryCategory = new StoryGroupCategory({
   name: "Experiences",
   index: 1,
   storyGroups: ExperiencesStoryGroups,
   icon: <ExperienceIcon />,
 });
 
-export const othersStoryCategory = new StoryCategory({
+export const othersStoryCategory = new StoryGroupCategory({
   name: "Others",
   index: 2,
   storyGroups: OthersStoryGroups,
   icon: <ThreeDotsIcon />,
 });
 
-export const storyCategories: StoryCategory[] = [projectsStoryCategory, experiencesStoryCategory, othersStoryCategory];
+export const storyCategories: StoryGroupCategory[] = [projectsStoryCategory, experiencesStoryCategory, othersStoryCategory];
 
 export class StoryVideo {
   constructor(
     public url: string,
     public extraComponents?: React.JSX.Element,
   ) {}
+}
+
+export function getStoryCategoryByUrl(url: string): [number, StoryGroupCategory] {
+  let index = storyCategories.findIndex((storyCategory) => storyCategory.name.toLowerCase() === url.toLowerCase());
+  if (index === -1) {
+    console.error("Invalid story category url:", url);
+  }
+  return [index, storyCategories[index]];
+}
+
+export function getStoryGroupByUrl(category: StoryGroupCategory, url: string): [number, StoryGroup] { 
+  let index = category.storyGroups.findIndex((storyGroup) => storyGroup.getGroupUrl().toLowerCase() === url.toLowerCase());
+  if (index === -1) {
+    console.error("Invalid story group url:", url);
+  }
+
+  return [index, category.storyGroups[index]];
+}
+
+export function getStoryGroupByIndex(category: StoryGroupCategory, index: number): StoryGroup {
+  return category.storyGroups[index];
 }

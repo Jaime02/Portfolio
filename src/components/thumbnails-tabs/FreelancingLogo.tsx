@@ -4,7 +4,7 @@ import UpworkLogo from "@/icons/UpworkLogo";
 
 export default function FreelancingLogo({href}: {href: string}) {
   return (
-    <TabThumbnailLayout href={href} padding={true}>
+    <TabThumbnailLayout href={href} title="Freelancing" padding={true}>
       <div className="flex flex-col items-center justify-around size-full">
         <FiverrLogo/>
         <UpworkLogo/>

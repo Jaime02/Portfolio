@@ -1,18 +1,13 @@
 "use client";
 import { StoryGroupsContextProvider } from "@/components/stories/StoryGroupsContext";
-import { othersStoryCategory } from "@/misc/Constants";
 import dynamic from "next/dynamic";
 const GroupsLayout = dynamic(() => import('@/components/stories/GroupsLayout'), {
   ssr: false,
 });
 
-interface Props {
-  params: { other: string[] };
-}
-
-export default function Page({ params }: Props ) {
+export default function Page() {
   return (
-    <StoryGroupsContextProvider storyCategory={othersStoryCategory} initialStoryGroupUrl={params.other ? params.other[0] : ""}>
+    <StoryGroupsContextProvider>
       <GroupsLayout/>
     </StoryGroupsContextProvider>
   );

@@ -7,11 +7,12 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 
 function OPmobilityTitle({ title }: { title: string }) {
   return (
-    <div className="font- bg-op-mobility-blue rounded-lg p-2 text-xl font-bold text-white">
+    <div className="font- rounded-lg bg-op-mobility-blue p-2 text-xl font-bold text-white">
       <h1 className="text-center">{title}</h1>
     </div>
   );
 }
+
 const PaintFilterManager = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
   return (
     <CardsLayout {...props} ref={ref} font={OpMobilityFont.className}>
@@ -25,7 +26,7 @@ const PaintFilterManager = forwardRef<HTMLDivElement, CardsLayoutProps>((props, 
           , I developed a customized web and mobile application for managing the filters of the paint line.
         </p>
         <p>In the following image, you can see a screenshot of the initial page of the website application. It shows a table with information about each filter.</p>
-        <Image src="/images/PFM.webp" width="800" height="800" alt="Paint filter manager" className="w-full select-none" draggable="false" priority={true} />
+        <Image src="/images/PFM.webp" width="800" height="800" alt="Paint filter manager web screenshot" className="w-full select-none" draggable="false" priority={true} />
       </Card>
       <Card>
         <OPmobilityTitle title="Website" />
@@ -45,7 +46,7 @@ const PaintFilterManager = forwardRef<HTMLDivElement, CardsLayoutProps>((props, 
           </a>
           .
         </p>
-        <Image src="/images/PFMTable.webp" width="800" height="800" alt="Paint filter manager table" className="w-full select-none" draggable="false" priority={true} />
+        <Image src="/images/PFMTable.webp" width="800" height="800" alt="Paint filter manager web table screenshot" className="w-full select-none" draggable="false" priority={true} />
       </Card>
       <Card>
         <OPmobilityTitle title="Android app" />
@@ -56,19 +57,22 @@ const PaintFilterManager = forwardRef<HTMLDivElement, CardsLayoutProps>((props, 
           </a>
           , which is the standard language for Android.
         </p>
-        <div className="flex flex-row items-center h-fit">
-          <div className="flex flex-col h-fit">
-            <h2 className="font-bold text-center">Features</h2>
+        <div className="flex h-fit flex-row">
+          <div className="flex h-fit flex-col">
+            <h2 className="py-2 text-center text-lg font-bold">Features:</h2>
             <ul className="ml-4 list-disc">
               <li>QR code scanner</li>
               <li>Responsive design</li>
               <li>Dark mode</li>
-              <li>Language translations</li>
+              <li>Translations</li>
               <li>Offline mode</li>
             </ul>
+            <div className="relative my-4 self-end aspect-square w-full">
+              <Image src="/images/icons/AndroidIcon.svg" alt="Android icon" fill className="mx-auto select-none" draggable="false" priority={true} />
+            </div>
           </div>
-          <div className="grow relative h-[50vh]">
-          <Image src="/images/PFMApp.webp" fill alt="Paint filter manager android app" className=" select-none object-contain" draggable="false" priority={true} />
+          <div className="relative h-[50vh] grow">
+            <Image src="/images/PFMApp.webp" fill alt="Paint filter manager Android app screenshot" className="select-none object-contain" draggable="false" priority={true} />
           </div>
         </div>
       </Card>

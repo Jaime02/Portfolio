@@ -3,6 +3,7 @@ import CardsLayout, { CardsLayoutProps } from "@/components/stories/CardsLayout"
 import { forwardRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import LinkIcon from "@/icons/LinkIcon";
 
 const OPmobility = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
   return (
@@ -31,8 +32,12 @@ const OPmobility = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => 
       </Card>
       <Card>
         <p>
-          During the internship, I developed the Paint Filter Manager project, which is described <Link className="styled-a" href="/projects/paint-filter-manager">here</Link>. It was a wonderful experience to be working in that environment full of motivaded people.
+          During the internship, I developed the <q>Paint Filter Manager</q> project. It was a wonderful experience to be working in that environment full of motivaded people.
         </p>
+        <Image src="/images/PFM.webp" width="800" height="800" alt="Paint filter manager web" className="w-full select-none" draggable="false" priority={true} />
+        <Link href="/projects/paint-filter-manager" onClick={(event) => event.stopPropagation()}>
+          <button className="btn-primary mx-auto text-lg"><LinkIcon extraClasses="size-5"/>Go to Paint Filter Manager project</button>
+        </Link>
       </Card>
     </CardsLayout>
   );

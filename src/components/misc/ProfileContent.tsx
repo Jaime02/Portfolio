@@ -4,7 +4,6 @@ import ThreeDotsIcon from "@/icons/ThreeDotsIcon";
 import UserPlusIcon from "@/icons/UserPlusIcon";
 import { useEffect, useState } from "react";
 import UserCheckIcon from "@/icons/UserCheckIcon";
-import ThemeSwitch from "@/components/misc/ThemeSwitch";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import Settings from "@/components/misc/Settings";
 

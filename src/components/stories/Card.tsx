@@ -1,8 +1,20 @@
 import { forwardRef } from "react";
 
-const Card = forwardRef<HTMLDivElement, { onMouseDown: React.MouseEventHandler<HTMLDivElement>, onMouseUp: React.MouseEventHandler<HTMLDivElement>, children: React.ReactNode, padding?: boolean }>(({ children, onMouseDown, onMouseUp, padding }, ref) => {  
+interface CardProps {
+  children: React.ReactNode;
+  onMouseDown?: React.MouseEventHandler<HTMLDivElement>;
+  onMouseUp?: React.MouseEventHandler<HTMLDivElement>;
+  padding?: boolean;
+}
+
+const Card = forwardRef<HTMLDivElement, CardProps>(({ children, onMouseDown, onMouseUp, padding }, ref) => {
   return (
-    <div ref={ref} onMouseDown={onMouseDown} onMouseUp={onMouseUp} className={`flex relative min-w-full max-w-full h-full flex-col gap-2 rounded-md text-pretty bg-white dark:bg-[#343434] ${padding ? "p-2" : ""}`}>
+    <div
+      ref={ref}
+      onMouseDown={onMouseDown}
+      onMouseUpCapture={onMouseUp}
+      className={`relative flex h-full min-w-full max-w-full flex-col gap-2 overflow-y-auto text-pretty rounded-md bg-white dark:bg-[#343434] ${padding ? "p-2" : ""}`}
+    >
       {children}
     </div>
   );

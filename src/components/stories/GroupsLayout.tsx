@@ -1,12 +1,12 @@
 "use client";
 import React, { useCallback, useContext, useEffect, useLayoutEffect, useRef } from "react";
 import useOnWindowResize from "@/misc/useOnWindowResize";
-import { StoryGroupsContext } from "@/components/stories/StoryGroupsContext";
 import { StoryGroup } from "@/misc/Constants";
 import { StoryGroupContextProvider } from "@/components/stories/StoryGroupContext";
+import { StoryGroupsContext } from "@/components/stories/StoryGroupsContext";
 
 export default function GroupsLayout() {
-  const { activeStoryGroup, storyCategory, activeStoryGroupIndex } = useContext(StoryGroupsContext);
+  const {activeStoryCategory, activeStoryGroupIndex} = useContext(StoryGroupsContext);
 
   const storyGroupsRefs = useRef<HTMLDivElement[]>([]);
   const groupsLayoutContainerRef = useRef<HTMLDivElement | null>(null);
@@ -28,9 +28,8 @@ export default function GroupsLayout() {
   }, [updateLayoutOffset]);
 
   useEffect(() => {
-    window.history.replaceState(null, "", activeStoryGroup.getFullUrl());
     updateLayoutOffset();
-  }, [activeStoryGroup, updateLayoutOffset]);
+  }, [activeStoryGroupIndex, updateLayoutOffset]);
 
   useEffect(() => {
     // Animate the scroll only after the component has been mounted. Avoid animating the scroll on page render
@@ -44,11 +43,10 @@ export default function GroupsLayout() {
   return (
     <div ref={groupsLayoutContainerRef} className="flex h-dvh max-h-dvh w-full max-w-full flex-col justify-center overflow-hidden bg-black px-2 py-1 sm:bg-[#1a1a1a] sm:py-3">
       <div ref={groupsLayoutRef} className="flex h-full max-h-full flex-row data-[animate]:transition-transform data-[animate]:duration-500">
-        {storyCategory.storyGroups.map((storyGroup: StoryGroup, storyGroupIndex: number) => (
-          <StoryGroupContextProvider storyGroupIndex={storyGroupIndex!} storyGroup={storyGroup!} key={storyGroupIndex}>
+        {activeStoryCategory.storyGroups.map((storyGroup: StoryGroup, storyGroupIndex: number) => (
+          <StoryGroupContextProvider key={storyGroupIndex} storyGroup={storyGroup!} storyGroupIndex={storyGroupIndex!}>
             {React.cloneElement(storyGroup.component, {
               ref: (el: HTMLDivElement) => (storyGroupsRefs.current[storyGroupIndex] = el),
-              storyGroupIndex: storyGroupIndex,
             })}
           </StoryGroupContextProvider>
         ))}
