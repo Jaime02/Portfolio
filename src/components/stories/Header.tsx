@@ -5,6 +5,7 @@ import { StoryGroup } from "@/misc/Constants";
 import { useContext } from "react";
 import { StoryGroupsContext } from "@/components/stories/StoryGroupsContext";
 import { StoryGroupContext } from "@/components/stories/StoryGroupContext";
+import Link from "next/link";
 
 interface Props {
   floatingHeader: boolean;
@@ -29,9 +30,9 @@ export default function Header({ floatingHeader }: Props) {
               <PauseIcon />
             </button>
           )}
-          <a href="/" aria-label="Close">
+          <Link href="/" aria-label="Close">
             <CloseIcon />
-          </a>
+          </Link>
         </>
       )}
     </div>

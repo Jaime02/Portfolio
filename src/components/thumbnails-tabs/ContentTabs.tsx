@@ -34,6 +34,11 @@ export default function ContentTabs() {
     }
   }, [activeTabIndex]);
 
+  const updateTabsContainerHeight = useCallback(() => {
+    let parentHeight = Math.max(...tabElements.current.map((tab) => tab.offsetHeight));
+    tabsContainerLayoutRef.current!.style.height = `${parentHeight}px`;
+  }, [tabElements]);
+
   useOnWindowResize(() => {
     updateTabsContainerHeight();
     updateLayoutOffset();
@@ -76,12 +81,7 @@ export default function ContentTabs() {
   useLayoutEffect(() => {
     updateTabsContainerHeight();
     updateLayoutOffset();
-  }, [updateLayoutOffset]);
-
-  const updateTabsContainerHeight = useCallback(() => {
-    let parentHeight = Math.max(...tabElements.current.map((tab) => tab.offsetHeight));
-    tabsContainerLayoutRef.current!.style.height = `${parentHeight}px`;
-  }, [tabElements]);
+  }, [updateLayoutOffset, updateTabsContainerHeight]);
 
   function handleAnchorClick(tabId: string, event: React.MouseEvent<HTMLAnchorElement>) {
     // Prevent default behavior. By default, it always sets the hash in the URL
@@ -120,7 +120,7 @@ export default function ContentTabs() {
           );
         })}
       </div>
-      <div ref={tabsContainerLayoutRef} className="w-full overflow-hidden relative">
+      <div ref={tabsContainerLayoutRef} className="relative w-full overflow-hidden">
         {storyCategories.map((tab, index) => (
           <ThumbnailContextProvider key={index} onFocus={(event: React.FocusEvent<HTMLDivElement>) => thumbnailOnFocus(event, tab.getId())}>
             {React.cloneElement(tab.storyTabThumbnails, {
