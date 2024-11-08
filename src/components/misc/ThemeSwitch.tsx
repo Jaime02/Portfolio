@@ -1,14 +1,14 @@
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { useTheme } from "next-themes";
-import { useState, useEffect } from "react";
-import Image from "next/image";
+import { useState, useEffect, useContext } from "react";
 import DarkThemeIcon from "@/icons/DarkThemeIcon";
 import LightThemeIcon from "@/icons/LightThemeIcon";
+import { SettingsContext } from "@/lib/SettingsContext";
 
 export default function ThemeSwitch() {
+  const { theme, setTheme } = useContext(SettingsContext);
   const [isMounted, setIsMounted] = useState(false);
-  const { resolvedTheme, setTheme } = useTheme();
 
   useEffect(() => {
     setIsMounted(true);
@@ -23,7 +23,7 @@ export default function ThemeSwitch() {
       <Label htmlFor="theme-switch" aria-labelledby="theme-switch">
         <LightThemeIcon/>
       </Label>
-      <Switch id="theme-switch" checked={resolvedTheme === "dark"} onCheckedChange={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")} />
+      <Switch id="theme-switch" checked={theme === "dark"} onCheckedChange={() => setTheme(theme === "dark" ? "light" : "dark")} />
       <Label htmlFor="theme-switch" aria-labelledby="theme-switch">
         <DarkThemeIcon/> 
       </Label>

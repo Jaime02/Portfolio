@@ -1,4 +1,4 @@
-import { StoryGroupContext } from "@/components/stories/StoryGroupContext";
+import { StoryGroupContext } from "@/lib/StoryGroupContext";
 import { useContext } from "react";
 
 export default function GoToNextStoryArrow({ onClick }: { onClick?: () => void }) {

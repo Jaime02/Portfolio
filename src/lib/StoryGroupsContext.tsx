@@ -10,8 +10,6 @@ const StoryGroupsContext = createContext<any>({
   goToPreviousStoryGroup: () => {},
   inFirstGroup: false,
   inLastGroup: false,
-  setPaused: (paused: boolean) => {},
-  paused: true,
 });
 
 interface StoryGroupsContextProviderProps {
@@ -26,7 +24,6 @@ const StoryGroupsContextProvider = ({ children }: StoryGroupsContextProviderProp
   const [_, activeStoryCategory] = getStoryCategoryByUrl(categoryUrl);
   const [initialStoryGroupIndex, __] = getStoryGroupByUrl(activeStoryCategory, groupUrl);
   
-  const [paused, setPaused] = useState(true);
   const [activeStoryGroupIndex, setActiveStoryGroupIndex] = useState(initialStoryGroupIndex);
 
   const inLastGroup = useMemo(() => activeStoryGroupIndex === activeStoryCategory.storyGroups.length - 1, [activeStoryCategory.storyGroups.length, activeStoryGroupIndex]);
@@ -34,11 +31,10 @@ const StoryGroupsContextProvider = ({ children }: StoryGroupsContextProviderProp
 
   useEffect(() => {
     const storyGroup = getStoryGroupByIndex(activeStoryCategory, activeStoryGroupIndex);
-    // router.push(`${storyGroup.getFullUrl()}`);
     if (storyGroup.getFullUrl() === window.location.pathname) {
       return;
     }
-
+    
     window.history.replaceState(null, "", `${storyGroup.getFullUrl()}`);
   }, [activeStoryCategory, activeStoryGroupIndex])
   
@@ -70,8 +66,6 @@ const StoryGroupsContextProvider = ({ children }: StoryGroupsContextProviderProp
         goToPreviousStoryGroup,
         inFirstGroup,
         inLastGroup,
-        paused,
-        setPaused
       }}
     >
       {children}

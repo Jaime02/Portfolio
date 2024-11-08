@@ -1,4 +1,4 @@
-import { StoryGroupsContext } from "@/components/stories/StoryGroupsContext";
+import { StoryGroupsContext } from "@/lib/StoryGroupsContext";
 import { StoryGroup } from "@/misc/Constants";
 import React from "react";
 import { createContext, useContext, useMemo } from "react";

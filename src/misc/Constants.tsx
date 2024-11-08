@@ -165,7 +165,7 @@ export const OthersStoryGroups: StoryGroup[] = [
   new OthersStoryGroup({
     title: "Curriculum Vitae",
     component: <CV />,
-    tabThumbnail: <TabThumbnail title="Curriculum Vitae" src="/images/CVIcon.svg" href="/others/cv" padding={true} />,
+    tabThumbnail: <TabThumbnail title="Curriculum Vitae" src="/images/CVIcon.svg" href="/others/curriculum-vitae" padding={true} />,
     headerThumbnail: <HeaderThumbnail src="/images/CVIcon.svg" />,
   }),
   new OthersStoryGroup({

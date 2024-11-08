@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import "@/app/globals.css";
 import { ThemeProvider } from "next-themes";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { SettingsContextProvider } from "@/lib/SettingsContext";
 
 export const metadata: Metadata = {
   title: "Jaime Resano | Personal website",
@@ -22,7 +23,9 @@ export default function BaseLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className={`flex min-h-dvh flex-col transition-colors duration-300 ease-linear`}>
         <ThemeProvider attribute="class">
-          <TooltipProvider delayDuration={100}>{children}</TooltipProvider>
+          <TooltipProvider delayDuration={100}>
+            <SettingsContextProvider>{children}</SettingsContextProvider>
+          </TooltipProvider>
         </ThemeProvider>
       </body>
     </html>

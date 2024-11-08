@@ -3,16 +3,17 @@ import PlayIcon from "@/icons/PlayIcon";
 import PauseIcon from "@/icons/PauseIcon";
 import { StoryGroup } from "@/misc/Constants";
 import { useContext } from "react";
-import { StoryGroupsContext } from "@/components/stories/StoryGroupsContext";
-import { StoryGroupContext } from "@/components/stories/StoryGroupContext";
+import { StoryGroupsContext } from "@/lib/StoryGroupsContext";
+import { StoryGroupContext } from "@/lib/StoryGroupContext";
 import Link from "next/link";
+import { SettingsContext } from "@/lib/SettingsContext";
 
 interface Props {
   floatingHeader: boolean;
 }
 
 export default function Header({ floatingHeader }: Props) {
-  const { paused, setPaused } = useContext(StoryGroupsContext);
+  const { pausedStories, setPausedStories } = useContext(SettingsContext);
   const { title, headerThumbnail, active } = useContext(StoryGroupContext);
 
   return (
@@ -21,12 +22,12 @@ export default function Header({ floatingHeader }: Props) {
       <h1 className="h-fit flex-1 text-left leading-none text-white">{title}</h1>
       {active && (
         <>
-          {paused ? (
-            <button aria-label="Resume" onClick={() => setPaused(false)}>
+          {pausedStories ? (
+            <button aria-label="Resume" onClick={() => setPausedStories(false)}>
               <PlayIcon />
             </button>
           ) : (
-            <button aria-label="Pause" onClick={() => setPaused(true)}>
+            <button aria-label="Pause" onClick={() => setPausedStories(true)}>
               <PauseIcon />
             </button>
           )}
