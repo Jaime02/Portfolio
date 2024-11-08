@@ -22,8 +22,17 @@ const Hiberus = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
           </Link>
           .
         </p>
+        <figure>
+          <Image src="/images/HiberusFacade.jpg" alt="Hiberus office" width={800} height={800} />
+          <figcaption className="text-center italic">Hiberus headquarters in Zaragoza</figcaption>
+        </figure>
+      </Card>
+      <Card>
         <p>
-          During the internship, I developed a internal tool for the company. It was a web app intended to be used by the HR department in order to manage candidates and job offers. It was a{" "}
+          During the internship, I developed a internal tool for the company. It was a web app intended to be used by the HR department in order to manage candidates and job offers.
+        </p>
+        <p>
+          It was a{" "}
           <a href="https://dotnet.microsoft.com/en-us/apps/aspnet/mvc" target="_blank" className="styled-a">
             ASP.NET MVC
           </a>{" "}

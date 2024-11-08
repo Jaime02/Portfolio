@@ -43,25 +43,6 @@ const QtProjects = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => 
           code you write can be executed on Windows, MacOS and Linux!
         </p>
         <p>Keep navigation in order to discover some of the projects I have done 😄</p>
-        <p>Pito</p>
-        <p>Pito</p>
-        <p>Pito</p>
-        <p>Pito</p>
-        <p>Pito</p>
-        <p>Pito</p>
-        <p>Pito</p>
-        <p>Pito</p>
-        <p>Pito</p>
-        <p>Pito</p>
-        <p>Pito</p>
-        <p>Pito</p>
-        <p>Pito</p>
-        <p>Pito</p>
-        <p>Pito</p>
-        <p>Pito</p>
-        <p>Pito</p>
-        <p>Pito</p>
-        
       </Card>
       <Card>
         <div className="rounded-lg bg-gray-300 p-2 text-xl font-bold dark:bg-slate-900">

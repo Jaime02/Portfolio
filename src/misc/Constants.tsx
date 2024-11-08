@@ -5,7 +5,6 @@ import TheQtCompany from "@/app/(stories)/experiences/TheQtCompany";
 import Upna from "@/app/(stories)/experiences/Upna";
 import CoolPictures from "@/app/(stories)/others/CoolPictures";
 import MyLinks from "@/app/(stories)/others/MyLinks";
-import DownloadCV from "@/app/(stories)/others/DownloadCV";
 import PaintFilterManager from "@/app/(stories)/projects/PaintFilterManager";
 import QtProjects from "@/app/(stories)/projects/QtProjects";
 import ThisWebsite from "@/app/(stories)/projects/ThisWebsite";
@@ -23,6 +22,7 @@ import QtThumbnail from "@/components/thumbnails-tabs/QtThumbnail";
 import Crispin from "@/app/(stories)/others/Crispin";
 import CoolPicturesThumbnail from "@/components/thumbnails-tabs/CoolPicturesThumbnail";
 import MyLinksThumbnail from "@/components/thumbnails-tabs/MyLinksThumbnail";
+import CV from "@/app/(stories)/others/CV";
 
 export const SMALL_BREAKPOINT_WIDTH = 640;
 export const MOUSE_PRESS_DURATION_THRESHOLD = 100;
@@ -163,9 +163,9 @@ export const ExperiencesStoryGroups: StoryGroup[] = [
 
 export const OthersStoryGroups: StoryGroup[] = [
   new OthersStoryGroup({
-    title: "Download CV",
-    component: <DownloadCV />,
-    tabThumbnail: <TabThumbnail title="Download CV" src="/images/CVIcon.svg" href="/others/download-cv" padding={true} />,
+    title: "Curriculum Vitae",
+    component: <CV />,
+    tabThumbnail: <TabThumbnail title="Curriculum Vitae" src="/images/CVIcon.svg" href="/others/cv" padding={true} />,
     headerThumbnail: <HeaderThumbnail src="/images/CVIcon.svg" />,
   }),
   new OthersStoryGroup({
@@ -177,7 +177,7 @@ export const OthersStoryGroups: StoryGroup[] = [
   new OthersStoryGroup({
     title: "Crispin",
     component: <Crispin />,
-    tabThumbnail: <TabThumbnail title="Crispin" src="/images/CrispinThumbnail.jpg" href="/others/crispin" />,
+    tabThumbnail: <TabThumbnail title="Crispín" src="/images/CrispinThumbnail.jpg" href="/others/crispin" />,
     headerThumbnail: <HeaderThumbnail src="/images/CrispinSquareThumbnail.jpg" />,
   }),
   new OthersStoryGroup({
@@ -222,14 +222,22 @@ export function getStoryCategoryByUrl(url: string): [number, StoryGroupCategory]
   let index = storyCategories.findIndex((storyCategory) => storyCategory.name.toLowerCase() === url.toLowerCase());
   if (index === -1) {
     console.error("Invalid story category url:", url);
+    index = 0;
   }
   return [index, storyCategories[index]];
 }
 
 export function getStoryGroupByUrl(category: StoryGroupCategory, url: string): [number, StoryGroup] { 
-  let index = category.storyGroups.findIndex((storyGroup) => storyGroup.getGroupUrl().toLowerCase() === url.toLowerCase());
+  let index;
+  if (!url) {
+    index = 0;
+  } else {
+    index = category.storyGroups.findIndex((storyGroup) => storyGroup.getGroupUrl().toLowerCase() === url.toLowerCase());
+  }
+  
   if (index === -1) {
     console.error("Invalid story group url:", url);
+    index = 0;
   }
 
   return [index, category.storyGroups[index]];

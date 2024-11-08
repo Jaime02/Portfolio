@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, forwardRef, useEffect, useCallback, useImperativeHandle, useLayoutEffect, useContext } from "react";
+import React, { useState, useRef, forwardRef, useEffect, useCallback, useImperativeHandle, useLayoutEffect, useContext, useMemo } from "react";
 import NextArrow from "@/icons/NextArrow";
 import PreviousArrow from "@/icons/PreviousArrow";
 import BottomBar from "@/components/stories/BottomBar";
@@ -9,6 +9,8 @@ import ProgressBar from "@/components/stories/ProgressBar";
 import useOnWindowResize from "@/misc/useOnWindowResize";
 import { StoryGroupContext } from "@/components/stories/StoryGroupContext";
 import { StoryGroupsContext } from "@/components/stories/StoryGroupsContext";
+import GoToPreviousStoryArrow from "@/components/stories/GoToPreviousStoryArrow";
+import GoToNextStoryArrow from "@/components/stories/GoToNextStoryArrow";
 
 export interface CardsLayoutProps {
   children?: React.ReactNode[] | React.ReactNode;
@@ -29,7 +31,7 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, fo
   let cards = React.Children.toArray(children);
   let storiesCount = cards.length;
   
-  const {inFirstGroup, inLastGroup, paused, setPaused, goToNextStoryGroup, goToPreviousStoryGroup, setActiveStoryGroupIndex} = useContext(StoryGroupsContext);
+  const {inLastGroup, paused, setPaused, goToNextStoryGroup, goToPreviousStoryGroup, setActiveStoryGroupIndex} = useContext(StoryGroupsContext);
   const {active, storyGroupIndex } = useContext(StoryGroupContext);
 
   const storiesContainerRef = useRef<HTMLDivElement>(null);
@@ -221,13 +223,14 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, fo
     setPaused(false);
   }
 
+
   return (
     <div
       className={`flex h-full max-w-full flex-row items-center sm:gap-4 ${!active ? "scale-50 opacity-50" : ""} transition-transform duration-300 ease-in-out ${font ? font : ""}`}
       onMouseUp={selectThisGroup}
       ref={ref}
     >
-      {<PreviousArrow extraClasses={`sm:shrink-0 invisible ${active && (hash !== 0 || !inFirstGroup) ? "sm:visible" : ""}`} onClick={goToPreviousStory} />}
+      <GoToPreviousStoryArrow onClick={goToPreviousStory} />
       <div
         className={`${floatingHeader ? "relative" : ""} flex overflow-x-hidden aspect-[9/16] h-full max-h-full max-w-full flex-col rounded-md bg-black ${!active ? "pointer-events-none" : ""}`}
       >
@@ -237,12 +240,13 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, fo
         </div>
         <div
           ref={storiesContainerRef}
-          className={`${floatingHeader ? "h-full w-full" : ""} flex grow flex-row overflow-x-visible items-center gap-2 data-[animate]:transition-transform data-[animate]:duration-500`}
+          className={`${floatingHeader ? "h-full w-full" : ""} min-h-0 flex grow flex-row items-center gap-2 data-[animate]:transition-transform data-[animate]:duration-500`}
         >
           {cards.map((child, index) =>
             React.cloneElement(child as React.ReactElement<any>, {
               ref: (el: HTMLDivElement) => (storiesRefs.current[index] = el),
               key: index,
+              active: active && hash === index,
               padding: !floatingHeader,
               onMouseDown: navigationMouseDown,
               onMouseUp: navigationMouseUp
@@ -251,7 +255,7 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, fo
         </div>
         {active && <BottomBar floatingHeader={floatingHeader!} />}
       </div>
-      {<NextArrow extraClasses={`sm:shrink-0 invisible ${active ? "sm:visible" : ""}`} onClick={goToNextStory} />}
+      <GoToNextStoryArrow onClick={goToNextStory} />
     </div>
   );
 });

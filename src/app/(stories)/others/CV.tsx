@@ -3,7 +3,7 @@ import CardsLayout, { CardsLayoutProps } from "@/components/stories/CardsLayout"
 import { forwardRef } from "react";
 import Image from "next/image";
 
-const DownloadCV = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
+const CV = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
   return (
     <CardsLayout {...props} ref={ref}>
       <Card>
@@ -17,5 +17,5 @@ const DownloadCV = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => 
   );
 });
 
-DownloadCV.displayName = "My links";
-export default DownloadCV;
+CV.displayName = "Curriculum Vitae";
+export default CV;

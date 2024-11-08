@@ -25,7 +25,7 @@
 
   .styled-a {
     @apply underline hover:text-blue-800 dark:hover:text-blue-500;
-  }  
+  }
 }
 
 

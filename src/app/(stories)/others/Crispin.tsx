@@ -8,7 +8,7 @@ const Crispin = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
   let presentationSign = (
     <div className="absolute left-[51%] top-[16%] z-10 flex w-[90%] translate-x-[-50%] translate-y-[-50%] flex-col justify-center rounded-md p-1 backdrop-blur-[2px]">
       <p className="text-pretty font-bold text-black sm:text-xl">
-        This is my dog, <span className="font-extrabold">Crispin</span>. He is a handsome and loyal dog. It is a mix between an American Standford and an Alano Español{" "}
+        This is my dog, <span className="font-extrabold">Crispín</span>. He is a handsome and loyal dog. It is a mix between an American Standford and an Alano Español{" "}
         <SpanishFlagIcon extraClasses="size-4 inline" />
       </p>
     </div>

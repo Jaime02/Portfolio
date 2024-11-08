@@ -12,7 +12,7 @@ const Freelancing = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) =>
           I started working as a{" "}
           <Tooltip>
             <TooltipTrigger>freelance</TooltipTrigger>
-            <TooltipContent>Someone who does particular pieces of work for different organizations, rather than working all the time for a single organization</TooltipContent>
+            <TooltipContent>Someone who does particular pieces of work for different organizations</TooltipContent>
           </Tooltip>{" "}
           in 2021. It was a great way of learn by doing doing projects and getting paid at same time. I worked with different clients and even small companies. First, I joined{" "}
           <a href="https://www.fiverr.com/" target="_blank" className="styled-a">

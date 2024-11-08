@@ -6,7 +6,7 @@ import { StoryGroupContextProvider } from "@/components/stories/StoryGroupContex
 import { StoryGroupsContext } from "@/components/stories/StoryGroupsContext";
 
 export default function GroupsLayout() {
-  const {activeStoryCategory, activeStoryGroupIndex} = useContext(StoryGroupsContext);
+  const { activeStoryCategory, activeStoryGroupIndex } = useContext(StoryGroupsContext);
 
   const storyGroupsRefs = useRef<HTMLDivElement[]>([]);
   const groupsLayoutContainerRef = useRef<HTMLDivElement | null>(null);
