@@ -187,7 +187,7 @@ export const OthersStoryGroups: StoryGroup[] = [
   new OthersStoryGroup({
     title: "Cool pictures",
     component: <CoolPictures />,
-    tabThumbnail: <TabThumbnail title="Neuschwanstein castle" src="/images/NeuschwansteinCastle.jpg" href="/others/cool-pictures" />,
+    tabThumbnail: <TabThumbnail title="Cool pictures" src="/images/NeuschwansteinCastle.jpg" href="/others/cool-pictures" />,
     headerThumbnail: <HeaderThumbnail src="/images/icons/CameraIcon.svg" />,
     isBestFriends: true,
   }),
