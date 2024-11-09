@@ -20,7 +20,6 @@ import React from "react";
 import LiveGL from "@/app/(stories)/projects/LiveGL";
 import QtThumbnail from "@/components/thumbnails-tabs/QtThumbnail";
 import Crispin from "@/app/(stories)/others/Crispin";
-import CoolPicturesThumbnail from "@/components/thumbnails-tabs/CoolPicturesThumbnail";
 import MyLinksThumbnail from "@/components/thumbnails-tabs/MyLinksThumbnail";
 import CV from "@/app/(stories)/others/CV";
 

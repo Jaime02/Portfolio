@@ -41,7 +41,7 @@ const SettingsContextProvider = ({children} : {children: React.ReactNode}) => {
     } else {
       setPausedStories(previousPauseState.current);
     }
-  }, [temporalPause]);
+  }, [temporalPause, pausedStories]);
 
   return (
     <SettingsContext.Provider

@@ -1,7 +1,5 @@
 "use client";
 import React, { useState, useRef, forwardRef, useEffect, useCallback, useImperativeHandle, useLayoutEffect, useContext, useMemo } from "react";
-import NextArrow from "@/icons/NextArrow";
-import PreviousArrow from "@/icons/PreviousArrow";
 import BottomBar from "@/components/stories/BottomBar";
 import Header from "@/components/stories/Header";
 import * as Constants from "@/misc/Constants";
@@ -123,7 +121,7 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, fo
     } else {
       setStoryDuration(Constants.DEFAULT_STORY_DURATION);
     }
-  }, [active, hash, updateLayoutOffset]);
+  }, [active, hash, updateLayoutOffset, pausedStories]);
 
   // Pause the video when active or pausedStories changes
   useEffect(() => {
