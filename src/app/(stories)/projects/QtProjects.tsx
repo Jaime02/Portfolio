@@ -4,6 +4,7 @@ import GithubRepoLink from "@/components/story-widgets/GithubRepoLink";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { QtFont } from "@/misc/fonts";
 import Image from "next/image";
+import Link from "next/link";
 import { forwardRef } from "react";
 
 const QtProjects = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
@@ -22,7 +23,11 @@ const QtProjects = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => 
             <TooltipTrigger>GUI</TooltipTrigger>
             <TooltipContent>Graphical User Interface</TooltipContent>
           </Tooltip>{" "}
-          framework. I have been using it for many years in my personal and professional projects. I love the Python{" "}
+          framework. Is open-source. Is maintained by{" "}
+          <Link href="https://www.qt.io/" className="styled-a" target="_blank">
+            The Qt Company
+          </Link>{" "}
+          and many other individual contributors.I have been using it for many years in my personal and professional projects. I love the Python{" "}
           <Tooltip>
             <TooltipTrigger>bindings</TooltipTrigger>
             <TooltipContent>Allows the usage of the C++ library from Python</TooltipContent>
@@ -107,10 +112,8 @@ const QtProjects = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => 
           </a>{" "}
           algorithm.
         </p>
-        <p>
-          The user can paint numbers in a black and white canvas using his mouse. Afterwards, the program will use the algorithm to identify the number drawn.
-        </p>
-        <Image src="/images/KNN.webp" width="800" height="800" alt="QKNNPainter" className="w-[60%] mx-auto select-none" draggable="false" priority={true} />
+        <p>The user can paint numbers in a black and white canvas using his mouse. Afterwards, the program will use the algorithm to identify the number drawn.</p>
+        <Image src="/images/KNN.webp" width="800" height="800" alt="QKNNPainter" className="mx-auto w-[60%] select-none" draggable="false" priority={true} />
         <GithubRepoLink href="https://github.com/Jaime02/QKNNPainter" />
       </Card>
     </CardsLayout>

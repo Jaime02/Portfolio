@@ -32,7 +32,7 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, fo
 
   const { inLastGroup, goToNextStoryGroup, goToPreviousStoryGroup, setActiveStoryGroupIndex } = useContext(StoryGroupsContext);
   const { active, storyGroupIndex } = useContext(StoryGroupContext);
-  const { pausedStories, setTemporalPause, setPausedStories } = useContext(SettingsContext);
+  const { pausedStories, setTemporalPause } = useContext(SettingsContext);
 
   const storiesContainerRef = useRef<HTMLDivElement>(null);
   const storiesRefs = useRef<HTMLDivElement[]>([]);
@@ -115,9 +115,6 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, fo
       video.onloadedmetadata = () => {
         setStoryDuration(video.duration * 1000);
       };
-      if (!pausedStories) {
-        video.play();
-      }
     } else {
       setStoryDuration(Constants.DEFAULT_STORY_DURATION);
     }

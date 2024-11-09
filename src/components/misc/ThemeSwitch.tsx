@@ -20,11 +20,11 @@ export default function ThemeSwitch() {
 
   return (
     <div className="flex items-center space-x-2">
-      <Label htmlFor="theme-switch" aria-labelledby="theme-switch">
+      <Label htmlFor="theme-switch" aria-labelledby="theme-switch" className="hover:cursor-pointer">
         <LightThemeIcon/>
       </Label>
       <Switch id="theme-switch" checked={theme === "dark"} onCheckedChange={() => setTheme(theme === "dark" ? "light" : "dark")} />
-      <Label htmlFor="theme-switch" aria-labelledby="theme-switch">
+      <Label htmlFor="theme-switch" aria-labelledby="theme-switch" className="hover:cursor-pointer">
         <DarkThemeIcon/> 
       </Label>
     </div>

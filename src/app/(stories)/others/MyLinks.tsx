@@ -48,7 +48,7 @@ const MyLinks = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
               onClick={onlyfansHidden && index == 3 ? showOnlyfans : () => {}}
             >
               {titledIcon.icon}
-              <h1 className="text-lg bg-black w-full">{titledIcon.title}</h1>
+              <h1 className="text-lg bg-black text-white w-full">{titledIcon.title}</h1>
             </a>
           ))}
         </div>

@@ -27,7 +27,7 @@ const CoolPictures = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) =
           <video
             width={0}
             height={0}
-            className="max-h-full w-full"
+            className="max-h-full w-full my-auto"
             muted={mutedStories}
             loop
           >

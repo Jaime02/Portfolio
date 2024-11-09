@@ -22,7 +22,7 @@ export default function Poll({ title, options, correctAnswerIndex, messagesOnAns
 
   return (
     <div
-      className="mx-auto flex flex-col items-center gap-2 overflow-clip rounded-lg bg-gray-100 sm:my-2"
+      className="mx-auto flex flex-col items-center gap-2 overflow-clip rounded-lg bg-gray-100 sm:my-2 border-[1px] border-black shadow-xl"
       onMouseUp={(event) => {
         event.stopPropagation();
       }}

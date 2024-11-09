@@ -20,7 +20,7 @@ const SettingsContextProvider = ({children} : {children: React.ReactNode}) => {
   const { resolvedTheme, setTheme } = useTheme();
   
   const [pausedStories, setPausedStories] = useState(true);
-  const [temporalPause, setTemporalPause] = useState(false);
+  const [temporalPause, setTemporalPause] = useState(null);
   
   const previousPauseState = useRef(pausedStories);
 
@@ -28,6 +28,7 @@ const SettingsContextProvider = ({children} : {children: React.ReactNode}) => {
 
   useEffect(() => {
     setMutedStories(window.localStorage.getItem("mutedStories") === "true");
+    setPausedStories(window.localStorage.getItem("pausedStories") === "true");
   }, []);
 
   useEffect(() => {
@@ -35,11 +36,17 @@ const SettingsContextProvider = ({children} : {children: React.ReactNode}) => {
   }, [mutedStories]);
 
   useEffect(() => {
+    window.localStorage.setItem("pausedStories", pausedStories.toString());
+  }, [pausedStories]);
+
+  useEffect(() => {
     if (temporalPause) {
       previousPauseState.current = pausedStories;
       setPausedStories(true);
-    } else {
+      setTemporalPause(null);
+    } else if (temporalPause === false) {
       setPausedStories(previousPauseState.current);
+      setTemporalPause(null);
     }
   }, [temporalPause, pausedStories]);
 
