@@ -1,10 +1,13 @@
 import Card from "@/components/stories/Card";
 import CardsLayout, { CardsLayoutProps } from "@/components/stories/CardsLayout";
-import { forwardRef, useRef } from "react";
+import { forwardRef, useContext, useRef } from "react";
 import { StoryVideo } from "@/misc/Constants";
 import StoryLocation from "@/components/story-widgets/StoryLocation";
+import { SettingsContext } from "@/lib/SettingsContext";
 
 const CoolPictures = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
+  const { mutedStories } = useContext(SettingsContext);
+  
   let videos = [
     new StoryVideo("/videos/Castle.mp4", <StoryLocation extraContainerClasses="left-[50%] top-[80%]" locationUrl="https://maps.app.goo.gl/4VmokxJJHsCYEdJK9" text="Neuschwanstein castle"/>),
     new StoryVideo("/videos/OPmobilityGolf.mp4"),
@@ -25,7 +28,7 @@ const CoolPictures = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) =
             width={0}
             height={0}
             className="max-h-full w-full"
-            muted
+            muted={mutedStories}
             loop
           >
             <source src={video.url} type="video/mp4" />

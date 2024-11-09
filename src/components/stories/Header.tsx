@@ -7,6 +7,8 @@ import { StoryGroupsContext } from "@/lib/StoryGroupsContext";
 import { StoryGroupContext } from "@/lib/StoryGroupContext";
 import Link from "next/link";
 import { SettingsContext } from "@/lib/SettingsContext";
+import SoundCheckbox from "@/components/misc/SoundCheckbox";
+import BestFriends from "@/components/story-widgets/BestFriends";
 
 interface Props {
   floatingHeader: boolean;
@@ -14,14 +16,16 @@ interface Props {
 
 export default function Header({ floatingHeader }: Props) {
   const { pausedStories, setPausedStories } = useContext(SettingsContext);
-  const { title, headerThumbnail, active } = useContext(StoryGroupContext);
+  const { isBestFriends, title, headerThumbnail, active } = useContext(StoryGroupContext);
 
   return (
     <div className={`flex w-full flex-row items-center gap-2 ${!floatingHeader ? "bg-ig-gray dark:bg-black" : ""}`}>
       {headerThumbnail}
-      <h1 className="h-fit flex-1 text-left leading-none text-white">{title}</h1>
+      <h1 className="h-fit flex-1 leading-none text-white">{title}</h1>
       {active && (
         <>
+          {isBestFriends && <BestFriends />}
+          <SoundCheckbox />
           {pausedStories ? (
             <button aria-label="Resume" onClick={() => setPausedStories(false)}>
               <PlayIcon />
@@ -31,7 +35,7 @@ export default function Header({ floatingHeader }: Props) {
               <PauseIcon />
             </button>
           )}
-          <Link href="/" aria-label="Close">
+          <Link href="/" aria-label="Close" className="text-white transition-all active:opacity-50">
             <CloseIcon />
           </Link>
         </>

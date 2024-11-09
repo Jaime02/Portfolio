@@ -9,7 +9,8 @@ const StoryGroupContext = createContext<any>({
   active: false,
   title: null,
   headerThumbnail: null,
-  selectMyself: () => {}
+  selectMyself: () => {},
+  isBestFriends: false,
 });
 
 interface StoryGroupContextProviderProps {
@@ -24,6 +25,7 @@ const StoryGroupContextProvider = ({ children, storyGroup, storyGroupIndex }: St
   const active = useMemo(() => activeStoryGroupIndex === storyGroupIndex, [activeStoryGroupIndex, storyGroupIndex]);
   const title = useMemo(() => storyGroup.title, [storyGroup]);
   const headerThumbnail = useMemo(() => storyGroup.headerThumbnail, [storyGroup]);
+  const isBestFriends = useMemo(() => storyGroup.isBestFriends, [storyGroup]);
 
   return (
     <StoryGroupContext.Provider
@@ -32,7 +34,8 @@ const StoryGroupContextProvider = ({ children, storyGroup, storyGroupIndex }: St
         storyGroupIndex,
         active,
         title,
-        headerThumbnail
+        headerThumbnail,
+        isBestFriends
       }}
     >
       {children}

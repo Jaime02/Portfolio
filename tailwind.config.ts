@@ -16,7 +16,8 @@ const config: Config = {
     			sm: "calc(var(--radius) - 4px)"
     		},
     		colors: {
-					"ig-gray": "var(--ig-gray)",
+					"ig-gray": "#dbdbdb",
+					"ig-close-friends": "rgb(28, 209, 79)",
 					"qt-green": "rgb(65, 205, 82)",
 					"op-mobility-blue": "#0e3571",
     			background: "hsl(var(--background))",

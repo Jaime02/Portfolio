@@ -10,7 +10,7 @@ const ThisWebsite = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) =>
       <Card>
         <p>As you can see, this website is a clone of an Instagram profile. I reverse-engineered all the styles of the official page and adapted for achieving this amazing result.</p>
         <p className="font-bold">Features:</p>
-        <ul className="ml-6 list-disc">
+        <ul className="ml-6 list-disc flex flex-col gap-1"> 
           <li>
             Fully{" "}
             <Tooltip>
@@ -20,7 +20,8 @@ const ThisWebsite = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) =>
             design
           </li>
           <li>Dark mode</li>
-          <li>Scroll animations</li>
+          <li>Smooth scroll animations</li>
+          <li>Pure HTML stories</li>
         </ul>
         <Poll
           title="Do you like it?"

@@ -58,6 +58,7 @@ interface StoryGroupProps {
   tabThumbnail: React.ReactElement;
   headerThumbnail: React.ReactElement;
   urlCategoryPrefix?: string;
+  isBestFriends?: boolean;
 }
 
 export abstract class StoryGroup {
@@ -66,12 +67,15 @@ export abstract class StoryGroup {
   tabThumbnail: React.ReactElement;
   headerThumbnail: React.ReactElement;
   urlCategoryPrefix?: string = "";
-  constructor({ title, component, tabThumbnail, headerThumbnail, urlCategoryPrefix }: StoryGroupProps) {
+  isBestFriends: boolean;
+
+  constructor({ title, component, tabThumbnail, headerThumbnail, urlCategoryPrefix, isBestFriends = false }: StoryGroupProps) {
     this.title = title;
     this.component = React.cloneElement(component, { storyGroup: this });
     this.tabThumbnail = tabThumbnail;
     this.headerThumbnail = headerThumbnail;
     this.urlCategoryPrefix = urlCategoryPrefix;
+    this.isBestFriends = isBestFriends;
   }
 
   getGroupUrl() {
@@ -96,8 +100,8 @@ class ExperiencesStoryGroup extends StoryGroup {
 }
 
 class OthersStoryGroup extends StoryGroup {
-  constructor({ title, component, tabThumbnail, headerThumbnail }: StoryGroupProps) {
-    super({ title, component, tabThumbnail, headerThumbnail, urlCategoryPrefix: "others" });
+  constructor({ title, component, tabThumbnail, headerThumbnail, isBestFriends }: StoryGroupProps) {
+    super({ title, component, tabThumbnail, headerThumbnail, isBestFriends, urlCategoryPrefix: "others" });
   }
 }
 
@@ -165,7 +169,7 @@ export const OthersStoryGroups: StoryGroup[] = [
   new OthersStoryGroup({
     title: "Curriculum Vitae",
     component: <CV />,
-    tabThumbnail: <TabThumbnail title="Curriculum Vitae" src="/images/CVIcon.svg" href="/others/curriculum-vitae" padding={true} />,
+    tabThumbnail: <TabThumbnail title="Curriculum Vitae" src="/images/CVPreview.webp" href="/others/curriculum-vitae" padding={true} />,
     headerThumbnail: <HeaderThumbnail src="/images/CVIcon.svg" />,
   }),
   new OthersStoryGroup({
@@ -179,12 +183,14 @@ export const OthersStoryGroups: StoryGroup[] = [
     component: <Crispin />,
     tabThumbnail: <TabThumbnail title="Crispín" src="/images/CrispinThumbnail.jpg" href="/others/crispin" />,
     headerThumbnail: <HeaderThumbnail src="/images/CrispinSquareThumbnail.jpg" />,
+    isBestFriends: true,
   }),
   new OthersStoryGroup({
     title: "Cool pictures",
     component: <CoolPictures />,
-    tabThumbnail: <CoolPicturesThumbnail />,
+    tabThumbnail: <TabThumbnail title="Neuschwanstein castle" src="/images/NeuschwansteinCastle.jpg" href="/others/cool-pictures" />,
     headerThumbnail: <HeaderThumbnail src="/images/icons/CameraIcon.svg" />,
+    isBestFriends: true,
   }),
 ];
 

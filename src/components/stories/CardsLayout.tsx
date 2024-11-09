@@ -34,7 +34,7 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, fo
 
   const { inLastGroup, goToNextStoryGroup, goToPreviousStoryGroup, setActiveStoryGroupIndex } = useContext(StoryGroupsContext);
   const { active, storyGroupIndex } = useContext(StoryGroupContext);
-  const { pausedStories, setPausedStories } = useContext(SettingsContext);
+  const { pausedStories, setTemporalPause, setPausedStories } = useContext(SettingsContext);
 
   const storiesContainerRef = useRef<HTMLDivElement>(null);
   const storiesRefs = useRef<HTMLDivElement[]>([]);
@@ -105,7 +105,10 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, fo
     if (!storiesRefs.current[hash] || !active) {
       return;
     }
-
+    
+    // Pause the previous video if existing
+    currentVideoRef.current?.pause();
+    
     let videoElement = storiesRefs.current[hash];
     let video = videoElement.querySelector("video");
     currentVideoRef.current = video;
@@ -114,6 +117,9 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, fo
       video.onloadedmetadata = () => {
         setStoryDuration(video.duration * 1000);
       };
+      if (!pausedStories) {
+        video.play();
+      }
     } else {
       setStoryDuration(Constants.DEFAULT_STORY_DURATION);
     }
@@ -124,7 +130,6 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, fo
     if (!active) {
       if (currentVideoRef.current) {
         currentVideoRef.current.pause();
-        setPausedStories(true);
       }
       return;
     }
@@ -134,7 +139,7 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, fo
     } else {
       currentVideoRef.current?.play();
     }
-  }, [active, pausedStories, setPausedStories]);
+  }, [active, pausedStories]);
 
   // Story timer effect
   useEffect(() => {
@@ -191,16 +196,7 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, fo
       goToPreviousStory(event);
     }
   }
-
-  function navigationMouseDown(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-    if (!active) {
-      return;
-    }
-
-    setMouseDownTime(Date.now());
-    setPausedStories(true);
-  }
-
+  
   function selectThisGroup() {
     if (active) {
       return;
@@ -210,6 +206,15 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, fo
     setStoryTimer(0);
     setHash(0);
     setActiveStoryGroupIndex(storyGroupIndex);
+  }
+
+  function navigationMouseDown(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    if (!active) {
+      return;
+    }
+
+    setMouseDownTime(Date.now());
+    setTemporalPause(true);
   }
 
   function navigationMouseUp(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
@@ -224,6 +229,7 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, fo
     }
 
     setMouseDownTime(0);
+    setTemporalPause(false);
   }
 
   return (

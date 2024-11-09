@@ -5,7 +5,7 @@ export default function BottomBar({ floatingHeader }: { floatingHeader: boolean 
   return (
     <div inert className={`${floatingHeader ? "absolute bottom-0 z-20" : ""} flex w-full flex-row items-center gap-4 px-4 py-2`}>
       <input
-        className="min-w-0 flex-1 rounded-full border-[1px] border-ig-gray bg-transparent px-4 py-2 text-left placeholder:text-ellipsis placeholder:text-ig-gray hover:border-white placeholder:hover:text-white focus:border-white focus:placeholder:text-white"
+        className="min-w-0 flex-1 rounded-full border-[1px] border-ig-gray bg-transparent px-4 py-2 placeholder:text-ellipsis placeholder:text-ig-gray hover:border-white placeholder:hover:text-white focus:border-white focus:placeholder:text-white"
         placeholder="Reply to Jaime Resano..."
       />
       <HeartIcon />

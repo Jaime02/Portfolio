@@ -1,10 +1,13 @@
 import Card from "@/components/stories/Card";
 import CardsLayout, { CardsLayoutProps } from "@/components/stories/CardsLayout";
-import { forwardRef, useRef } from "react";
+import { forwardRef, useContext, useRef } from "react";
 import SpanishFlagIcon from "@/icons/SpanishFlagIcon";
 import { StoryVideo } from "@/misc/Constants";
+import { SettingsContext } from "@/lib/SettingsContext";
 
 const Crispin = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
+  const { mutedStories } = useContext(SettingsContext);
+  
   let presentationSign = (
     <div className="absolute left-[51%] top-[16%] z-10 flex w-[90%] translate-x-[-50%] translate-y-[-50%] flex-col justify-center rounded-md p-1 backdrop-blur-[2px]">
       <p className="text-pretty font-bold text-black sm:text-xl">
@@ -30,8 +33,8 @@ const Crispin = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
           <video
             width={0}
             height={0}
-            className="max-h-full w-full"
-            muted
+            className="max-h-full w-full my-auto"
+            muted={mutedStories}
             loop
           >
             <source src={video.url} type="video/mp4" />
