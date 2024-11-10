@@ -1,3 +1,5 @@
+"use client";
+
 import { getStoryCategoryByUrl, getStoryGroupByIndex, getStoryGroupByUrl } from "@/misc/Constants";
 import { usePathname } from "next/navigation";
 import { createContext, useCallback, useEffect, useMemo, useState } from "react";

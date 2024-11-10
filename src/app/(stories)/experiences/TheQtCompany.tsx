@@ -1,7 +1,6 @@
 import Card from "@/components/stories/Card";
 import CardsLayout, { CardsLayoutProps } from "@/components/stories/CardsLayout";
 import QtLogo from "@/icons/QtLogo";
-import Image from "next/image";
 import { forwardRef } from "react";
 
 const TheQtCompany = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {

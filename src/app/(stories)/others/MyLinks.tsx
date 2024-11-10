@@ -1,3 +1,5 @@
+"use client";
+
 import Card from "@/components/stories/Card";
 import CardsLayout, { CardsLayoutProps } from "@/components/stories/CardsLayout";
 import GithubIcon from "@/icons/GithubIcon";

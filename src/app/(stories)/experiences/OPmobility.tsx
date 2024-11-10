@@ -2,8 +2,6 @@ import Card from "@/components/stories/Card";
 import CardsLayout, { CardsLayoutProps } from "@/components/stories/CardsLayout";
 import { forwardRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import LinkIcon from "@/icons/LinkIcon";
 import LocalLink from "@/components/stories/LocalLink";
 
 const OPmobility = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
