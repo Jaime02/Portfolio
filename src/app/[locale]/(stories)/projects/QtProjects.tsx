@@ -4,7 +4,7 @@ import GithubRepoLink from "@/components/story-widgets/GithubRepoLink";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { QtFont } from "@/misc/fonts";
 import Image from "next/image";
-import Link from "next/link";
+import {Link} from "@/translations/routing";
 import { forwardRef } from "react";
 
 const QtProjects = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {

@@ -1,0 +1,29 @@
+{
+  "LocaleLayout": {
+    "title": "Jaime Resano | Portfolio",
+    "description": "Jaime Resano Aisa's personal website"
+  },
+  "ProfileContent": {
+    "title": "Profile",
+    "subtitle": "About me",
+    "Jaime Resano face": "Jaime Resano face",
+    "Following": "Following",
+    "This is fake lol": "This is fake lol",
+    "Send message": "Send message",
+    "Sorry, this is fake too": "Sorry, this is fake too",
+    "projects": "projects",
+    "years old": "years old",
+    "followers": "followers",
+    "Welcome to my personal website": "Welcome to my personal website",
+    "Description1": "I am a software engineer with a strong passion for programming and anything related to computers.",
+    "Description2": "In this website you can find my portfolio with the format of an Instagram profile.",
+    "Settings": "Settings"
+  },
+  "Others": "Others",
+  "Experiences": "Experiences",
+  "Projects": "Projects",
+  "Cool pictures": "Cool pictures",
+  "My links": "My links",
+  "Qt projects": "Qt projects",
+  "This website": "This website"
+}

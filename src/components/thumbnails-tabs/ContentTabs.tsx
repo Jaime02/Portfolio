@@ -5,11 +5,15 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react
 import useOnWindowResize from "@/misc/useOnWindowResize";
 import React from "react";
 import { ThumbnailContextProvider } from "@/components/thumbnails-tabs/ThumbnailContext";
+import { usePathname, useRouter } from "@/translations/routing";
 
 export default function ContentTabs() {
   const tabsContainerLayoutRef = useRef<HTMLDivElement>(null);
   const tabElements = useRef<HTMLElement[]>([]);
 
+  const router = useRouter();
+  const pathname = usePathname();
+  
   let initialTabIndex: number = 0;
   let urlHash = window.location.hash.replace("#", "");
   if (urlHash) {
@@ -66,14 +70,15 @@ export default function ContentTabs() {
   }, []);
 
   function updateSelectedTab(tabId: string) {
-    if (tabId === "projects") {
+    let tabIndex = storyCategories.findIndex((tab) => tab.getId() === tabId);
+    if (tabIndex === 0) {
       // Remove the URL hash on the first tab
-      history.replaceState(null, "", window.location.pathname);
+      router.replace(pathname);
     } else {
-      history.replaceState(null, "", `#${tabId}`);
+      router.replace(`${pathname}#${tabId}`);
     }
 
-    setActiveTabIndex(storyCategories.findIndex((tab) => tab.getId() === tabId));
+    setActiveTabIndex(tabIndex);
     updateLayoutOffset();
   }
 

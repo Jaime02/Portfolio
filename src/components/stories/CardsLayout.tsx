@@ -10,17 +10,13 @@ import { StoryGroupsContext } from "@/lib/StoryGroupsContext";
 import GoToPreviousStoryArrow from "@/components/stories/GoToPreviousStoryArrow";
 import GoToNextStoryArrow from "@/components/stories/GoToNextStoryArrow";
 import { SettingsContext } from "@/lib/SettingsContext";
+import { useRouter, usePathname } from "@/translations/routing";
 
 export interface CardsLayoutProps {
   children?: React.ReactNode[] | React.ReactNode;
   hash?: number;
   font?: string;
   floatingHeader?: boolean;
-}
-
-function parseLocationHash(): number {
-  const hashNumber = parseInt(window.location.hash.slice(1), 10);
-  return isNaN(hashNumber) ? 0 : hashNumber;
 }
 
 const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, font, floatingHeader = false }, forwardedRef) => {
@@ -30,6 +26,8 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, fo
   let cards = React.Children.toArray(children);
   let storiesCount = cards.length;
 
+  const router = useRouter();
+  const pathname = usePathname();
   const { inLastGroup, goToNextStoryGroup, goToPreviousStoryGroup, setActiveStoryGroupIndex } = useContext(StoryGroupsContext);
   const { active, storyGroupIndex } = useContext(StoryGroupContext);
   const { pausedStories, setTemporalPause } = useContext(SettingsContext);
@@ -37,6 +35,11 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, fo
   const storiesContainerRef = useRef<HTMLDivElement>(null);
   const storiesRefs = useRef<HTMLDivElement[]>([]);
   const currentVideoRef = useRef<HTMLVideoElement | null>(null);
+  
+  function parseLocationHash(): number {
+    const hashNumber = parseInt(window.location.hash.slice(1), 10);
+    return isNaN(hashNumber) ? 0 : hashNumber;
+  }
 
   const [storyTimer, setStoryTimer] = useState(0);
   const [mouseDownTime, setMouseDownTime] = useState<number>(0);
@@ -68,7 +71,7 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, fo
   const goToNextStory = useCallback((event?: React.MouseEvent<HTMLElement, MouseEvent>) => {
     event?.stopPropagation();
     if (hash === storiesCount - 1 && inLastGroup) {
-      window.location.href = "/";
+      router.push("/");
       return;
     }
 
@@ -81,7 +84,7 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, fo
     }
 
     setHash(hash + 1);
-  }, [hash, setHash, storiesCount, inLastGroup, goToNextStoryGroup]);
+  }, [hash, storiesCount, inLastGroup, router, goToNextStoryGroup]);
 
   useOnWindowResize(() => {
     updateLayoutOffset();
@@ -92,9 +95,9 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, fo
 
     // If a hash greater than the number of stories is provided, replace the hash with 0
     if (parseLocationHash() > storiesCount - 1) {
-      window.history.replaceState(null, "", window.location.pathname);
+      router.replace(pathname);
     }
-  }, [storiesCount, updateLayoutOffset]);
+  }, [pathname, router, storiesCount, updateLayoutOffset]);
 
   // Story changed effect
   useEffect(() => {
@@ -170,11 +173,11 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, fo
     }
 
     if (hash === 0) {
-      window.history.replaceState(null, "", window.location.pathname);
+      router.replace(pathname);
     } else {
-      window.history.replaceState(null, "", window.location.pathname + "#" + hash.toString());
+      router.replace(`${pathname}#${hash}`);
     }
-  }, [active, hash]);
+  }, [active, hash, pathname, router]);
 
   function navigateIfSmallScreen(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     if (window.innerWidth > Constants.SMALL_BREAKPOINT_WIDTH) {

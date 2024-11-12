@@ -1,6 +1,5 @@
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { useTheme } from "next-themes";
 import { useState, useEffect, useContext } from "react";
 import DarkThemeIcon from "@/icons/DarkThemeIcon";
 import LightThemeIcon from "@/icons/LightThemeIcon";
@@ -21,11 +20,11 @@ export default function ThemeSwitch() {
   return (
     <div className="flex items-center space-x-2">
       <Label htmlFor="theme-switch" aria-labelledby="theme-switch" className="hover:cursor-pointer">
-        <LightThemeIcon/>
+        <LightThemeIcon extraClasses="size-8"/>
       </Label>
       <Switch id="theme-switch" checked={theme === "dark"} onCheckedChange={() => setTheme(theme === "dark" ? "light" : "dark")} />
       <Label htmlFor="theme-switch" aria-labelledby="theme-switch" className="hover:cursor-pointer">
-        <DarkThemeIcon/> 
+        <DarkThemeIcon extraClasses="size-8"/>
       </Label>
     </div>
   );

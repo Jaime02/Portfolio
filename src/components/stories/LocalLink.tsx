@@ -1,5 +1,5 @@
 import LinkIcon from "@/icons/LinkIcon";
-import Link from "next/link";
+import {Link} from "@/translations/routing";
 
 export default function LocalLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (

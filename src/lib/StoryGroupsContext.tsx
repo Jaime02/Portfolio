@@ -1,7 +1,7 @@
 "use client";
 
 import { getStoryCategoryByUrl, getStoryGroupByIndex, getStoryGroupByUrl } from "@/misc/Constants";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "@/translations/routing";
 import { createContext, useCallback, useEffect, useMemo, useState } from "react";
 
 const StoryGroupsContext = createContext<any>({
@@ -19,6 +19,7 @@ interface StoryGroupsContextProviderProps {
 }
 
 const StoryGroupsContextProvider = ({ children }: StoryGroupsContextProviderProps) => {
+  const router = useRouter();
   const pathname = usePathname();
   
   // The url has the following format: /<storyGroupCategory>/<storyGroupTitle>#[activeStoryCardIndex]
@@ -33,30 +34,30 @@ const StoryGroupsContextProvider = ({ children }: StoryGroupsContextProviderProp
 
   useEffect(() => {
     const storyGroup = getStoryGroupByIndex(activeStoryCategory, activeStoryGroupIndex);
-    if (storyGroup.getFullUrl() === window.location.pathname) {
+    if (storyGroup.getFullUrl() === pathname) {
       return;
     }
     
     window.history.replaceState(null, "", `${storyGroup.getFullUrl()}`);
-  }, [activeStoryCategory, activeStoryGroupIndex])
+  }, [activeStoryCategory, activeStoryGroupIndex, pathname])
   
   const goToNextStoryGroup = useCallback(() => {
     if (activeStoryGroupIndex === activeStoryCategory.storyGroups.length - 1) {
-      window.location.href = "/";
+      router.push("/");
       return;
     }
     
     setActiveStoryGroupIndex(activeStoryGroupIndex + 1);
-  }, [activeStoryGroupIndex, activeStoryCategory.storyGroups.length]);
+  }, [activeStoryGroupIndex, activeStoryCategory.storyGroups.length, router]);
   
   const goToPreviousStoryGroup = useCallback(() => {
     if (activeStoryGroupIndex === 0) {
-      window.location.href = "/";
+      router.push("/");
       return;
     }
     
     setActiveStoryGroupIndex(activeStoryGroupIndex - 1);
-  }, [activeStoryGroupIndex]);
+  }, [activeStoryGroupIndex, router]);
 
   return (
     <StoryGroupsContext.Provider

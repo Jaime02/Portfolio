@@ -1,6 +1,6 @@
 import Card from "@/components/stories/Card";
 import CardsLayout, { CardsLayoutProps } from "@/components/stories/CardsLayout";
-import Link from "next/link";
+import {Link} from "@/translations/routing";
 import { forwardRef } from "react";
 import Image from "next/image";
 

@@ -1,13 +1,13 @@
-import Freelancing from "@/app/(stories)/experiences/Freelancing";
-import Hiberus from "@/app/(stories)/experiences/Hiberus";
-import OPmobility from "@/app/(stories)/experiences/OPmobility";
-import TheQtCompany from "@/app/(stories)/experiences/TheQtCompany";
-import Upna from "@/app/(stories)/experiences/Upna";
-import CoolPictures from "@/app/(stories)/others/CoolPictures";
-import MyLinks from "@/app/(stories)/others/MyLinks";
-import PaintFilterManager from "@/app/(stories)/projects/PaintFilterManager";
-import QtProjects from "@/app/(stories)/projects/QtProjects";
-import ThisWebsite from "@/app/(stories)/projects/ThisWebsite";
+import Freelancing from "@/app/[locale]/(stories)/experiences/Freelancing";
+import Hiberus from "@/app/[locale]/(stories)/experiences/Hiberus";
+import OPmobility from "@/app/[locale]/(stories)/experiences/OPmobility";
+import TheQtCompany from "@/app/[locale]/(stories)/experiences/TheQtCompany";
+import Upna from "@/app/[locale]/(stories)/experiences/Upna";
+import CoolPictures from "@/app/[locale]/(stories)/others/CoolPictures";
+import MyLinks from "@/app/[locale]/(stories)/others/MyLinks";
+import PaintFilterManager from "@/app/[locale]/(stories)/projects/PaintFilterManager";
+import QtProjects from "@/app/[locale]/(stories)/projects/QtProjects";
+import ThisWebsite from "@/app/[locale]/(stories)/projects/ThisWebsite";
 import HeaderThumbnail from "@/components/stories/HeaderThumbnail";
 import FreelancingLogo from "@/components/thumbnails-tabs/FreelancingLogo";
 import QtGroupThumbnail from "@/components/thumbnails-tabs/QtGroupThumbnail";
@@ -17,11 +17,27 @@ import ExperienceIcon from "@/icons/ExperienceIcon";
 import ProjectsIcon from "@/icons/ProjectsIcon";
 import ThreeDotsIcon from "@/icons/ThreeDotsIcon";
 import React from "react";
-import LiveGL from "@/app/(stories)/projects/LiveGL";
+import LiveGL from "@/app/[locale]/(stories)/projects/LiveGL";
 import QtThumbnail from "@/components/thumbnails-tabs/QtThumbnail";
-import Crispin from "@/app/(stories)/others/Crispin";
+import Crispin from "@/app/[locale]/(stories)/others/Crispin";
 import MyLinksThumbnail from "@/components/thumbnails-tabs/MyLinksThumbnail";
-import CV from "@/app/(stories)/others/CV";
+import CV from "@/app/[locale]/(stories)/others/CV";
+import { createTranslator } from "next-intl";
+import { getLocale } from "next-intl/server";
+/*
+let messages = {};
+export async function getTranslation(namespace: any, key: any): Promise<string> {
+  // this should be up to you, maybe from app state or from cookies
+  const locale = (await getLocale()) ?? "en";
+  messages = Object.keys(messages).length == 0 ? (await import(`../messages/${locale}.json`)).default : messages;
+
+  const t = createTranslator({ locale, messages, namespace });
+  return t(key);
+};*/
+
+function t(p: string): string {
+  return p;
+}
 
 export const SMALL_BREAKPOINT_WIDTH = 640;
 export const MOUSE_PRESS_DURATION_THRESHOLD = 100;
@@ -106,13 +122,13 @@ class OthersStoryGroup extends StoryGroup {
 
 export const ProjectsStoryGroups: StoryGroup[] = [
   new ProjectsStoryGroup({
-    title: "This website",
+    title: t("This website"),
     component: <ThisWebsite />,
     tabThumbnail: <TabThumbnail title="This website" src="/images/InstagramLogo.svg" href="/projects/this-website" padding={true} />,
     headerThumbnail: <HeaderThumbnail src="/images/InstagramLogo.svg" />,
   }),
   new ProjectsStoryGroup({
-    title: "Qt projects",
+    title: t("Qt projects"),
     component: <QtProjects />,
     tabThumbnail: <QtThumbnail />,
     headerThumbnail: <HeaderThumbnail src="/images/QtSquareLogo.svg" />,
@@ -172,7 +188,7 @@ export const OthersStoryGroups: StoryGroup[] = [
     headerThumbnail: <HeaderThumbnail src="/images/CVIcon.svg" />,
   }),
   new OthersStoryGroup({
-    title: "My links",
+    title: t("My links"),
     component: <MyLinks />,
     tabThumbnail: <MyLinksThumbnail href="/others/my-links" />,
     headerThumbnail: <HeaderThumbnail src="/images/LinkIcon.svg" />,
@@ -185,7 +201,7 @@ export const OthersStoryGroups: StoryGroup[] = [
     isBestFriends: true,
   }),
   new OthersStoryGroup({
-    title: "Cool pictures",
+    title: t("Cool pictures"),
     component: <CoolPictures />,
     tabThumbnail: <TabThumbnail title="Cool pictures" src="/images/NeuschwansteinCastle.jpg" href="/others/cool-pictures" />,
     headerThumbnail: <HeaderThumbnail src="/images/icons/CameraIcon.svg" />,
@@ -194,21 +210,21 @@ export const OthersStoryGroups: StoryGroup[] = [
 ];
 
 export const projectsStoryCategory = new StoryGroupCategory({
-  name: "Projects",
+  name: t("Projects"),
   index: 0,
   storyGroups: ProjectsStoryGroups,
   icon: <ProjectsIcon />,
 });
 
 export const experiencesStoryCategory = new StoryGroupCategory({
-  name: "Experiences",
+  name: t("Experiences"),
   index: 1,
   storyGroups: ExperiencesStoryGroups,
   icon: <ExperienceIcon />,
 });
 
 export const othersStoryCategory = new StoryGroupCategory({
-  name: "Others",
+  name: t("Others"),
   index: 2,
   storyGroups: OthersStoryGroups,
   icon: <ThreeDotsIcon />,

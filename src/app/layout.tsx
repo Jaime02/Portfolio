@@ -1,33 +1,11 @@
-import { Metadata } from "next";
-import "@/app/globals.css";
-import { ThemeProvider } from "next-themes";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { SettingsContextProvider } from "@/lib/SettingsContext";
+import {ReactNode} from 'react';
 
-export const metadata: Metadata = {
-  title: "Jaime Resano | Personal website",
-  description: "Jaime Resano Aisa personal website",
+type Props = {
+  children: ReactNode;
 };
 
-export default function BaseLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en" className="" suppressHydrationWarning>
-      <head>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
-        <link rel="manifest" href="/site.webmanifest" />
-      </head>
-      <body className={`flex min-h-dvh flex-col transition-colors duration-300 ease-linear`}>
-        <ThemeProvider attribute="class">
-          <TooltipProvider delayDuration={100}>
-            <SettingsContextProvider>{children}</SettingsContextProvider>
-          </TooltipProvider>
-        </ThemeProvider>
-      </body>
-    </html>
-  );
+// Since we have a `not-found.tsx` page on the root, a layout file
+// is required, even if it's just passing children through.
+export default function RootLayout({children}: Props) {
+  return children;
 }

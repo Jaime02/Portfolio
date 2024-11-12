@@ -1,5 +1,6 @@
 "use client";
 import { ThumbnailContext } from "@/components/thumbnails-tabs/ThumbnailContext";
+import { Link } from "@/translations/routing";
 import { useContext, useState } from "react";
 
 interface TabThumbnailLayoutProps {
@@ -14,7 +15,7 @@ export default function TabThumbnailLayout({ children, href, title, padding = fa
   const {onFocus} = useContext(ThumbnailContext);
 
   return (
-    <a
+    <Link
       href={href}
       className={`relative flex aspect-square items-center overflow-hidden rounded-md bg-white data-[animate]:transition-transform data-[animate]:duration-700 hover:scale-[102%] active:ring-2 dark:bg-gray-300 ${padding ? "p-2" : ""}`}
       onMouseEnter={() => setIsHovered(true)}
@@ -31,6 +32,6 @@ export default function TabThumbnailLayout({ children, href, title, padding = fa
         {title}
       </div>
       <span className="sr-only">{title}</span>
-    </a>
+    </Link>
   );
 }

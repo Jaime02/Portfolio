@@ -1,7 +1,7 @@
 import CloseIcon from "@/icons/CloseIcon";
 import { useContext } from "react";
 import { StoryGroupContext } from "@/lib/StoryGroupContext";
-import Link from "next/link";
+import {Link} from "@/translations/routing";
 import SoundCheckbox from "@/components/misc/SoundCheckbox";
 import BestFriends from "@/components/story-widgets/BestFriends";
 import PauseStoriesCheckbox from "@/components/misc/PauseStoriesCheckbox";
