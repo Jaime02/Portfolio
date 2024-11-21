@@ -5,6 +5,7 @@ import { SettingsContextProvider } from "@/app/lib/SettingsContext";
 import { getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import { Toaster } from "@/components/ui/toaster";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export default async function BaseLayout({ children, locale }: { children: React.ReactNode; locale: string }) {
   const messages = await getMessages();
