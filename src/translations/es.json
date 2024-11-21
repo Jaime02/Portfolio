@@ -1,4 +1,8 @@
 {
+  "Commons": {
+    "No video tag support": "Lo siento, tu navegador no soporta la etiqueta video",
+    "Source code": "Código fuente"
+  },
   "LocaleLayout": {
     "title": "Jaime Resano | Web personal",
     "description": "Web personal de Jaime Resano Aisa"
@@ -19,11 +23,228 @@
     "Description2": "En esta web puedes encontrar mi portafolio con el formato de un perfil de Instagram.",
     "Settings": "Ajustes"
   },
-  "Others": "Otros",
-  "Experiences": "Experiencias",
-  "Projects": "Proyectos",
-  "Cool pictures": "Fotos to guapas",
-  "My links": "Mis enlaces",
-  "Qt projects": "Proyectos de Qt",
-  "This website": "Esta web"
+  "Constants": {
+    "Others": "Otros",
+    "Experiences": "Experiencias",
+    "Projects": "Proyectos",
+    "Cool pictures": "Fotos to guapas",
+    "My links": "Mis enlaces",
+    "Qt projects": "Proyectos de Qt",
+    "This website": "Esta web"
+  },
+  "Thumbnails": {
+    "Qt projects": "Proyectos de Qt",
+    "This website": "Esta web",
+    "Cool pictures": "Fotos to guapas",
+    "My links": "Mis enlaces"
+  },
+  "This website": {
+    "2": {
+      "1": "El sitio web es simplemente un conjunto de archivos HTML, CSS y TypeScript manejados por el meta-framework",
+      "2": "Sigue las mejores prácticas y usa las mínimas dependencias posibles",
+      "3": "El rendimiento, la accesibilidad y",
+      "4": "Determina la clasificación un sitio web en los resultados de búsqueda",
+      "5": "del sitio web es evaluado con la máxima puntuación en"
+    },
+    "This website description": "Como puedes ver, este sitio web es un clon de un perfil de Instagram. \nCopié todos los estilos de la página oficial mediante ingeniería inversa y los adapté para lograr este increíble resultado.",
+    "Features": "Características",
+    "Feature 1": {
+      "1": "Diseño",
+      "2": ""
+    },
+    "It adapts to any screen size": "Se adapta a cualquier tamaño de pantalla",
+    "Dark mode": "Modo oscuro",
+    "Smooth scroll animations": "Animaciones suaves",
+    "HTML content": "Historias hechas con HTML, CSS y JavaScript",
+    "Language translatations": "Traducciones",
+    "Do you like it": "¿Qué te parece?",
+    "Does not look professional": "No parece profesional",
+    "I dont know": "No lo sé...",
+    "I love it": "Me encanta!",
+    "Mateo 7 6": "No deis lo santo a los perros. Mateo 7:6",
+    "Keep trying": "Prueba otra vez",
+    "You nailed it": "Lo has clavao!",
+    "Technological stack": "Tecnologías utilizadas",
+    "It is hosted on": "Está hosteado en",
+    "and the source code is available on": "y su código fuente está disponible en"
+  },
+  "Qt projects": {
+    "1": {
+      "1": "es un framework enfocado a programas con",
+      "2": "Interfaz Gráfica de Usuario",
+      "3": "extremadamente potente. Es de código abierto. Lo desarrolla la empresa",
+      "4": "y muchos otros colaboradores individuales. Lo he estado usando durante muchos años en mis proyectos personales y profesionales. Me encantan los",
+      "5": "Permite el uso de la biblioteca de C++ desde Python",
+      "6": "de Python, llamados",
+      "7": "La combinación de las capacidades de Qt y la velocidad de desarrollo de Python es maravillosa.",
+      "8": "Una de las mejores características de Qt es su compatibilidad multiplataforma. El código de Python, C++ o",
+      "9": "que escribes puede ser ejecutado en Windows, MacOS y Linux!",
+      "10": "Sigue navegando para descubrir algunos de los proyectos que he hecho",
+      "11": "Logo de Qt"
+    },
+    "2": {
+      "1": "Este es el primer gran proyecto que recuerdo. Estaba en la escuela secundaria cuando lo hice. Es una aplicación de dibujo técnico en 3D que permite al alumno dibujar",
+      "2": "elementos fundamentales",
+      "3": "Puntos, rectas y planos",
+      "4": "visualizar el espacio y hacer operaciones geométricas",
+      "5": "Todos los cálculos geométricos los hace el código del programa, no se usan dependencias. Para dibujar los gráficos se utiliza",
+      "6": ""
+    },
+    "3": {
+      "1": "Durante mi segundo año de universidad, codifiqué una simulación del algoritmo QuickSort usando PySide. \nDe esa manera aprendí cómo funciona el algoritmo de ordenado QuickSort y ayudé a mis compañeros a visualizar el algoritmo. \nLa demostración muestra una preciosa animación del proceso de clasificación."
+    },
+    "4": {
+      "1": "Esta es una herramienta que construí para ejecutar simulaciones de",
+      "2": "con diferentes parámetros. \nLos algoritmos genéticos son un conjunto de técnicas para resolver problemas de optimización mediante el uso de la selección natural, que es el mismo proceso detrás de la evolución biológica.",
+      "3": "El programa muestra los resultados en una tabla estructurada y gráficos estadísticos"
+    },
+    "5": {
+      "1": "Este es un programa simple que desarrollé para una asignatura para de mostrar una demostración interactiva del algoritmo",
+      "2": "",
+      "3": "El usuario puede pintar números en un lienzo en blanco y negro usando el ratón. Después, el programa utilizará el algoritmo para identificar el número dibujado"
+    },
+    "Genetic algorithms": "Algoritmos genéticos",
+    "Qt projects": "Proyectos de Qt",
+    "Technical drawing app": "Aplicación de dibujo técnico"
+  },
+  "Paint Filter Manager": {
+    "1": {
+      "1": "Durante mi Erasmus en",
+      "2": ", desarrollé una aplicación web y otra móvil personalizada para la gestión de los filtros de la línea de pintura",
+      "3": "En la siguiente imagen puedes ver una captura de pantalla de la página inicial de la aplicación del sitio web. Muestra una tabla con información de cada filtro",
+      "4": "Captura de pantalla web del Paint Filter Manager"
+    },
+    "2": {
+      "1": "Página web",
+      "2": "Elegí un sistema web porque necesitaba guardar y sincronizar datos entre múltiples dispositivos en tiempo real. El servidor actúa como un servicio web y un",
+      "3": "Interfaz de Programación de Aplicaciones",
+      "4": "Software que puede interactuar enviando y recibiendo solicitudes",
+      "5": "al mismo tiempo. El código del servidor escrito en Python y utiliza la biblioteca"
+    },
+    "3": {
+      "1": "Aplicación Android",
+      "2": "Además, el usuario puede utilizar una aplicación nativa de Android para interactuar con el sistema. La aplicación está escrita en",
+      "3": "que es el lenguaje de programación estándar para Android",
+      "4": "Características:",
+      "5": "Escáner de códigos QR",
+      "6": "Diseño responsive",
+      "7": "Modo oscuro",
+      "8": "Traducciones",
+      "9": "Modo sin conexión",
+      "10": "Icono de Android",
+      "11": "Captura de pantalla de la aplicación Android"
+    }
+  },
+  "LiveGL": {
+    "1": {
+      "1": "Esta es una herramienta simple que desarrollé para probar shaders de",
+      "2": "en tiempo real. El usuario puede editar el código fuente de los shaders de fragmentos y vértices, el programa los recompilará y ejecutará en tiempo real. Ojo, está escrito en un zarrapastroso código de Java!",
+      "3": "Captura de pantalla de LiveGL"
+    }
+  },
+  "The Qt Company": {
+    "1": {
+      "1": "Continuará",
+      "2": "Octubre"
+    }
+  },
+  "OPmobility": {
+    "1": {
+      "1": "OPmobility, anteriormente conocida como Plastic Omnium, es una empresa global especializada en el desarrollo, producción y venta de soluciones de movilidad. Está centrada en la automoción, pero está explorando sectores emergentes como el hidrógeno o el almacenamiento de energía",
+      "2": "Portada de OPmobility",
+      "3": "Emplea a más de 40.000 personas en 40 centros de investigación y desarrollo y 152 plantas distribuidas en 28 países. \nDe hecho, ¡1 de cada 5 vehículos fabricados en el mundo está equipado por la empresa!"
+    },
+    "2": {
+      "1": "Trabajé como ingeniero de software en prácticas en una planta del grupo situada en Baviera, en el pueblo de",
+      "2": "Esta planta produce principalmente parachoques para clientes como Audi y BMW",
+      "3": "Planta de OPmobility en Pappenheim",
+      "4": "Parachoques del coche"
+    },
+    "3": {
+      "1": "Durante las prácticas, desarrollé el proyecto <q>Paint Filter Manager</q>. \nFue una experiencia maravillosa trabajar en ese ambiente lleno de gente motivada",
+      "2": "Ir al proyecto Paint Filter Manager"
+    }
+  },
+  "Hiberus": {
+    "1": {
+      "1": "Hiberus es una empresa española de consultoría especializada en desarrollo de software y digitalización. Desde su fundación en 2011, ha experimentado un vertiginoso crecimiento exponencial. En 2024, emplea a más de 3300 empleados en 32 países",
+      "2": "Trabajé en el otoño de 2023 como desarrollador junior de software gracias a mi universidad, la",
+      "3": "Oficina de Hiberus",
+      "4": "Sede de Hiberus en Zaragoza"
+    },
+    "2": {
+      "1": "Durante las prácticas desarrollé una herramienta interna para la empresa. Se trataba de una aplicación web destinada a ser utilizada por el departamento de Talento para gestionar candidatos y ofertas de trabajo",
+      "2": "Era una aplicación de tipo ",
+      "3": "escrita en",
+      "4": "y",
+      "5": "Sin embargo, no guardé imágenes ni código del proyecto",
+      "6": "Logo de .NET",
+      "7": "Logo de C sharp",
+      "8": "Logo de SQL Server"
+    }
+  },
+  "Freelancing": {
+    "1": {
+      "1": "Empecé a trabajar como",
+      "2": "Alguien que realiza trabajos para diferentes particulares u organizaciones",
+      "3": "en 2021. Era una excelente manera de aprender realizando proyectos y recibir dinero al mismo tiempo. Trabajé con diferentes clientes e incluso pequeñas empresas. Primero me uní a",
+      "4": "y luego"
+    },
+    "2": {
+      "1": "Después de trabajar durante",
+      "2": "muchas, muchas",
+      "3": "horas, amasé unos 2500 euros en total (pero no le digas nada a Hacienda",
+      "4": "Meme de un cliente pidiendo más cambios antes de pagar"
+    },
+    "3": {
+      "1": "Es una plataforma de freelancing fácil de usar que facilita que los trabajadores independientes y los clientes conecten",
+      "2": "He completado más de 50 pedidos y recibido más de 30 reseñas positivas, logrando una calificación media de 4,9",
+      "3": "Logo de Fiverr",
+      "4": "Contrátame en Fiverr"
+    },
+    "4": {
+      "1": "Upwork es una que conecta a empresas y particulares con trabajadores independientes. Ofrece más control sobre el contrato y el proceso de pago que Fiverr",
+      "2": "Estuve trabajando desde 2022 hasta 2024. Sin embargo,",
+      "3": "un cliente me estafó 700 euros",
+      "4": "Tuve una experiencia terrible con el servicio de atención al cliente de Upwork. ¡Finalmente no me creyeron e incluso bloquearon mi cuenta!",
+      "5": "No recomiendo ni uso la plataforma"
+    }
+  },
+  "Upna": {
+    "1": {
+      "1": "Soy graduado en Ingeniería Informática por la Universidad Pública de Navarra (UPNA). Comencé en 2020 durante el apocalipsis pandémico y terminé la carrera en 2024. Desarrollé el proyecto",
+      "2": "en mi tésis",
+      "3": "Campus de la UPNA",
+      "4": "En resumen, obtener el título no fue un proceso fácil y costó esfuerzo, sudor y lágrimas. Al final me ha permitido tener muchas experiencias memorables, así que supongo que valió la pena",
+      "5": "Esta es mi foto de la graduación",
+      "6": "Yo llevando la ropa de la graduación"
+    }
+  },
+  "Icons": {
+    "GitHub icon": "Icono de GitHub",
+    "Linkedin icon": "Icono de LinkedIn",
+    "Youtube icon": "Icono de Youtube",
+    "Spanish flag": "Bandera de España",
+    "English flag": "Bandera inglesa",
+    "Muted icon": "Silenciado",
+    "Sound icon": "Sonido activado",
+    "Close friends": "Mejores amigos",
+    "Download icon": "Descargar"
+  },
+  "Crispin": {
+    "1": {
+      "1": "Este es ",
+      "2": ", mi perro. Siempre apuesto y leal. Es una mezcla entre un American Standford y un Alano Español."
+    }
+  },
+  "Cool pictures": {
+    "1": {
+      "1": "Pero, ¿todavía estás aquí? No tengo nada más que enseñarte... bueno... aquí tienes unas fotos to guapas",
+      "2": "Activa el sonido y sigue scrolleando",
+      "3": "Castillo de Neuschwanstein"
+    }
+  },
+  "Bottom bar": {
+    "1": "Mensaje correctamente ignorado"
+  }
 }

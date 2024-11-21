@@ -1,6 +1,6 @@
 import PauseIcon from "@/icons/PauseIcon";
 import PlayIcon from "@/icons/PlayIcon";
-import { SettingsContext } from "@/lib/SettingsContext";
+import { SettingsContext } from "@/app/lib/SettingsContext";
 import { useContext } from "react";
 
 export default function PauseStoriesCheckbox({extraClasses = "size-4"}: {extraClasses?: string}) {

@@ -6,69 +6,74 @@ import { QtFont } from "@/misc/fonts";
 import Image from "next/image";
 import {Link} from "@/translations/routing";
 import { forwardRef } from "react";
+import { useTranslations } from "next-intl";
+import QtLogo from "@/icons/QtLogo";
 
 const QtProjects = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
+  const tc = useTranslations('Commons');
+  const t = useTranslations('Qt projects');
   return (
     <CardsLayout {...props} font={QtFont.className} ref={ref}>
       <Card>
         <div className="rounded-lg bg-qt-green p-2">
-          <h1 className="text-center text-xl font-bold text-white">Qt projects</h1>
+          <h1 className="text-center text-xl font-bold text-white">{t("Qt projects")}</h1>
         </div>
         <p>
           <a href="https://www.qt.io/" target="_blank">
             Qt
           </a>{" "}
-          is an extremely powerful{" "}
+          {t("1.1") + " "}
           <Tooltip>
             <TooltipTrigger>GUI</TooltipTrigger>
-            <TooltipContent>Graphical User Interface</TooltipContent>
+            <TooltipContent>Graphical User Interface<br/>{t("1.2")}</TooltipContent>
           </Tooltip>{" "}
-          framework. Is open-source. Is maintained by{" "}
+          {t("1.3") + " "}
           <Link href="https://www.qt.io/" className="styled-a" target="_blank">
             The Qt Company
           </Link>{" "}
-          and many other individual contributors.I have been using it for many years in my personal and professional projects. I love the Python{" "}
+          {t("1.4") + " "}
           <Tooltip>
             <TooltipTrigger>bindings</TooltipTrigger>
-            <TooltipContent>Allows the usage of the C++ library from Python</TooltipContent>
+            <TooltipContent>{t("1.5")}</TooltipContent>
           </Tooltip>
-          , which are called{" "}
+          {t("1.6") + " "}
           <q>
             <a className="styled-a" target="_blank" href="https://wiki.qt.io/Qt_for_Python">
               PySide
             </a>
           </q>
-          . The combination of the capabilities of Qt and the development speed of Python is amazing.
+          . {t("1.7")}
         </p>
         <p>
-          One of Qt&apos;s most notable strengths is its cross-platform compatibility. The Python, C++ or{" "}
+          {t("1.8") + " "}
           <a className="styled-a" href="https://doc.qt.io/qt-6/qtqml-index.html" target="_blank">
             QML
           </a>{" "}
-          code you write can be executed on Windows, MacOS and Linux!
+          {t("1.9")}
         </p>
-        <p>Keep navigation in order to discover some of the projects I have done 😄</p>
+        <QtLogo extraClasses="mx-auto"/>
+        <p>{t("1.10")} ➡️</p>
       </Card>
       <Card>
         <div className="rounded-lg bg-gray-300 p-2 text-xl font-bold dark:bg-slate-900">
-          <h1 className="text-center">Technical drawing app</h1>
+          <h1 className="text-center">{t("Technical drawing app")}</h1> 
         </div>
         <p>
-          This is the first big project I did while I was in high school. It is a 3D drawing app simulator that allows the student to draw{" "}
+          {t("2.1") + " "}
           <Tooltip>
-            <TooltipTrigger>primitives</TooltipTrigger>
-            <TooltipContent>Points, lines and planes</TooltipContent>
+            <TooltipTrigger>{t("2.2")}</TooltipTrigger>
+            <TooltipContent>{t("2.3")}</TooltipContent>
           </Tooltip>
-          , visualize the space and perform operations between them.
+          , {t("2.4")}.
         </p>
         <p>
-          All the geometry handling is done by the program code. In order to draw the scene,{" "}
+          {t("2.5") + " "}
           <a className="styled-a" href="https://www.opengl.org/" target="_blank">
             OpenGL
           </a>{" "}
-          is used.
+          {t("2.6")}
         </p>
-        <Image src="/images/TechnicalDrawingAppScreenshot.webp" width="700" height="700" alt="Technical drawing app" className="w-full select-none" draggable="false" priority={true} />
+        <Image src="/images/TechnicalDrawingAppScreenshot.webp" width="700" height="700" alt={t("Technical drawing app")} className="w-full select-none" draggable="false" priority={true} />
         <GithubRepoLink href="https://github.com/Jaime02/Proyecto-de-investigacion-2020-Dibujo-tecnico" />
       </Card>
       <Card>
@@ -76,29 +81,27 @@ const QtProjects = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => 
           <h1 className="text-center">QQuickSort</h1>
         </div>
         <p>
-          During my second year of university, I coded a QuickSort algorithm simulation using PySide. That way I learned how QuickSort works and I helped my classmates to achieve the same goal. The
-          demo shows a gorgeous animation of the sorting process.
+          {t("3.1")}
         </p>
         <video autoPlay muted loop>
           <source src="/videos/QQuickSortDemo.mp4" type="video/mp4" />
-          Sorry, your browser does not support the video tag
+          {tc("No video tag support")}
         </video>
         <GithubRepoLink href="https://github.com/Jaime02/QQuickSort" />
       </Card>
       <Card>
         <div className="rounded-lg bg-gray-300 p-2 text-xl font-bold dark:bg-slate-900">
-          <h1 className="text-center">Genetic algorithms</h1>
+          <h1 className="text-center">{t("Genetic algorithms")}</h1>
         </div>
         <p>
-          This is a tool I built for a university subject in order to run{" "}
+          {t("4.1") + " "}
           <a className="styled-a" target="_blank" href="https://en.wikipedia.org/wiki/Genetic_algorithm">
-            genetic algorithm
+            {t("Genetic algorithms")}
           </a>{" "}
-          simulations with different parameters. Genetic algorithms are a set of techniques for solving optimization problems by using natural selection, which is the same process behind biological
-          evolution.
+          {t("4.2")}
         </p>
-        <p>The program shows the results in a structured table and graphs with analytics of the results.</p>
-        <Image src="/images/GeneticAlgorithms.webp" width="800" height="800" alt="Genetic algorithms" className="w-full select-none" draggable="false" priority={true} />
+        <p>{t("4.3")}</p>
+        <Image src="/images/GeneticAlgorithms.webp" width="800" height="800" alt={t("Genetic algorithms")} className="w-full select-none" draggable="false" priority={true} />
         <GithubRepoLink href="https://github.com/Jaime02/Genetic-Algorithm" />
       </Card>
       <Card>
@@ -106,13 +109,13 @@ const QtProjects = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => 
           <h1 className="text-center">QKNNPainter</h1>
         </div>
         <p>
-          This is a simple program I developed for a university subject in order to show an interactive demo of the{" "}
+          {t("5.1") + " "}
           <a className="styled-a" target="_blank" href="https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm">
             K-nearest neighbors
           </a>{" "}
-          algorithm.
+          {t("5.2")}
         </p>
-        <p>The user can paint numbers in a black and white canvas using his mouse. Afterwards, the program will use the algorithm to identify the number drawn.</p>
+        <p>{t("5.3")}</p>
         <Image src="/images/KNN.webp" width="800" height="800" alt="QKNNPainter" className="mx-auto w-[60%] select-none" draggable="false" priority={true} />
         <GithubRepoLink href="https://github.com/Jaime02/QKNNPainter" />
       </Card>

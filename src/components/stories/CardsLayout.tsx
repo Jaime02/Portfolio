@@ -5,12 +5,13 @@ import Header from "@/components/stories/Header";
 import * as Constants from "@/misc/Constants";
 import ProgressBar from "@/components/stories/ProgressBar";
 import useOnWindowResize from "@/misc/useOnWindowResize";
-import { StoryGroupContext } from "@/lib/StoryGroupContext";
-import { StoryGroupsContext } from "@/lib/StoryGroupsContext";
+import { StoryGroupContext } from "@/app/lib/StoryGroupContext";
+import { StoryGroupsContext } from "@/app/lib/StoryGroupsContext";
 import GoToPreviousStoryArrow from "@/components/stories/GoToPreviousStoryArrow";
 import GoToNextStoryArrow from "@/components/stories/GoToNextStoryArrow";
-import { SettingsContext } from "@/lib/SettingsContext";
-import { useRouter, usePathname } from "@/translations/routing";
+import { SettingsContext } from "@/app/lib/SettingsContext";
+import { usePathname } from "@/translations/routing";
+import { StoriesContext } from "@/app/lib/StoriesContext";
 
 export interface CardsLayoutProps {
   children?: React.ReactNode[] | React.ReactNode;
@@ -26,6 +27,7 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, fo
   let cards = React.Children.toArray(children);
   let storiesCount = cards.length;
 
+  const { useRouter } = useContext(StoriesContext);
   const router = useRouter();
   const pathname = usePathname();
   const { inLastGroup, goToNextStoryGroup, goToPreviousStoryGroup, setActiveStoryGroupIndex } = useContext(StoryGroupsContext);
@@ -71,7 +73,7 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, fo
   const goToNextStory = useCallback((event?: React.MouseEvent<HTMLElement, MouseEvent>) => {
     event?.stopPropagation();
     if (hash === storiesCount - 1 && inLastGroup) {
-      router.push("/");
+      window.location.href = "/";
       return;
     }
 
@@ -84,20 +86,23 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, fo
     }
 
     setHash(hash + 1);
-  }, [hash, storiesCount, inLastGroup, router, goToNextStoryGroup]);
+  }, [hash, storiesCount, inLastGroup, goToNextStoryGroup]);
 
   useOnWindowResize(() => {
     updateLayoutOffset();
   }, [updateLayoutOffset]);
 
   useLayoutEffect(() => {
-    updateLayoutOffset();
+    if (!active) {
+      return;
+    }
 
+    updateLayoutOffset();
     // If a hash greater than the number of stories is provided, replace the hash with 0
     if (parseLocationHash() > storiesCount - 1) {
       router.replace(pathname);
     }
-  }, [pathname, router, storiesCount, updateLayoutOffset]);
+  }, [active, pathname, router, storiesCount, updateLayoutOffset]);
 
   // Story changed effect
   useEffect(() => {
@@ -118,10 +123,13 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, fo
       video.onloadedmetadata = () => {
         setStoryDuration(video.duration * 1000);
       };
+      if (!pausedStories) {
+        video.play().catch((err) => {});
+      }
     } else {
       setStoryDuration(Constants.DEFAULT_STORY_DURATION);
     }
-  }, [active, hash, updateLayoutOffset, pausedStories]);
+  }, [active, hash, updateLayoutOffset]);
 
   // Pause the video when active or pausedStories changes
   useEffect(() => {
@@ -135,7 +143,7 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, fo
     if (pausedStories) {
       currentVideoRef.current?.pause();
     } else {
-      currentVideoRef.current?.play();
+      currentVideoRef.current?.play().catch((err) => {});
     }
   }, [active, pausedStories]);
 
@@ -171,7 +179,7 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, fo
     if (!active) {
       return;
     }
-
+    
     if (hash === 0) {
       router.replace(pathname);
     } else {

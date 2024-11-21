@@ -1,5 +1,5 @@
 "use client";
-import { StoryGroupsContextProvider } from "@/lib/StoryGroupsContext";
+import { StoryGroupsContextProvider } from "@/app/lib/StoryGroupsContext";
 import dynamic from "next/dynamic";
 const GroupsLayout = dynamic(() => import('@/components/stories/GroupsLayout'), {
   ssr: false,

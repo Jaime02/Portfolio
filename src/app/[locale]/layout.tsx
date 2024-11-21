@@ -3,25 +3,25 @@ import { routing } from "@/translations/routing";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import BaseLayout from "@/components/layouts/BaseLayout";
+import { StoriesContextProvider } from "@/app/lib/StoriesContext";
 
 type Props = {
   children: React.ReactNode;
-  params: {locale: string};
+  params: Promise<{ locale: string }>;
 };
 
 export function generateStaticParams() {
-  return routing.locales.map((locale) => ({locale}));
+  return routing.locales.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata({
-  params
-}: Omit<Props, 'children'>) {
-  const {locale} = await params;
-  const t = await getTranslations({locale, namespace: 'LocaleLayout'});
+export async function generateMetadata({ params }: Omit<Props, "children">) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "LocaleLayout" });
   return {
     title: t("title"),
     description: t("description"),
   };
+  // TO DO
   /*
   <meta charSet="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,18 +32,17 @@ export async function generateMetadata({
   <link rel="manifest" href="/site.webmanifest" />*/
 }
 
-export default async function LocaleLayout({
-  children,
-  params
-}: Props) {
-  const {locale} = await params;
+export default async function LocaleLayout({ children, params }: Props) {
+  const { locale } = await params;
 
-  if (!routing.locales.includes(locale as any)) {
+  if (locale && !routing.locales.includes(locale as any)) {
     return notFound();
   }
   setRequestLocale(locale);
 
   return (
-    <BaseLayout locale={locale}>{children}</BaseLayout>
+    <BaseLayout locale={locale}>
+      <StoriesContextProvider locale={locale}>{children}</StoriesContextProvider>
+    </BaseLayout>
   );
 }

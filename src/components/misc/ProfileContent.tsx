@@ -15,9 +15,9 @@ export default function ProfileContent() {
 
   const [followingPopoverOpen, setFollowingPopoverOpen] = useState(false);
   const [settingsPopoverOpen, setSettingsPopoverOpen] = useState(false);
+  const [settingsOpenedEver, setSettingsOpenedEver] = useState(true);
   const [sendMessagePopoverOpen, setSendMessagePopoverOpen] = useState(false);
   const [isFollowingMe, setIsFollowingMe] = useState(false);
-
   useEffect(() => {
     let timer = setTimeout(() => {
       setSendMessagePopoverOpen(false);
@@ -29,9 +29,14 @@ export default function ProfileContent() {
     if (localStorage.getItem("settingsPopoverOpen")) {
       setSettingsPopoverOpen(true);
     }
+    if (!localStorage.getItem("settingsOpenedEver")) {
+      setSettingsOpenedEver(false);
+    }
   }, []);
 
   function settingsPopoverOpenChange(open: boolean) {
+    setSettingsOpenedEver(true);
+    localStorage.setItem("settingsOpenedEver", "true");
     setSettingsPopoverOpen(open);
     if (open) {
       localStorage.setItem("settingsPopoverOpen", "true");
@@ -69,7 +74,7 @@ export default function ProfileContent() {
               {isFollowingMe ? <UserCheckIcon /> : <UserPlusIcon />}
             </div>
             <Popover open={settingsPopoverOpen} onOpenChange={settingsPopoverOpenChange}>
-              <PopoverTrigger className="btn-outline p-2" aria-label={t("Settings")}>
+              <PopoverTrigger className={`p-2 ${settingsOpenedEver ? "dark:text-white btn-outline" : "dark:text-black btn-shiny"}`} aria-label={t("Settings")}>
                 <ThreeDotsIcon />
               </PopoverTrigger>
               <PopoverContent>
@@ -92,7 +97,7 @@ export default function ProfileContent() {
           </div>
         </div>
         <div className="col-span-2 col-start-1 p-4 font-system text-base sm:col-span-1 sm:col-start-2 sm:row-start-3 sm:p-0">
-          <h2 className="font-lg font-bold">{t("Welcome to my personal website")}</h2>
+          <h2 className="font-lg font-bold">{t("Welcome to my personal website")} 😀</h2>
           <p>
             {t("Description1")}
             <br/>

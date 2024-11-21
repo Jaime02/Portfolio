@@ -3,13 +3,17 @@ import CardsLayout, { CardsLayoutProps } from "@/components/stories/CardsLayout"
 import { forwardRef, useContext, useRef } from "react";
 import { StoryVideo } from "@/misc/Constants";
 import StoryLocation from "@/components/story-widgets/StoryLocation";
-import { SettingsContext } from "@/lib/SettingsContext";
+import { SettingsContext } from "@/app/lib/SettingsContext";
+import { useTranslations } from "next-intl";
+import RainbowBackgroundContainer from "@/components/stories/RainbowBackgroundContainer";
 
 const CoolPictures = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
+  const tc = useTranslations("Commons");
+  const t = useTranslations("Cool pictures");
   const { mutedStories } = useContext(SettingsContext);
   
   let videos = [
-    new StoryVideo("/videos/Castle.mp4", <StoryLocation extraContainerClasses="left-[50%] top-[80%]" locationUrl="https://maps.app.goo.gl/4VmokxJJHsCYEdJK9" text="Neuschwanstein castle"/>),
+    new StoryVideo("/videos/Castle.mp4", <StoryLocation extraContainerClasses="left-[50%] top-[80%]" locationUrl="https://maps.app.goo.gl/4VmokxJJHsCYEdJK9" text={t("1.3")}/>),
     new StoryVideo("/videos/OPmobilityGolf.mp4"),
     new StoryVideo("/videos/WUG.mp4", <StoryLocation extraContainerClasses="left-[50%] top-[40%]" locationUrl="https://maps.app.goo.gl/H9x2NKCJj9mBMxLh8" text="Weißenburg in Bayern" />),
   ];
@@ -17,10 +21,10 @@ const CoolPictures = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) =
   return (
     <CardsLayout {...props} ref={ref} floatingHeader={true}>
       <Card>
-        <div className="flex h-full w-full flex-col items-center justify-center gap-4 p-4">
-          <h1>Hey, are you still here? I have nothing else to show you... well... here you have, some cool pictures &#128513;</h1>
-          <p className="text-lg font-bold">Keep scrolling 😉 ➡️</p>
-        </div>
+        <RainbowBackgroundContainer>
+          <h1>{t("1.1")} 😁</h1>
+          <p className="text-lg font-bold">{t("1.2")} 😉 ➡️</p>
+        </RainbowBackgroundContainer>
       </Card>
       {videos.map((video, index) => (
         <Card key={index}>
@@ -32,7 +36,7 @@ const CoolPictures = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) =
             loop
           >
             <source src={video.url} type="video/mp4" />
-            Sorry, your browser does not support the video tag
+            {tc("No video tag support")}
           </video>
           {video.extraComponents}
         </Card>

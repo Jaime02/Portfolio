@@ -1,6 +1,10 @@
+import { useTranslations } from "next-intl";
+
 export default function LinkedinIcon({extraClasses}: {extraClasses?: string}) {
+  const t = useTranslations('Icons');
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className={extraClasses} viewBox="0 0 76.624 65.326">
+      <title>{t("Linkedin icon")}</title>
       <path
         d="M1165,274.515a1.2,1.2,0,0,0,1.21-1.269c0-.9-.543-1.33-1.657-1.33h-1.8v4.712h.677v-2.054h.832l.019.025,1.291,2.029h.724l-1.389-2.1Zm-.783-.472h-.785V272.45h.995c.514,0,1.1.084,1.1.757,0,.774-.593.836-1.314.836"
         transform="translate(-1092.136 -213.406)"

@@ -1,6 +1,6 @@
 "use client";
 
-import { StoryGroupsContext } from "@/lib/StoryGroupsContext";
+import { StoryGroupsContext } from "@/app/lib/StoryGroupsContext";
 import { StoryGroup } from "@/misc/Constants";
 import React from "react";
 import { createContext, useContext, useMemo } from "react";
@@ -12,7 +12,7 @@ const StoryGroupContext = createContext<any>({
   title: null,
   headerThumbnail: null,
   selectMyself: () => {},
-  isBestFriends: false,
+  isCloseFriends: false,
 });
 
 interface StoryGroupContextProviderProps {
@@ -27,7 +27,7 @@ const StoryGroupContextProvider = ({ children, storyGroup, storyGroupIndex }: St
   const active = useMemo(() => activeStoryGroupIndex === storyGroupIndex, [activeStoryGroupIndex, storyGroupIndex]);
   const title = useMemo(() => storyGroup.title, [storyGroup]);
   const headerThumbnail = useMemo(() => storyGroup.headerThumbnail, [storyGroup]);
-  const isBestFriends = useMemo(() => storyGroup.isBestFriends, [storyGroup]);
+  const isCloseFriends = useMemo(() => storyGroup.isCloseFriends, [storyGroup]);
 
   return (
     <StoryGroupContext.Provider
@@ -37,7 +37,7 @@ const StoryGroupContextProvider = ({ children, storyGroup, storyGroupIndex }: St
         active,
         title,
         headerThumbnail,
-        isBestFriends
+        isCloseFriends
       }}
     >
       {children}

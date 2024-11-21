@@ -1,10 +1,14 @@
 import GithubIcon from "@/icons/GithubIcon";
+import { useTranslations } from "next-intl";
 
 export default function GithubRepoLink({ href }: { href: string }) {
+  const t = useTranslations("Commons");
   return (
-  <a className="styled-a flex items-center justify-center gap-1 text-center" href={href} target="_blank">
-  <GithubIcon extraClasses="size-5"/> 
-  Source code
-</a>
+    <a className="mx-auto" href={href} target="_blank">
+      <button className="styled-a btn-secondary text-lg">
+        <GithubIcon extraClasses="size-8" />
+        {t("Source code")}
+      </button>
+    </a>
   );
 }

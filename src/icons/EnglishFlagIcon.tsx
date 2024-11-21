@@ -1,6 +1,10 @@
+import { useTranslations } from "next-intl";
+
 export default function EnglishFlagIcon({ extraClasses }: { extraClasses?: string }) {
+  const t = useTranslations('Icons');
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 30" className={`${extraClasses}`}>
+      <title>{t("English flag")}</title>
       <clipPath id="t">
         <path d="M25,15h25v15zv15h-25zh-25v-15zv-15h25z" />
       </clipPath>

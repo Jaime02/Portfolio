@@ -1,8 +1,8 @@
 "use client";
 
-import { getStoryCategoryByUrl, getStoryGroupByIndex, getStoryGroupByUrl } from "@/misc/Constants";
-import { usePathname, useRouter } from "@/translations/routing";
-import { createContext, useCallback, useEffect, useMemo, useState } from "react";
+import { StoriesContext } from "@/app/lib/StoriesContext";
+import { usePathname } from "@/translations/routing";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 
 const StoryGroupsContext = createContext<any>({
   activeStoryCategory: null,
@@ -18,15 +18,17 @@ interface StoryGroupsContextProviderProps {
   children: React.ReactNode;
 }
 
-const StoryGroupsContextProvider = ({ children }: StoryGroupsContextProviderProps) => {
+function StoryGroupsContextProvider({ children }: StoryGroupsContextProviderProps){
+  const { useRouter } = useContext(StoriesContext);
+
   const router = useRouter();
   const pathname = usePathname();
   
+  const { getStoryCategoryByUrl, getStoryGroupByUrl, getStoryGroupByIndex } = useContext(StoriesContext);
   // The url has the following format: /<storyGroupCategory>/<storyGroupTitle>#[activeStoryCardIndex]
   const [categoryUrl, groupUrl] = pathname.split('/').slice(1, 3);
   const [_, activeStoryCategory] = getStoryCategoryByUrl(categoryUrl);
   const [initialStoryGroupIndex, __] = getStoryGroupByUrl(activeStoryCategory, groupUrl);
-  
   const [activeStoryGroupIndex, setActiveStoryGroupIndex] = useState(initialStoryGroupIndex);
 
   const inLastGroup = useMemo(() => activeStoryGroupIndex === activeStoryCategory.storyGroups.length - 1, [activeStoryCategory.storyGroups.length, activeStoryGroupIndex]);
@@ -38,26 +40,26 @@ const StoryGroupsContextProvider = ({ children }: StoryGroupsContextProviderProp
       return;
     }
     
-    window.history.replaceState(null, "", `${storyGroup.getFullUrl()}`);
-  }, [activeStoryCategory, activeStoryGroupIndex, pathname])
+    router.replace(storyGroup.getFullUrl());
+  }, [activeStoryCategory, activeStoryGroupIndex, getStoryGroupByIndex, pathname, router])
   
   const goToNextStoryGroup = useCallback(() => {
     if (activeStoryGroupIndex === activeStoryCategory.storyGroups.length - 1) {
-      router.push("/");
+      window.location.href = "/";
       return;
     }
     
     setActiveStoryGroupIndex(activeStoryGroupIndex + 1);
-  }, [activeStoryGroupIndex, activeStoryCategory.storyGroups.length, router]);
+  }, [activeStoryGroupIndex, activeStoryCategory.storyGroups.length]);
   
   const goToPreviousStoryGroup = useCallback(() => {
     if (activeStoryGroupIndex === 0) {
-      router.push("/");
+      window.location.href = "/";
       return;
     }
     
     setActiveStoryGroupIndex(activeStoryGroupIndex - 1);
-  }, [activeStoryGroupIndex, router]);
+  }, [activeStoryGroupIndex]);
 
   return (
     <StoryGroupsContext.Provider

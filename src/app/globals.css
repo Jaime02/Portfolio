@@ -12,7 +12,7 @@
   }
 
   .btn-primary {
-    @apply btn-base bg-[#0095f6] hover:bg-[#1877f2];
+    @apply btn-base bg-[#0095f6] hover:bg-[#1877f2] text-white;
   }
 
   .btn-secondary {
@@ -22,9 +22,34 @@
   .btn-outline {
     @apply btn-base border border-gray-500;
   }
+  
+  @keyframes scalePulse {
+    50% {
+      filter: brightness(1.1);
+      transform: scale(1.15);
+    }
+  }
+
+  .btn-shiny {
+    @apply animate-pulse btn-base bg-yellow-300 border-2 border-yellow-400 dark:bg-yellow-400 dark:border-yellow-600; 
+    animation: scalePulse 1s ease-in-out infinite;
+  }
 
   .styled-a {
     @apply underline hover:text-blue-800 dark:hover:text-blue-500;
+  }
+
+  @keyframes rainbow-spin {
+    from {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+  
+  .rainbow-spin {
+    animation: rainbow-spin 40s linear infinite;
   }
 }
 

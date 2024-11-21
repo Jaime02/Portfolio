@@ -1,4 +1,8 @@
 {
+  "Commons": {
+    "No video tag support": "Sorry, your browser does not support the video tag",
+    "Source code": "Source code"
+  },
   "LocaleLayout": {
     "title": "Jaime Resano | Portfolio",
     "description": "Jaime Resano Aisa's personal website"
@@ -19,11 +23,228 @@
     "Description2": "In this website you can find my portfolio with the format of an Instagram profile.",
     "Settings": "Settings"
   },
-  "Others": "Others",
-  "Experiences": "Experiences",
-  "Projects": "Projects",
-  "Cool pictures": "Cool pictures",
-  "My links": "My links",
-  "Qt projects": "Qt projects",
-  "This website": "This website"
+  "Constants": {
+    "Others": "Others",
+    "Experiences": "Experiences",
+    "Projects": "Projects",
+    "Cool pictures": "Cool pictures",
+    "My links": "My links",
+    "Qt projects": "Qt projects",
+    "This website": "This website"
+  },
+  "Thumbnails": {
+    "Qt projects": "Qt projects",
+    "This website": "This website",
+    "Cool pictures": "Cool pictures",
+    "My links": "My links"
+  },
+  "This website": {
+    "2": {
+      "1": "The website is just a set of HTML, CSS and TypeScript files handled by the meta-framework",
+      "2": "It follows the best programming practices and uses the least number of dependencies possible",
+      "3": "The performance, accesibility and",
+      "4": "Determines how well a website ranks in search results",
+      "5": "of the website is evaluated with the maximum score in"
+    },
+    "This website description": "As you can see, this website is a clone of an Instagram profile. I reverse-engineered all the styles of the official page and adapted for achieving this amazing result",
+    "Features": "Features",
+    "Feature 1": {
+      "1": "Fully",
+      "2": "design"
+    },
+    "It adapts to any screen size": "It adapts to any screen size",
+    "Dark mode": "Dark mode",
+    "Smooth scroll animations": "Smooth scroll animations",
+    "HTML content": "Stories made using HTML, CSS and JavaScript",
+    "Language translatations": "Language translations",
+    "Do you like it": "Do you like it?",
+    "Does not look professional": "Does not look professional",
+    "I dont know": "I don't know...",
+    "I love it": "I love it!",
+    "Mateo 7 6": "\"Do not give dogs what is sacred\". Mathew 7:6",
+    "Keep trying": "Keep trying",
+    "You nailed it": "You nailed it!",
+    "Technological stack": "Technological stack",
+    "It is hosted on": "It is hosted on",
+    "and the source code is available on": "and the source code is available on"
+  },
+  "Qt projects": {
+    "1": {
+      "1": "is an extremely powerful",
+      "2": "",
+      "3": "framework. Is open-source. Is maintained by",
+      "4": "and many other individual contributors.I have been using it for many years in my personal and professional projects. I love the Python",
+      "5": "Allows the usage of the C++ library from Python",
+      "6": ", which are called",
+      "7": "The combination of the capabilities of Qt and the development speed of Python is amazing",
+      "8": "One of Qt's most notable strengths is its cross-platform compatibility. The Python, C++ or",
+      "9": "code you write can be executed on Windows, MacOS and Linux!",
+      "10": "Keep navigation in order to discover some of the projects I have done",
+      "11": "Qt logo"
+    },
+    "2": {
+      "1": "This is the first big project I ever did. I was in high school when I made it. It is a 3D drawing app simulator that allows the student to draw",
+      "2": "primitive elements",
+      "3": "Points lines and planes",
+      "4": "visualize the space and perform geometric operations",
+      "5": "All the geometry handling is done by the program code, no dependencies involved. In order to draw the scene,",
+      "6": "is used"
+    },
+    "3": {
+      "1": "During my second year of university, I coded a QuickSort algorithm simulation using PySide. That way I learned how QuickSort works and I helped my classmates to visualize the algorithm The demo shows a gorgeous animation of the sorting process"
+    },
+    "4": {
+      "1": "This is a tool I built in order to run",
+      "2": "simulations with different parameters. Genetic algorithms are a set of techniques for solving optimization problems by using natural selection, which is the same process behind biological evolution.",
+      "3": "The program shows the results in a structured table and statistic graphs "
+    },
+    "5": {
+      "1": "This is a simple program I developed for a university subject in order to show an interactive demo of the",
+      "2": "algorithm",
+      "3": "The user can paint numbers in a black and white canvas using his mouse. Afterwards, the program will use the algorithm to identify the number drawn"
+    },
+    "Qt projects": "Qt projects",
+    "Genetic algorithms": "Genetic algorithms",
+    "Technical drawing app": "Technical drawing app"
+  },
+  "Paint Filter Manager": {
+    "1": {
+      "1": "During my internship in",
+      "2": ", I developed a customized web and mobile application for managing the filters of the paint line",
+      "3": "In the following image you can see a screenshot of the initial page of the website application. It shows a table with information about each filter",
+      "4": "Paint filter manager web screenshot"
+    },
+    "2": {
+      "1": "Website",
+      "2": "I chose a system web because I needed to save and synchronize data between multiple devices in real time. The server acts as a web server and an",
+      "3": "Application Programming Interface",
+      "4": "Software that can interact sending and receiving requests",
+      "5": "at the same time. The server code written in Python and uses the library"
+    },
+    "3": {
+      "1": "Android app",
+      "2": "In addition, the user can use an Android native app to interact with the system. The app is written in",
+      "3": "which is the standard programming language for Android",
+      "4": "Features:",
+      "5": "QR code scanner",
+      "6": "Responsive design",
+      "7": "Dark mode",
+      "8": "Translations",
+      "9": "Offline mode",
+      "10": "Android icon",
+      "11": "Paint filter manager Android app screenshot"
+    }
+  },
+  "LiveGL": {
+    "1": {
+      "1": "This is a simple tool I developed in order to test",
+      "2": "shaders in real time. The user can edit the fragment and vertex shaders source code and the program will recompile and execute them on demand. Watch out, it is written in ancient Java!",
+      "3": "LiveGL screenshot"
+    }
+  },
+  "The Qt Company": {
+    "1": {
+      "1": "To be continued",
+      "2": "October"
+    }
+  },
+  "OPmobility": {
+    "1": {
+      "1": "OPmobility, formerly known as Plastic Omnium, is a global company specialized in the development, production and sale of mobility solutions. It is focused in the automotive industry, but is exploring emerging sectors such as hydrogen or energy storage",
+      "2": "OPmobility cover",
+      "3": "It employs more than 40000 people in 40 research and development centers and 152 plants distributed in 28 countries. In fact, 1 in every 5 vehicles manufactured worlwide is equipped by the company!"
+    },
+    "2": {
+      "1": "I worked as a software engineer intern in a plant of the group located in Bavaria, in the village of",
+      "2": "This plant mainly produces car bumpers for costumers such as Audi and BMW",
+      "3": "OPmobility Pappenheim plant",
+      "4": "Car bumper"
+    },
+    "3": {
+      "1": "During the internship, I developed the <q>Paint Filter Manager</q> project. It was a wonderful experience to be working in that environment full of motivaded people",
+      "2": "Go to Paint Filter Manager project"
+    }
+  },
+  "Hiberus": {
+    "1": {
+      "1": "Hiberus is a Spanish consulting company specialized in software development and digitalization. Since its founding in 2011, it has experienced a remarkable exponential growth. As of 2024, it employs more than 3300 employees in 32 countries",
+      "2": "I worked in fall 2023 as a junior software developer intern thanks to my university, the",
+      "3": "Hiberus office",
+      "4": "Hiberus headquarters in Zaragoza"
+    },
+    "2": {
+      "1": "During the internship, I developed a internal tool for the company. It was a web app intended to be used by the HR department in order to manage candidates and job offers",
+      "2": "It was a",
+      "3": "application which used",
+      "4": "and",
+      "5": "However, I have no pictures or code of the project",
+      "6": ".NET logo",
+      "7": "C sharp logo",
+      "8": "SQL Server logo"
+    }
+  },
+  "Freelancing": {
+    "1": {
+      "1": "I started working as a",
+      "2": "Someone who does pieces of work for different organizations",
+      "3": "in 2021. It was a great way of learn by doing doing projects and getting paid at same time. I worked with different clients and even small companies. First, I joined",
+      "4": "and then"
+    },
+    "2": {
+      "1": "After working for",
+      "2": "many, many",
+      "3": "hours, I have earned about 2500 euros in total (but don't tell tax authorities",
+      "4": "Freelancing meme of a client asking extra changes before payment"
+    },
+    "3": {
+      "1": "It is a user-friendly freelancing platform, making it easy for freelancers and clients to connect and collaborate",
+      "2": "I have completed more than 50 orders and received more than 30 positive reviews, achieving an average rating of 4.9",
+      "3": "Fiverr logo",
+      "4": "Hire me on Fiverr"
+    },
+    "4": {
+      "1": "Upwork is a freelancing platform that connects businesses with freelancers. It offers more control over the contract and payment process than Fiverr",
+      "2": "I worked there from 2022 to 2024. However,",
+      "3": "a client scammed me 700 euros",
+      "4": "I had a terrible experience with the Upwork costumer support. They finally did not belive me and even blocked my account!",
+      "5": "I no longer use or recommend the platform"
+    }
+  },
+  "Upna": {
+    "1": {
+      "1": "I am a Computer Engineering graduate at the Public University of Navarra (UPNA). I started in 2020 during the pandemic apocalypse and I finished the degee in 2024. I developed the",
+      "2": " project in my thesis",
+      "3": "UPNA campus",
+      "4": "Briefly, the degree was not a easy process and required some effort, sweat and tears. In the end, it has allowed me to have excellent experiences, so I guess it was worth it",
+      "5": "This is my graduation photo",
+      "6": "Me wearing graduation clothes"
+    }
+  },
+  "Icons": {
+    "GitHub icon": "Github icon",
+    "Linkedin icon": "LinkedIn icon",
+    "Youtube icon": "Youtube icon",
+    "Spanish flag": "Spanish flag",
+    "English flag": "English flag",
+    "Muted icon": "Muted",
+    "Sound icon": "Sound active",
+    "Close friends": "Close friends",
+    "Download icon": "Download"
+  },
+  "Crispin": {
+    "1": {
+      "1": "This is my dog,",
+      "2": ". He is a handsome and loyal dog. It is a mix between an American Standford and an Alano Español"
+    }
+  },
+  "Cool pictures": {
+    "1": {
+      "1": "Hey, are you still here? I have nothing else to show you... well... here you have, some cool pictures",
+      "2": "Enable sound and keep scrolling",
+      "3": "Neuschwanstein castle"
+    }
+  },
+  "Bottom bar": {
+    "1": "Message successfully ignored"
+  }
 }

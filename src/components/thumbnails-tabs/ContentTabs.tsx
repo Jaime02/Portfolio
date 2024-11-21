@@ -1,15 +1,19 @@
 "use client";
 
-import { storyCategories } from "@/misc/Constants";
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
 import useOnWindowResize from "@/misc/useOnWindowResize";
 import React from "react";
 import { ThumbnailContextProvider } from "@/components/thumbnails-tabs/ThumbnailContext";
-import { usePathname, useRouter } from "@/translations/routing";
+import { usePathname } from "@/translations/routing";
+import { StoriesContext } from "@/app/lib/StoriesContext";
+import { StoryGroupCategory } from "@/misc/Constants";
 
 export default function ContentTabs() {
   const tabsContainerLayoutRef = useRef<HTMLDivElement>(null);
   const tabElements = useRef<HTMLElement[]>([]);
+  
+  const { storyCategories } = useContext(StoriesContext);
+  const { useRouter } = useContext(StoriesContext);
 
   const router = useRouter();
   const pathname = usePathname();
@@ -18,11 +22,10 @@ export default function ContentTabs() {
   let urlHash = window.location.hash.replace("#", "");
   if (urlHash) {
     initialTabIndex = Math.max(
-      storyCategories.findIndex((tab) => tab.getId() === urlHash),
+      storyCategories.findIndex((tab: StoryGroupCategory) => tab.getId() === urlHash),
       0,
     );
   }
-
   const [activeTabIndex, setActiveTabIndex] = useState(initialTabIndex);
   const [activeBorderIndex, setActiveBorderIndex] = useState(initialTabIndex);
 
@@ -70,8 +73,8 @@ export default function ContentTabs() {
   }, []);
 
   function updateSelectedTab(tabId: string) {
-    let tabIndex = storyCategories.findIndex((tab) => tab.getId() === tabId);
-    if (tabIndex === 0) {
+    let tabIndex = storyCategories.findIndex((tab: StoryGroupCategory) => tab.getId() === tabId);
+    if (tabIndex === 0 || tabIndex === -1) {
       // Remove the URL hash on the first tab
       router.replace(pathname);
     } else {
@@ -108,7 +111,7 @@ export default function ContentTabs() {
   return (
     <>
       <div className="flex w-full flex-row justify-around border-t-[1px] sm:justify-center sm:gap-[60px]">
-        {storyCategories.map((tab, index) => {
+        {storyCategories.map((tab: StoryGroupCategory, index: number) => {
           let tabId = tab.getId();
           let isActive = activeBorderIndex === index;
           return (
@@ -126,7 +129,7 @@ export default function ContentTabs() {
         })}
       </div>
       <div ref={tabsContainerLayoutRef} className="relative w-full overflow-hidden">
-        {storyCategories.map((tab, index) => (
+        {storyCategories.map((tab: StoryGroupCategory, index: number) => (
           <ThumbnailContextProvider key={index} onFocus={(event: React.FocusEvent<HTMLDivElement>) => thumbnailOnFocus(event, tab.getId())}>
             {React.cloneElement(tab.storyTabThumbnails, {
               ref: (el: HTMLDivElement) => (tabElements.current[index] = el),

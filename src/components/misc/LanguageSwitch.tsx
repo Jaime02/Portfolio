@@ -2,15 +2,15 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import EnglishFlagIcon from "@/icons/EnglishFlagIcon";
 import SpanishFlagIcon from "@/icons/SpanishFlagIcon";
-import { usePathname, useRouter } from "@/translations/routing";
+import { useNextIntlRouter, usePathname } from "@/translations/routing";
 import { useLocale } from "next-intl";
 import { useParams } from "next/navigation";
-import { startTransition, useEffect, useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 
 export default function LanguageSwitch() {
   const [isMounted, setIsMounted] = useState(false);
   const locale = useLocale();
-  const router = useRouter();
+  const router = useNextIntlRouter();
   const [isPending, startTransition] = useTransition();
   const pathname = usePathname();
   const params = useParams();

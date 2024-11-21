@@ -3,7 +3,7 @@ import { Switch } from "@/components/ui/switch";
 import { useState, useEffect, useContext } from "react";
 import DarkThemeIcon from "@/icons/DarkThemeIcon";
 import LightThemeIcon from "@/icons/LightThemeIcon";
-import { SettingsContext } from "@/lib/SettingsContext";
+import { SettingsContext } from "@/app/lib/SettingsContext";
 
 export default function ThemeSwitch() {
   const { theme, setTheme } = useContext(SettingsContext);

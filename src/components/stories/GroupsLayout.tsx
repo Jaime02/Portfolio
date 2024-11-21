@@ -2,8 +2,8 @@
 import React, { useCallback, useContext, useEffect, useLayoutEffect, useRef } from "react";
 import useOnWindowResize from "@/misc/useOnWindowResize";
 import { StoryGroup } from "@/misc/Constants";
-import { StoryGroupContextProvider } from "@/lib/StoryGroupContext";
-import { StoryGroupsContext } from "@/lib/StoryGroupsContext";
+import { StoryGroupContextProvider } from "@/app/lib/StoryGroupContext";
+import { StoryGroupsContext } from "@/app/lib/StoryGroupsContext";
 
 export default function GroupsLayout() {
   const { activeStoryCategory, activeStoryGroupIndex } = useContext(StoryGroupsContext);

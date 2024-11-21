@@ -3,16 +3,19 @@ import CardsLayout, { CardsLayoutProps } from "@/components/stories/CardsLayout"
 import { forwardRef, useContext, useRef } from "react";
 import SpanishFlagIcon from "@/icons/SpanishFlagIcon";
 import { StoryVideo } from "@/misc/Constants";
-import { SettingsContext } from "@/lib/SettingsContext";
+import { SettingsContext } from "@/app/lib/SettingsContext";
+import { useTranslations } from "next-intl";
 
 const Crispin = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
+  const t = useTranslations("Crispin");
+  const tc = useTranslations("Commons");
   const { mutedStories } = useContext(SettingsContext);
   
   let presentationSign = (
     <div className="absolute left-[51%] top-[16%] z-10 flex w-[90%] translate-x-[-50%] translate-y-[-50%] flex-col justify-center rounded-md p-1 backdrop-blur-[2px]">
       <p className="text-pretty font-bold text-black sm:text-xl">
-        This is my dog, <span className="font-extrabold">Crispín</span>. He is a handsome and loyal dog. It is a mix between an American Standford and an Alano Español{" "}
-        <SpanishFlagIcon extraClasses="size-4 inline" />
+        {t("1.1")} <span className="font-extrabold">Crispín</span>{t("1.2") + " "}
+        <SpanishFlagIcon extraClasses="size-6 inline" />
       </p>
     </div>
   );
@@ -38,7 +41,7 @@ const Crispin = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
             loop
           >
             <source src={video.url} type="video/mp4" />
-            Sorry, your browser does not support the video tag
+            {tc("No video tag support")}
           </video>
           {video.extraComponents}
         </Card>

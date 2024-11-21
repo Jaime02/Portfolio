@@ -2,71 +2,75 @@ import Card from "@/components/stories/Card";
 import CardsLayout, { CardsLayoutProps } from "@/components/stories/CardsLayout";
 import Poll from "@/components/story-widgets/Poll";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { useTranslations } from "next-intl";
 import { forwardRef } from "react";
 
 const ThisWebsite = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
+  const t = useTranslations('This website');
+  const tc = useTranslations('Commons');
   return (
     <CardsLayout {...props} ref={ref}>
       <Card>
-        <p>As you can see, this website is a clone of an Instagram profile. I reverse-engineered all the styles of the official page and adapted for achieving this amazing result.</p>
-        <p className="font-bold">Features:</p>
+        <p>{t("This website description")}</p>
+        <p className="font-bold">{t("Features")}:</p>
         <ul className="ml-6 list-disc flex flex-col gap-1"> 
           <li>
-            Fully{" "}
+            {t("Feature 1.1")}{" "}
             <Tooltip>
               <TooltipTrigger>responsive</TooltipTrigger>
-              <TooltipContent>It adapts to any screen size</TooltipContent>
+              <TooltipContent>{t("It adapts to any screen size")}</TooltipContent>
             </Tooltip>{" "}
-            design
+            {t("Feature 1.2")}
           </li>
-          <li>Dark mode</li>
-          <li>Smooth scroll animations</li>
-          <li>Pure HTML stories</li>
+          <li>{t("Dark mode")}</li>
+          <li>{t("Smooth scroll animations")}</li>
+          <li>{t("HTML content")}</li>
+          <li>{t("Language translatations")}</li>
         </ul>
         <Poll
-          title="Do you like it?"
-          options={["Does not look professional 😪👎🏻", "I don't know 🫤", "I love it! 😍"]}
+          title={t("Do you like it")}
+          options={[t("Does not look professional") + " 😪👎🏻", t("I dont know") + " 🫤", t("I love it") + " 😍"]}
           correctAnswerIndex={2}
-          messagesOnAnswerChosen={['"Do not give dogs what is sacred". Mathew 7:6', "Keep trying...😉", "You nailed it! 👏🏻"]}
+          messagesOnAnswerChosen={[t('Mateo 7 6'), t("Keep trying") + "...😉", t("You nailed it") + " 👏🏻"]}
         />
       </Card>
       <Card>
         <div className="rounded-lg bg-gray-300 p-2 dark:bg-slate-900">
-          <h1 className="bg-gradient-to-r from-blue-700 to-green-400 bg-clip-text text-center text-2xl font-black text-transparent dark:from-blue-500 dark:to-green-500">Technological stack</h1>
+          <h1 className="bg-gradient-to-r from-blue-700 to-green-400 bg-clip-text text-center text-2xl font-black text-transparent dark:from-blue-500 dark:to-green-500">{t("Technological stack")}</h1>
         </div>
         <p>
-          The website is just a set of HTML, CSS and TypeScript files handled by the meta-framework{" "}
+          {t("2.1") + " "}
           <a className="styled-a" href="https://nextjs.org/" target="_blank">
             Next.js
           </a>
-          . It is hosted on{" "}
+          . {t("It is hosted on") + " "}
           <a className="styled-a" href="https://www.vercel.com/" target="_blank">
             Vercel
           </a>
-          , and the source code is available on{" "}
+          , {t("and the source code is available on") +" "}
           <a className="styled-a" href="https://github.com/Jaime02/Portfolio" target="_blank">
             Github
           </a>
-          . I wanted to follow the best practices available and keep the number of dependencies as low as possible.
+          . {t("2.2")}
         </p>
         <p>
-          The performance, accesibility and{" "}
+          {t("2.3") + " "}
           <Tooltip>
             <TooltipTrigger>SEO</TooltipTrigger>
             <TooltipContent>
               Search Engine Optimization
               <br />
-              Determines how well a website ranks in search results
+              {t("2.4")}
             </TooltipContent>
           </Tooltip>{" "}
-          of the website is evaluated with the maximum score in{" "}
+          {t("2.5") + " "}
           <a target="_blank" className="styled-a" href="https://developer.chrome.com/docs/lighthouse/overview">
             Google&rsquo;s Lighthouse
           </a>
         </p>
         <video autoPlay muted loop>
           <source src="/videos/LighthouseResults.mp4" type="video/mp4" />
-          Sorry, your browser does not support the video tag
+          {tc("No video tag support")}
         </video>
       </Card>
     </CardsLayout>
