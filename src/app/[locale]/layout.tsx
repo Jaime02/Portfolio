@@ -31,7 +31,9 @@ export async function generateMetadata({ params }: Omit<Props, "children">) {
     },
     openGraph: {
       title: "Jaime Resano | Portfolio",
-      description: "Jaime Resano Aisa's personal website",
+      description: "Jaime Resano Aisa's portfolio",
+      site_name: "Jaime Resano Aisa Portfolio",
+      url: "https://jaime02.vercel.app/",
       images: [
         {
           "url": "/images/ThisWebsitePreview.webp",
