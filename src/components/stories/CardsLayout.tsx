@@ -27,8 +27,7 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, fo
   let cards = React.Children.toArray(children);
   let storiesCount = cards.length;
 
-  const { useRouter } = useContext(StoriesContext);
-  const router = useRouter();
+  const { router } = useContext(StoriesContext);
   const pathname = usePathname();
   const { inLastGroup, goToNextStoryGroup, goToPreviousStoryGroup, setActiveStoryGroupIndex } = useContext(StoryGroupsContext);
   const { active, storyGroupIndex } = useContext(StoryGroupContext);
@@ -73,7 +72,7 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, fo
   const goToNextStory = useCallback((event?: React.MouseEvent<HTMLElement, MouseEvent>) => {
     event?.stopPropagation();
     if (hash === storiesCount - 1 && inLastGroup) {
-      window.location.href = "/";
+      router.back();
       return;
     }
 

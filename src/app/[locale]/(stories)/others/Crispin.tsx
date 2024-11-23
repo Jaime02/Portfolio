@@ -12,7 +12,7 @@ const Crispin = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
   const { mutedStories } = useContext(SettingsContext);
   
   let presentationSign = (
-    <div className="absolute left-[51%] top-[16%] z-10 flex w-[90%] translate-x-[-50%] translate-y-[-50%] flex-col justify-center rounded-md p-1 backdrop-blur-[2px]">
+    <div className="absolute left-[50%] top-[16%] z-10 flex w-[90%] translate-x-[-50%] translate-y-[-50%] flex-col justify-center rounded-md p-1">
       <p className="text-pretty font-bold text-black sm:text-xl">
         {t("1.1")} <span className="font-extrabold">Crispín</span>{t("1.2") + " "}
         <SpanishFlagIcon extraClasses="size-6 inline" />

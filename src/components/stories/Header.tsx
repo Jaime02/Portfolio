@@ -7,6 +7,7 @@ import {useNextIntlRouter} from "@/translations/routing";
 import SoundCheckbox from "@/components/misc/SoundCheckbox";
 import CloseFriends from "@/components/story-widgets/CloseFriends";
 import PauseStoriesCheckbox from "@/components/misc/PauseStoriesCheckbox";
+import { StoriesContext } from "@/app/lib/StoriesContext";
 
 interface Props {
   floatingHeader: boolean;
@@ -14,7 +15,7 @@ interface Props {
 
 export default function Header({ floatingHeader }: Props) {
   const { isCloseFriends, title, headerThumbnail, active, hasAudio } = useContext(StoryGroupContext);
-  const router = useNextIntlRouter();
+  const { router } = useContext(StoriesContext);
 
   return (
     <div className={`flex w-full flex-row items-center gap-2 ${!floatingHeader ? "bg-black" : ""}`}>

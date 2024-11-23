@@ -12,10 +12,7 @@ export default function ContentTabs() {
   const tabsContainerLayoutRef = useRef<HTMLDivElement>(null);
   const tabElements = useRef<HTMLElement[]>([]);
   
-  const { storyCategories } = useContext(StoriesContext);
-  const { useRouter } = useContext(StoriesContext);
-
-  const router = useRouter();
+  const { storyCategories, router } = useContext(StoriesContext);
   const pathname = usePathname();
   
   let initialTabIndex: number = 0;
@@ -110,7 +107,7 @@ export default function ContentTabs() {
 
   return (
     <>
-      <div className="flex w-full flex-row justify-around border-t-[1px] sm:justify-center sm:gap-[60px]">
+      <div role="navigation" className="flex w-full flex-row justify-around border-t-[1px] sm:justify-center sm:gap-[60px]">
         {storyCategories.map((tab: StoryGroupCategory, index: number) => {
           let tabId = tab.getId();
           let isActive = activeBorderIndex === index;

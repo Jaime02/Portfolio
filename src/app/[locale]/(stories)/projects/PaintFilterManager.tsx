@@ -74,7 +74,7 @@ const PaintFilterManager = forwardRef<HTMLDivElement, CardsLayoutProps>((props, 
             </div>
           </div>
           <div className="relative h-[50vh] grow">
-            <Image src="/images/PFMApp.webp" fill alt={t("3.11")} className="select-none object-contain" draggable="false" priority={true} />
+            <Image src="/images/PFMApp.webp" fill sizes="50vw" alt={t("3.11")} className="select-none object-contain" draggable="false" priority={true} />
           </div>
         </div>
       </Card>

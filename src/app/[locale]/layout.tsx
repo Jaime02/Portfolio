@@ -20,16 +20,28 @@ export async function generateMetadata({ params }: Omit<Props, "children">) {
   return {
     title: t("title"),
     description: t("description"),
+    icons: {
+      icon: "/favicon/favicon.svg",
+      shortcut: "/favicon/favicon.svg",
+      apple: "/favicon/apple-touch-icon.png",
+      other: {
+        rel: "apple-touch-icon-precomposed",
+        url: "/favicon/apple-touch-icon.png",
+      }
+    },
+    openGraph: {
+      title: "Jaime Resano | Portfolio",
+      description: "Jaime Resano Aisa's personal website",
+      images: [
+        {
+          "url": "/images/ThisWebsitePreview.webp",
+          "width": 1145,
+          "height": 865,
+        }
+      ]
+    },
+    type: 'website'
   };
-  // TO DO
-  /*
-  <meta charSet="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
-  <link rel="manifest" href="/site.webmanifest" />*/
 }
 
 export default async function LocaleLayout({ children, params }: Props) {

@@ -24,7 +24,7 @@ import MyLinksThumbnail from "@/components/thumbnails-tabs/MyLinksThumbnail";
 import CV from "@/app/[locale]/(stories)/others/CV";
 import { useTranslations } from "next-intl";
 import { createContext, useCallback, useMemo } from "react";
-import { routing } from "@/translations/routing";
+import { routing, useNextIntlRouter } from "@/translations/routing";
 import { StoryGroup, ProjectsStoryGroup, ExperiencesStoryGroup, OthersStoryGroup } from "@/components/stories/StoryGroup";
 import { StoryGroupCategory } from "@/components/stories/StoryGroupCategory";
 
@@ -33,10 +33,7 @@ const StoriesContext = createContext<any>({
   getStoryCategoryByUrl: () => [0, null],
   getStoryGroupByUrl: () => [0, null],
   getStoryGroupByIndex: () => null,
-  useRouter: () => ({
-    push: () => {},
-    replace: () => {},
-  }),
+  router: null
 });
 
 interface StoriesContextProviderProps {
@@ -254,12 +251,15 @@ function StoriesContextProvider({ children, locale }: StoriesContextProviderProp
     [locale],
   );
 
+  const nextIntlRouter = useNextIntlRouter();
   function useRouter() {
     return {
       push: useRouterPush,
       replace: useRouterReplace,
+      back: nextIntlRouter.back
     };
   }
+  const router = useRouter();
 
   return (
     <StoriesContext.Provider
@@ -268,7 +268,7 @@ function StoriesContextProvider({ children, locale }: StoriesContextProviderProp
         getStoryCategoryByUrl,
         getStoryGroupByUrl,
         getStoryGroupByIndex,
-        useRouter,
+        router,
       }}
     >
       {children}

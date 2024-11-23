@@ -19,9 +19,7 @@ interface StoryGroupsContextProviderProps {
 }
 
 function StoryGroupsContextProvider({ children }: StoryGroupsContextProviderProps){
-  const { useRouter } = useContext(StoriesContext);
-
-  const router = useRouter();
+  const { router } = useContext(StoriesContext);
   const pathname = usePathname();
   
   const { getStoryCategoryByUrl, getStoryGroupByUrl, getStoryGroupByIndex } = useContext(StoriesContext);
@@ -45,7 +43,7 @@ function StoryGroupsContextProvider({ children }: StoryGroupsContextProviderProp
   
   const goToNextStoryGroup = useCallback(() => {
     if (activeStoryGroupIndex === activeStoryCategory.storyGroups.length - 1) {
-      window.location.href = "/";
+      router.back();
       return;
     }
     
@@ -54,7 +52,7 @@ function StoryGroupsContextProvider({ children }: StoryGroupsContextProviderProp
   
   const goToPreviousStoryGroup = useCallback(() => {
     if (activeStoryGroupIndex === 0) {
-      window.location.href = "/";
+      router.back();
       return;
     }
     

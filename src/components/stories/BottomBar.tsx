@@ -12,7 +12,11 @@ export default function BottomBar({ floatingHeader }: { floatingHeader: boolean 
   const t = useTranslations("Bottom bar");
   
   function sendMessage() {
-    replyInputRef.current!.value = "";
+    if (!replyInputRef.current || replyInputRef.current.value === "") {
+      return;
+    }
+
+    replyInputRef.current.value = "";
     toast({title: t("1") + " 👌🏻"});
   }
 
