@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: Omit<Props, "children">) {
     openGraph: {
       title: "Jaime Resano | Portfolio",
       description: "Jaime Resano Aisa's portfolio",
-      site_name: "Jaime Resano Aisa Portfolio",
+      siteName: "Jaime Resano Aisa Portfolio",
       url: "https://jaime02.vercel.app/",
       images: [
         {
