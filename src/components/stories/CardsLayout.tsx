@@ -264,7 +264,7 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, fo
             }),
           )}
         </div>
-        {active && <BottomBar floatingHeader={floatingHeader!} />}
+        {active && !floatingHeader && <BottomBar floatingHeader={floatingHeader!} />}
       </div>
       <GoToNextStoryArrow onClick={goToNextStory} /> 
     </div>
