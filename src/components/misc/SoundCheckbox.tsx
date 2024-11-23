@@ -1,7 +1,7 @@
 import MutedIcon from "@/icons/MutedIcon";
 import SoundIcon from "@/icons/SoundIcon";
 import { SettingsContext } from "@/app/lib/SettingsContext";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { cn } from "@/misc/utils";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslations } from "next-intl";
@@ -26,7 +26,7 @@ export default function SoundCheckbox({extraClasses, showToastOnChange = false}:
   }
 
   return (
-    <button className={`${!hasEverActivatedSound ? "btn-shiny p-2 rounded-full text-black" : ""}`} onClick={() => onSoundButtonClicked()} aria-label="Toggle sound"> 
+    <button className={`clickable p-2 rounded-md ${!hasEverActivatedSound ? "btn-shiny rounded-full text-black" : ""}`} onClick={() => onSoundButtonClicked()} aria-label="Toggle sound"> 
       {mutedStories ? <MutedIcon extraClasses={cn(extraClasses, !hasEverActivatedSound ? "text-black" : "")}/> : <SoundIcon extraClasses={extraClasses}/>}
     </button>
   );

@@ -27,11 +27,11 @@ export default function PauseStoriesCheckbox({ extraClasses, showToastOnChange =
   }
 
   return pausedStories ? (
-    <button aria-label="Resume" className={!hasEverPlayedStories ? "btn-shiny rounded-full p-2" : ""} onClick={onPauseStoriesButtonClicked}>
+    <button aria-label="Resume" className={cn("clickable p-2 rounded-md", !hasEverPlayedStories ? "btn-shiny rounded-full p-2" : "")} onClick={onPauseStoriesButtonClicked}>
       <PlayIcon extraClasses={cn(extraClasses, !hasEverPlayedStories ? "text-black dark:text-black" : "")} />
     </button>
   ) : (
-    <button aria-label="Pause" onClick={onPauseStoriesButtonClicked}>
+    <button aria-label="Pause" onClick={onPauseStoriesButtonClicked} className="clickable p-2 rounded-md">
       <PauseIcon extraClasses={extraClasses} />
     </button>
   );
