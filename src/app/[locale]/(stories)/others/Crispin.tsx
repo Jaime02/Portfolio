@@ -1,10 +1,10 @@
 import Card from "@/components/stories/Card";
 import CardsLayout, { CardsLayoutProps } from "@/components/stories/CardsLayout";
-import { forwardRef, useContext, useRef } from "react";
+import { forwardRef, useContext } from "react";
 import SpanishFlagIcon from "@/icons/SpanishFlagIcon";
-import { StoryVideo } from "@/misc/Constants";
 import { SettingsContext } from "@/app/lib/SettingsContext";
 import { useTranslations } from "next-intl";
+import { StoryVideo } from "@/components/stories/StoryVideo";
 
 const Crispin = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
   const t = useTranslations("Crispin");

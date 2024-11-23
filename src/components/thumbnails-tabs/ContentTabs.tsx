@@ -6,7 +6,7 @@ import React from "react";
 import { ThumbnailContextProvider } from "@/components/thumbnails-tabs/ThumbnailContext";
 import { usePathname } from "@/translations/routing";
 import { StoriesContext } from "@/app/lib/StoriesContext";
-import { StoryGroupCategory } from "@/misc/Constants";
+import { StoryGroupCategory } from "@/components/stories/StoryGroupCategory";
 
 export default function ContentTabs() {
   const tabsContainerLayoutRef = useRef<HTMLDivElement>(null);

@@ -1,7 +1,7 @@
 "use client";
 
 import { StoryGroupsContext } from "@/app/lib/StoryGroupsContext";
-import { StoryGroup } from "@/misc/Constants";
+import { StoryGroup } from "@/components/stories/StoryGroup";
 import React from "react";
 import { createContext, useContext, useMemo } from "react";
 

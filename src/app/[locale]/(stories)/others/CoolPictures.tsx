@@ -1,11 +1,12 @@
 import Card from "@/components/stories/Card";
 import CardsLayout, { CardsLayoutProps } from "@/components/stories/CardsLayout";
 import { forwardRef, useContext, useRef } from "react";
-import { StoryVideo } from "@/misc/Constants";
+
 import StoryLocation from "@/components/story-widgets/StoryLocation";
 import { SettingsContext } from "@/app/lib/SettingsContext";
 import { useTranslations } from "next-intl";
 import RainbowBackgroundContainer from "@/components/stories/RainbowBackgroundContainer";
+import { StoryVideo } from "@/components/stories/StoryVideo";
 
 const CoolPictures = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
   const tc = useTranslations("Commons");
