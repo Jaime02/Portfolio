@@ -22,7 +22,8 @@
     "Description1": "I am a software engineer with a strong passion for programming and anything related to computers.",
     "Description2": "In this website you can find my portfolio with the format of an Instagram profile.",
     "Settings": "Settings",
-    "Message on unfollow": "Anyways, this is fake too"
+    "Message on unfollow": "Anyways, this is fake too",
+    "Following": "Following"
   },
   "Constants": {
     "Others": "Others",
