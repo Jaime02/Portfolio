@@ -50,7 +50,7 @@ export default function ProfileContent() {
   function toggleIsFollowingMe() {
     setIsFollowingMe(!isFollowingMe);
     toast({
-      title: !isFollowingMe ? t("Following") + " 😊" : t("Unfollowing") + " 🤪",
+      title: !isFollowingMe ? t("Message on follow") + " 😊" : t("Message on unfollow") + " 🤪",  
     });
   }
 
