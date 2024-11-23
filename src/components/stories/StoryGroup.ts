@@ -1,5 +1,16 @@
 import React from "react";
 
+interface StoryGroupProps {
+  title: string;
+  component: React.ReactElement;
+  tabThumbnail: React.ReactElement;
+  headerThumbnail: React.ReactElement;
+  storyGroupUrl: string;
+  categoryPrefixUrl?: string;
+  isCloseFriends?: boolean;
+  hasAudio?: boolean;
+}
+
 export abstract class StoryGroup {
   title: string;
   component: React.ReactElement;

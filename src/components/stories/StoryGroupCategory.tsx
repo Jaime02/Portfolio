@@ -34,14 +34,3 @@ export class StoryGroupCategory {
     return this.name.split(" ").join("-").toLowerCase();
   }
 }
-
-interface StoryGroupProps {
-  title: string;
-  component: React.ReactElement;
-  tabThumbnail: React.ReactElement;
-  headerThumbnail: React.ReactElement;
-  storyGroupUrl: string;
-  categoryPrefixUrl?: string;
-  isCloseFriends?: boolean;
-  hasAudio?: boolean;
-}
