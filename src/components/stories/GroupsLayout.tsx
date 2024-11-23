@@ -1,6 +1,6 @@
 "use client";
 import React, { useCallback, useContext, useEffect, useLayoutEffect, useRef } from "react";
-import useOnWindowResize from "@/misc/useOnWindowResize";
+import useOnWindowResize from "@/hooks/useOnWindowResize";
 import { StoryGroup } from "@/misc/Constants";
 import { StoryGroupContextProvider } from "@/app/lib/StoryGroupContext";
 import { StoryGroupsContext } from "@/app/lib/StoryGroupsContext";

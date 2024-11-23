@@ -1,14 +1,33 @@
 import MutedIcon from "@/icons/MutedIcon";
 import SoundIcon from "@/icons/SoundIcon";
 import { SettingsContext } from "@/app/lib/SettingsContext";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import { cn } from "@/misc/utils";
+import { useToast } from "@/hooks/use-toast";
+import { useTranslations } from "next-intl";
 
-export default function SoundCheckbox({extraClasses}: {extraClasses?: string}) {
+export default function SoundCheckbox({extraClasses, showToastOnChange = false}: {extraClasses?: string, showToastOnChange?: boolean}) {
   const { mutedStories, setMutedStories } = useContext(SettingsContext);
+  const [hasEverActivatedSound, setHasEverActivatedSound] = useState(!mutedStories);
+  const t = useTranslations("Sound");
+  const { toast } = useToast();
+
+  function onSoundButtonClicked() {
+    if (showToastOnChange) {
+      toast({
+        title: (!mutedStories ? t("Sound muted") + " 🤫" : t("Sound activated") + " 🔊✅😎")
+      });
+    }
+    
+    if (mutedStories) {
+      setHasEverActivatedSound(mutedStories);
+    }
+    setMutedStories(!mutedStories);
+  }
 
   return (
-    <button className="active:opacity-50" onClick={() => setMutedStories(!mutedStories)} aria-label="Toggle sound">
-      {mutedStories ? <MutedIcon extraClasses={extraClasses}/> : <SoundIcon extraClasses={extraClasses}/>}
+    <button className={`${!hasEverActivatedSound ? "btn-shiny p-2 rounded-full text-black" : ""}`} onClick={() => onSoundButtonClicked()} aria-label="Toggle sound"> 
+      {mutedStories ? <MutedIcon extraClasses={cn(extraClasses, !hasEverActivatedSound ? "text-black" : "")}/> : <SoundIcon extraClasses={extraClasses}/>}
     </button>
   );
 }

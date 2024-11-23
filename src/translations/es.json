@@ -14,7 +14,7 @@
     "Following": "Siguiendo",
     "This is fake lol": "Esto es falso xD",
     "Send message": "Enviar mensaje",
-    "Sorry, this is fake too": "Lo siento, también esto es falso",
+    "Sorry, this is fake too": "Lo siento, esto también es falso",
     "projects": "proyectos",
     "years old": "años",
     "followers": "seguidores",
@@ -229,7 +229,8 @@
     "Muted icon": "Silenciado",
     "Sound icon": "Sonido activado",
     "Close friends": "Mejores amigos",
-    "Download icon": "Descargar"
+    "Download icon": "Descargar",
+    "Close": "Cerrar"
   },
   "Crispin": {
     "1": {
@@ -246,5 +247,21 @@
   },
   "Bottom bar": {
     "1": "Mensaje correctamente ignorado"
+  },
+  "Sound": {
+    "Sound muted": "Modo sigilo activado",
+    "Sound activated": "Sonido activado"
+  },
+  "Pause Stories": {
+    "Stories paused": "Historias pausadas",
+    "Stories resumed": "Historias reanudadas"
+  },
+  "Theme": {
+    "Theme dark": "Modo oscuro activado",
+    "Theme light": "Modo claro activado"
+  },
+  "Settings": {
+    "Sound": "Sonido",
+    "Pause stories": "Pausar historias"
   }
 }

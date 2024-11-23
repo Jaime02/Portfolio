@@ -23,9 +23,10 @@ import Crispin from "@/app/[locale]/(stories)/others/Crispin";
 import MyLinksThumbnail from "@/components/thumbnails-tabs/MyLinksThumbnail";
 import CV from "@/app/[locale]/(stories)/others/CV";
 import { useTranslations } from "next-intl";
-import { ExperiencesStoryGroup, OthersStoryGroup, ProjectsStoryGroup, StoryGroup, StoryGroupCategory } from "@/misc/Constants";
 import { createContext, useCallback, useMemo } from "react";
 import { routing } from "@/translations/routing";
+import { StoryGroup, ProjectsStoryGroup, ExperiencesStoryGroup, OthersStoryGroup } from "@/components/stories/StoryGroup";
+import { StoryGroupCategory } from "@/components/stories/StoryGroupCategory";
 
 const StoriesContext = createContext<any>({
   storyCategories: [],
@@ -144,6 +145,7 @@ function StoriesContextProvider({ children, locale }: StoriesContextProviderProp
         tabThumbnail: <TabThumbnail title="Crispín" src="/images/CrispinThumbnail.jpg" href="/others/crispin" />,
         headerThumbnail: <HeaderThumbnail src="/images/CrispinSquareThumbnail.jpg" />,
         isCloseFriends: true,
+        hasAudio: true,
       }),
       new OthersStoryGroup({
         title: t("Cool pictures"),
@@ -211,7 +213,7 @@ function StoriesContextProvider({ children, locale }: StoriesContextProviderProp
   );
 
   const getStoryGroupByUrl = useCallback((category: StoryGroupCategory, url: string): [number, StoryGroup] => {
-    let index = category.storyGroups.findIndex((storyGroup) => storyGroup.storyGroupUrl.toLowerCase() === url.toLowerCase());
+    let index = category.storyGroups.findIndex((storyGroup: StoryGroup) => storyGroup.storyGroupUrl.toLowerCase() === url.toLowerCase());
     if (index === -1) {
       console.error("Invalid story group url:", url);
       index = 0;

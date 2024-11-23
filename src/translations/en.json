@@ -229,7 +229,8 @@
     "Muted icon": "Muted",
     "Sound icon": "Sound active",
     "Close friends": "Close friends",
-    "Download icon": "Download"
+    "Download icon": "Download",
+    "Close": "Close"
   },
   "Crispin": {
     "1": {
@@ -246,5 +247,21 @@
   },
   "Bottom bar": {
     "1": "Message successfully ignored"
+  },
+  "Sound": {
+    "Sound muted": "Stealth mode activated",
+    "Sound activated": "Sound activated"
+  },
+  "Pause Stories": {
+    "Stories paused": "Stories paused",
+    "Stories resumed": "Stories resumed"
+  },
+  "Theme": {
+    "Theme dark": "Dark theme activated",
+    "Theme light": "Light theme activated"
+  },
+  "Settings": {
+    "Sound": "Sound",
+    "Pause stories": "Pause stories"
   }
 }

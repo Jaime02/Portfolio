@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
-import useOnWindowResize from "@/misc/useOnWindowResize";
+import useOnWindowResize from "@/hooks/useOnWindowResize";
 import React from "react";
 import { ThumbnailContextProvider } from "@/components/thumbnails-tabs/ThumbnailContext";
 import { usePathname } from "@/translations/routing";

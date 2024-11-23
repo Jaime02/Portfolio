@@ -4,7 +4,7 @@ import BottomBar from "@/components/stories/BottomBar";
 import Header from "@/components/stories/Header";
 import * as Constants from "@/misc/Constants";
 import ProgressBar from "@/components/stories/ProgressBar";
-import useOnWindowResize from "@/misc/useOnWindowResize";
+import useOnWindowResize from "@/hooks/useOnWindowResize";
 import { StoryGroupContext } from "@/app/lib/StoryGroupContext";
 import { StoryGroupsContext } from "@/app/lib/StoryGroupsContext";
 import GoToPreviousStoryArrow from "@/components/stories/GoToPreviousStoryArrow";

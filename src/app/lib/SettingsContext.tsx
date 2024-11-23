@@ -28,16 +28,11 @@ const SettingsContextProvider = ({children} : {children: React.ReactNode}) => {
 
   useEffect(() => {
     setMutedStories(window.localStorage.getItem("mutedStories") === "true");
-    setPausedStories(window.localStorage.getItem("pausedStories") === "true");
   }, []);
 
   useEffect(() => {
     window.localStorage.setItem("mutedStories", mutedStories.toString());
   }, [mutedStories]);
-
-  useEffect(() => {
-    window.localStorage.setItem("pausedStories", pausedStories.toString());
-  }, [pausedStories]);
 
   useEffect(() => {
     if (temporalPause) {

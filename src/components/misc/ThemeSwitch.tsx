@@ -4,11 +4,15 @@ import { useState, useEffect, useContext } from "react";
 import DarkThemeIcon from "@/icons/DarkThemeIcon";
 import LightThemeIcon from "@/icons/LightThemeIcon";
 import { SettingsContext } from "@/app/lib/SettingsContext";
+import { useTranslations } from "next-intl";
+import { useToast } from "@/hooks/use-toast";
 
 export default function ThemeSwitch() {
   const { theme, setTheme } = useContext(SettingsContext);
   const [isMounted, setIsMounted] = useState(false);
-
+  const t = useTranslations("Theme");
+  const { toast } = useToast();
+  
   useEffect(() => {
     setIsMounted(true);
   }, []);

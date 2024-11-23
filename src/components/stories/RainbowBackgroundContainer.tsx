@@ -31,9 +31,9 @@ export default function RainboxBackgroundContainer({ children }: { children: Rea
     })
     .join(', ');
   return (
-    <div className="relative h-full w-full overflow-hidden">
+    <div className="relative h-full w-full overflow-hidden text-black">
       <div
-        className="motion-safe:rainbow-spin size-[210%] absolute origin-center top-1/2 left-1/2"
+        className="rainbow-spin size-[260%] absolute origin-center top-1/2 left-1/2"
         style={{
           background: `repeating-conic-gradient(${repeatingConicGradient})`,
         }}

@@ -74,7 +74,7 @@ export default function ProfileContent() {
               {isFollowingMe ? <UserCheckIcon /> : <UserPlusIcon />}
             </div>
             <Popover open={settingsPopoverOpen} onOpenChange={settingsPopoverOpenChange}>
-              <PopoverTrigger className={`p-2 ${settingsOpenedEver ? "dark:text-white btn-outline" : "dark:text-black btn-shiny"}`} aria-label={t("Settings")}>
+              <PopoverTrigger className={`p-2 ${settingsOpenedEver ? "dark:text-white btn-outline" : "btn-base btn-shiny"}`} aria-label={t("Settings")}>
                 <ThreeDotsIcon />
               </PopoverTrigger>
               <PopoverContent>

@@ -11,8 +11,8 @@ interface Props {
 }
 
 export default function Header({ floatingHeader }: Props) {
-  const { isCloseFriends, title, headerThumbnail, active } = useContext(StoryGroupContext);
-
+  const { isCloseFriends, title, headerThumbnail, active, hasAudio } = useContext(StoryGroupContext);
+  
   return (
     <div className={`flex w-full flex-row items-center gap-2 ${!floatingHeader ? "bg-black" : ""}`}>
       {headerThumbnail}
@@ -20,10 +20,10 @@ export default function Header({ floatingHeader }: Props) {
       {active && (
         <>
           {isCloseFriends && <CloseFriends />}
-          <SoundCheckbox extraClasses="text-white size-4" />
-          <PauseStoriesCheckbox />
-          <Link href="/" aria-label="Close" className="text-white transition-all active:opacity-50">
-            <CloseIcon />
+          {hasAudio && <SoundCheckbox extraClasses="size-4 text-white" />}
+          <PauseStoriesCheckbox extraClasses="size-4 text-white"/>
+          <Link href="/" aria-label="Close">
+            <CloseIcon extraClasses="text-white" />
           </Link>
         </>
       )}
