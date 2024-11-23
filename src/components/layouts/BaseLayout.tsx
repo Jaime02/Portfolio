@@ -18,6 +18,7 @@ export default async function BaseLayout({ children, locale }: { children: React
             <SettingsContextProvider>
               <NextIntlClientProvider messages={messages}>
                 {children}
+                <SpeedInsights/>
               </NextIntlClientProvider>
             </SettingsContextProvider>
           </TooltipProvider>
