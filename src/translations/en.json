@@ -11,7 +11,7 @@
     "title": "Profile",
     "subtitle": "About me",
     "Jaime Resano face": "Jaime Resano face",
-    "Following": "Following",
+    "Following": "Thanks for following me!",
     "This is fake lol": "This is fake lol",
     "Send message": "Send message",
     "Sorry, this is fake too": "Sorry, this is fake too",
@@ -21,7 +21,8 @@
     "Welcome to my personal website": "Welcome to my personal website",
     "Description1": "I am a software engineer with a strong passion for programming and anything related to computers.",
     "Description2": "In this website you can find my portfolio with the format of an Instagram profile.",
-    "Settings": "Settings"
+    "Settings": "Settings",
+    "Unfollowing": "Anyways, this is fake too"
   },
   "Constants": {
     "Others": "Others",

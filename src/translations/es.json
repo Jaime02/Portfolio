@@ -11,7 +11,7 @@
     "title": "Perfil",
     "subtitle": "Sobre mi",
     "Jaime Resano face": "Cara de Jaime Resano",
-    "Following": "Siguiendo",
+    "Following": "Gracias por seguirme!",
     "This is fake lol": "Esto es falso xD",
     "Send message": "Enviar mensaje",
     "Sorry, this is fake too": "Lo siento, esto también es falso",
@@ -21,7 +21,8 @@
     "Welcome to my personal website": "Bienvenido a mi página personal",
     "Description1": "Soy un desarrollador de software con una fuerte pasión por la programación y cualquier cosa relacionada con los ordenadores.",
     "Description2": "En esta web puedes encontrar mi portafolio con el formato de un perfil de Instagram.",
-    "Settings": "Ajustes"
+    "Settings": "Ajustes",
+    "Unfollowing": "Da igual, esto también es falso"
   },
   "Constants": {
     "Others": "Otros",

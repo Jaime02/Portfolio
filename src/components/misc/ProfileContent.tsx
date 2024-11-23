@@ -9,6 +9,7 @@ import UserCheckIcon from "@/icons/UserCheckIcon";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import Settings from "@/components/misc/Settings";
 import { useTranslations } from "next-intl";
+import { toast } from "@/hooks/use-toast";
 
 export default function ProfileContent() {
   const t = useTranslations('ProfileContent');
@@ -18,6 +19,7 @@ export default function ProfileContent() {
   const [settingsOpenedEver, setSettingsOpenedEver] = useState(true);
   const [sendMessagePopoverOpen, setSendMessagePopoverOpen] = useState(false);
   const [isFollowingMe, setIsFollowingMe] = useState(false);
+
   useEffect(() => {
     let timer = setTimeout(() => {
       setSendMessagePopoverOpen(false);
@@ -45,6 +47,13 @@ export default function ProfileContent() {
     }
   }
 
+  function toggleIsFollowingMe() {
+    setIsFollowingMe(!isFollowingMe);
+    toast({
+      title: !isFollowingMe ? t("Following") + " 😊" : t("Unfollowing") + " 🤪",
+    });
+  }
+
   return (
     <section className="flex flex-col items-start justify-center">
       <header className="flex h-11 w-full flex-row items-center justify-center border-b-[1px] border-ig-gray sm:hidden">
@@ -70,9 +79,9 @@ export default function ProfileContent() {
               <PopoverTrigger className="btn-secondary">{t("Send message")}</PopoverTrigger>
               <PopoverContent>{t("Sorry, this is fake too")}</PopoverContent>
             </Popover>
-            <div className={`btn-base select-none transition-transform active:scale-[85%] ${isFollowingMe ? "bg-green-400 dark:bg-green-600" : "bg-[#efefef] dark:bg-[#363636]"}`} onClick={() => setIsFollowingMe(!isFollowingMe)}>
+            <button className={`btn-base select-none transition-transform active:scale-[85%] ${isFollowingMe ? "bg-green-400 dark:bg-green-600" : "bg-[#efefef] dark:bg-[#363636]"}`} onClick={toggleIsFollowingMe}>
               {isFollowingMe ? <UserCheckIcon /> : <UserPlusIcon />}
-            </div>
+            </button>
             <Popover open={settingsPopoverOpen} onOpenChange={settingsPopoverOpenChange}>
               <PopoverTrigger className={`p-2 ${settingsOpenedEver ? "dark:text-white btn-outline" : "btn-base btn-shiny text-black"}`} aria-label={t("Settings")}>
                 <ThreeDotsIcon />
