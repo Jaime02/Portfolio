@@ -265,5 +265,8 @@
   "Settings": {
     "Sound": "Sonido",
     "Pause stories": "Pausar historias"
+  },
+  "LanguageSwitch": {
+    "Changing language": "Cambiando de idioma"
   }
 }

@@ -3,11 +3,13 @@ import { Switch } from "@/components/ui/switch";
 import EnglishFlagIcon from "@/icons/EnglishFlagIcon";
 import SpanishFlagIcon from "@/icons/SpanishFlagIcon";
 import { useNextIntlRouter, usePathname } from "@/translations/routing";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 
 export default function LanguageSwitch() {
+  const t = useTranslations("LanguageSwitch");
+  
   const [isMounted, setIsMounted] = useState(false);
   const locale = useLocale();
   const router = useNextIntlRouter();
@@ -34,6 +36,10 @@ export default function LanguageSwitch() {
         {locale: nextLocale},
       )
     });
+  }
+
+  if (isPending) {
+    return <div>{t("Changing language")}...</div>;
   }
 
   return (
