@@ -10,7 +10,7 @@ const TooltipProvider = TooltipPrimitive.Provider;
 const Tooltip = TooltipPrimitive.Root;
 
 const TooltipTrigger = React.forwardRef<React.ElementRef<typeof TooltipPrimitive.Trigger>, React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Trigger>>(({ children, ...props }, ref) => (
-  <TooltipPrimitive.Trigger ref={ref} {...props}>
+  <TooltipPrimitive.Trigger ref={ref} {...props} onMouseUp={(e) => e.stopPropagation()}>
     <div className="flex flex-row gap-0.5 mr-1">
       {children}
       <span className="relative h-4 w-4 rounded-full bg-black dark:bg-white text-white dark:text-black align-top">
