@@ -19,7 +19,7 @@ export default function GroupsLayout() {
 
     const storyWidth = storyGroupsRefs.current[activeStoryGroupIndex].offsetWidth;
     const containerWidth = groupsLayoutContainerRef.current.offsetWidth;
-    let offset = containerWidth / 2 - storyWidth / 2 - activeStoryGroupIndex * storyWidth;
+    let offset = containerWidth / 2 - storyWidth / 2 - activeStoryGroupIndex * storyWidth - 8;
     groupsLayoutRef.current!.style.transform = `translateX(${offset}px)`;
   }, [activeStoryGroupIndex]);
 

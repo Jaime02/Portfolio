@@ -1,5 +1,3 @@
-import { cn } from "@/misc/utils";
-
 export default function PlayIcon({extraClasses}: {extraClasses?: string}) {
   return (
     <svg aria-label="Play" className={extraClasses} fill="currentColor" viewBox="0 0 24 24">

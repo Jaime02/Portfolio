@@ -269,5 +269,9 @@
   },
   "LanguageSwitch": {
     "Changing language": "Changing language"
+  },
+  "Header": {
+    "Do not panic!": "Do not panic!",
+    "Go back button": "Go back button"
   }
 }

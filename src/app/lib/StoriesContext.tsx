@@ -23,17 +23,21 @@ import Crispin from "@/app/[locale]/(stories)/others/Crispin";
 import MyLinksThumbnail from "@/components/thumbnails-tabs/MyLinksThumbnail";
 import CV from "@/app/[locale]/(stories)/others/CV";
 import { useTranslations } from "next-intl";
-import { createContext, useCallback, useMemo } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { routing, useNextIntlRouter } from "@/translations/routing";
 import { StoryGroup, ProjectsStoryGroup, ExperiencesStoryGroup, OthersStoryGroup } from "@/components/stories/StoryGroup";
 import { StoryGroupCategory } from "@/components/stories/StoryGroupCategory";
+import * as Constants from "@/misc/Constants";
+import { SettingsContext } from "@/app/lib/SettingsContext";
 
 const StoriesContext = createContext<any>({
   storyCategories: [],
   getStoryCategoryByUrl: () => [0, null],
   getStoryGroupByUrl: () => [0, null],
   getStoryGroupByIndex: () => null,
-  router: null
+  router: null,
+  willShowClosePopup: null,
+  setWillShowClosePopup: () => null,
 });
 
 interface StoriesContextProviderProps {
@@ -151,6 +155,7 @@ function StoriesContextProvider({ children, locale }: StoriesContextProviderProp
         tabThumbnail: <TabThumbnail title={t("Cool pictures")} src="/images/NeuschwansteinCastle.jpg" href="/others/cool-pictures" />,
         headerThumbnail: <HeaderThumbnail src="/images/icons/CameraIcon.svg" />,
         isCloseFriends: true,
+        hasAudio: true,
       }),
     ],
     [t],
@@ -252,6 +257,7 @@ function StoriesContextProvider({ children, locale }: StoriesContextProviderProp
   );
 
   const nextIntlRouter = useNextIntlRouter();
+
   function useRouter() {
     return {
       push: useRouterPush,
@@ -259,8 +265,18 @@ function StoriesContextProvider({ children, locale }: StoriesContextProviderProp
       back: nextIntlRouter.back
     };
   }
+
   const router = useRouter();
 
+  const [willShowClosePopup, setWillShowClosePopup] = useState(false);
+  const { fullScreenStories } = useContext(SettingsContext);
+  
+  useEffect(() => {
+    if (!window.localStorage.getItem("showClosePopupEver") && window.innerWidth < Constants.SMALL_BREAKPOINT_WIDTH && fullScreenStories) {
+      setWillShowClosePopup(true);
+    }
+  }, [fullScreenStories]);
+  
   return (
     <StoriesContext.Provider
       value={{
@@ -269,6 +285,8 @@ function StoriesContextProvider({ children, locale }: StoriesContextProviderProp
         getStoryGroupByUrl,
         getStoryGroupByIndex,
         router,
+        willShowClosePopup,
+        setWillShowClosePopup
       }}
     >
       {children}

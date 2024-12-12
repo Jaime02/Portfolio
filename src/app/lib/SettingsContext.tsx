@@ -12,6 +12,8 @@ const SettingsContext = createContext<any>({
   setLanguage: () => {},
   pauseStories: null,
   setPauseStories: () => {},
+  hasEverPlayedStories: null,
+  setHasEverPlayedStories: () => {},
   setTemporalPause: () => {},
   mutedStories: null,
   setMutedStories: () => {},
@@ -23,6 +25,8 @@ const SettingsContextProvider = ({children} : {children: React.ReactNode}) => {
   const { resolvedTheme, setTheme } = useTheme();
   
   const [pausedStories, setPausedStories] = useState(true);
+  const [hasEverPlayedStories, setHasEverPlayedStories] = useState(false);
+  
   const [temporalPause, setTemporalPause] = useState(null);
   
   const previousPauseState = useRef(pausedStories);
@@ -32,6 +36,8 @@ const SettingsContextProvider = ({children} : {children: React.ReactNode}) => {
 
   useEffect(() => {
     setMutedStories(window.localStorage.getItem("mutedStories") === "true");
+    setHasEverPlayedStories(window.localStorage.getItem("hasEverPlayedStories") === "true");
+
     let existingFullScreenStories = window.localStorage.getItem("fullScreenStories");
     if (existingFullScreenStories) {
       setFullScreenStories(existingFullScreenStories === "true");
@@ -44,6 +50,9 @@ const SettingsContextProvider = ({children} : {children: React.ReactNode}) => {
 
   useEffect(() => {
     window.localStorage.setItem("mutedStories", mutedStories.toString());
+    if (!mutedStories) {
+      window.localStorage.setItem("hasEverActivatedSound", "true");
+    }
   }, [mutedStories]);
 
   useEffect(() => {
@@ -61,6 +70,12 @@ const SettingsContextProvider = ({children} : {children: React.ReactNode}) => {
     }
   }, [temporalPause, pausedStories]);
 
+  useEffect(() => {
+    if (!pausedStories) {
+      window.localStorage.setItem("hasEverPlayedStories", "true");
+    }
+  }, [pausedStories]);
+
   return (
     <SettingsContext.Provider
       value={{
@@ -68,6 +83,8 @@ const SettingsContextProvider = ({children} : {children: React.ReactNode}) => {
         setTheme: setTheme,
         pausedStories: pausedStories,
         setPausedStories: setPausedStories,
+        hasEverPlayedStories: hasEverPlayedStories,
+        setHasEverPlayedStories: setHasEverPlayedStories,
         setTemporalPause: setTemporalPause,
         mutedStories: mutedStories,
         setMutedStories: setMutedStories,

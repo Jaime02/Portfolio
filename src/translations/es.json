@@ -62,7 +62,7 @@
     "Does not look professional": "No parece profesional",
     "I dont know": "No lo sé...",
     "I love it": "Me encanta!",
-    "Mateo 7 6": "No deis lo santo a los perros. Mateo 7:6",
+    "Mateo 7 6": "No está hecha la miel para la boca del asno !!",
     "Keep trying": "Prueba otra vez",
     "You nailed it": "Lo has clavao!",
     "Technological stack": "Tecnologías utilizadas",
@@ -269,5 +269,9 @@
   },
   "LanguageSwitch": {
     "Changing language": "Cambiando de idioma"
+  },
+  "Header": {
+    "Do not panic!": "No te asustes!",
+    "Go back button": "Botón de volver atrás"
   }
 }

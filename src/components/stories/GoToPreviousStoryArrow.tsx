@@ -6,7 +6,7 @@ export default function GoToPreviousStoryArrow({ onClick }: { onClick?: () => vo
   const { inFirstGroup } = useContext(StoryGroupsContext);
   const { active, hash } = useContext(StoryGroupContext);
   return (
-    <button role="navigation" aria-label="Go to previous story" className={`invisible ${active && (hash !== 0 || !inFirstGroup) ? "sm:visible" : ""}`} onClick={onClick}>
+    <button role="navigation" aria-label="Go to previous story" className={`hidden ${active && (hash !== 0 || !inFirstGroup) ? "sm:block" : ""}`} onClick={onClick}>
       <svg
         aria-label="Go to previous story"
         className={`size-6 text-[#8e8e8e] transition-all hover:cursor-pointer hover:text-white sm:shrink-0`}

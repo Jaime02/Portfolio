@@ -1,14 +1,13 @@
 import PauseIcon from "@/icons/PauseIcon";
 import PlayIcon from "@/icons/PlayIcon";
 import { SettingsContext } from "@/app/lib/SettingsContext";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { cn } from "@/misc/utils";
 import { useTranslations } from "next-intl";
 import { useToast } from "@/hooks/use-toast";
 
 export default function PauseStoriesCheckbox({ extraClasses, showToastOnChange = false}: { extraClasses?: string, showToastOnChange?: boolean }) {
-  const { pausedStories, setPausedStories } = useContext(SettingsContext);
-  const [hasEverPlayedStories, setHasEverPlayedStories] = useState(false);
+  const { pausedStories, setPausedStories, hasEverPlayedStories, setHasEverPlayedStories } = useContext(SettingsContext);
 
   const t = useTranslations("Pause Stories");
   const { toast } = useToast();

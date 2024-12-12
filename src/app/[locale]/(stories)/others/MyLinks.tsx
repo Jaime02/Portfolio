@@ -48,6 +48,7 @@ const MyLinks = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
               href={onlyfansHidden && index == 3 ? "" : titledIcon.link}
               target="_blank"
               onClick={onlyfansHidden && index == 3 ? showOnlyfans : () => {}}
+              onMouseUp={event => event?.stopPropagation()}
             >
               {titledIcon.icon}
               <h1 className="text-lg bg-black text-white w-full">{titledIcon.title}</h1>
