@@ -4,7 +4,6 @@
     "Source code": "Source code"
   },
   "LocaleLayout": {
-    "title": "Jaime Resano | Portfolio",
     "description": "Jaime Resano Aisa's portfolio"
   },
   "ProfileContent": {
@@ -260,11 +259,13 @@
   },
   "Theme": {
     "Theme dark": "Dark theme activated",
-    "Theme light": "Light theme activated"
+    "Theme light": "Light theme activated",
+    "Loading": "Loading themes"
   },
   "Settings": {
     "Sound": "Sound",
-    "Pause stories": "Pause stories"
+    "Pause stories": "Pause stories",
+    "Full screen stories": "Full screen stories"
   },
   "LanguageSwitch": {
     "Changing language": "Changing language"

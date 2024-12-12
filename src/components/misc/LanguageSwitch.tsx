@@ -44,11 +44,11 @@ export default function LanguageSwitch() {
 
   return (
     <div className="flex items-center space-x-2">
-      <Label htmlFor="language-switch" aria-labelledby="language-switch" className="hover:cursor-pointer">
+      <Label htmlFor="language-switch" className="hover:cursor-pointer">
         <EnglishFlagIcon extraClasses="h-6 aspect-ratio-[5/3]" />
       </Label>
       <Switch id="language-switch" checked={locale == "es"} onCheckedChange={onLanguageChange} />
-      <Label htmlFor="language-switch" aria-labelledby="language-switch" className="hover:cursor-pointer">
+      <Label htmlFor="language-switch" className="hover:cursor-pointer">
         <SpanishFlagIcon extraClasses="size-8" />
       </Label>
     </div>

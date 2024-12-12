@@ -17,6 +17,13 @@ export default function Header({ floatingHeader }: Props) {
   const { isCloseFriends, title, headerThumbnail, active, hasAudio } = useContext(StoryGroupContext);
   const { router } = useContext(StoriesContext);
 
+  async function onCloseButtonClicked() {
+    if (document.fullscreenElement) {
+      await document.exitFullscreen();
+    }
+    router.back();
+  }
+
   return (
     <div className={`flex w-full flex-row items-center gap-2 ${!floatingHeader ? "bg-black" : ""}`}>
       {headerThumbnail}
@@ -26,7 +33,7 @@ export default function Header({ floatingHeader }: Props) {
           {isCloseFriends && <CloseFriends />}
           {hasAudio && <SoundCheckbox extraClasses="size-4 text-white" />}
           <PauseStoriesCheckbox extraClasses="size-4 text-white"/>
-          <button aria-label="Close" className="clickable p-2 rounded-md" onClick={() => router.back()}>
+          <button aria-label="Close" className="clickable p-2 rounded-md" onClick={onCloseButtonClicked}>
             <CloseIcon extraClasses="text-white" />
           </button>
         </>

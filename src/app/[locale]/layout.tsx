@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Omit<Props, "children">) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "LocaleLayout" });
   return {
-    title: t("title"),
+    title: "Jaime Resano | Portfolio",
     description: t("description"),
     icons: {
       icon: "/favicon/favicon.svg",

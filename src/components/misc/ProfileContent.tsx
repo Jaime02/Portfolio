@@ -13,6 +13,7 @@ import { toast } from "@/hooks/use-toast";
 
 export default function ProfileContent() {
   const t = useTranslations('ProfileContent');
+  const tc = useTranslations('Constants');
 
   const [followingPopoverOpen, setFollowingPopoverOpen] = useState(false);
   const [settingsPopoverOpen, setSettingsPopoverOpen] = useState(false);
@@ -57,7 +58,7 @@ export default function ProfileContent() {
   return (
     <section className="flex flex-col items-start justify-center">
       <header className="flex h-11 w-full flex-row items-center justify-center border-b-[1px] border-ig-gray sm:hidden">
-        <h1 className="font-system font-semibold">Jaime Resano</h1>
+        <h1 className="font-system font-semibold">Jaime Resano | Portfolio</h1>
       </header>
       <div className="mt-4 grid auto-cols-[min-content_auto] grid-flow-col sm:mb-4 sm:mt-0">
         <div className="col-start-1 row-span-2 row-start-1 mx-4 h-fit w-fit rounded-full bg-gradient-to-tr from-yellow-200 via-[#FD1D1D] to-[#FF00AA] p-[3.5px] sm:row-span-3 sm:mx-7">

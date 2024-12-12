@@ -85,7 +85,7 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, fo
     }
 
     setHash(hash + 1);
-  }, [hash, storiesCount, inLastGroup, goToNextStoryGroup]);
+  }, [router, hash, storiesCount, inLastGroup, goToNextStoryGroup]);
 
   useOnWindowResize(() => {
     updateLayoutOffset();

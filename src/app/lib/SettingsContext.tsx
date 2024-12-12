@@ -3,6 +3,7 @@
 import { useTheme } from "next-themes";
 import React, { useEffect, useRef, useState } from "react";
 import { createContext } from "react";
+import * as Constants from "@/misc/Constants";
 
 const SettingsContext = createContext<any>({
   theme: null,
@@ -14,6 +15,8 @@ const SettingsContext = createContext<any>({
   setTemporalPause: () => {},
   mutedStories: null,
   setMutedStories: () => {},
+  fullScreenStories: null,
+  setFullScreenStories: () => {},
 });
 
 const SettingsContextProvider = ({children} : {children: React.ReactNode}) => {
@@ -25,14 +28,27 @@ const SettingsContextProvider = ({children} : {children: React.ReactNode}) => {
   const previousPauseState = useRef(pausedStories);
 
   const [mutedStories, setMutedStories] = useState(true);
+  const [fullScreenStories, setFullScreenStories] = useState(false);
 
   useEffect(() => {
     setMutedStories(window.localStorage.getItem("mutedStories") === "true");
+    let existingFullScreenStories = window.localStorage.getItem("fullScreenStories");
+    if (existingFullScreenStories) {
+      setFullScreenStories(existingFullScreenStories === "true");
+    } else {
+      if (window.innerWidth < Constants.SMALL_BREAKPOINT_WIDTH) {
+        setFullScreenStories(true);
+      }
+    }
   }, []);
 
   useEffect(() => {
     window.localStorage.setItem("mutedStories", mutedStories.toString());
   }, [mutedStories]);
+
+  useEffect(() => {
+    window.localStorage.setItem("fullScreenStories", fullScreenStories.toString());
+  }, [fullScreenStories]);
 
   useEffect(() => {
     if (temporalPause) {
@@ -54,7 +70,9 @@ const SettingsContextProvider = ({children} : {children: React.ReactNode}) => {
         setPausedStories: setPausedStories,
         setTemporalPause: setTemporalPause,
         mutedStories: mutedStories,
-        setMutedStories: setMutedStories
+        setMutedStories: setMutedStories,
+        fullScreenStories: fullScreenStories,
+        setFullScreenStories: setFullScreenStories,
       }}
     >
       {children}
