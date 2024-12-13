@@ -69,9 +69,13 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(({ children, fo
     setHash(hash - 1);
   }, [hash, setHash, goToPreviousStoryGroup]);
 
-  const goToNextStory = useCallback((event?: React.MouseEvent<HTMLElement, MouseEvent>) => {
+  const goToNextStory = useCallback(async (event?: React.MouseEvent<HTMLElement, MouseEvent>) => {
     event?.stopPropagation();
     if (hash === storiesCount - 1 && inLastGroup) {
+      // Go back to the main page
+      if (document.fullscreenElement) {
+        await document.exitFullscreen();
+      }
       router.back();
       return;
     }

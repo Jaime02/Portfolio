@@ -41,23 +41,31 @@ function StoryGroupsContextProvider({ children }: StoryGroupsContextProviderProp
     router.replace(storyGroup.getFullUrl());
   }, [activeStoryCategory, activeStoryGroupIndex, getStoryGroupByIndex, pathname, router])
   
-  const goToNextStoryGroup = useCallback(() => {
+  const goToNextStoryGroup = useCallback(async () => {
     if (activeStoryGroupIndex === activeStoryCategory.storyGroups.length - 1) {
+      if (document.fullscreenElement) {
+        await document.exitFullscreen();
+      }
+      // Go back to the main page
       router.back();
       return;
     }
     
     setActiveStoryGroupIndex(activeStoryGroupIndex + 1);
-  }, [activeStoryGroupIndex, activeStoryCategory.storyGroups.length]);
+  }, [router, activeStoryGroupIndex, activeStoryCategory.storyGroups]);
   
-  const goToPreviousStoryGroup = useCallback(() => {
+  const goToPreviousStoryGroup = useCallback(async () => {
     if (activeStoryGroupIndex === 0) {
+      if (document.fullscreenElement) {
+        await document.exitFullscreen();
+      }
+      // Go back to the main page
       router.back();
       return;
     }
     
     setActiveStoryGroupIndex(activeStoryGroupIndex - 1);
-  }, [activeStoryGroupIndex]);
+  }, [router, activeStoryGroupIndex]);
 
   return (
     <StoryGroupsContext.Provider
