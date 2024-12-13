@@ -52,7 +52,7 @@ export default function Header({ floatingHeader }: Props) {
           <PauseStoriesCheckbox extraClasses="size-4 text-white" />
           <Popover defaultOpen={willShowClosePopup && document.fullscreenEnabled} onOpenChange={onClosePopupOpenChange}>
             <PopoverTrigger onClick={(event) => event.preventDefault()}>
-              <div role="button" aria-label="Close" className="clickable rounded-md p-2" onClick={onCloseButtonClicked}>
+              <div role="button" aria-label="Close" className="clickable rounded-md p-1" onClick={onCloseButtonClicked}>
                 <CloseIcon extraClasses="text-white" />
               </div>
             </PopoverTrigger>

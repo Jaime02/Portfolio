@@ -19,7 +19,9 @@ export default function GroupsLayout() {
 
     const storyWidth = storyGroupsRefs.current[activeStoryGroupIndex].offsetWidth;
     const containerWidth = groupsLayoutContainerRef.current.offsetWidth;
-    let offset = containerWidth / 2 - storyWidth / 2 - activeStoryGroupIndex * storyWidth - 8;
+    // 8 because of the px-2 of the main container
+    // 80 because of the arrows indicators of the card layout
+    let offset = containerWidth / 2 - storyWidth / 2 - activeStoryGroupIndex * storyWidth - 8 + 80 * activeStoryGroupIndex;
     groupsLayoutRef.current!.style.transform = `translateX(${offset}px)`;
   }, [activeStoryGroupIndex]);
 

@@ -29,6 +29,7 @@ import { StoryGroup, ProjectsStoryGroup, ExperiencesStoryGroup, OthersStoryGroup
 import { StoryGroupCategory } from "@/components/stories/StoryGroupCategory";
 import * as Constants from "@/misc/Constants";
 import { SettingsContext } from "@/app/lib/SettingsContext";
+import CoolPicturesHeaderThumbnail from "@/components/misc/CoolPicturesHeaderThumbnail";
 
 const StoriesContext = createContext<any>({
   storyCategories: [],
@@ -153,7 +154,7 @@ function StoriesContextProvider({ children, locale }: StoriesContextProviderProp
         storyGroupUrl: "cool-pictures",
         component: <CoolPictures />,
         tabThumbnail: <TabThumbnail title={t("Cool pictures")} src="/images/NeuschwansteinCastle.jpg" href="/others/cool-pictures" />,
-        headerThumbnail: <HeaderThumbnail src="/images/icons/CameraIcon.svg" />,
+        headerThumbnail: <CoolPicturesHeaderThumbnail />,
         isCloseFriends: true,
         hasAudio: true,
       }),

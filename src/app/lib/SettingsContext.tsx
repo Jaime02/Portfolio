@@ -10,8 +10,8 @@ const SettingsContext = createContext<any>({
   setTheme: () => {},
   language: null,
   setLanguage: () => {},
-  pauseStories: null,
-  setPauseStories: () => {},
+  pausedStories: null,
+  setPausedStories: () => {},
   hasEverPlayedStories: null,
   setHasEverPlayedStories: () => {},
   setTemporalPause: () => {},
@@ -72,6 +72,7 @@ const SettingsContextProvider = ({children} : {children: React.ReactNode}) => {
 
   useEffect(() => {
     if (!pausedStories) {
+      setHasEverPlayedStories(true);
       window.localStorage.setItem("hasEverPlayedStories", "true");
     }
   }, [pausedStories]);

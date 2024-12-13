@@ -1,4 +1,12 @@
-export default function RainboxBackgroundContainer({ children }: { children: React.ReactNode }) {
+import { cn } from "@/misc/utils";
+
+interface RainboxBackgroundContainerProps {
+  children?: React.ReactNode;
+  extraClasses?: string;
+  repetitions?: number;
+}
+
+export default function RainboxBackgroundContainer({ children, extraClasses, repetitions = 6 }: RainboxBackgroundContainerProps) {
   // Rainbow colors
   const colors = [
     "#FF0000", // Red
@@ -17,13 +25,15 @@ export default function RainboxBackgroundContainer({ children }: { children: Rea
     "black",
   ];
 
-  const anglePerColor = 360 / (colors.length * 6);
+  const anglePerColor = 360 / (colors.length * repetitions);
   let currentAngle = 0;
 
   const repeatingConicGradient = colors
     .map((color, index) => {
       if (color === "black") {
-        currentAngle += anglePerColor / 5;
+        if (repetitions > 2) {
+          currentAngle += anglePerColor / 5; 
+        }
       } else {
         currentAngle += anglePerColor;
       }
@@ -31,14 +41,14 @@ export default function RainboxBackgroundContainer({ children }: { children: Rea
     })
     .join(', ');
   return (
-    <div className="relative h-full w-full overflow-hidden text-black">
+    <div className={cn("relative h-full w-full overflow-hidden text-black", extraClasses)}>
       <div
         className="rainbow-spin size-[260%] absolute origin-center top-1/2 left-1/2"
         style={{
           background: `repeating-conic-gradient(${repeatingConicGradient})`,
         }}
       />
-      <div className="top-1/2 bg-white rounded-md w-[80%] left-1/2 absolute flex translate-x-[-50%] translate-y-[-50%] flex-col items-center justify-center gap-2 p-4">{children}</div>
+      <div className={`top-1/2 bg-white rounded-md w-[80%] left-1/2 absolute flex translate-x-[-50%] translate-y-[-50%] flex-col items-center justify-center gap-2 ${children ? "p-4" : ""}`}>{children}</div>
     </div>
   );
 }

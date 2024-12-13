@@ -7,7 +7,6 @@ import { SettingsContext } from "@/app/lib/SettingsContext";
 import { useTranslations } from "next-intl";
 import RainbowBackgroundContainer from "@/components/stories/RainbowBackgroundContainer";
 import { StoryVideo } from "@/components/stories/StoryVideo";
-import PlayIcon from "@/icons/PlayIcon";
 import PlayVideoButton from "@/components/misc/PlayVideoButton";
 
 const CoolPictures = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
