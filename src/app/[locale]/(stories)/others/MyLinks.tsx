@@ -22,12 +22,12 @@ const MyLinks = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
   const [onlyfansHidden, setOnlyfansHidden] = useState(true);
 
   let titledIcons = [
-    new TitledIcon("GitHub", <GithubIcon extraClasses="h-full w-full"/>, "https://github.com/Jaime02"),
-    new TitledIcon("LinkedIn", <LinkedinIcon extraClasses="h-full w-full"/>, "https://www.linkedin.com/in/jaime-resano/"),
-    new TitledIcon("YouTube", <YoutubeIcon extraClasses="h-full w-full"/>, "https://www.youtube.com/@jaimer02"),
+    new TitledIcon("GitHub", <GithubIcon extraClasses="p-2 h-full w-full"/>, "https://github.com/Jaime02"),
+    new TitledIcon("LinkedIn", <LinkedinIcon extraClasses="p-2 h-full w-full"/>, "https://www.linkedin.com/in/jaime-resano/"),
+    new TitledIcon("YouTube", <YoutubeIcon extraClasses="p-2 h-full w-full"/>, "https://www.youtube.com/@jaimer02"),
     new TitledIcon(
       "???",
-      <Image src="/images/OnlyfansLogo.svg" width="300" height="300" className="h-full w-full" alt="Onlyfans link" draggable="false" priority={true} />,
+      <Image src="/images/OnlyfansLogo.svg" width="300" height="300" className="p-2 h-full w-full" alt="Onlyfans link" draggable="false" priority={true} />,
       "https://www.youtube.com/watch?v=dQw4w9WgXcQ",  // DO NOT OPEN THE LINK
     ),
   ];
