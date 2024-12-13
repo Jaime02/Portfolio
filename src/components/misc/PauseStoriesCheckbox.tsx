@@ -26,8 +26,8 @@ export default function PauseStoriesCheckbox({ extraClasses, showToastOnChange =
   }
 
   return pausedStories ? (
-    <button id="pause-stories-checkbox" aria-label="Resume" className={cn("clickable p-2 sm:p-1 rounded-md", !hasEverPlayedStories ? "btn-shiny rounded-full p-2" : "")} onClick={onPauseStoriesButtonClicked}>
-      <PlayIcon extraClasses={cn(extraClasses, !hasEverPlayedStories ? "text-black dark:text-black" : "")} />
+    <button id="pause-stories-checkbox" aria-label="Resume" className="clickable p-2 sm:p-1 rounded-md" onClick={onPauseStoriesButtonClicked}>
+      <PlayIcon extraClasses={extraClasses} />
     </button>
   ) : (
     <button id="pause-stories-checkbox" aria-label="Pause" onClick={onPauseStoriesButtonClicked} className="clickable p-2 sm:p-1 rounded-md">

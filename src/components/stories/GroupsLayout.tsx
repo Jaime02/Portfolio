@@ -4,6 +4,7 @@ import useOnWindowResize from "@/hooks/useOnWindowResize";
 import { StoryGroupContextProvider } from "@/app/lib/StoryGroupContext";
 import { StoryGroupsContext } from "@/app/lib/StoryGroupsContext";
 import { StoryGroup } from "@/components/stories/StoryGroup";
+import * as Constants from "@/misc/Constants";
 
 export default function GroupsLayout() {
   const { activeStoryCategory, activeStoryGroupIndex } = useContext(StoryGroupsContext);
@@ -21,7 +22,8 @@ export default function GroupsLayout() {
     const containerWidth = groupsLayoutContainerRef.current.offsetWidth;
     // 8 because of the px-2 of the main container
     // 80 because of the arrows indicators of the card layout
-    let offset = containerWidth / 2 - storyWidth / 2 - activeStoryGroupIndex * storyWidth - 8 + 80 * activeStoryGroupIndex;
+    let buttonsOffset = window.innerWidth > Constants.SMALL_BREAKPOINT_WIDTH ? (- 8 + 80 * activeStoryGroupIndex) : 0;
+    let offset = containerWidth / 2 - storyWidth / 2 - activeStoryGroupIndex * storyWidth + buttonsOffset - 8;
     groupsLayoutRef.current!.style.transform = `translateX(${offset}px)`;
   }, [activeStoryGroupIndex]);
 

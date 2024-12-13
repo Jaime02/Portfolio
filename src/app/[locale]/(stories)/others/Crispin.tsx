@@ -5,6 +5,7 @@ import SpanishFlagIcon from "@/icons/SpanishFlagIcon";
 import { SettingsContext } from "@/app/lib/SettingsContext";
 import { useTranslations } from "next-intl";
 import { StoryVideo } from "@/components/stories/StoryVideo";
+import PlayVideoButton from "@/components/misc/PlayVideoButton";
 
 const Crispin = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
   const t = useTranslations("Crispin");
@@ -33,6 +34,7 @@ const Crispin = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
     <CardsLayout {...props} ref={ref} floatingHeader={true}>
       {videos.map((video, index) => (
         <Card key={index}>
+          <PlayVideoButton/>
           <video
             width={0}
             height={0}
