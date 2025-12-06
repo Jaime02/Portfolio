@@ -3,7 +3,7 @@ import React from "react";
 interface StoryTabThumbnailsProps {
   index: number;
   thumbnails: React.ReactElement[];
-  ref: React.Ref<HTMLDivElement>;
+  ref?: React.Ref<HTMLDivElement>;
 }
 
 function StoryTabThumbnails({ index, thumbnails, ref }: StoryTabThumbnailsProps) {

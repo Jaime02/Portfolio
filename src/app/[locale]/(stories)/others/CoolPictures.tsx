@@ -14,7 +14,7 @@ const CoolPictures = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) =
   const t = useTranslations("Cool pictures");
   const { mutedStories } = useContext(SettingsContext);
 
-  let videos = [
+  const videos = [
     new StoryVideo(
       "/videos/Castle.mp4",
       <StoryLocation
@@ -45,7 +45,7 @@ const CoolPictures = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) =
       {videos.map((video, index) => (
         <Card key={index}>
           <PlayVideoButton />
-          <video width={0} height={0} className="my-auto max-h-full w-full" muted={mutedStories} loop>
+          <video width={0} height={0} className="my-auto max-h-full w-full" muted={!!mutedStories} loop>
             <source src={video.url} type="video/mp4" />
             {tc("No video tag support")}
           </video>

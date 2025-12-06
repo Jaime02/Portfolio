@@ -12,7 +12,7 @@ const Crispin = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
   const tc = useTranslations("Commons");
   const { mutedStories } = useContext(SettingsContext);
 
-  let presentationSign = (
+  const presentationSign = (
     <div className="absolute top-[16%] left-[50%] z-10 flex w-[90%] translate-x-[-50%] translate-y-[-50%] flex-col justify-center rounded-md p-1">
       <p className="font-bold text-pretty text-black sm:text-xl">
         {t("1.1")} <span className="font-extrabold">Crispín</span>
@@ -22,7 +22,7 @@ const Crispin = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
     </div>
   );
 
-  let videos = [
+  const videos = [
     new StoryVideo("/videos/CrispinHandsome.mp4", presentationSign),
     new StoryVideo("/videos/CrispinSofa.mp4"),
     new StoryVideo("/videos/CrispinStaring.mp4"),
@@ -39,7 +39,7 @@ const Crispin = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
       {videos.map((video, index) => (
         <Card key={index}>
           <PlayVideoButton />
-          <video width={0} height={0} className="my-auto max-h-full w-full" muted={mutedStories} loop>
+          <video width={0} height={0} className="my-auto max-h-full w-full" muted={!!mutedStories} loop>
             <source src={video.url} type="video/mp4" />
             {tc("No video tag support")}
           </video>

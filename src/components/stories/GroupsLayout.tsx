@@ -23,8 +23,8 @@ export default function GroupsLayout() {
     const containerWidth = groupsLayoutContainerRef.current.offsetWidth;
     // 8 because of the px-2 of the main container
     // 80 because of the arrows indicators of the card layout
-    let buttonsOffset = window.innerWidth > Constants.SMALL_BREAKPOINT_WIDTH ? -8 + 80 * activeStoryGroupIndex : 0;
-    let offset = containerWidth / 2 - storyWidth / 2 - activeStoryGroupIndex * storyWidth + buttonsOffset - 8;
+    const buttonsOffset = window.innerWidth > Constants.SMALL_BREAKPOINT_WIDTH ? -8 + 80 * activeStoryGroupIndex : 0;
+    const offset = containerWidth / 2 - storyWidth / 2 - activeStoryGroupIndex * storyWidth + buttonsOffset - 8;
     groupsLayoutRef.current!.style.transform = `translateX(${offset}px)`;
   }, [activeStoryGroupIndex]);
 

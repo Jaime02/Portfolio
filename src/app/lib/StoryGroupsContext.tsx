@@ -1,18 +1,21 @@
 "use client";
 
 import { StoriesContext } from "@/app/lib/StoriesContext";
+import { StoryGroupCategory } from "@/components/stories/StoryGroupCategory";
 import { usePathname } from "@/translations/routing";
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 
-const StoryGroupsContext = createContext<any>({
-  activeStoryCategory: null,
-  activeStoryGroupIndex: 0,
-  setActiveStoryGroupIndex: () => {},
-  goToNextStoryGroup: () => {},
-  goToPreviousStoryGroup: () => {},
-  inFirstGroup: false,
-  inLastGroup: false,
-});
+interface TStoryGroupsContext {
+  activeStoryCategory: StoryGroupCategory;
+  activeStoryGroupIndex: number;
+  setActiveStoryGroupIndex: (index: number) => void;
+  goToNextStoryGroup: () => Promise<void>;
+  goToPreviousStoryGroup: () => Promise<void>;
+  inFirstGroup: boolean;
+  inLastGroup: boolean;
+}
+
+const StoryGroupsContext = createContext<TStoryGroupsContext>({} as TStoryGroupsContext);
 
 interface StoryGroupsContextProviderProps {
   children: React.ReactNode;
@@ -25,8 +28,8 @@ function StoryGroupsContextProvider({ children }: StoryGroupsContextProviderProp
   const { getStoryCategoryByUrl, getStoryGroupByUrl, getStoryGroupByIndex } = useContext(StoriesContext);
   // The url has the following format: /<storyGroupCategory>/<storyGroupTitle>#[activeStoryCardIndex]
   const [categoryUrl, groupUrl] = pathname.split("/").slice(1, 3);
-  const [_, activeStoryCategory] = getStoryCategoryByUrl(categoryUrl);
-  const [initialStoryGroupIndex, __] = getStoryGroupByUrl(activeStoryCategory, groupUrl);
+  const [, activeStoryCategory] = getStoryCategoryByUrl(categoryUrl);
+  const [initialStoryGroupIndex, ] = getStoryGroupByUrl(activeStoryCategory, groupUrl);
   const [activeStoryGroupIndex, setActiveStoryGroupIndex] = useState(initialStoryGroupIndex);
 
   const inLastGroup = useMemo(

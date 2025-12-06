@@ -16,7 +16,7 @@ export default function ContentTabs() {
   const pathname = usePathname();
 
   let initialTabIndex: number = 0;
-  let urlHash = window.location.hash.replace("#", "");
+  const urlHash = window.location.hash.replace("#", "");
   if (urlHash) {
     initialTabIndex = Math.max(
       storyCategories.findIndex((tab: StoryGroupCategory) => tab.getId() === urlHash),
@@ -33,14 +33,14 @@ export default function ContentTabs() {
     const tabWidth = tabElements.current[activeTabIndex].clientWidth;
     const containerWidth = tabsContainerLayoutRef.current.offsetWidth;
     for (let i = 0; i < tabElements.current.length; i++) {
-      let offset =
+      const offset =
         containerWidth / 2 - tabWidth / 2 + i * tabWidth - activeTabIndex * tabWidth + 20 * i - activeTabIndex * 20;
       tabElements.current![i].style.left = `${offset}px`;
     }
   }, [activeTabIndex]);
 
   const updateTabsContainerHeight = useCallback(() => {
-    let parentHeight = Math.max(...tabElements.current.map((tab) => tab.offsetHeight));
+    const parentHeight = Math.max(...tabElements.current.map((tab) => tab.offsetHeight));
     tabsContainerLayoutRef.current!.style.height = `${parentHeight}px`;
   }, [tabElements]);
 
@@ -55,7 +55,7 @@ export default function ContentTabs() {
       (entries: IntersectionObserverEntry[]) => {
         entries.forEach((entry: IntersectionObserverEntry) => {
           if (entry.isIntersecting) {
-            let index = (entry.target as HTMLElement).dataset.index;
+            const index = (entry.target as HTMLElement).dataset.index;
             if (index !== undefined) {
               setActiveBorderIndex(Number(index));
             }
@@ -71,7 +71,7 @@ export default function ContentTabs() {
   }, []);
 
   function updateSelectedTab(tabId: string) {
-    let tabIndex = storyCategories.findIndex((tab: StoryGroupCategory) => tab.getId() === tabId);
+    const tabIndex = storyCategories.findIndex((tab: StoryGroupCategory) => tab.getId() === tabId);
     if (tabIndex === 0 || tabIndex === -1) {
       // Remove the URL hash on the first tab
       router.replace(pathname);
@@ -110,8 +110,8 @@ export default function ContentTabs() {
     <>
       <div role="navigation" className="flex w-full flex-row justify-around border-t sm:justify-center sm:gap-[60px]">
         {storyCategories.map((tab: StoryGroupCategory, index: number) => {
-          let tabId = tab.getId();
-          let isActive = activeBorderIndex === index;
+          const tabId = tab.getId();
+          const isActive = activeBorderIndex === index;
           return (
             <a
               key={tabId}

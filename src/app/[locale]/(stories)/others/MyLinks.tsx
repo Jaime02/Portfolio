@@ -21,7 +21,7 @@ class TitledIcon {
 const MyLinks = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
   const [onlyfansHidden, setOnlyfansHidden] = useState(true);
 
-  let titledIcons = [
+  const titledIcons = [
     new TitledIcon("GitHub", <GithubIcon extraClasses="p-2 h-full w-full" />, "https://github.com/Jaime02"),
     new TitledIcon(
       "LinkedIn",

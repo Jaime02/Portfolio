@@ -35,15 +35,21 @@ import * as Constants from "@/misc/Constants";
 import { SettingsContext } from "@/app/lib/SettingsContext";
 import CoolPicturesHeaderThumbnail from "@/components/misc/CoolPicturesHeaderThumbnail";
 
-const StoriesContext = createContext<any>({
-  storyCategories: [],
-  getStoryCategoryByUrl: () => [0, null],
-  getStoryGroupByUrl: () => [0, null],
-  getStoryGroupByIndex: () => null,
-  router: null,
-  willShowClosePopup: null,
-  setWillShowClosePopup: () => null,
-});
+interface TStoriesContext {
+  storyCategories: StoryGroupCategory[];
+  getStoryCategoryByUrl: (url: string) => [number, StoryGroupCategory];
+  getStoryGroupByUrl: (category: StoryGroupCategory, url: string) => [number, StoryGroup];
+  getStoryGroupByIndex: (category: StoryGroupCategory, index: number) => StoryGroup;
+  router: {
+    push: (url: string) => void;
+    replace: (url: string) => void;
+    back: () => void;
+  };
+  willShowClosePopup: boolean;
+  setWillShowClosePopup: (willShow: boolean) => void;
+}
+
+const StoriesContext = createContext<TStoriesContext>({} as TStoriesContext);
 
 interface StoriesContextProviderProps {
   children: React.ReactNode;

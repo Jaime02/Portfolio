@@ -5,16 +5,17 @@ import { StoryGroup } from "@/components/stories/StoryGroup";
 import React from "react";
 import { createContext, useContext, useMemo } from "react";
 
-const StoryGroupContext = createContext<any>({
-  storyGroup: null,
-  storyGroupIndex: null,
-  active: false,
-  title: null,
-  headerThumbnail: null,
-  selectMyself: () => {},
-  isCloseFriends: false,
-  hasAudio: false,
-});
+interface TStoryGroupContext {
+  storyGroup: StoryGroup | null;
+  storyGroupIndex: number | null;
+  active: boolean;
+  title: string | null;
+  headerThumbnail: React.ReactElement | null;
+  isCloseFriends: boolean;
+  hasAudio: boolean;
+}
+
+const StoryGroupContext = createContext<TStoryGroupContext>({} as TStoryGroupContext);
 
 interface StoryGroupContextProviderProps {
   children: React.ReactElement;

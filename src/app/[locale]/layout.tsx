@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: Omit<Props, "children">) {
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;
 
-  if (locale && !routing.locales.includes(locale as any)) {
+  if (locale && !(routing.locales as readonly string[]).includes(locale)) {
     return notFound();
   }
   setRequestLocale(locale);
