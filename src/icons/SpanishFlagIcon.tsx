@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 
 export default function SpanishFlagIcon({ extraClasses }: { extraClasses?: string }) {
-  const t = useTranslations('Icons');
+  const t = useTranslations("Icons");
   return (
     <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" className={`${extraClasses}`}>
       <title>{t("Spanish flag")}</title>

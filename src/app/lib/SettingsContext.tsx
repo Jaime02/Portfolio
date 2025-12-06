@@ -21,14 +21,14 @@ const SettingsContext = createContext<any>({
   setFullScreenStories: () => {},
 });
 
-const SettingsContextProvider = ({children} : {children: React.ReactNode}) => {
+const SettingsContextProvider = ({ children }: { children: React.ReactNode }) => {
   const { resolvedTheme, setTheme } = useTheme();
-  
+
   const [pausedStories, setPausedStories] = useState(true);
   const [hasEverPlayedStories, setHasEverPlayedStories] = useState(false);
-  
+
   const [temporalPause, setTemporalPause] = useState(null);
-  
+
   const previousPauseState = useRef(pausedStories);
 
   const [mutedStories, setMutedStories] = useState(true);

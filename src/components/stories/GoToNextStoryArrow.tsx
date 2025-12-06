@@ -4,10 +4,15 @@ import { useContext } from "react";
 export default function GoToNextStoryArrow({ onClick }: { onClick?: () => void }) {
   const { active } = useContext(StoryGroupContext);
   return (
-    <button role="navigation" aria-label="Go to next story" onClick={onClick} className={`hidden ${active ? "sm:block" : ""}`}>
+    <button
+      role="navigation"
+      aria-label="Go to next story"
+      onClick={onClick}
+      className={`hidden ${active ? "sm:block" : ""}`}
+    >
       <svg
         aria-label="Go to next story"
-        className={`size-6 text-[#8e8e8e] transition-all hover:cursor-pointer hover:text-white sm:shrink-0`}
+        className={`size-8 text-[#8e8e8e] transition-all hover:cursor-pointer hover:text-white sm:shrink-0`}
         fill="currentColor"
         role="img"
         viewBox="0 0 24 24"

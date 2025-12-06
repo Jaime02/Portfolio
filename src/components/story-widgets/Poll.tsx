@@ -24,12 +24,12 @@ export default function Poll({ title, options, correctAnswerIndex, messagesOnAns
 
   return (
     <div
-      className="mx-auto flex flex-col items-center gap-2 overflow-clip rounded-lg bg-gray-100 sm:my-2 border-[1px] border-black shadow-xl"
+      className="mx-auto flex flex-col items-center gap-2 overflow-clip rounded-lg border-[1px] border-black bg-gray-100 shadow-xl sm:my-2"
       onMouseUp={(event) => {
         event.stopPropagation();
       }}
     >
-      <h2 className="w-full bg-black text-white p-2 text-center text-lg font-bold">{title}</h2>
+      <h2 className="w-full bg-black p-2 text-center text-lg font-bold text-white">{title}</h2>
       <div className="flex flex-col items-stretch gap-2 p-2">
         {options.map((option, index) => (
           <button
@@ -42,7 +42,9 @@ export default function Poll({ title, options, correctAnswerIndex, messagesOnAns
             {option}
           </button>
         ))}
-        <p className={`font-bold overflow-y-clip text-black transition-all duration-1000 ${message ? "h-max" : "h-0"}`}>{message}</p>
+        <p className={`overflow-y-clip font-bold text-black transition-all duration-1000 ${message ? "h-max" : "h-0"}`}>
+          {message}
+        </p>
       </div>
     </div>
   );

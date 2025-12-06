@@ -1,6 +1,6 @@
 import { cn } from "@/misc/utils";
 
-export default function PauseIcon({extraClasses}: {extraClasses?: string}) {
+export default function PauseIcon({ extraClasses }: { extraClasses?: string }) {
   return (
     <svg aria-label="Pause" className={extraClasses} fill="currentColor" viewBox="0 0 48 48">
       <title>Pause</title>

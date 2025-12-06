@@ -1,4 +1,10 @@
-export default function ArrowIcon({ extraClasses, direction = "up" }: { extraClasses: string, direction?: "left" | "right" | "up" | "down" }) {
+export default function ArrowIcon({
+  extraClasses,
+  direction = "up",
+}: {
+  extraClasses: string;
+  direction?: "left" | "right" | "up" | "down";
+}) {
   let transform = "";
   if (direction === "down") {
     transform = "matrix(-1 0 0 -1 0 0)";
@@ -7,7 +13,7 @@ export default function ArrowIcon({ extraClasses, direction = "up" }: { extraCla
   } else if (direction === "right") {
     transform = "matrix(1 0 0 -1 0 0)";
   }
-    
+
   return (
     <svg
       viewBox="0 0 24 24"

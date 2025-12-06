@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 
-export default function SoundIcon({extraClasses}: {extraClasses?: string}) {
-  const t = useTranslations('Icons');
+export default function SoundIcon({ extraClasses }: { extraClasses?: string }) {
+  const t = useTranslations("Icons");
   return (
     <svg fill="currentColor" className={extraClasses} viewBox="0 0 24 24">
       <title>{t("Sound icon")}</title>

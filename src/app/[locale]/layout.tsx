@@ -5,10 +5,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import BaseLayout from "@/components/layouts/BaseLayout";
 import { StoriesContextProvider } from "@/app/lib/StoriesContext";
 
-type Props = {
-  children: React.ReactNode;
-  params: Promise<{ locale: string }>;
-};
+type Props = { children: React.ReactNode; params: Promise<{ locale: string }> };
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -18,31 +15,23 @@ export async function generateMetadata({ params }: Omit<Props, "children">) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "LocaleLayout" });
   return {
+    metadataBase: new URL("https://jaime02.vercel.app"),
     title: "Jaime Resano | Portfolio",
     description: t("description"),
     icons: {
       icon: "/favicon/favicon.svg",
       shortcut: "/favicon/favicon.svg",
       apple: "/favicon/apple-touch-icon.png",
-      other: {
-        rel: "apple-touch-icon-precomposed",
-        url: "/favicon/apple-touch-icon.png",
-      }
+      other: { rel: "apple-touch-icon-precomposed", url: "/favicon/apple-touch-icon.png" },
     },
     openGraph: {
       title: "Jaime Resano | Portfolio",
       description: "Jaime Resano Aisa's portfolio",
       siteName: "Jaime Resano Aisa Portfolio",
       url: "https://jaime02.vercel.app/",
-      images: [
-        {
-          "url": "/images/ThisWebsitePreview.webp",
-          "width": 1145,
-          "height": 865,
-        }
-      ]
+      images: [{ url: "/images/ThisWebsitePreview.webp", width: 1145, height: 865 }],
     },
-    type: 'website'
+    type: "website",
   };
 }
 

@@ -2,7 +2,7 @@ import React from "react";
 import { createContext } from "react";
 
 const ThumbnailContext = createContext<any>({
-  onFocus: null
+  onFocus: null,
 });
 
 interface ThumbnailContextProviderProps {
@@ -14,7 +14,7 @@ const ThumbnailContextProvider = ({ children, onFocus }: ThumbnailContextProvide
   return (
     <ThumbnailContext.Provider
       value={{
-        onFocus
+        onFocus,
       }}
     >
       {children}

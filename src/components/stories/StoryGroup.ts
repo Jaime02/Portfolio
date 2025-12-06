@@ -21,7 +21,16 @@ export abstract class StoryGroup {
   isCloseFriends: boolean;
   hasAudio: boolean;
 
-  constructor({ title, component, tabThumbnail, headerThumbnail, storyGroupUrl, categoryPrefixUrl, isCloseFriends = false, hasAudio = false }: StoryGroupProps) {
+  constructor({
+    title,
+    component,
+    tabThumbnail,
+    headerThumbnail,
+    storyGroupUrl,
+    categoryPrefixUrl,
+    isCloseFriends = false,
+    hasAudio = false,
+  }: StoryGroupProps) {
     this.title = title;
     this.component = React.cloneElement(component, { storyGroup: this });
     this.tabThumbnail = tabThumbnail;
@@ -38,19 +47,70 @@ export abstract class StoryGroup {
 }
 
 export class ProjectsStoryGroup extends StoryGroup {
-  constructor({ title, component, tabThumbnail, headerThumbnail, isCloseFriends, hasAudio, storyGroupUrl }: StoryGroupProps) {
-    super({ title, component, tabThumbnail, headerThumbnail, isCloseFriends, hasAudio, storyGroupUrl, categoryPrefixUrl: "projects" });
+  constructor({
+    title,
+    component,
+    tabThumbnail,
+    headerThumbnail,
+    isCloseFriends,
+    hasAudio,
+    storyGroupUrl,
+  }: StoryGroupProps) {
+    super({
+      title,
+      component,
+      tabThumbnail,
+      headerThumbnail,
+      isCloseFriends,
+      hasAudio,
+      storyGroupUrl,
+      categoryPrefixUrl: "projects",
+    });
   }
 }
 
 export class ExperiencesStoryGroup extends StoryGroup {
-  constructor({ title, component, tabThumbnail, headerThumbnail, isCloseFriends, hasAudio, storyGroupUrl }: StoryGroupProps) {
-    super({ title, component, tabThumbnail, headerThumbnail, isCloseFriends, hasAudio, storyGroupUrl, categoryPrefixUrl: "experiences" });
+  constructor({
+    title,
+    component,
+    tabThumbnail,
+    headerThumbnail,
+    isCloseFriends,
+    hasAudio,
+    storyGroupUrl,
+  }: StoryGroupProps) {
+    super({
+      title,
+      component,
+      tabThumbnail,
+      headerThumbnail,
+      isCloseFriends,
+      hasAudio,
+      storyGroupUrl,
+      categoryPrefixUrl: "experiences",
+    });
   }
 }
 
 export class OthersStoryGroup extends StoryGroup {
-  constructor({ title, component, tabThumbnail, headerThumbnail, isCloseFriends, hasAudio, storyGroupUrl }: StoryGroupProps) {
-    super({ title, component, tabThumbnail, headerThumbnail, isCloseFriends, hasAudio, storyGroupUrl, categoryPrefixUrl: "others" });
+  constructor({
+    title,
+    component,
+    tabThumbnail,
+    headerThumbnail,
+    isCloseFriends,
+    hasAudio,
+    storyGroupUrl,
+  }: StoryGroupProps) {
+    super({
+      title,
+      component,
+      tabThumbnail,
+      headerThumbnail,
+      isCloseFriends,
+      hasAudio,
+      storyGroupUrl,
+      categoryPrefixUrl: "others",
+    });
   }
 }

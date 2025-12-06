@@ -20,8 +20,8 @@ export default function Settings() {
         <SoundCheckbox extraClasses="size-6" showToastOnChange={true} />
       </div>
       <div className="flex items-center gap-2">
-      <Label htmlFor="pause-stories-checkbox" className="hover:cursor-pointer">
-        {t("Pause stories") + ": "} 
+        <Label htmlFor="pause-stories-checkbox" className="hover:cursor-pointer">
+          {t("Pause stories") + ": "}
         </Label>
         <PauseStoriesCheckbox extraClasses="size-6 text-black dark:text-white" showToastOnChange={true} />
       </div>

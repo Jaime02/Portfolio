@@ -6,8 +6,15 @@ import { cn } from "@/misc/utils";
 import { useTranslations } from "next-intl";
 import { useToast } from "@/hooks/use-toast";
 
-export default function PauseStoriesCheckbox({ extraClasses, showToastOnChange = false}: { extraClasses?: string, showToastOnChange?: boolean }) {
-  const { pausedStories, setPausedStories, hasEverPlayedStories, setHasEverPlayedStories } = useContext(SettingsContext);
+export default function PauseStoriesCheckbox({
+  extraClasses,
+  showToastOnChange = false,
+}: {
+  extraClasses?: string;
+  showToastOnChange?: boolean;
+}) {
+  const { pausedStories, setPausedStories, setHasEverPlayedStories } =
+    useContext(SettingsContext);
 
   const t = useTranslations("Pause Stories");
   const { toast } = useToast();
@@ -15,10 +22,10 @@ export default function PauseStoriesCheckbox({ extraClasses, showToastOnChange =
   function onPauseStoriesButtonClicked() {
     if (showToastOnChange) {
       toast({
-        title: (!pausedStories ? t("Stories paused") + " 🖐🏻⏸️" : t("Stories resumed") + " ✅▶️")
+        title: !pausedStories ? t("Stories paused") + " 🖐🏻⏸️" : t("Stories resumed") + " ✅▶️",
       });
     }
-    
+
     if (pausedStories) {
       setHasEverPlayedStories(pausedStories);
     }
@@ -26,11 +33,21 @@ export default function PauseStoriesCheckbox({ extraClasses, showToastOnChange =
   }
 
   return pausedStories ? (
-    <button id="pause-stories-checkbox" aria-label="Resume" className="clickable p-2 sm:p-1 rounded-md" onClick={onPauseStoriesButtonClicked}>
+    <button
+      id="pause-stories-checkbox"
+      aria-label="Resume"
+      className="clickable rounded-md p-2 sm:p-1"
+      onClick={onPauseStoriesButtonClicked}
+    >
       <PlayIcon extraClasses={extraClasses} />
     </button>
   ) : (
-    <button id="pause-stories-checkbox" aria-label="Pause" onClick={onPauseStoriesButtonClicked} className="clickable p-2 sm:p-1 rounded-md">
+    <button
+      id="pause-stories-checkbox"
+      aria-label="Pause"
+      onClick={onPauseStoriesButtonClicked}
+      className="clickable rounded-md p-2 sm:p-1"
+    >
       <PauseIcon extraClasses={extraClasses} />
     </button>
   );

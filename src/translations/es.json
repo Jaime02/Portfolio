@@ -3,9 +3,7 @@
     "No video tag support": "Lo siento, tu navegador no soporta la etiqueta video",
     "Source code": "Código fuente"
   },
-  "LocaleLayout": {
-    "description": "Portfolio de Jaime Resano Aisa"
-  },
+  "LocaleLayout": { "description": "Portfolio de Jaime Resano Aisa" },
   "ProfileContent": {
     "title": "Perfil",
     "subtitle": "Sobre mi",
@@ -49,13 +47,10 @@
     },
     "This website description": "Como puedes ver, este sitio web es un clon de un perfil de Instagram. \nCopié todos los estilos de la página oficial mediante ingeniería inversa y los adapté para lograr este increíble resultado.",
     "Features": "Características",
-    "Feature 1": {
-      "1": "Diseño",
-      "2": ""
-    },
+    "Feature 1": { "1": "Diseño", "2": "" },
     "It adapts to any screen size": "Se adapta a cualquier tamaño de pantalla",
     "Dark mode": "Modo oscuro",
-    "Smooth scroll animations": "Animaciones suaves",
+    "Smooth scroll animations": "Animaciones molonas",
     "HTML content": "Historias hechas con HTML, CSS y JavaScript",
     "Language translatations": "Traducciones",
     "Do you like it": "¿Qué te parece?",
@@ -67,7 +62,8 @@
     "You nailed it": "Lo has clavao!",
     "Technological stack": "Tecnologías utilizadas",
     "It is hosted on": "Está hosteado en",
-    "and the source code is available on": "y su código fuente está disponible en"
+    "and the source code is available on": "y su código fuente está disponible en",
+    "Click the arrows to navigate": "Haz click en las flechas para navegar"
   },
   "Qt projects": {
     "1": {
@@ -145,8 +141,13 @@
   },
   "The Qt Company": {
     "1": {
-      "1": "Continuará",
-      "2": "Octubre"
+      "1": "Mi experiencia en The Qt Company",
+      "2": "En 2024, me uní a The Qt Company como Ingeniero de Software Junior en la oficina de Berlin. The Qt Company es el principal mantenedor del framework Qt, que he estado utilizando durante años en mis proyectos personales y profesionales. ¡Fue un sueño hecho realidad trabajar allí! Me uní al equipo de PySide, que trabaja en el binding de Python del framework",
+      "3": "Yo en Berlín"
+    },
+    "2": {
+      "1": "También contribuí a Qt Design Studio, enfocándome principalmente en mejorar el exportador de proyectos a Python. Esta herramienta convierte proyectos de Qt Design Studio en aplicaciones Python independientes que los usuarios pueden ejecutar y personalizar según sus necesidades.",
+      "2": "Captura de pantalla de Qt Design Studio"
     }
   },
   "OPmobility": {
@@ -244,34 +245,19 @@
       "1": "Pero, ¿todavía estás aquí? No tengo nada más que enseñarte... bueno... aquí tienes unas fotos to guapas",
       "2": "Activa el sonido y sigue scrolleando",
       "3": "Castillo de Neuschwanstein"
-    }
+    },
+    "5": { "1": "Nieve en Berlin" },
+    "6": { "1": "Una bici que encontré en Potsdam" }
   },
-  "Bottom bar": {
-    "1": "Mensaje correctamente ignorado"
-  },
-  "Sound": {
-    "Sound muted": "Modo sigilo activado",
-    "Sound activated": "Sonido activado"
-  },
-  "Pause Stories": {
-    "Stories paused": "Historias pausadas",
-    "Stories resumed": "Historias reanudadas"
-  },
-  "Theme": {
-    "Theme dark": "Modo oscuro activado",
-    "Theme light": "Modo claro activado",
-    "Loading": "Cargando temas"
-  },
+  "Bottom bar": { "1": "Mensaje correctamente ignorado" },
+  "Sound": { "Sound muted": "Modo sigilo activado", "Sound activated": "Sonido activado" },
+  "Pause Stories": { "Stories paused": "Historias pausadas", "Stories resumed": "Historias reanudadas" },
+  "Theme": { "Theme dark": "Modo oscuro activado", "Theme light": "Modo claro activado", "Loading": "Cargando temas" },
   "Settings": {
     "Sound": "Sonido",
     "Pause stories": "Pausar historias",
     "Full screen stories": "Historias a pantalla completa"
   },
-  "LanguageSwitch": {
-    "Changing language": "Cambiando de idioma"
-  },
-  "Header": {
-    "Do not panic!": "No te asustes!",
-    "Go back button": "Botón de volver atrás"
-  }
+  "LanguageSwitch": { "Changing language": "Cambiando de idioma" },
+  "Header": { "Do not panic!": "No te asustes!", "Go back button": "Botón de volver atrás" }
 }

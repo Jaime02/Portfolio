@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 
-export default function MutedIcon({extraClasses}: {extraClasses?: string}) {
-  const t = useTranslations('Icons');
+export default function MutedIcon({ extraClasses }: { extraClasses?: string }) {
+  const t = useTranslations("Icons");
   return (
     <svg className={extraClasses} fill="currentColor" viewBox="0 0 48 48">
       <title>{t("Muted icon")}</title>

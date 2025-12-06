@@ -11,10 +11,10 @@ import { StoryGroupCategory } from "@/components/stories/StoryGroupCategory";
 export default function ContentTabs() {
   const tabsContainerLayoutRef = useRef<HTMLDivElement>(null);
   const tabElements = useRef<HTMLElement[]>([]);
-  
+
   const { storyCategories, router } = useContext(StoriesContext);
   const pathname = usePathname();
-  
+
   let initialTabIndex: number = 0;
   let urlHash = window.location.hash.replace("#", "");
   if (urlHash) {
@@ -33,7 +33,8 @@ export default function ContentTabs() {
     const tabWidth = tabElements.current[activeTabIndex].clientWidth;
     const containerWidth = tabsContainerLayoutRef.current.offsetWidth;
     for (let i = 0; i < tabElements.current.length; i++) {
-      let offset = containerWidth / 2 - tabWidth / 2 + i * tabWidth - activeTabIndex * tabWidth + 20 * i - activeTabIndex * 20;
+      let offset =
+        containerWidth / 2 - tabWidth / 2 + i * tabWidth - activeTabIndex * tabWidth + 20 * i - activeTabIndex * 20;
       tabElements.current![i].style.left = `${offset}px`;
     }
   }, [activeTabIndex]);
@@ -107,27 +108,32 @@ export default function ContentTabs() {
 
   return (
     <>
-      <div role="navigation" className="flex w-full flex-row justify-around border-t-[1px] sm:justify-center sm:gap-[60px]">
+      <div role="navigation" className="flex w-full flex-row justify-around border-t sm:justify-center sm:gap-[60px]">
         {storyCategories.map((tab: StoryGroupCategory, index: number) => {
           let tabId = tab.getId();
           let isActive = activeBorderIndex === index;
           return (
             <a
               key={tabId}
-              className={`flex flex-1 flex-row items-center justify-center gap-2 ${isActive ? "border-t-[1px] border-black dark:border-white" : "text-gray-800 dark:text-ig-gray"} py-2`}
+              className={`flex flex-1 flex-row py-2 items-center justify-center gap-2 ${isActive ? "border-t border-black dark:border-white" : "dark:text-ig-gray text-gray-800"}`}
               href={tabId === "projects" ? "" : `#${tabId}`}
               aria-label={tab.name}
               onClick={(event) => handleAnchorClick(tabId, event)}
             >
               {tab.icon}
-              <span className={`hidden text-sm uppercase tracking-widest sm:inline ${isActive ? "font-bold" : ""}`}>{tab.name}</span>
+              <span className={`hidden text-sm tracking-widest uppercase sm:inline ${isActive ? "font-bold" : ""}`}>
+                {tab.name}
+              </span>
             </a>
           );
         })}
       </div>
       <div ref={tabsContainerLayoutRef} className="relative w-full overflow-hidden">
         {storyCategories.map((tab: StoryGroupCategory, index: number) => (
-          <ThumbnailContextProvider key={index} onFocus={(event: React.FocusEvent<HTMLDivElement>) => thumbnailOnFocus(event, tab.getId())}>
+          <ThumbnailContextProvider
+            key={index}
+            onFocus={(event: React.FocusEvent<HTMLDivElement>) => thumbnailOnFocus(event, tab.getId())}
+          >
             {React.cloneElement(tab.storyTabThumbnails, {
               ref: (el: HTMLDivElement) => (tabElements.current[index] = el),
               key: index,

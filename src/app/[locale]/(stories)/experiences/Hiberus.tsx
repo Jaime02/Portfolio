@@ -1,6 +1,6 @@
 import Card from "@/components/stories/Card";
 import CardsLayout, { CardsLayoutProps } from "@/components/stories/CardsLayout";
-import {Link} from "@/translations/routing";
+import { Link } from "@/translations/routing";
 import { forwardRef } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
@@ -13,9 +13,7 @@ const Hiberus = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
         <div className="rounded-lg bg-[#19245A] p-2">
           <h1 className="text-center text-xl font-bold text-white">Hiberus</h1>
         </div>
-        <p>
-          {t("1.1")}
-        </p>
+        <p>{t("1.1")}</p>
         <p>
           {t("1.2") + " "}
           <Link href="/experiences/upna" className="styled-a">
@@ -29,9 +27,7 @@ const Hiberus = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
         </figure>
       </Card>
       <Card>
-        <p>
-          {t("2.1")}
-        </p>
+        <p>{t("2.1")}</p>
         <p>
           {t("2.2") + " "}
           <a href="https://dotnet.microsoft.com/en-us/apps/aspnet/mvc" target="_blank" className="styled-a">
@@ -47,15 +43,36 @@ const Hiberus = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
           </a>
           . {t("2.5")} 😅.
         </p>
-        <div className="flex h-fit flex-row gap-2 py-2 p-2 bg-ig-gray rounded-md">
+        <div className="bg-ig-gray flex h-fit flex-row gap-2 rounded-md p-2 py-2">
           <div className="relative aspect-square grow">
-            <Image src="/images/icons/dotNetIcon.svg" fill alt={t("2.6")} className="w-full select-none" draggable="false" priority={true} />
+            <Image
+              src="/images/icons/dotNetIcon.svg"
+              fill
+              alt={t("2.6")}
+              className="w-full select-none"
+              draggable="false"
+              priority={true}
+            />
           </div>
           <div className="relative aspect-square grow">
-            <Image src="/images/icons/CSharpIcon.svg" fill alt={t("2.7")} className="w-full select-none" draggable="false" priority={true} />
+            <Image
+              src="/images/icons/CSharpIcon.svg"
+              fill
+              alt={t("2.7")}
+              className="w-full select-none"
+              draggable="false"
+              priority={true}
+            />
           </div>
           <div className="relative aspect-square grow">
-            <Image src="/images/icons/SQLServerIcon.svg" fill alt={t("2.8")} className="w-full select-none" draggable="false" priority={true} />
+            <Image
+              src="/images/icons/SQLServerIcon.svg"
+              fill
+              alt={t("2.8")}
+              className="w-full select-none"
+              draggable="false"
+              priority={true}
+            />
           </div>
         </div>
       </Card>

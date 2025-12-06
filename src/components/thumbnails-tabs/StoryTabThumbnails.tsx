@@ -1,22 +1,23 @@
 import React from "react";
-import { forwardRef } from "react";
 
-interface Props {
+interface StoryTabThumbnailsProps {
   index: number;
   thumbnails: React.ReactElement[];
+  ref: React.Ref<HTMLDivElement>;
 }
 
-const StoryTabThumbnails = forwardRef<HTMLDivElement, Props>(({index, thumbnails}: Props, ref) => {
+function StoryTabThumbnails({ index, thumbnails, ref }: StoryTabThumbnailsProps) {
   return (
-    <div ref={ref} data-index={index} className="min-w-full w-full absolute top-0 data-[animate]:transition-[left] data-[animate]:duration-700"> 
-      <div className="grid grid-cols-3 gap-2 rounded-md bg-gray-100 dark:bg-gray-800 p-2">
-        {
-          thumbnails.map((thumbnail, index) => React.cloneElement(thumbnail, {key: index}))
-        }
+    <div
+      ref={ref}
+      data-index={index}
+      className="absolute top-0 w-full min-w-full data-animate:transition-[left] data-animate:duration-700"
+    >
+      <div className="grid grid-cols-3 gap-2 rounded-md bg-gray-100 p-2 dark:bg-gray-800">
+        {thumbnails.map((thumbnail, index) => React.cloneElement(thumbnail, { key: index }))}
       </div>
     </div>
   );
-});
+};
 
-StoryTabThumbnails.displayName = "Content tab";
 export default StoryTabThumbnails;

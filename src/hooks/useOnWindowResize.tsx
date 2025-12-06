@@ -7,6 +7,6 @@ export default function useOnWindowResize(callback: () => void, dependencies: an
     }
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [callback, ...dependencies]);
 }

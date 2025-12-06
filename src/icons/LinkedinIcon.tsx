@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 
-export default function LinkedinIcon({extraClasses}: {extraClasses?: string}) {
-  const t = useTranslations('Icons');
+export default function LinkedinIcon({ extraClasses }: { extraClasses?: string }) {
+  const t = useTranslations("Icons");
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className={extraClasses} viewBox="0 0 76.624 65.326">
       <title>{t("Linkedin icon")}</title>

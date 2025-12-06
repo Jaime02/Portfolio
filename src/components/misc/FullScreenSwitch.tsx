@@ -12,7 +12,7 @@ export default function ThemeSwitch() {
 
   function onFullScreenStoriesButtonClicked() {
     toast({
-      title: (!fullScreenStories ? t("Full screen stories") + " 😎" : t("Full screen stories") + " ❌")
+      title: !fullScreenStories ? t("Full screen stories") + " 😎" : t("Full screen stories") + " ❌",
     });
     setFullScreenStories(!fullScreenStories);
   }

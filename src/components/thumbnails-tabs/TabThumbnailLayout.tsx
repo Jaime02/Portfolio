@@ -20,10 +20,10 @@ export default function TabThumbnailLayout({ children, href, title, padding = fa
     if (!fullScreenStories) {
       return;
     }
-    document.documentElement.requestFullscreen()
+    document.documentElement
+      .requestFullscreen()
       .then(() => {
         console.log("Fullscreen enabled");
-        
       })
       .catch((err) => {
         setFullScreenStories(false);
@@ -46,7 +46,7 @@ export default function TabThumbnailLayout({ children, href, title, padding = fa
     >
       {children}
       <div
-        className={`absolute left-0 top-0 w-full transform bg-gray-700 py-2 text-center text-white transition-transform duration-300 ${isHovered ? "translate-y-0" : "-translate-y-full"}`}
+        className={`absolute top-0 left-0 w-full transform bg-gray-700 py-2 text-center text-white transition-transform duration-300 ${isHovered ? "translate-y-0" : "-translate-y-full"}`}
         aria-hidden={!isHovered}
       >
         {title}

@@ -1,4 +1,4 @@
-export default function PlayIcon({extraClasses}: {extraClasses?: string}) {
+export default function PlayIcon({ extraClasses }: { extraClasses?: string }) {
   return (
     <svg aria-label="Play" className={extraClasses} fill="currentColor" viewBox="0 0 24 24">
       <title>Play</title>

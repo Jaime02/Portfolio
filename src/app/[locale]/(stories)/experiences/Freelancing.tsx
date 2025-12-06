@@ -4,6 +4,7 @@ import { forwardRef } from "react";
 import Image from "next/image";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useTranslations } from "next-intl";
+import UpworkLogo from "@/icons/UpworkLogo";
 
 const Freelancing = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
   const t = useTranslations("Freelancing");
@@ -29,7 +30,15 @@ const Freelancing = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) =>
         <p>
           {t("2.1")} <span className="font-bold italic">{t("2.2")}</span> {t("2.3")} 😜)
         </p>
-        <Image src="/images/FreelancingMeme.webp" width="600" height="600" alt={t("2.4")} className="w-[70%] mx-auto select-none" draggable="false" priority={true} />
+        <Image
+          src="/images/FreelancingMeme.webp"
+          width="600"
+          height="600"
+          alt={t("2.4")}
+          className="mx-auto w-[70%] select-none"
+          draggable="false"
+          priority={true}
+        />
       </Card>
       <Card>
         <div className="rounded-lg bg-[#1DBF73] p-2">
@@ -37,7 +46,15 @@ const Freelancing = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) =>
         </div>
         <p>{t("3.1")}</p>
         <p>{t("3.2")} ⭐</p>
-        <Image src="/images/FiverrProfile.png" width="600" height="600" alt={t("3.3")} className="w-full select-none" draggable="false" priority={true} />
+        <Image
+          src="/images/FiverrProfile.png"
+          width="600"
+          height="600"
+          alt={t("3.3")}
+          className="w-full select-none"
+          draggable="false"
+          priority={true}
+        />
         <a className="btn-primary mx-auto bg-[#1DBF73] text-lg" href="https://www.fiverr.com/jaime_02" target="_blank">
           {t("3.4")}
         </a>
@@ -51,6 +68,7 @@ const Freelancing = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) =>
           {t("4.2")} <span className="font-bold">{t("4.3")}</span>. {t("4.4")} 😡
         </p>
         <p>{t("4.5")} 👎🏻</p>
+        <UpworkLogo extraClasses="mx-auto w-[50%] select-none" />
       </Card>
     </CardsLayout>
   );

@@ -1,6 +1,6 @@
 import Card from "@/components/stories/Card";
 import CardsLayout, { CardsLayoutProps } from "@/components/stories/CardsLayout";
-import {Link} from "@/translations/routing";
+import { Link } from "@/translations/routing";
 import { forwardRef } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
@@ -10,9 +10,15 @@ const Upna = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
   return (
     <CardsLayout {...props} ref={ref}>
       <Card>
-        <p>{t("1.1")} <Link className="styled-a" href="/projects/paint-filter-manager">Paint filter manager</Link> {t("1.2")}</p> 
+        <p>
+          {t("1.1")}{" "}
+          <Link className="styled-a" href="/projects/paint-filter-manager">
+            Paint filter manager
+          </Link>{" "}
+          {t("1.2")}
+        </p>
         <figure>
-        <Image src="/images/UPNACampus.webp" alt={t("1.3")} width={600} height={600} />
+          <Image src="/images/UPNACampus.webp" alt={t("1.3")} width={600} height={600} />
           <figcaption className="text-center italic">{t("1.3")}</figcaption>
         </figure>
         <p>{t("1.4")}</p>

@@ -1,5 +1,5 @@
 import BaseLayout from "@/components/layouts/BaseLayout";
-import {routing} from '@/translations/routing';
+import { routing } from "@/translations/routing";
 
 export default function NotFound() {
   return (

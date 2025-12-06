@@ -11,11 +11,11 @@ export default function ProgressBar({ storyCount, activeStoryIndex, progress }: 
         .fill(0)
         .map((_, index) => {
           return (
-            <div className="h-full w-full bg-gray-400 rounded-md" key={index}>
+            <div className="h-full w-full rounded-md bg-gray-400" key={index}>
               <div
                 className="h-full bg-white"
                 style={{
-                  width: activeStoryIndex > index ? '100%' : index === activeStoryIndex ? `${progress}%` : '0%',
+                  width: activeStoryIndex > index ? "100%" : index === activeStoryIndex ? `${progress}%` : "0%",
                 }}
               />
             </div>

@@ -71,4 +71,4 @@ export const OpMobilityFont = localFont({
       style: "normal",
     },
   ],
-}); 
+});

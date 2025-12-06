@@ -10,13 +10,17 @@ const OPmobility = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => 
   return (
     <CardsLayout {...props} ref={ref}>
       <Card>
-        <p>
-          {t("1.1")}
-        </p>
-        <Image src="/images/OPmobilityCover.jpg" width="800" height="800" alt={t("1.2")} className="w-full select-none" draggable="false" priority={true} />
-        <p>
-          {t("1.3")}
-        </p>
+        <p>{t("1.1")}</p>
+        <Image
+          src="/images/OPmobilityCover.jpg"
+          width="800"
+          height="800"
+          alt={t("1.2")}
+          className="w-full select-none"
+          draggable="false"
+          priority={true}
+        />
+        <p>{t("1.3")}</p>
       </Card>
       <Card>
         <p>
@@ -26,17 +30,37 @@ const OPmobility = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => 
           </a>
           . {t("2.2")}
         </p>
-        <Image src="/images/OPmobilityPappenheim.png" width="800" height="800" alt={t("2.3")} className="w-full select-none" draggable="false" priority={true} />
-        <Image src="/images/OPmobilityBumper.jpg" width="800" height="800" alt={t("2.4")} className="w-full select-none" draggable="false" priority={true} />
+        <Image
+          src="/images/OPmobilityPappenheim.png"
+          width="800"
+          height="800"
+          alt={t("2.3")}
+          className="w-full select-none"
+          draggable="false"
+          priority={true}
+        />
+        <Image
+          src="/images/OPmobilityBumper.jpg"
+          width="800"
+          height="800"
+          alt={t("2.4")}
+          className="w-full select-none"
+          draggable="false"
+          priority={true}
+        />
       </Card>
       <Card>
-        <p>
-          {t.rich("3.1", {q: (chunk) => <q>{chunk}</q>})}
-        </p>
-        <Image src="/images/PFM.webp" width="800" height="800" alt="Paint filter manager web" className="w-full select-none" draggable="false" priority={true} />
-        <LocalLink href="/projects/paint-filter-manager">
-          {t("3.2")}
-        </LocalLink>
+        <p>{t.rich("3.1", { q: (chunk) => <q>{chunk}</q> })}</p>
+        <Image
+          src="/images/PFM.webp"
+          width="800"
+          height="800"
+          alt="Paint filter manager web"
+          className="w-full select-none"
+          draggable="false"
+          priority={true}
+        />
+        <LocalLink href="/projects/paint-filter-manager">{t("3.2")}</LocalLink>
       </Card>
     </CardsLayout>
   );

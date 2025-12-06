@@ -1,63 +1,118 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer components {
-  .clickable {
-    @apply hover:ring-2 active:opacity-75 select-none cursor-pointer;
-  }
+@plugin "tailwindcss-animate";
 
-  .btn-base {
-    @apply clickable flex h-8 w-fit flex-row flex-nowrap items-center justify-center gap-2 text-nowrap rounded-lg px-4 py-[7px] font-system text-sm font-semibold;
-  }
+@custom-variant dark (&:where(.dark, .dark *));
 
-  .btn-primary {
-    @apply btn-base bg-[#0095f6] hover:bg-[#1877f2] text-white;
-  }
+@theme {
+  --font-system: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-instagram: var(--font-instagram);
+  --font-opmobility: var(--opmobility-font);
+  --font-qt: var(--font-qt);
 
-  .btn-secondary {
-    @apply btn-base bg-[#efefef] hover:bg-ig-gray dark:bg-[#363636] dark:hover:bg-[#262626];
-  }
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
 
-  .btn-outline {
-    @apply btn-base border border-gray-500;
-  }
-  
-  @keyframes scalePulse {
+  --color-ig-gray: #dbdbdb;
+  --color-ig-close-friends: rgb(28, 209, 79);
+  --color-qt-green: rgb(65, 205, 82);
+  --color-op-mobility-blue: #0e3571;
+
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-chart-1: hsl(var(--chart-1));
+  --color-chart-2: hsl(var(--chart-2));
+  --color-chart-3: hsl(var(--chart-3));
+  --color-chart-4: hsl(var(--chart-4));
+  --color-chart-5: hsl(var(--chart-5));
+
+  --animate-moving-background: animatedBackground 4s ease infinite alternate;
+  --background-size-300%: 300%;
+
+  @keyframes animatedBackground {
+    0% {
+      background-position: 0% 50%;
+    }
     50% {
-      filter: brightness(1.1);
-      transform: scale(1.15);
+      background-position: 100% 50%;
     }
-  }
-
-  .btn-shiny {
-    @apply animate-pulse bg-yellow-300 border-2 border-yellow-400 dark:bg-yellow-400 dark:border-yellow-600; 
-    animation: scalePulse 1s ease-in-out infinite;
-  }
-
-  .styled-a {
-    @apply underline hover:text-blue-800 dark:hover:text-blue-500;
-  }
-
-  @keyframes rainbow-spin {
-    from {
-      transform: translate(-50%, -50%) rotate(0deg);
-    }
-    to {
-      transform: translate(-50%, -50%) rotate(360deg);
-    }
-  }
-  
-  .rainbow-spin {
-    @media (prefers-reduced-motion: no-preference) {
-      animation: rainbow-spin 40s linear infinite;
-    }
-    @media (prefers-reduced-motion) {
-      transform: translate(-50%, -50%);
+    100% {
+      background-position: 0% 50%;
     }
   }
 }
 
+@utility clickable {
+  @apply cursor-pointer select-none hover:ring-2 active:opacity-75;
+}
+
+@utility btn-base {
+  @apply clickable font-system flex h-8 w-fit flex-row flex-nowrap items-center justify-center gap-2 rounded-lg px-4 py-[7px] text-sm font-semibold text-nowrap;
+}
+
+@utility btn-primary {
+  @apply btn-base bg-[#0095f6] text-white hover:bg-[#1877f2];
+}
+
+@utility btn-secondary {
+  @apply btn-base hover:bg-ig-gray bg-[#efefef] dark:bg-[#363636] dark:hover:bg-[#262626];
+}
+
+@utility btn-outline {
+  @apply btn-base border border-gray-500;
+}
+
+@keyframes scalePulse {
+  50% {
+    filter: brightness(1.1);
+    transform: scale(1.15);
+  }
+}
+
+@utility btn-shiny {
+  @apply animate-pulse border-2 border-yellow-400 bg-yellow-300 dark:border-yellow-600 dark:bg-yellow-400;
+  animation: scalePulse 1s ease-in-out infinite;
+}
+
+@utility styled-a {
+  @apply underline hover:text-blue-800 dark:hover:text-blue-500;
+}
+
+@keyframes rainbow-spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@utility rainbow-spin {
+  @media (prefers-reduced-motion: no-preference) {
+    animation: rainbow-spin 40s linear infinite;
+  }
+  @media (prefers-reduced-motion) {
+    transform: translate(-50%, -50%);
+  }
+}
 
 @layer base {
   :root {

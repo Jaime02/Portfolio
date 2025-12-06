@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 
 export default function YoutubeIcon({ extraClasses }: { extraClasses?: string }) {
-  const t = useTranslations('Icons');
+  const t = useTranslations("Icons");
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className={extraClasses} viewBox="-35.20005 -41.33325 305.0671 247.9995">
       <title>{t("Youtube icon")}</title>

@@ -58,7 +58,7 @@ export default function Header({ floatingHeader }: Props) {
             </PopoverTrigger>
             <PopoverContent>
               {t("Do not panic!")} 😉
-                <br/>
+              <br />
               {t("Go back button")} ⬆️
             </PopoverContent>
           </Popover>

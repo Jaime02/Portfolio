@@ -3,9 +3,7 @@
     "No video tag support": "Sorry, your browser does not support the video tag",
     "Source code": "Source code"
   },
-  "LocaleLayout": {
-    "description": "Jaime Resano Aisa's portfolio"
-  },
+  "LocaleLayout": { "description": "Jaime Resano Aisa's portfolio" },
   "ProfileContent": {
     "title": "Profile",
     "subtitle": "About me",
@@ -49,10 +47,7 @@
     },
     "This website description": "As you can see, this website is a clone of an Instagram profile. I reverse-engineered all the styles of the official page and adapted for achieving this amazing result",
     "Features": "Features",
-    "Feature 1": {
-      "1": "Fully",
-      "2": "design"
-    },
+    "Feature 1": { "1": "Fully", "2": "design" },
     "It adapts to any screen size": "It adapts to any screen size",
     "Dark mode": "Dark mode",
     "Smooth scroll animations": "Smooth scroll animations",
@@ -67,7 +62,8 @@
     "You nailed it": "You nailed it!",
     "Technological stack": "Technological stack",
     "It is hosted on": "It is hosted on",
-    "and the source code is available on": "and the source code is available on"
+    "and the source code is available on": "and the source code is available on",
+    "Click the arrows to navigate": "Click the arrows to navigate"
   },
   "Qt projects": {
     "1": {
@@ -145,8 +141,13 @@
   },
   "The Qt Company": {
     "1": {
-      "1": "To be continued",
-      "2": "October"
+      "1": "My experience at The Qt Company",
+      "2": "In 2024, I joined The Qt Company as a Junior Software Engineer in the Berlin office. The Qt Company is the main maintainer of the Qt framework, which I have been using for years in my personal and professional projects. It was a dream come true to work there! I joined the PySide team, which works in the Python bindings of the framework",
+      "3": "Me in Berlin"
+    },
+    "2": {
+      "1": "I also contributed to Qt Design Studio, focusing primarily on enhancing the Python project exporter. This tool converts Qt Design Studio projects into standalone Python applications that users can execute and customize according to their needs",
+      "2": "Qt Design Studio screenshot"
     }
   },
   "OPmobility": {
@@ -244,34 +245,19 @@
       "1": "Hey, are you still here? I have nothing else to show you... well... here you have, some cool pictures",
       "2": "Enable sound and keep scrolling",
       "3": "Neuschwanstein castle"
-    }
+    },
+    "5": { "1": "Berlin Snow" },
+    "6": { "1": "A bike I found in Potsdam" }
   },
-  "Bottom bar": {
-    "1": "Message successfully ignored"
-  },
-  "Sound": {
-    "Sound muted": "Stealth mode activated",
-    "Sound activated": "Sound activated"
-  },
-  "Pause Stories": {
-    "Stories paused": "Stories paused",
-    "Stories resumed": "Stories resumed"
-  },
+  "Bottom bar": { "1": "Message successfully ignored" },
+  "Sound": { "Sound muted": "Stealth mode activated", "Sound activated": "Sound activated" },
+  "Pause Stories": { "Stories paused": "Stories paused", "Stories resumed": "Stories resumed" },
   "Theme": {
     "Theme dark": "Dark theme activated",
     "Theme light": "Light theme activated",
     "Loading": "Loading themes"
   },
-  "Settings": {
-    "Sound": "Sound",
-    "Pause stories": "Pause stories",
-    "Full screen stories": "Full screen stories"
-  },
-  "LanguageSwitch": {
-    "Changing language": "Changing language"
-  },
-  "Header": {
-    "Do not panic!": "Do not panic!",
-    "Go back button": "Go back button"
-  }
+  "Settings": { "Sound": "Sound", "Pause stories": "Pause stories", "Full screen stories": "Full screen stories" },
+  "LanguageSwitch": { "Changing language": "Changing language" },
+  "Header": { "Do not panic!": "Do not panic!", "Go back button": "Go back button" }
 }

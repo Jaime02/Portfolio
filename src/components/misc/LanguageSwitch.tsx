@@ -9,14 +9,14 @@ import { useEffect, useState, useTransition } from "react";
 
 export default function LanguageSwitch() {
   const t = useTranslations("LanguageSwitch");
-  
+
   const [isMounted, setIsMounted] = useState(false);
   const locale = useLocale();
   const router = useNextIntlRouter();
   const [isPending, startTransition] = useTransition();
   const pathname = usePathname();
   const params = useParams();
-  
+
   useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -32,9 +32,9 @@ export default function LanguageSwitch() {
         // @ts-expect-error -- TypeScript will validate that only known `params`
         // are used in combination with a given `pathname`. Since the two will
         // always match for the current route, we can skip runtime checks.
-        {pathname, params},
-        {locale: nextLocale},
-      )
+        { pathname, params },
+        { locale: nextLocale },
+      );
     });
   }
 

@@ -11,11 +11,12 @@ const Crispin = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
   const t = useTranslations("Crispin");
   const tc = useTranslations("Commons");
   const { mutedStories } = useContext(SettingsContext);
-  
+
   let presentationSign = (
-    <div className="absolute left-[50%] top-[16%] z-10 flex w-[90%] translate-x-[-50%] translate-y-[-50%] flex-col justify-center rounded-md p-1">
-      <p className="text-pretty font-bold text-black sm:text-xl">
-        {t("1.1")} <span className="font-extrabold">Crispín</span>{t("1.2") + " "}
+    <div className="absolute top-[16%] left-[50%] z-10 flex w-[90%] translate-x-[-50%] translate-y-[-50%] flex-col justify-center rounded-md p-1">
+      <p className="font-bold text-pretty text-black sm:text-xl">
+        {t("1.1")} <span className="font-extrabold">Crispín</span>
+        {t("1.2") + " "}
         <SpanishFlagIcon extraClasses="size-6 inline" />
       </p>
     </div>
@@ -25,23 +26,20 @@ const Crispin = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
     new StoryVideo("/videos/CrispinHandsome.mp4", presentationSign),
     new StoryVideo("/videos/CrispinSofa.mp4"),
     new StoryVideo("/videos/CrispinStaring.mp4"),
-    new StoryVideo("/videos/CrispinSad.mp4"),
     new StoryVideo("/videos/CrispinField.mp4"),
+    new StoryVideo("/videos/CrispinLiveIt.mp4"),
     new StoryVideo("/videos/CrispinJumping.mp4"),
+    new StoryVideo("/videos/CrispinHungry.mp4"),
+    new StoryVideo("/videos/CrispinSleeping.mp4"),
+    new StoryVideo("/videos/CrispinSleeping2.mp4"),
   ];
 
   return (
     <CardsLayout {...props} ref={ref} floatingHeader={true}>
       {videos.map((video, index) => (
         <Card key={index}>
-          <PlayVideoButton/>
-          <video
-            width={0}
-            height={0}
-            className="max-h-full w-full my-auto"
-            muted={mutedStories}
-            loop
-          >
+          <PlayVideoButton />
+          <video width={0} height={0} className="my-auto max-h-full w-full" muted={mutedStories} loop>
             <source src={video.url} type="video/mp4" />
             {tc("No video tag support")}
           </video>

@@ -8,7 +8,7 @@ import { useTranslations } from "next-intl";
 
 function OPmobilityTitle({ title }: { title: string }) {
   return (
-    <div className="font- rounded-lg bg-op-mobility-blue p-2 text-xl font-bold text-white">
+    <div className="font- bg-op-mobility-blue rounded-lg p-2 text-xl font-bold text-white">
       <h1 className="text-center">{title}</h1>
     </div>
   );
@@ -28,10 +28,18 @@ const PaintFilterManager = forwardRef<HTMLDivElement, CardsLayoutProps>((props, 
           {t("1.2")}
         </p>
         <p>{t("1.3")}</p>
-        <Image src="/images/PFM.webp" width="800" height="800" alt={t("1.4")} className="w-full select-none" draggable="false" priority={true} />
+        <Image
+          src="/images/PFM.webp"
+          width="800"
+          height="800"
+          alt={t("1.4")}
+          className="w-full select-none"
+          draggable="false"
+          priority={true}
+        />
       </Card>
       <Card>
-        <OPmobilityTitle title={t("2.1")}/>
+        <OPmobilityTitle title={t("2.1")} />
         <p>
           {t("2.2") + " "}
           <Tooltip>
@@ -48,10 +56,18 @@ const PaintFilterManager = forwardRef<HTMLDivElement, CardsLayoutProps>((props, 
           </a>
           .
         </p>
-        <Image src="/images/PFMTable.webp" width="800" height="800" alt="Paint filter manager web table screenshot" className="w-full select-none" draggable="false" priority={true} />
+        <Image
+          src="/images/PFMTable.webp"
+          width="800"
+          height="800"
+          alt="Paint filter manager web table screenshot"
+          className="w-full select-none"
+          draggable="false"
+          priority={true}
+        />
       </Card>
       <Card>
-        <OPmobilityTitle title={t("3.1")}/>
+        <OPmobilityTitle title={t("3.1")} />
         <p>
           {t("3.2") + " "}
           <a href="https://kotlinlang.org/" className="styled-a" target="_blank">
@@ -69,12 +85,27 @@ const PaintFilterManager = forwardRef<HTMLDivElement, CardsLayoutProps>((props, 
               <li>{t("3.8")}</li>
               <li>{t("3.9")}</li>
             </ul>
-            <div className="relative my-4 self-end aspect-square w-full">
-              <Image src="/images/icons/AndroidIcon.svg" alt={t("3.10")} fill className="mx-auto select-none" draggable="false" priority={true} />
+            <div className="relative my-4 aspect-square w-full self-end">
+              <Image
+                src="/images/icons/AndroidIcon.svg"
+                alt={t("3.10")}
+                fill
+                className="mx-auto select-none"
+                draggable="false"
+                priority={true}
+              />
             </div>
           </div>
           <div className="relative h-[50vh] grow">
-            <Image src="/images/PFMApp.webp" fill sizes="50vw" alt={t("3.11")} className="select-none object-contain" draggable="false" priority={true} />
+            <Image
+              src="/images/PFMApp.webp"
+              fill
+              sizes="50vw"
+              alt={t("3.11")}
+              className="object-contain select-none"
+              draggable="false"
+              priority={true}
+            />
           </div>
         </div>
       </Card>

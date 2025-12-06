@@ -21,11 +21,15 @@ import LiveGL from "@/app/[locale]/(stories)/projects/LiveGL";
 import QtThumbnail from "@/components/thumbnails-tabs/QtThumbnail";
 import Crispin from "@/app/[locale]/(stories)/others/Crispin";
 import MyLinksThumbnail from "@/components/thumbnails-tabs/MyLinksThumbnail";
-import CV from "@/app/[locale]/(stories)/others/CV";
 import { useTranslations } from "next-intl";
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { routing, useNextIntlRouter } from "@/translations/routing";
-import { StoryGroup, ProjectsStoryGroup, ExperiencesStoryGroup, OthersStoryGroup } from "@/components/stories/StoryGroup";
+import {
+  StoryGroup,
+  ProjectsStoryGroup,
+  ExperiencesStoryGroup,
+  OthersStoryGroup,
+} from "@/components/stories/StoryGroup";
 import { StoryGroupCategory } from "@/components/stories/StoryGroupCategory";
 import * as Constants from "@/misc/Constants";
 import { SettingsContext } from "@/app/lib/SettingsContext";
@@ -55,7 +59,14 @@ function StoriesContextProvider({ children, locale }: StoriesContextProviderProp
         title: t("This website"),
         storyGroupUrl: "this-website",
         component: <ThisWebsite />,
-        tabThumbnail: <TabThumbnail title={t("This website")} src="/images/InstagramLogo.svg" href="/projects/this-website" padding={true} />,
+        tabThumbnail: (
+          <TabThumbnail
+            title={t("This website")}
+            src="/images/InstagramLogo.svg"
+            href="/projects/this-website"
+            padding={true}
+          />
+        ),
         headerThumbnail: <HeaderThumbnail src="/images/InstagramLogo.svg" />,
       }),
       new ProjectsStoryGroup({
@@ -69,14 +80,22 @@ function StoriesContextProvider({ children, locale }: StoriesContextProviderProp
         title: "Paint filter manager",
         storyGroupUrl: "paint-filter-manager",
         component: <PaintFilterManager />,
-        tabThumbnail: <TabThumbnail title="Paint filter manager" src="/images/PaintFilterManagerLogo.webp" href="/projects/paint-filter-manager" />,
+        tabThumbnail: (
+          <TabThumbnail
+            title="Paint filter manager"
+            src="/images/PaintFilterManagerLogo.webp"
+            href="/projects/paint-filter-manager"
+          />
+        ),
         headerThumbnail: <HeaderThumbnail src="/images/PaintFilterManagerLogo.webp" />,
       }),
       new ProjectsStoryGroup({
         title: "LiveGL",
         storyGroupUrl: "livegl",
         component: <LiveGL />,
-        tabThumbnail: <TabThumbnail title="LiveGL" src="/images/LiveGLThumbnail.webp" href="/projects/livegl" padding={true} />,
+        tabThumbnail: (
+          <TabThumbnail title="LiveGL" src="/images/LiveGLThumbnail.webp" href="/projects/livegl" padding={true} />
+        ),
         headerThumbnail: <HeaderThumbnail src="/images/LiveGLThumbnail.webp" />,
       }),
     ],
@@ -96,7 +115,9 @@ function StoriesContextProvider({ children, locale }: StoriesContextProviderProp
         title: "OPmobility",
         storyGroupUrl: "opmobility",
         component: <OPmobility />,
-        tabThumbnail: <TabThumbnail title="OPmobility" src="/images/OPmobilityLogo.webp" href="/experiences/opmobility" />,
+        tabThumbnail: (
+          <TabThumbnail title="OPmobility" src="/images/OPmobilityLogo.webp" href="/experiences/opmobility" />
+        ),
         headerThumbnail: <HeaderThumbnail src="/images/PlasticOmniumLogo.svg" />,
       }),
       new ExperiencesStoryGroup({
@@ -117,7 +138,14 @@ function StoriesContextProvider({ children, locale }: StoriesContextProviderProp
         title: "Upna",
         storyGroupUrl: "upna",
         component: <Upna />,
-        tabThumbnail: <TabThumbnail title="Universidad Publica de Navarra" src="/images/UpnaLogo.webp" href="/experiences/upna" padding={true} />,
+        tabThumbnail: (
+          <TabThumbnail
+            title="Universidad Publica de Navarra"
+            src="/images/UpnaLogo.webp"
+            href="/experiences/upna"
+            padding={true}
+          />
+        ),
         headerThumbnail: <HeaderThumbnail src="/images/AcademicIcon.svg" />,
       }),
     ],
@@ -126,13 +154,6 @@ function StoriesContextProvider({ children, locale }: StoriesContextProviderProp
 
   const OthersStoryGroups: StoryGroup[] = useMemo(
     () => [
-      new OthersStoryGroup({
-        title: "Curriculum Vitae",
-        storyGroupUrl: "curriculum-vitae",
-        component: <CV />,
-        tabThumbnail: <TabThumbnail title="Curriculum Vitae" src="/images/CVPreview.webp" href="/others/curriculum-vitae" padding={true} />,
-        headerThumbnail: <HeaderThumbnail src="/images/CVIcon.svg" />,
-      }),
       new OthersStoryGroup({
         title: t("My links"),
         storyGroupUrl: "my-links",
@@ -153,7 +174,13 @@ function StoriesContextProvider({ children, locale }: StoriesContextProviderProp
         title: t("Cool pictures"),
         storyGroupUrl: "cool-pictures",
         component: <CoolPictures />,
-        tabThumbnail: <TabThumbnail title={t("Cool pictures")} src="/images/NeuschwansteinCastle.jpg" href="/others/cool-pictures" />,
+        tabThumbnail: (
+          <TabThumbnail
+            title={t("Cool pictures")}
+            src="/images/NeuschwansteinCastle.jpg"
+            href="/others/cool-pictures"
+          />
+        ),
         headerThumbnail: <CoolPicturesHeaderThumbnail />,
         isCloseFriends: true,
         hasAudio: true,
@@ -205,7 +232,9 @@ function StoriesContextProvider({ children, locale }: StoriesContextProviderProp
 
   const getStoryCategoryByUrl = useCallback(
     (url: string): [number, StoryGroupCategory] => {
-      let index = storyCategories.findIndex((storyCategory) => storyCategory.storyGroupCategoryUrl === url.toLowerCase());
+      let index = storyCategories.findIndex(
+        (storyCategory) => storyCategory.storyGroupCategoryUrl === url.toLowerCase(),
+      );
       if (index === -1) {
         console.error("Invalid story category url:", url);
         index = 0;
@@ -216,7 +245,9 @@ function StoriesContextProvider({ children, locale }: StoriesContextProviderProp
   );
 
   const getStoryGroupByUrl = useCallback((category: StoryGroupCategory, url: string): [number, StoryGroup] => {
-    let index = category.storyGroups.findIndex((storyGroup: StoryGroup) => storyGroup.storyGroupUrl.toLowerCase() === url.toLowerCase());
+    let index = category.storyGroups.findIndex(
+      (storyGroup: StoryGroup) => storyGroup.storyGroupUrl.toLowerCase() === url.toLowerCase(),
+    );
     if (index === -1) {
       console.error("Invalid story group url:", url);
       index = 0;
@@ -263,7 +294,7 @@ function StoriesContextProvider({ children, locale }: StoriesContextProviderProp
     return {
       push: useRouterPush,
       replace: useRouterReplace,
-      back: nextIntlRouter.back
+      back: nextIntlRouter.back,
     };
   }
 
@@ -271,13 +302,17 @@ function StoriesContextProvider({ children, locale }: StoriesContextProviderProp
 
   const [willShowClosePopup, setWillShowClosePopup] = useState(false);
   const { fullScreenStories } = useContext(SettingsContext);
-  
+
   useEffect(() => {
-    if (!window.localStorage.getItem("showClosePopupEver") && window.innerWidth < Constants.SMALL_BREAKPOINT_WIDTH && fullScreenStories) {
+    if (
+      !window.localStorage.getItem("showClosePopupEver") &&
+      window.innerWidth < Constants.SMALL_BREAKPOINT_WIDTH &&
+      fullScreenStories
+    ) {
       setWillShowClosePopup(true);
     }
   }, [fullScreenStories]);
-  
+
   return (
     <StoriesContext.Provider
       value={{
@@ -287,7 +322,7 @@ function StoriesContextProvider({ children, locale }: StoriesContextProviderProp
         getStoryGroupByIndex,
         router,
         willShowClosePopup,
-        setWillShowClosePopup
+        setWillShowClosePopup,
       }}
     >
       {children}

@@ -11,7 +11,9 @@ const LiveGL = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
     <CardsLayout {...props} ref={ref}>
       <Card>
         <div className="rounded-lg bg-gray-300 p-2 text-xl font-bold dark:bg-slate-900">
-          <h1 className="animate-moving-background bg-gradient-to-r from-orange-600 via-blue-500 to-green-400 bg-300% bg-clip-text text-center text-transparent">LiveGL</h1>
+          <h1 className="animate-moving-background bg-300% bg-linear-to-r from-orange-600 via-blue-500 to-green-400 bg-clip-text text-center text-transparent">
+            LiveGL
+          </h1>
         </div>
         <p>
           {t("1.1") + " "}
@@ -20,7 +22,15 @@ const LiveGL = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
           </a>{" "}
           {t("1.2")}
         </p>
-        <Image src="/images/LiveGL.webp" width="800" height="800" alt={t("1.3")} className="w-full select-none" draggable="false" priority={true} />
+        <Image
+          src="/images/LiveGL.webp"
+          width="800"
+          height="800"
+          alt={t("1.3")}
+          className="w-full select-none"
+          draggable="false"
+          priority={true}
+        />
         <GithubRepoLink href="https://github.com/Jaime02/LiveGL" />
       </Card>
     </CardsLayout>

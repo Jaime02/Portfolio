@@ -22,13 +22,25 @@ const MyLinks = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
   const [onlyfansHidden, setOnlyfansHidden] = useState(true);
 
   let titledIcons = [
-    new TitledIcon("GitHub", <GithubIcon extraClasses="p-2 h-full w-full"/>, "https://github.com/Jaime02"),
-    new TitledIcon("LinkedIn", <LinkedinIcon extraClasses="p-2 h-full w-full"/>, "https://www.linkedin.com/in/jaime-resano/"),
-    new TitledIcon("YouTube", <YoutubeIcon extraClasses="p-2 h-full w-full"/>, "https://www.youtube.com/@jaimer02"),
+    new TitledIcon("GitHub", <GithubIcon extraClasses="p-2 h-full w-full" />, "https://github.com/Jaime02"),
+    new TitledIcon(
+      "LinkedIn",
+      <LinkedinIcon extraClasses="p-2 h-full w-full" />,
+      "https://www.linkedin.com/in/jaime-resano/",
+    ),
+    new TitledIcon("YouTube", <YoutubeIcon extraClasses="p-2 h-full w-full" />, "https://www.youtube.com/@jaimer02"),
     new TitledIcon(
       "???",
-      <Image src="/images/OnlyfansLogo.svg" width="300" height="300" className="p-2 h-full w-full" alt="Onlyfans link" draggable="false" priority={true} />,
-      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",  // DO NOT OPEN THE LINK
+      <Image
+        src="/images/OnlyfansLogo.svg"
+        width="300"
+        height="300"
+        className="h-full w-full p-2"
+        alt="Onlyfans link"
+        draggable="false"
+        priority={true}
+      />,
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ", // DO NOT OPEN THE LINK
     ),
   ];
 
@@ -44,14 +56,14 @@ const MyLinks = forwardRef<HTMLDivElement, CardsLayoutProps>((props, ref) => {
           {titledIcons.map((titledIcon, index) => (
             <a
               key={index}
-              className={`flex aspect-square w-full flex-col items-center gap-1 text-center rounded-md overflow-hidden border-2 hover:ring transition-opacity duration-1000 ${onlyfansHidden && index == 3 ? "opacity-0" : ""}`}
+              className={`flex aspect-square w-full flex-col items-center gap-1 overflow-hidden rounded-md border-2 text-center transition-opacity duration-1000 hover:ring ${onlyfansHidden && index == 3 ? "opacity-0" : ""}`}
               href={onlyfansHidden && index == 3 ? "" : titledIcon.link}
               target="_blank"
               onClick={onlyfansHidden && index == 3 ? showOnlyfans : () => {}}
-              onMouseUp={event => event?.stopPropagation()}
+              onMouseUp={(event) => event?.stopPropagation()}
             >
               {titledIcon.icon}
-              <h1 className="text-lg bg-black text-white w-full">{titledIcon.title}</h1>
+              <h1 className="w-full bg-black text-lg text-white">{titledIcon.title}</h1>
             </a>
           ))}
         </div>

@@ -15,7 +15,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(({ children, active, padding,
       ref={ref}
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
-      className={`relative flex h-full max-h-full min-w-full max-w-full flex-col gap-3 overflow-y-auto text-pretty rounded-md bg-white dark:bg-[#343434] ${padding ? "p-2" : ""}`}
+      className={`relative flex h-full max-h-full max-w-full min-w-full flex-col gap-3 overflow-y-auto rounded-md bg-white text-pretty dark:bg-[#343434] ${padding ? "p-2" : ""}`}
     >
       {children}
     </div>

@@ -6,7 +6,13 @@ import { cn } from "@/misc/utils";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslations } from "next-intl";
 
-export default function SoundCheckbox({extraClasses, showToastOnChange = false}: {extraClasses?: string, showToastOnChange?: boolean}) {
+export default function SoundCheckbox({
+  extraClasses,
+  showToastOnChange = false,
+}: {
+  extraClasses?: string;
+  showToastOnChange?: boolean;
+}) {
   const { mutedStories, setMutedStories } = useContext(SettingsContext);
   const [hasEverActivatedSound, setHasEverActivatedSound] = useState(!mutedStories);
   const t = useTranslations("Sound");
@@ -15,10 +21,10 @@ export default function SoundCheckbox({extraClasses, showToastOnChange = false}:
   function onSoundButtonClicked() {
     if (showToastOnChange) {
       toast({
-        title: (!mutedStories ? t("Sound muted") + " 🤫" : t("Sound activated") + " 🔊✅😎")
+        title: !mutedStories ? t("Sound muted") + " 🤫" : t("Sound activated") + " 🔊✅😎",
       });
     }
-    
+
     if (mutedStories) {
       setHasEverActivatedSound(mutedStories);
     }
@@ -26,8 +32,17 @@ export default function SoundCheckbox({extraClasses, showToastOnChange = false}:
   }
 
   return (
-    <button id="sound-checkbox" className={`clickable p-2 sm:p-1 rounded-md ${!hasEverActivatedSound ? "btn-shiny rounded-full text-black" : ""}`} onClick={() => onSoundButtonClicked()} aria-label="Toggle sound"> 
-      {mutedStories ? <MutedIcon extraClasses={cn(extraClasses, !hasEverActivatedSound ? "text-black" : "")}/> : <SoundIcon extraClasses={extraClasses}/>}
+    <button
+      id="sound-checkbox"
+      className={`clickable rounded-md p-2 sm:p-1 ${!hasEverActivatedSound ? "btn-shiny rounded-full text-black" : ""}`}
+      onClick={() => onSoundButtonClicked()}
+      aria-label="Toggle sound"
+    >
+      {mutedStories ? (
+        <MutedIcon extraClasses={cn(extraClasses, !hasEverActivatedSound ? "text-black" : "")} />
+      ) : (
+        <SoundIcon extraClasses={extraClasses} />
+      )}
     </button>
   );
 }

@@ -22,7 +22,7 @@ export default function GroupsLayout() {
     const containerWidth = groupsLayoutContainerRef.current.offsetWidth;
     // 8 because of the px-2 of the main container
     // 80 because of the arrows indicators of the card layout
-    let buttonsOffset = window.innerWidth > Constants.SMALL_BREAKPOINT_WIDTH ? (- 8 + 80 * activeStoryGroupIndex) : 0;
+    let buttonsOffset = window.innerWidth > Constants.SMALL_BREAKPOINT_WIDTH ? -8 + 80 * activeStoryGroupIndex : 0;
     let offset = containerWidth / 2 - storyWidth / 2 - activeStoryGroupIndex * storyWidth + buttonsOffset - 8;
     groupsLayoutRef.current!.style.transform = `translateX(${offset}px)`;
   }, [activeStoryGroupIndex]);
@@ -45,8 +45,15 @@ export default function GroupsLayout() {
   }, [updateLayoutOffset]);
 
   return (
-    <main role="main" ref={groupsLayoutContainerRef} className="flex h-dvh max-h-dvh w-full max-w-full flex-col justify-center overflow-hidden bg-black px-2 py-1 sm:bg-[#1a1a1a] sm:py-3">
-      <div ref={groupsLayoutRef} className="flex h-full max-h-full flex-row data-[animate]:transition-transform data-[animate]:duration-500">
+    <main
+      role="main"
+      ref={groupsLayoutContainerRef}
+      className="flex h-dvh max-h-dvh w-full max-w-full flex-col justify-center overflow-hidden bg-black px-2 py-1 sm:bg-[#1a1a1a] sm:py-3"
+    >
+      <div
+        ref={groupsLayoutRef}
+        className="flex h-full max-h-full flex-row data-animate:transition-transform data-animate:duration-500"
+      >
         {activeStoryCategory.storyGroups.map((storyGroup: StoryGroup, storyGroupIndex: number) => (
           <StoryGroupContextProvider key={storyGroupIndex} storyGroup={storyGroup!} storyGroupIndex={storyGroupIndex!}>
             {React.cloneElement(storyGroup.component, {

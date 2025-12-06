@@ -18,18 +18,21 @@ interface StoryGroupsContextProviderProps {
   children: React.ReactNode;
 }
 
-function StoryGroupsContextProvider({ children }: StoryGroupsContextProviderProps){
+function StoryGroupsContextProvider({ children }: StoryGroupsContextProviderProps) {
   const { router } = useContext(StoriesContext);
   const pathname = usePathname();
-  
+
   const { getStoryCategoryByUrl, getStoryGroupByUrl, getStoryGroupByIndex } = useContext(StoriesContext);
   // The url has the following format: /<storyGroupCategory>/<storyGroupTitle>#[activeStoryCardIndex]
-  const [categoryUrl, groupUrl] = pathname.split('/').slice(1, 3);
+  const [categoryUrl, groupUrl] = pathname.split("/").slice(1, 3);
   const [_, activeStoryCategory] = getStoryCategoryByUrl(categoryUrl);
   const [initialStoryGroupIndex, __] = getStoryGroupByUrl(activeStoryCategory, groupUrl);
   const [activeStoryGroupIndex, setActiveStoryGroupIndex] = useState(initialStoryGroupIndex);
 
-  const inLastGroup = useMemo(() => activeStoryGroupIndex === activeStoryCategory.storyGroups.length - 1, [activeStoryCategory.storyGroups.length, activeStoryGroupIndex]);
+  const inLastGroup = useMemo(
+    () => activeStoryGroupIndex === activeStoryCategory.storyGroups.length - 1,
+    [activeStoryCategory.storyGroups.length, activeStoryGroupIndex],
+  );
   const inFirstGroup = useMemo(() => activeStoryGroupIndex === 0, [activeStoryGroupIndex]);
 
   useEffect(() => {
@@ -37,10 +40,10 @@ function StoryGroupsContextProvider({ children }: StoryGroupsContextProviderProp
     if (storyGroup.getFullUrl() === pathname) {
       return;
     }
-    
+
     router.replace(storyGroup.getFullUrl());
-  }, [activeStoryCategory, activeStoryGroupIndex, getStoryGroupByIndex, pathname, router])
-  
+  }, [activeStoryCategory, activeStoryGroupIndex, getStoryGroupByIndex, pathname, router]);
+
   const goToNextStoryGroup = useCallback(async () => {
     if (activeStoryGroupIndex === activeStoryCategory.storyGroups.length - 1) {
       if (document.fullscreenElement) {
@@ -50,10 +53,10 @@ function StoryGroupsContextProvider({ children }: StoryGroupsContextProviderProp
       router.back();
       return;
     }
-    
+
     setActiveStoryGroupIndex(activeStoryGroupIndex + 1);
   }, [router, activeStoryGroupIndex, activeStoryCategory.storyGroups]);
-  
+
   const goToPreviousStoryGroup = useCallback(async () => {
     if (activeStoryGroupIndex === 0) {
       if (document.fullscreenElement) {
@@ -63,7 +66,7 @@ function StoryGroupsContextProvider({ children }: StoryGroupsContextProviderProp
       router.back();
       return;
     }
-    
+
     setActiveStoryGroupIndex(activeStoryGroupIndex - 1);
   }, [router, activeStoryGroupIndex]);
 
@@ -82,6 +85,6 @@ function StoryGroupsContextProvider({ children }: StoryGroupsContextProviderProp
       {children}
     </StoryGroupsContext.Provider>
   );
-};
+}
 
 export { StoryGroupsContext, StoryGroupsContextProvider };
