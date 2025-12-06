@@ -1,5 +1,6 @@
 "use client";
-import React, { useCallback, useContext, useEffect, useLayoutEffect, useRef } from "react";
+
+import { useCallback, useContext, useEffect, useLayoutEffect, useRef } from "react";
 import useOnWindowResize from "@/hooks/useOnWindowResize";
 import { StoryGroupContextProvider } from "@/app/lib/StoryGroupContext";
 import { StoryGroupsContext } from "@/app/lib/StoryGroupsContext";
@@ -56,9 +57,14 @@ export default function GroupsLayout() {
       >
         {activeStoryCategory.storyGroups.map((storyGroup: StoryGroup, storyGroupIndex: number) => (
           <StoryGroupContextProvider key={storyGroupIndex} storyGroup={storyGroup!} storyGroupIndex={storyGroupIndex!}>
-            {React.cloneElement(storyGroup.component, {
-              ref: (el: HTMLDivElement) => (storyGroupsRefs.current[storyGroupIndex] = el),
-            })}
+            <div
+              className="h-full"
+              ref={(el: HTMLDivElement | null) => {
+                storyGroupsRefs.current[storyGroupIndex] = el!;
+              }}
+            >
+              {storyGroup.component}
+            </div>
           </StoryGroupContextProvider>
         ))}
       </div>

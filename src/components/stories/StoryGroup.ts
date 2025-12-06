@@ -32,6 +32,7 @@ export abstract class StoryGroup {
     hasAudio = false,
   }: StoryGroupProps) {
     this.title = title;
+    // @ts-ignore
     this.component = React.cloneElement(component, { storyGroup: this });
     this.tabThumbnail = tabThumbnail;
     this.headerThumbnail = headerThumbnail;
