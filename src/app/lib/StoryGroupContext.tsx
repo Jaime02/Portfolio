@@ -6,8 +6,8 @@ import React from "react";
 import { createContext, useContext, useMemo } from "react";
 
 interface TStoryGroupContext {
-  storyGroup: StoryGroup | null;
-  storyGroupIndex: number | null;
+  storyGroup: StoryGroup;
+  storyGroupIndex: number;
   active: boolean;
   title: string | null;
   headerThumbnail: React.ReactElement | null;

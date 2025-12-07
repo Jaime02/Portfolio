@@ -2,7 +2,6 @@ import PauseIcon from "@/icons/PauseIcon";
 import PlayIcon from "@/icons/PlayIcon";
 import { SettingsContext } from "@/app/lib/SettingsContext";
 import { useContext } from "react";
-import { cn } from "@/misc/utils";
 import { useTranslations } from "next-intl";
 import { useToast } from "@/hooks/use-toast";
 

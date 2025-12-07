@@ -16,7 +16,7 @@ export class StoryGroupCategory {
   index: number;
   storyGroups: StoryGroup[];
   icon: React.ReactNode;
-  storyTabThumbnails: React.ReactElement;
+  storyTabThumbnails: React.JSX.Element;
   constructor({ name, storyGroupCategoryUrl, index, storyGroups, icon }: StoryGroupCategoryProps) {
     this.name = name;
     this.storyGroupCategoryUrl = storyGroupCategoryUrl;

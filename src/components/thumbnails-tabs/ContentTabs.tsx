@@ -47,7 +47,7 @@ export default function ContentTabs() {
   useOnWindowResize(() => {
     updateTabsContainerHeight();
     updateLayoutOffset();
-  }, [updateLayoutOffset]);
+  });
 
   // Observer which updates the border of the active tab
   useEffect(() => {
@@ -100,7 +100,7 @@ export default function ContentTabs() {
 
     updateSelectedTab(tabId);
   }
-  function thumbnailOnFocus(event: React.FocusEvent<HTMLDivElement>, tabId: string) {
+  function thumbnailOnFocus(tabId: string) {
     updateSelectedTab(tabId);
     // Avoid the scroll jumping to the top when focusing the thumbnail
     tabsContainerLayoutRef.current!.scrollLeft = 0;
@@ -115,7 +115,7 @@ export default function ContentTabs() {
           return (
             <a
               key={tabId}
-              className={`flex flex-1 flex-row py-2 items-center justify-center gap-2 ${isActive ? "border-t border-black dark:border-white" : "dark:text-ig-gray text-gray-800"}`}
+              className={`flex flex-1 flex-row items-center justify-center gap-2 py-2 ${isActive ? "border-t border-black dark:border-white" : "dark:text-ig-gray text-gray-800"}`}
               href={tabId === "projects" ? "" : `#${tabId}`}
               aria-label={tab.name}
               onClick={(event) => handleAnchorClick(tabId, event)}
@@ -129,11 +129,9 @@ export default function ContentTabs() {
         })}
       </div>
       <div ref={tabsContainerLayoutRef} className="relative w-full overflow-hidden">
+        {/* eslint-disable-next-line react-hooks/refs */}
         {storyCategories.map((tab: StoryGroupCategory, index: number) => (
-          <ThumbnailContextProvider
-            key={index}
-            onFocus={(event: React.FocusEvent<HTMLDivElement>) => thumbnailOnFocus(event, tab.getId())}
-          >
+          <ThumbnailContextProvider key={index} onFocus={() => thumbnailOnFocus(tab.getId())}>
             {React.cloneElement(tab.storyTabThumbnails, {
               ref: (el: HTMLDivElement) => (tabElements.current[index] = el),
               key: index,

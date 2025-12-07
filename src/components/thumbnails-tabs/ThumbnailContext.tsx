@@ -2,14 +2,14 @@ import React from "react";
 import { createContext } from "react";
 
 interface TThumbnailContext {
-  onFocus: (event: React.FocusEvent<HTMLDivElement>) => void;
+  onFocus: (event: React.FocusEvent<HTMLAnchorElement>) => void;
 }
 
 const ThumbnailContext = createContext<TThumbnailContext>({} as TThumbnailContext);
 
 interface ThumbnailContextProviderProps {
   children: React.ReactElement;
-  onFocus: (event: React.FocusEvent<HTMLDivElement>) => void;
+  onFocus: (event: React.FocusEvent<HTMLAnchorElement>) => void;
 }
 
 const ThumbnailContextProvider = ({ children, onFocus }: ThumbnailContextProviderProps) => {

@@ -1,7 +1,7 @@
 "use client";
 
 import CloseIcon from "@/icons/CloseIcon";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { StoryGroupContext } from "@/app/lib/StoryGroupContext";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import SoundCheckbox from "@/components/misc/SoundCheckbox";

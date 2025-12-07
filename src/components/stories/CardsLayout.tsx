@@ -1,4 +1,5 @@
 "use client";
+
 import React, {
   useState,
   useRef,
@@ -8,7 +9,6 @@ import React, {
   useImperativeHandle,
   useLayoutEffect,
   useContext,
-  useMemo,
 } from "react";
 import BottomBar from "@/components/stories/BottomBar";
 import Header from "@/components/stories/Header";
@@ -35,8 +35,8 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(
     const ref = useRef<HTMLInputElement>(null);
     useImperativeHandle(forwardedRef, () => ref.current as HTMLInputElement);
 
-    let cards = React.Children.toArray(children);
-    let storiesCount = cards.length;
+    const cards = React.Children.toArray(children);
+    const storiesCount = cards.length;
 
     const { router } = useContext(StoriesContext);
     const pathname = usePathname();
@@ -68,7 +68,7 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(
 
       const storyWidth = storiesRefs.current[hash].offsetWidth;
       const containerWidth = storiesContainerRef.current.offsetWidth;
-      let offset = containerWidth / 2 - storyWidth / 2 - hash * storyWidth - hash * 8;
+      const offset = containerWidth / 2 - storyWidth / 2 - hash * storyWidth - hash * 8;
       storiesContainerRef.current.style.transform = `translateX(${offset}px)`;
     }, [active, hash]);
 
@@ -113,7 +113,7 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(
 
     useOnWindowResize(() => {
       updateLayoutOffset();
-    }, [updateLayoutOffset]);
+    });
 
     useLayoutEffect(() => {
       if (!active) {
@@ -138,8 +138,8 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(
       // Pause the previous video if existing
       currentVideoRef.current?.pause();
 
-      let videoElement = storiesRefs.current[hash];
-      let video = videoElement.querySelector("video");
+      const videoElement = storiesRefs.current[hash];
+      const video = videoElement.querySelector("video");
       currentVideoRef.current = video;
       if (video) {
         video.currentTime = 0;
@@ -147,7 +147,7 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(
           setStoryDuration(video.duration * 1000);
         };
         if (!pausedStories) {
-          video.play().catch((err) => {});
+          video.play().catch(() => {});
         }
       } else {
         setStoryDuration(Constants.DEFAULT_STORY_DURATION);
@@ -166,7 +166,7 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(
       if (pausedStories) {
         currentVideoRef.current?.pause();
       } else {
-        currentVideoRef.current?.play().catch((err) => {});
+        currentVideoRef.current?.play().catch(() => {});
       }
     }, [active, pausedStories]);
 
@@ -215,9 +215,9 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(
         return;
       }
 
-      let elementRect = event.currentTarget.getBoundingClientRect();
-      let centerX = elementRect.left + elementRect.width / 2;
-      let clickX = event.clientX;
+      const elementRect = event.currentTarget.getBoundingClientRect();
+      const centerX = elementRect.left + elementRect.width / 2;
+      const clickX = event.clientX;
 
       if (clickX > centerX) {
         goToNextStory(event);
@@ -237,7 +237,7 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(
       setActiveStoryGroupIndex(storyGroupIndex);
     }
 
-    function navigationMouseDown(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    function navigationMouseDown() {
       if (!active) {
         return;
       }
@@ -280,7 +280,7 @@ const CardsLayout = forwardRef<HTMLDivElement, CardsLayoutProps>(
             className={`${floatingHeader ? "h-full w-full" : ""} flex min-h-0 grow flex-row items-center gap-2 data-animate:transition-transform data-animate:duration-500`}
           >
             {cards.map((child, index) =>
-              React.cloneElement(child as React.ReactElement<any>, {
+              React.cloneElement(child as React.JSX.Element, {
                 ref: (el: HTMLDivElement) => (storiesRefs.current[index] = el),
                 key: index,
                 active: active && hash === index,

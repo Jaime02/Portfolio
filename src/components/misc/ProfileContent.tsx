@@ -14,7 +14,6 @@ import Link from "next/link";
 
 export default function ProfileContent() {
   const t = useTranslations("ProfileContent");
-  const tc = useTranslations("Constants");
 
   const [followingPopoverOpen, setFollowingPopoverOpen] = useState(false);
   const [settingsPopoverOpen, setSettingsPopoverOpen] = useState(false);
@@ -23,7 +22,7 @@ export default function ProfileContent() {
   const [isFollowingMe, setIsFollowingMe] = useState(false);
 
   useEffect(() => {
-    let timer = setTimeout(() => {
+    const timer = setTimeout(() => {
       setSendMessagePopoverOpen(false);
     }, 2000);
     return () => clearTimeout(timer);

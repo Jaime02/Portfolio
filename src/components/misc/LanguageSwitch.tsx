@@ -26,7 +26,7 @@ export default function LanguageSwitch() {
   }
 
   function onLanguageChange(checked: boolean) {
-    let nextLocale = checked ? "es" : "en";
+    const nextLocale = checked ? "es" : "en";
     startTransition(() => {
       router.replace(
         // @ts-expect-error -- TypeScript will validate that only known `params`

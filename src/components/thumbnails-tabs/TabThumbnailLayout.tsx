@@ -25,7 +25,7 @@ export default function TabThumbnailLayout({ children, href, title, padding = fa
       .then(() => {
         console.log("Fullscreen enabled");
       })
-      .catch((err) => {
+      .catch(() => {
         setFullScreenStories(false);
       });
   }
@@ -33,7 +33,7 @@ export default function TabThumbnailLayout({ children, href, title, padding = fa
   return (
     <Link
       href={href}
-      className={`relative flex aspect-square items-center overflow-hidden rounded-md bg-white hover:scale-[102%] active:ring-2 data-[animate]:transition-transform data-[animate]:duration-700 dark:bg-gray-300 ${padding ? "p-2" : ""}`}
+      className={`relative flex aspect-square items-center overflow-hidden rounded-md bg-white hover:scale-[102%] active:ring-2 data-animate:transition-transform data-animate:duration-700 dark:bg-gray-300 ${padding ? "p-2" : ""}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onFocus={(event) => {

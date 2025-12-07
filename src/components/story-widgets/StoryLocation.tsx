@@ -1,5 +1,4 @@
 import LocationIcon from "@/icons/LocationIcon";
-import { text } from "stream/consumers";
 
 interface Props {
   extraContainerClasses: string;

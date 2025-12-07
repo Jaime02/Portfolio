@@ -30,7 +30,7 @@ export default function GroupsLayout() {
 
   useOnWindowResize(() => {
     updateLayoutOffset();
-  }, [updateLayoutOffset]);
+  });
 
   useEffect(() => {
     updateLayoutOffset();
