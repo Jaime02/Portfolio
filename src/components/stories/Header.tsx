@@ -29,7 +29,6 @@ export default function Header({ floatingHeader }: Props) {
 
   function onClosePopupOpenChange(open: boolean) {
     if (open) {
-      console.log("Close popup open true");
       window.localStorage.setItem("showClosePopupEver", "true");
       setWillShowClosePopup(false);
       return;

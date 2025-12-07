@@ -22,9 +22,6 @@ export default function TabThumbnailLayout({ children, href, title, padding = fa
     }
     document.documentElement
       .requestFullscreen()
-      .then(() => {
-        console.log("Fullscreen enabled");
-      })
       .catch(() => {
         setFullScreenStories(false);
       });
