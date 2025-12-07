@@ -4,12 +4,14 @@ import { useContext } from "react";
 
 export default function GoToPreviousStoryArrow({ onClick }: { onClick?: () => void }) {
   const { inFirstGroup } = useContext(StoryGroupsContext);
-  const { active, hash } = useContext(StoryGroupContext);
+  const { active } = useContext(StoryGroupContext);
+  const urlHash = window.location.hash.replace("#", "");
+
   return (
     <button
       role="navigation"
       aria-label="Go to previous story"
-      className={`hidden ${active && (hash !== 0 || !inFirstGroup) ? "sm:block" : ""}`}
+      className={`invisible ${active && (urlHash || !inFirstGroup) ? "sm:visible" : ""}`}
       onClick={onClick}
     >
       <svg

@@ -15,7 +15,7 @@ interface TSettingsContext {
   setTemporalPause: React.Dispatch<SetStateAction<boolean | null>>;
   mutedStories: boolean | null;
   setMutedStories: (muted: boolean) => void;
-  fullScreenStories: boolean | null;
+  fullScreenStories: boolean;
   setFullScreenStories: (fullScreen: boolean) => void;
 }
 
